@@ -17,3 +17,4 @@ TMessagesProj/jni/ffmpeg/build_android
 
 # Marblegram: Telegram API credentials (see release.sh)
 secrets.properties
+__pycache__/
