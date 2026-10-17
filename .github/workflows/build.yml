@@ -49,10 +49,14 @@ jobs:
         with:
           python-version: '3.11'
 
-      - uses: android-actions/setup-android@v3
-
+      # The runner image already ships the Android SDK; use its sdkmanager directly
+      # (android-actions/setup-android@v3 tries to install the removed "tools" package and fails).
       - name: Install NDK and CMake
-        run: sdkmanager --install "ndk;27.2.12479018" "cmake;3.22.1" "platforms;android-36" "build-tools;36.0.0"
+        run: |
+          SDKM="$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager"
+          yes | "$SDKM" --licenses > /dev/null || true
+          "$SDKM" --install "ndk;27.2.12479018" "cmake;3.22.1" "platforms;android-36" "build-tools;36.0.0" > /dev/null
+          echo "ANDROID_NDK_HOME=$ANDROID_HOME/ndk/27.2.12479018" >> "$GITHUB_ENV"
 
       - uses: gradle/actions/setup-gradle@v4
         with:
