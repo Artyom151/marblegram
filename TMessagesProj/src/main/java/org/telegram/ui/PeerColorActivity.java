@@ -2282,7 +2282,7 @@ public class PeerColorActivity extends BaseFragment implements NotificationCente
 
             AndroidUtilities.rectTmp.set(left, cy - getIntrinsicHeight() / 2f, left + getIntrinsicWidth(), cy + getIntrinsicHeight() / 2f);
             gradientTools.gradientMatrix(AndroidUtilities.rectTmp);
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(10), dp(10), gradientTools.paint);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(10)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(10)), gradientTools.paint);
 
             lock.setBounds(
                     left + dp(3.33f),
@@ -2573,7 +2573,7 @@ public class PeerColorActivity extends BaseFragment implements NotificationCente
                         LocaleController.isRTL ? dp(15 + 9 + 9) + w : getMeasuredWidth() - dp(15),
                         (getMeasuredHeight() + dp(22)) / 2f
                 );
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(12), dp(12), userTextBackgroundPaint);
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(12)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(12)), userTextBackgroundPaint);
 
                 userText
                         .ellipsize(maxWidth)
@@ -2704,7 +2704,7 @@ public class PeerColorActivity extends BaseFragment implements NotificationCente
                             bounds.centerY() + color3Size / 2f
                     );
                     canvas.rotate(45f, bounds.centerX(), bounds.centerY());
-                    canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(2.33f), dp(2.33f), paint3);
+                    canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(2.33f)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(2.33f)), paint3);
                     canvas.restore();
                 }
 
@@ -3136,7 +3136,7 @@ public class PeerColorActivity extends BaseFragment implements NotificationCente
             if (hasColor3) {
                 AndroidUtilities.rectTmp.set(radius - dp(3.66f), radius - dp(3.66f), radius + dp(3.66f), radius + dp(3.66f));
                 canvas.rotate(45, radius, radius);
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(2.33f), dp(2.33f), color3Paint);
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(2.33f)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(2.33f)), color3Paint);
             }
             canvas.restore();
             if (emoji != null) {
@@ -3583,7 +3583,8 @@ public class PeerColorActivity extends BaseFragment implements NotificationCente
                     rectF.centerY() - r,
                     rectF.centerX() + r,
                     rectF.centerY() + r,
-                    rr, rr,
+                    org.telegram.marble.MarbleTheme.m3CornerPxF(rr),
+                    org.telegram.marble.MarbleTheme.m3CornerPxF(rr),
                     storyGradient.getPaint(rectF)
             );
 
@@ -3922,7 +3923,7 @@ public class PeerColorActivity extends BaseFragment implements NotificationCente
 
                     selectedPaint.setColor(selectedColor);
                     final float radius = selectedRect.height() / 2f;
-                    canvas.drawRoundRect(selectedRect, radius, radius, selectedPaint);
+                    canvas.drawRoundRect(selectedRect, org.telegram.marble.MarbleTheme.m3CornerPxF(radius), org.telegram.marble.MarbleTheme.m3CornerPxF(radius), selectedPaint);
                     super.dispatchDraw(canvas);
                 }
             };

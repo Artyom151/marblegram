@@ -209,7 +209,7 @@ public class PipRoundVideoView implements NotificationCenter.NotificationCenterD
                 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
                 @Override
                 public void getOutline(View view, Outline outline) {
-                    outline.setOval(0, 0, AndroidUtilities.dp(120), AndroidUtilities.dp(120));
+                    outline.setRoundRect(0, 0, AndroidUtilities.dp(120), AndroidUtilities.dp(120), org.telegram.marble.MarbleTheme.roundVideoRadius(AndroidUtilities.dp(120)));
                 }
             });
             aspectRatioFrameLayout.setClipToOutline(true);

@@ -317,7 +317,8 @@ public class MainTabsLayout extends AnimatedLinearLayout {
             canvas.drawRoundRect(
                     x - sWidth / 2f, (getHeight() - sHeight) / 2f,
                     x + sWidth / 2f, (getHeight() + sHeight) / 2f,
-                    sHeight / 2f, sHeight / 2f, selectorPaint);
+                    org.telegram.marble.MarbleTheme.m3CornerPxF(sHeight / 2f),
+                    org.telegram.marble.MarbleTheme.m3CornerPxF(sHeight / 2f), selectorPaint);
         }
 
         super.dispatchDraw(canvas);

@@ -88,10 +88,10 @@ public class CommentButton extends FrameLayout {
         AndroidUtilities.rectTmp.set(getWidth() - w, 0, getWidth(), dp(13));
         canvas.scale(s, s, AndroidUtilities.rectTmp.centerX(), AndroidUtilities.rectTmp.centerY());
         AndroidUtilities.rectTmp.inset(-dp(2), -dp(2));
-        canvas.drawRoundRect(AndroidUtilities.rectTmp, AndroidUtilities.rectTmp.height() / 2, AndroidUtilities.rectTmp.height() / 2, clearPaint);
+        canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.rectTmp.height() / 2), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.rectTmp.height() / 2), clearPaint);
 
         AndroidUtilities.rectTmp.set(getWidth() - w, 0, getWidth(), dp(13));
-        canvas.drawRoundRect(AndroidUtilities.rectTmp, AndroidUtilities.rectTmp.height() / 2, AndroidUtilities.rectTmp.height() / 2, backgroundPaint);
+        canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.rectTmp.height() / 2), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.rectTmp.height() / 2), backgroundPaint);
         canvas.translate(AndroidUtilities.rectTmp.left + (w - countText.getCurrentWidth()) / 2.0f, dp(7));
         countText.draw(canvas);
         canvas.restore();

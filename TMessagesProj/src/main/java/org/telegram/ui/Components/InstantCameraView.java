@@ -144,7 +144,7 @@ public class InstantCameraView extends InstantCameraViewBase implements Notifica
     private ImageView muteImageView;
     private float progress;
     private CameraInfo selectedCamera;
-    private boolean isFrontface = true;
+    private boolean isFrontface = org.telegram.marble.MarbleTheme.roundFrontCamera();
     private volatile boolean cameraReady;
     private AnimatorSet muteAnimation;
     private TLRPC.InputFile file;
@@ -314,7 +314,7 @@ public class InstantCameraView extends InstantCameraViewBase implements Notifica
         cameraContainer.setOutlineProvider(new ViewOutlineProvider() {
             @Override
             public void getOutline(View view, Outline outline) {
-                outline.setOval(0, 0, textureViewSize, textureViewSize);
+                outline.setRoundRect(0, 0, textureViewSize, textureViewSize, org.telegram.marble.MarbleTheme.roundVideoRadius(textureViewSize));
             }
         });
         cameraContainer.setClipToOutline(true);
@@ -424,7 +424,7 @@ public class InstantCameraView extends InstantCameraViewBase implements Notifica
                     flickerDrawable.setParentWidth(textureViewSize);
                     AndroidUtilities.rectTmp.set(0, 0, textureViewSize, textureViewSize);
                     float rad = AndroidUtilities.rectTmp.width() / 2f;
-                    canvas.drawRoundRect(AndroidUtilities.rectTmp, rad, rad, blackoutPaint);
+                    canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(rad), org.telegram.marble.MarbleTheme.m3CornerPxF(rad), blackoutPaint);
                     AndroidUtilities.rectTmp.inset(dp(1), dp(1));
                     flickerDrawable.draw(canvas, AndroidUtilities.rectTmp, rad, null);
                     invalidate();
@@ -630,7 +630,7 @@ public class InstantCameraView extends InstantCameraViewBase implements Notifica
             if (!flipAnimationInProgress) {
                 canvas.scale(cameraContainer.getScaleX(), cameraContainer.getScaleY(), rect.centerX(), rect.centerY());
             }
-            canvas.drawArc(rect, -90, 360 * progress, false, paint);
+            org.telegram.marble.WavyProgress.drawArc(canvas, rect, -90, 360 * progress, paint);
             canvas.restore();
         }
     }
@@ -736,9 +736,7 @@ public class InstantCameraView extends InstantCameraViewBase implements Notifica
         cameraReady = false;
         selectedCamera = null;
         if (!fromPaused) {
-            if (!useCamera2) {
-                isFrontface = true;
-            }
+            isFrontface = org.telegram.marble.MarbleTheme.roundFrontCamera(); // Marblegram: user-selected default camera
             updateFlash();
             recordedTime = 0;
             progress = 0;
@@ -3660,8 +3658,10 @@ public class InstantCameraView extends InstantCameraViewBase implements Notifica
                     "void main() {\n" +
                     "   vec4 textColor = texture2D(sTexture, vTextureCoord);\n" +
                     "   vec2 coord = resolution * 0.5;\n" +
-                    "   float radius = 0.51 * resolution.x;\n" +
-                    "   float d = length(coord - gl_FragCoord.xy) - radius;\n" +
+                    "   float halfSize = 0.51 * resolution.x;\n" +
+                    "   float rr = halfSize * " + m3CornerK() + ";\n" +
+                    "   vec2 q = abs(gl_FragCoord.xy - coord) - vec2(halfSize - rr);\n" +
+                    "   float d = length(max(q, 0.0)) + min(max(q.x, q.y), 0.0) - rr;\n" +
                     "   float t = clamp(d, 0.0, 1.0);\n" +
                     "   vec3 color = mix(textColor.rgb, vec3(1, 1, 1), t);\n" +
                     "   gl_FragColor = vec4(color * alpha, alpha);\n" +
@@ -3678,8 +3678,10 @@ public class InstantCameraView extends InstantCameraViewBase implements Notifica
                 "uniform samplerExternalOES sTexture;\n" +
                 "void main() {\n" +
                 "   vec2 coord = resolution * 0.5;\n" +
-                "   float radius = 0.51 * resolution.x;\n" +
-                "   float d = length(coord - gl_FragCoord.xy) - radius;\n" +
+                "   float halfSize = 0.51 * resolution.x;\n" +
+                "   float rr = halfSize * " + m3CornerK() + ";\n" +
+                "   vec2 q = abs(gl_FragCoord.xy - coord) - vec2(halfSize - rr);\n" +
+                "   float d = length(max(q, 0.0)) + min(max(q.x, q.y), 0.0) - rr;\n" +
                 "   float t = clamp(d, 0.0, 1.0);\n" +
                 "   if (t == 0.0) {\n" +
                 "       vec2 c_textureSize = preview;\n" +
@@ -3930,5 +3932,10 @@ public class InstantCameraView extends InstantCameraViewBase implements Notifica
         default boolean isInScheduleMode() {
             return false;
         }
+    }
+
+    /** Marblegram: corner factor of the recorded video mask (1 = circle, 0 = full square frame). */
+    private static String m3CornerK() {
+        return String.format(java.util.Locale.US, "%.3f", org.telegram.marble.MarbleTheme.roundVideoCorner() / 100f);
     }
 }

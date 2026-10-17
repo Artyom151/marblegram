@@ -224,7 +224,7 @@ public class EndCloseLayout extends FrameLayout {
             float cy = getHeight() / 2f;
             backgroundPaint.setColor(backColor);
             backgroundRect.set(0, 0, getWidth(), getHeight());
-            canvas.drawRoundRect(backgroundRect, round, round, backgroundPaint);
+            canvas.drawRoundRect(backgroundRect, org.telegram.marble.MarbleTheme.m3CornerPxF(round), org.telegram.marble.MarbleTheme.m3CornerPxF(round), backgroundPaint);
 
             callDeclineDrawable.setBounds(
                     (int) (cx - callDeclineDrawable.getIntrinsicWidth() / 2f), (int) (cy - callDeclineDrawable.getIntrinsicHeight() / 2),

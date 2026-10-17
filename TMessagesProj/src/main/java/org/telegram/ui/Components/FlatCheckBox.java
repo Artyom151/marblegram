@@ -149,8 +149,8 @@ public class FlatCheckBox extends View {
         int heightHalf = (getMeasuredHeight() >> 1);
 
         outLinePaint.setColor(colorInactive);
-        canvas.drawRoundRect(rectF, HEIGHT / 2f, HEIGHT / 2f, fillPaint);
-        canvas.drawRoundRect(rectF, HEIGHT / 2f, HEIGHT / 2f, outLinePaint);
+        canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(HEIGHT / 2f), org.telegram.marble.MarbleTheme.m3CornerPxF(HEIGHT / 2f), fillPaint);
+        canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(HEIGHT / 2f), org.telegram.marble.MarbleTheme.m3CornerPxF(HEIGHT / 2f), outLinePaint);
         if (text != null) {
             canvas.drawText(text,
                     (getMeasuredWidth() >> 1) + (textTranslation * TRANSLETE_TEXT),

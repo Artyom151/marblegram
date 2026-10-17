@@ -177,7 +177,57 @@ public class FilterTabsView extends FrameLayout {
     private static final float TAB_INTERNAL_PADDING = 12.5f;
     private static final float TAB_COUNTER_HEIGHT = 17.333f;
 
+    private static Paint m3ChipPaint;
+    private static android.graphics.Path m3ChipPath;
+    private static final float[] m3ChipRadii = new float[8];
+
+    // --- Marblegram: M3E ButtonGroup press interaction (animateWidth + pressedShape) ---
+    private static final float M3_EXPANDED_RATIO = 0.15f; // ButtonGroupDefaults.ExpandedRatio
+    private int m3PressedPosition = -1;
+    private float m3PressedWidth;
+    private float m3PressValue;
+    private androidx.dynamicanimation.animation.SpringAnimation m3PressSpring;
+
+    private void m3SetPressed(TabView tab, boolean pressed) {
+        if (!org.telegram.marble.MarbleTheme.folderChips()) {
+            return;
+        }
+        if (pressed) {
+            m3PressedPosition = tab.currentPosition;
+            m3PressedWidth = tab.getMeasuredWidth();
+        }
+        if (m3PressSpring == null) {
+            androidx.dynamicanimation.animation.FloatValueHolder holder = new androidx.dynamicanimation.animation.FloatValueHolder(0);
+            m3PressSpring = new androidx.dynamicanimation.animation.SpringAnimation(holder);
+            m3PressSpring.setSpring(new androidx.dynamicanimation.animation.SpringForce()
+                .setStiffness(800f).setDampingRatio(0.6f)); // MotionScheme.expressive fast spatial spec
+            m3PressSpring.addUpdateListener((anim, value, velocity) -> {
+                m3PressValue = Math.max(0f, value / 1000f);
+                for (int i = 0; i < listView.getChildCount(); i++) {
+                    listView.getChildAt(i).invalidate();
+                }
+                FilterTabsView.this.invalidate();
+            });
+            m3PressSpring.addEndListener((anim, canceled, value, velocity) -> {
+                if (value <= 0.5f) m3PressedPosition = -1;
+            });
+        }
+        m3PressSpring.animateToFinalPosition(pressed ? 1000f : 0f);
+    }
+
     public class TabView extends View {
+
+        private AnimatedFloat m3SelectAnim;
+        private float m3Select;
+
+        @Override
+        public void setPressed(boolean pressed) {
+            if (pressed != isPressed()) {
+                m3SetPressed(this, pressed);
+            }
+            super.setPressed(pressed);
+        }
+
 
         public ValueAnimator changeAnimator;
         private Tab currentTab;
@@ -391,6 +441,54 @@ public class FilterTabsView extends FrameLayout {
             if (animateTextX) {
                 textX = textX * changeProgress + animateFromTextX * (1f - changeProgress);
             }
+            if (org.telegram.marble.MarbleTheme.folderChips()) {
+                // fade (not slide) between unchecked and checked container, 220ms
+                final float target = currentTab.id == selectedTabId ? 1f : 0f;
+                if (m3SelectAnim == null) {
+                    m3Select = target;
+                    m3SelectAnim = new AnimatedFloat(this, 0, 220, CubicBezierInterpolator.EASE_OUT_QUINT);
+                    m3SelectAnim.set(target, true);
+                }
+                m3Select = m3SelectAnim.set(target);
+            }
+            if (org.telegram.marble.MarbleTheme.folderChips()) {
+                // Marblegram: M3E connected ButtonGroup (ToggleButton) — outer corners of the first/last
+                // button are fully round, inner corners are small, 2dp gap between buttons;
+                // the checked button is the primary pill drawn by the moving selector.
+                if (m3ChipPaint == null) {
+                    m3ChipPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+                    m3ChipPath = new android.graphics.Path();
+                }
+                m3ChipPaint.setStyle(Paint.Style.FILL);
+                final org.telegram.marble.MarbleTheme.Roles m3r = org.telegram.marble.MarbleTheme.roles(Theme.isCurrentThemeDark());
+                m3ChipPaint.setColor(androidx.core.graphics.ColorUtils.blendARGB(m3r.surfaceContainerHigh, m3r.primary, m3Select));
+                final float half = dp(14), inner = dp(6), gap = dp(1);
+                final boolean leading = currentPosition == 0, trailing = currentPosition == tabs.size() - 1;
+                float left = gap, right = getMeasuredWidth() - gap;
+                // ButtonGroup animateWidth: pressed button grows by ExpandedRatio, neighbours give up the space
+                final float e = m3PressValue * m3PressedWidth * M3_EXPANDED_RATIO / 2f;
+                float l = leading ? half : inner, r = trailing ? half : inner;
+                // checkedShape: the selected button becomes a full pill
+                l = AndroidUtilities.lerp(l, half, m3Select);
+                r = AndroidUtilities.lerp(r, half, m3Select);
+                if (currentPosition == m3PressedPosition) {
+                    left -= e;
+                    right += e;
+                    // pressedShape: corners tighten while pressed
+                    l = AndroidUtilities.lerp(l, inner * 0.66f, m3PressValue);
+                    r = AndroidUtilities.lerp(r, inner * 0.66f, m3PressValue);
+                } else if (currentPosition == m3PressedPosition - 1) {
+                    right -= e;
+                } else if (currentPosition == m3PressedPosition + 1) {
+                    left += e;
+                }
+                AndroidUtilities.rectTmp.set(left, getMeasuredHeight() / 2f - half, right, getMeasuredHeight() / 2f + half);
+                m3ChipRadii[0] = m3ChipRadii[1] = m3ChipRadii[6] = m3ChipRadii[7] = l;
+                m3ChipRadii[2] = m3ChipRadii[3] = m3ChipRadii[4] = m3ChipRadii[5] = r;
+                m3ChipPath.rewind();
+                m3ChipPath.addRoundRect(AndroidUtilities.rectTmp, m3ChipRadii, android.graphics.Path.Direction.CW);
+                canvas.drawPath(m3ChipPath, m3ChipPaint);
+            }
 
             if (!TextUtils.equals(currentTab.title, currentText)) {
                 currentText = currentTab.title;
@@ -490,7 +588,7 @@ public class FilterTabsView extends FrameLayout {
                     float s = animateCounterEnter ? changeProgress : 1f - changeProgress;
                     canvas.scale(s, s, rect.centerX(), rect.centerY());
                 }
-                canvas.drawRoundRect(rect, 11.5f * AndroidUtilities.density, 11.5f * AndroidUtilities.density, counterPaint);
+                canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(11.5f * AndroidUtilities.density), org.telegram.marble.MarbleTheme.m3CornerPxF(11.5f * AndroidUtilities.density), counterPaint);
 
                 if (animateCounterReplace) {
                     float y = countTop;
@@ -1388,8 +1486,13 @@ public class FilterTabsView extends FrameLayout {
 
     @Override
     protected boolean drawChild(@NonNull Canvas canvas, View child, long drawingTime) {
+        // Marblegram: the opaque M3E chip fill must be drawn under the tab labels
+        final boolean m3 = org.telegram.marble.MarbleTheme.isEnabled();
+        if (child == listView && m3) {
+            drawSelector(canvas);
+        }
         boolean result = super.drawChild(canvas, child, drawingTime);
-        if (child == listView) {
+        if (child == listView && !m3) {
             drawSelector(canvas);
         }
         long newTime = SystemClock.elapsedRealtime();
@@ -1507,8 +1610,13 @@ public class FilterTabsView extends FrameLayout {
             final float add = additionalTabWidth / 2f;
 
             final int y = height / 2 - dp(14);
-            selectorDrawable.setBounds((int) (indicatorX - dp(TAB_INTERNAL_PADDING) - add), y, (int) (indicatorX + indicatorWidth + dp(TAB_INTERNAL_PADDING) + add), y + dp(28));
-            selectorDrawable.setAlpha(31);
+            float m3e = 0;
+            if (m3PressedPosition >= 0 && m3PressedPosition < tabs.size() && tabs.get(m3PressedPosition).id == selectedTabId) {
+                m3e = m3PressValue * m3PressedWidth * M3_EXPANDED_RATIO / 2f;
+            }
+            selectorDrawable.setBounds((int) (indicatorX - dp(TAB_INTERNAL_PADDING) - add - m3e), y, (int) (indicatorX + indicatorWidth + dp(TAB_INTERNAL_PADDING) + add + m3e), y + dp(28));
+            // Marblegram: M3E connected toggle — selected folder is a filled secondaryContainer pill
+            selectorDrawable.setAlpha(org.telegram.marble.MarbleTheme.folderChips() ? 0 : org.telegram.marble.MarbleTheme.isEnabled() ? 255 : 31);
             selectorDrawable.draw(canvas);
             canvas.restore();
         }

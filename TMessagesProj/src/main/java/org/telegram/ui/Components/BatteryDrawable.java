@@ -134,7 +134,7 @@ public class BatteryDrawable extends Drawable {
                 x + (w + dpf2(16.33f)) / 2f - dpf2(1.33f),
                 y + (h + dpf2(10.33f)) / 2f
         );
-        canvas.drawRoundRect(rectTmp, dpf2(2.33f), dpf2(2.33f), strokePaint);
+        canvas.drawRoundRect(rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dpf2(2.33f)), org.telegram.marble.MarbleTheme.m3CornerPxF(dpf2(2.33f)), strokePaint);
 
         rectTmp.set(
                 x + (w - dpf2(13f)) / 2f - dpf2(1.66f),
@@ -142,7 +142,7 @@ public class BatteryDrawable extends Drawable {
                 x + (w - dpf2(13f)) / 2f - dpf2(1.66f) + Math.max(dpf2(1.1f), fillValue * dpf2(13)),
                 y + (h + dpf2(7.33f)) / 2f
         );
-        canvas.drawRoundRect(rectTmp, dpf2(0.83f), dpf2(0.83f), fillPaint);
+        canvas.drawRoundRect(rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dpf2(0.83f)), org.telegram.marble.MarbleTheme.m3CornerPxF(dpf2(0.83f)), fillPaint);
 
         rectTmp.set(
                 x + (w + dpf2(17.5f) - dpf2(4.66f)) / 2f,

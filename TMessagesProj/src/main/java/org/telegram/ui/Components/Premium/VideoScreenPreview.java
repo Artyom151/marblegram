@@ -418,9 +418,9 @@ public class VideoScreenPreview extends FrameLayout implements PagerHeaderView, 
         }
         AndroidUtilities.rectTmp.inset(-AndroidUtilities.dp(3), -AndroidUtilities.dp(3));
         AndroidUtilities.rectTmp.inset(-AndroidUtilities.dp(3), -AndroidUtilities.dp(3));
-        canvas.drawRoundRect(AndroidUtilities.rectTmp, roundRadius + AndroidUtilities.dp(3), roundRadius + AndroidUtilities.dp(3), phoneFrame2);
+        canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(roundRadius + AndroidUtilities.dp(3)), org.telegram.marble.MarbleTheme.m3CornerPxF(roundRadius + AndroidUtilities.dp(3)), phoneFrame2);
         AndroidUtilities.rectTmp.inset(AndroidUtilities.dp(3), AndroidUtilities.dp(3));
-        canvas.drawRoundRect(AndroidUtilities.rectTmp, roundRadius, roundRadius, phoneFrame1);
+        canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(roundRadius), org.telegram.marble.MarbleTheme.m3CornerPxF(roundRadius), phoneFrame1);
 
         if (fromTop) {
             AndroidUtilities.rectTmp.set(horizontalPadding, 0, getMeasuredWidth() - horizontalPadding, h);

@@ -1015,7 +1015,7 @@ public class ProfileSearchCell extends BaseCell implements NotificationCenter.No
             canvas.scale(s, s, adBounds.centerX(), adBounds.centerY());
             canvas.translate(l, nameTop);
             AndroidUtilities.rectTmp.set(0, 0, w, h);
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, h / 2f, h / 2f, adBackgroundPaint);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(h / 2f), org.telegram.marble.MarbleTheme.m3CornerPxF(h / 2f), adBackgroundPaint);
             adText.draw(canvas, dp(6.33f), h / 2.f, color, 1.0f);
             canvas.restore();
         }
@@ -1030,7 +1030,7 @@ public class ProfileSearchCell extends BaseCell implements NotificationCenter.No
         if (countLayout != null) {
             final int x = countLeft - dp(5.5f);
             rect.set(x, countTop, x + countWidth + dp(11), countTop + dp(23));
-            canvas.drawRoundRect(rect, 11.5f * AndroidUtilities.density, 11.5f * AndroidUtilities.density, MessagesController.getInstance(currentAccount).isDialogMuted(dialog_id, 0) ? Theme.dialogs_countGrayPaint : Theme.dialogs_countPaint);
+            canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(11.5f * AndroidUtilities.density), org.telegram.marble.MarbleTheme.m3CornerPxF(11.5f * AndroidUtilities.density), MessagesController.getInstance(currentAccount).isDialogMuted(dialog_id, 0) ? Theme.dialogs_countGrayPaint : Theme.dialogs_countPaint);
             canvas.save();
             canvas.translate(countLeft, countTop + dp(4));
             countLayout.draw(canvas);
@@ -1116,7 +1116,7 @@ public class ProfileSearchCell extends BaseCell implements NotificationCenter.No
             canvas.save();
             final float s = openButtonBounce.getScale(.06f);
             canvas.scale(s, s, openButtonRect.centerX(), openButtonRect.centerY());
-            canvas.drawRoundRect(openButtonRect, openButtonRect.height() / 2.0f, openButtonRect.height() / 2.0f, openButtonBackgroundPaint);
+            canvas.drawRoundRect(openButtonRect, org.telegram.marble.MarbleTheme.m3CornerPxF(openButtonRect.height() / 2.0f), org.telegram.marble.MarbleTheme.m3CornerPxF(openButtonRect.height() / 2.0f), openButtonBackgroundPaint);
             openButtonText.draw(canvas, x + dp(14), getHeight() / 2.0f, 0xFFFFFFFF, 1.0f);
             canvas.restore();
         }

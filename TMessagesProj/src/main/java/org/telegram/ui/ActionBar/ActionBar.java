@@ -229,13 +229,18 @@ public class ActionBar extends FrameLayout implements FactorAnimator.Target, The
         }
 
 
+        final boolean m3 = org.telegram.marble.MarbleTheme.isEnabled();
+        if (m3) {
+            // Marblegram: M3E floating app bar — tonal round buttons + separate title pill
+            glassDrawable.setColorProvider(org.telegram.ui.Components.blur3.drawable.color.impl.BlurredBackgroundProviderImpl.m3TitleContainer(resourcesProvider));
+        }
         glassDrawableBack = factory.create(this)
-            .setColorProvider(colorProvider)
+            .setColorProvider(m3 ? org.telegram.ui.Components.blur3.drawable.color.impl.BlurredBackgroundProviderImpl.m3TonalButton(resourcesProvider) : colorProvider)
             .setRadius(dp(23))
             .setPadding(dp(6));
 
         glassDrawableMenu = factory.create(this)
-            .setColorProvider(colorProvider)
+            .setColorProvider(m3 ? org.telegram.ui.Components.blur3.drawable.color.impl.BlurredBackgroundProviderImpl.m3TonalButton(resourcesProvider) : colorProvider)
             .setRadius(dp(23))
             .setPadding(dp(6));
 
@@ -1440,7 +1445,7 @@ public class ActionBar extends FrameLayout implements FactorAnimator.Target, The
                 availableWidth = Math.max(availableWidth, 0);
 
                 if (((fromBottom && i == 0) || (!fromBottom && i == 1)) && overlayTitleAnimation && titleAnimationRunning) {
-                    titleTextView[i].setTextSize(glassMode ? 17 : !AndroidUtilities.isTablet() && getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE ? 18 : 20);
+                    titleTextView[i].setTextSize(org.telegram.marble.MarbleTheme.expressiveTypography() && !glassMode ? 22 : glassMode ? 17 : !AndroidUtilities.isTablet() && getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE ? 18 : 20);
                 } else {
                     if (titleTextView[0] != null && titleTextView[0].getVisibility() != GONE && subtitleTextView != null && subtitleTextView.getVisibility() != GONE) {
                         if (titleTextView[i] != null) {
@@ -1452,7 +1457,7 @@ public class ActionBar extends FrameLayout implements FactorAnimator.Target, The
                         }
                     } else {
                         if (titleTextView[i] != null && titleTextView[i].getVisibility() != GONE) {
-                            titleTextView[i].setTextSize(glassMode ? 17 : !AndroidUtilities.isTablet() && getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE ? 18 : 20);
+                            titleTextView[i].setTextSize(org.telegram.marble.MarbleTheme.expressiveTypography() && !glassMode ? 22 : glassMode ? 17 : !AndroidUtilities.isTablet() && getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE ? 18 : 20);
                         }
                         if (subtitleTextView != null && subtitleTextView.getVisibility() != GONE) {
                             subtitleTextView.setTextSize(!AndroidUtilities.isTablet() && getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE ? 14 : 16);

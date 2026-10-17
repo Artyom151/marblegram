@@ -1232,9 +1232,9 @@ public class BottomSheetTabsOverlay extends View {
             if (simple) {
                 shadowPaint.setColor(0);
                 shadowPaint.setShadowLayer(dp(30), 0, dp(10), Theme.multAlpha(0x20000000, alpha * expandProgress * (1f - openingProgress)));
-                canvas.drawRoundRect(bounds, r, r, shadowPaint);
+                canvas.drawRoundRect(bounds, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), shadowPaint);
                 backgroundPaint.setAlpha((int) (0xFF * alpha));
-                canvas.drawRoundRect(bounds, r, r, backgroundPaint);
+                canvas.drawRoundRect(bounds, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), backgroundPaint);
                 canvas.restore();
                 return;
             }
@@ -1248,7 +1248,7 @@ public class BottomSheetTabsOverlay extends View {
             canvas.clipPath(clipPath);
 
             backgroundPaint.setAlpha((int) (0xFF * alpha * expandProgress));
-            canvas.drawRoundRect(bounds, r, r, backgroundPaint);
+            canvas.drawRoundRect(bounds, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), backgroundPaint);
 
             canvas.save();
             canvas.translate(bounds.left, bounds.top + dp(50) * tabScaleY + tabTranslateY);

@@ -529,7 +529,7 @@ public class SelectorBottomSheet extends BottomSheetWithRecyclerListView {
         top = AndroidUtilities.lerp(top, 0, statusBarT.set(top < AndroidUtilities.statusBarHeight));
         AndroidUtilities.rectTmp.set(backgroundPaddingLeft, top, containerView.getWidth() - backgroundPaddingLeft, containerView.getHeight() + dp(14));
         final float r = dp(14) * (1f - statusBarT.get());
-        canvas.drawRoundRect(AndroidUtilities.rectTmp, r, r, backgroundPaint);
+        canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), backgroundPaint);
     }
 
     private void updateActionButton(boolean animated) {

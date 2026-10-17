@@ -467,6 +467,12 @@ public class SettingsActivity extends BaseFragment implements NotificationCenter
         subtitleView.setSingleLine();
         subtitleView.setEllipsize(TextUtils.TruncateAt.END);
         topView.addView(subtitleView, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT, Gravity.CENTER_HORIZONTAL | Gravity.TOP, 0, 168 - 12, 0, 0));
+        if (org.telegram.marble.MarbleTheme.expressiveTypography()) {
+            // Marblegram: flexible-app-bar style header — headlineSmall emphasized title, bodyMedium subtitle
+            titleView.setTextSize(TypedValue.COMPLEX_UNIT_SP, org.telegram.marble.MarbleTypography.Style.HEADLINE_SMALL.size);
+            titleView.setTypeface(org.telegram.marble.MarbleTypography.typeface(org.telegram.marble.MarbleTypography.Style.HEADLINE_SMALL, true));
+            subtitleView.setTextSize(TypedValue.COMPLEX_UNIT_SP, org.telegram.marble.MarbleTypography.Style.BODY_MEDIUM.size);
+        }
 
         versionView = new TextView(context);
         versionView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
@@ -699,6 +705,7 @@ public class SettingsActivity extends BaseFragment implements NotificationCenter
 
         items.add(SettingCell.Factory.of(1, IconBackgroundColors.BLUE.top, IconBackgroundColors.BLUE.bottom, R.drawable.settings_account, getString(R.string.SettingsAccount), getString(R.string.SettingsAccountInfo)));
         items.add(SettingCell.Factory.of(2, IconBackgroundColors.ORANGE.top, IconBackgroundColors.ORANGE.bottom, R.drawable.settings_chat, getString(R.string.SettingsChat), getString(R.string.SettingsChatInfo)));
+        items.add(SettingCell.Factory.of(77, IconBackgroundColors.BLUE_DEEP.top, IconBackgroundColors.BLUE_DEEP.bottom, R.drawable.marble_settings_icon, getString(R.string.MarbleSettings), getString(R.string.MarbleSettingsInfo)));
         items.add(SettingCell.Factory.of(3, IconBackgroundColors.GREEN.top, IconBackgroundColors.GREEN.bottom, R.drawable.settings_privacy, getString(R.string.SettingsPrivacySecurity), getString(R.string.SettingsPrivacySecurityInfo)));
         items.add(SettingCell.Factory.of(5, IconBackgroundColors.RED.top, IconBackgroundColors.RED.bottom, R.drawable.settings_sounds, getString(R.string.SettingsNotifications), getString(R.string.SettingsNotificationsInfo)));
         items.add(SettingCell.Factory.of(6, IconBackgroundColors.BLUE_DEEP.top, IconBackgroundColors.BLUE_DEEP.bottom, R.drawable.settings_data, getString(R.string.SettingsData), getString(R.string.SettingsDataInfo)));
@@ -822,6 +829,9 @@ public class SettingsActivity extends BaseFragment implements NotificationCenter
                 break;
             case 2:
                 presentSettingFragment(new ThemeActivity(ThemeActivity.THEME_TYPE_BASIC));
+                break;
+            case 77:
+                presentSettingFragment(new org.telegram.marble.MarbleSettingsActivity());
                 break;
             case 3:
                 presentSettingFragment(new PrivacySettingsActivity());
@@ -1181,7 +1191,7 @@ public class SettingsActivity extends BaseFragment implements NotificationCenter
             textLayout.addView(titleView, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT, 0, 0, 0, 0));
 
             subtitleView = new TextView(context);
-            subtitleView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 13);
+            subtitleView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, org.telegram.marble.MarbleTheme.expressiveTypography() ? 14 : 13);
             textLayout.addView(subtitleView, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT, 0, 4, 0, 0));
 
             valueView = new TextView(context);
@@ -1203,7 +1213,7 @@ public class SettingsActivity extends BaseFragment implements NotificationCenter
             titleView.setTextColor(Theme.getColor(Theme.key_windowBackgroundWhiteBlackText, resourcesProvider));
             subtitleView.setTextColor(Theme.getColor(Theme.key_windowBackgroundWhiteGrayText, resourcesProvider));
             valueView.setTextColor(Theme.getColor(Theme.key_windowBackgroundWhiteBlueText, resourcesProvider));
-            iconBackground.setDrawBorder(hasBackground && (resourcesProvider != null ? resourcesProvider.isDark() : Theme.isCurrentThemeDark()));
+            iconBackground.setDrawBorder(!org.telegram.marble.MarbleTheme.isEnabled() && hasBackground && (resourcesProvider != null ? resourcesProvider.isDark() : Theme.isCurrentThemeDark()));
         }
 
         private boolean twoLines;
@@ -1221,6 +1231,11 @@ public class SettingsActivity extends BaseFragment implements NotificationCenter
 
             iconBackground.setColor(iconColorTop, iconColorBottom);
             iconView.setImageResource(icon);
+            if (org.telegram.marble.MarbleTheme.isEnabled() && hasBackground) {
+                iconView.setColorFilter(new android.graphics.PorterDuffColorFilter(org.telegram.marble.MarbleTheme.onTonal(iconColorTop != 0 ? iconColorTop : iconColorBottom, Theme.isCurrentThemeDark()), android.graphics.PorterDuff.Mode.SRC_IN));
+            } else {
+                iconView.clearColorFilter();
+            }
             titleView.setText(title);
             subtitleView.setVisibility((twoLines = !TextUtils.isEmpty(subtitle)) ? View.VISIBLE : View.GONE);
             subtitleView.setText(subtitle);
@@ -1254,6 +1269,10 @@ public class SettingsActivity extends BaseFragment implements NotificationCenter
             }
 
             public void setColor(int topColor, int bottomColor) {
+                if (org.telegram.marble.MarbleTheme.isEnabled() && (topColor != 0 || bottomColor != 0)) {
+                    // Marblegram: Android 16 style flat tonal container derived from the category hue
+                    topColor = bottomColor = org.telegram.marble.MarbleTheme.tonal(topColor, Theme.isCurrentThemeDark());
+                }
                 gradient = new LinearGradient(0, 0, 0, dp(28), new int[] { topColor, bottomColor }, new float[] { 0, 1 }, Shader.TileMode.CLAMP);
                 paint.setShader(gradient);
             }
@@ -1265,11 +1284,12 @@ public class SettingsActivity extends BaseFragment implements NotificationCenter
 
             @Override
             public void draw(@NonNull Canvas canvas) {
-                final float r = dp(10);
+                // Marblegram: M3 Expressive settings use circular tonal icon containers
+                final float r = org.telegram.marble.MarbleTheme.isEnabled() ? getBounds().height() / 2f : dp(10);
                 AndroidUtilities.rectTmp.set(getBounds());
                 matrix.reset();
                 matrix.postTranslate(AndroidUtilities.rectTmp.left, AndroidUtilities.rectTmp.top);
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, r, r, paint);
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), paint);
 
                 if (border) {
                     final float sw = dp(1);
@@ -1277,7 +1297,7 @@ public class SettingsActivity extends BaseFragment implements NotificationCenter
                     matrix.reset();
                     matrix.postTranslate(AndroidUtilities.rectTmp.left, AndroidUtilities.rectTmp.top);
                     AndroidUtilities.rectTmp.inset(sw / 2.0f, sw / 2.0f);
-                    canvas.drawRoundRect(AndroidUtilities.rectTmp, r, r, strokePaint);
+                    canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), strokePaint);
                 }
             }
 

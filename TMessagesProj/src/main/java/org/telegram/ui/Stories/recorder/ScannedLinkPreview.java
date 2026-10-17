@@ -198,10 +198,10 @@ public class ScannedLinkPreview extends View {
             canvas.drawRenderNode(node);
             canvas.restore();
             backgroundPaint.setColor(Theme.multAlpha(0x70000000, alpha));
-            canvas.drawRoundRect(clipBounds, dp(12), dp(12), backgroundPaint);
+            canvas.drawRoundRect(clipBounds, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(12)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(12)), backgroundPaint);
         } else {
             backgroundPaint.setColor(Theme.multAlpha(0xdd000000, alpha));
-            canvas.drawRoundRect(clipBounds, dp(12), dp(12), backgroundPaint);
+            canvas.drawRoundRect(clipBounds, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(12)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(12)), backgroundPaint);
         }
 
         canvas.save();

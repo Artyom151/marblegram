@@ -188,7 +188,7 @@ public class SuggestionOffer {
         final Paint backgroundPaint = Theme.getThemePaint(Theme.key_paint_chatActionBackground, resourcesProvider);
         int oldAlpha = backgroundPaint.getAlpha();
         backgroundPaint.setAlpha((int) (oldAlpha * alpha * bgAlpha));
-        canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(15), dp(15), backgroundPaint);
+        canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(15)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(15)), backgroundPaint);
         backgroundPaint.setAlpha(oldAlpha);
         if (resourcesProvider == null ? Theme.hasGradientService() : resourcesProvider.hasGradientService()) {
             final Paint darkenPaint = Theme.getThemePaint(Theme.key_paint_chatActionBackgroundDarken, resourcesProvider);

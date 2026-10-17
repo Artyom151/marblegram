@@ -471,19 +471,19 @@ public class SessionCell extends FrameLayout {
             float x = linearLayout.getX();
 
             AndroidUtilities.rectTmp.set(x, y - dp(4), x + getMeasuredWidth() * 0.2f, y + dp(4));
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(4), dp(4), globalGradient.getPaint());
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), globalGradient.getPaint());
 
             y = linearLayout.getTop() + detailTextView.getTop() - dp(1);
             x = linearLayout.getX();
 
             AndroidUtilities.rectTmp.set(x, y - dp(4), x + getMeasuredWidth() * 0.4f, y + dp(4));
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(4), dp(4), globalGradient.getPaint());
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), globalGradient.getPaint());
 
             y = linearLayout.getTop() + detailExTextView.getTop() - dp(1);
             x = linearLayout.getX();
 
             AndroidUtilities.rectTmp.set(x, y - dp(4), x + getMeasuredWidth() * 0.3f, y + dp(4));
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(4), dp(4), globalGradient.getPaint());
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), globalGradient.getPaint());
             invalidate();
 
             if (stubAlpha < 1f) {

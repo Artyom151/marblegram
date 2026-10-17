@@ -307,7 +307,7 @@ public abstract class BlurredBackgroundDrawable extends Drawable {
                 canvas.save();
                 canvas.clipRect(bounds.left, bounds.top, bounds.right, bottom);
                 canvas.drawRoundRect(boundsWithPadding.left, boundsWithPadding.top,
-                        boundsWithPadding.right, bottom, radii[0], radii[0], paint);
+                        boundsWithPadding.right, bottom, org.telegram.marble.MarbleTheme.m3CornerPxF(radii[0]), org.telegram.marble.MarbleTheme.m3CornerPxF(radii[0]), paint);
                 canvas.restore();
             } else {
                 draw(canvas, paint);
@@ -321,7 +321,8 @@ public abstract class BlurredBackgroundDrawable extends Drawable {
                     boundsWithPadding.top,
                     boundsWithPadding.right,
                     boundsWithPadding.bottom,
-                    radii[0], radii[0], paint);
+                    org.telegram.marble.MarbleTheme.m3CornerPxF(radii[0]),
+                    org.telegram.marble.MarbleTheme.m3CornerPxF(radii[0]), paint);
             } else {
                 canvas.drawPath(path, paint);
             }
@@ -429,7 +430,8 @@ public abstract class BlurredBackgroundDrawable extends Drawable {
                             top + strokeHalf,
                             right + strokeHalf,
                             bottom + strokeHalf,
-                            radii[0], radii[0],
+                            org.telegram.marble.MarbleTheme.m3CornerPxF(radii[0]),
+                            org.telegram.marble.MarbleTheme.m3CornerPxF(radii[0]),
                             paint
                     );
                 }
@@ -470,7 +472,8 @@ public abstract class BlurredBackgroundDrawable extends Drawable {
                             top - strokeHalf,
                             right + strokeHalf,
                             bottom - strokeHalf,
-                            radii[4], radii[4],
+                            org.telegram.marble.MarbleTheme.m3CornerPxF(radii[4]),
+                            org.telegram.marble.MarbleTheme.m3CornerPxF(radii[4]),
                             paint
                     );
                 }
@@ -521,7 +524,8 @@ public abstract class BlurredBackgroundDrawable extends Drawable {
                     top + strokeHalf,
                     right + strokeHalf,
                     bottom + strokeHalf,
-                    radii, radii,
+                    org.telegram.marble.MarbleTheme.m3CornerPxF(radii),
+                    org.telegram.marble.MarbleTheme.m3CornerPxF(radii),
                     paint
                 );
             }
@@ -532,7 +536,8 @@ public abstract class BlurredBackgroundDrawable extends Drawable {
                     top - strokeHalf,
                     right + strokeHalf,
                     bottom - strokeHalf,
-                    radii, radii,
+                    org.telegram.marble.MarbleTheme.m3CornerPxF(radii),
+                    org.telegram.marble.MarbleTheme.m3CornerPxF(radii),
                     paint
                 );
             }

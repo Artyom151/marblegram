@@ -1269,7 +1269,7 @@ public class TranslateAlert2 extends BottomSheet implements NotificationCenter.N
                         AndroidUtilities.rectTmp.set(0, (getHeight() - dp(18)) / 2f, width(), (getHeight() + dp(18)) / 2f);
                     }
                     bgPaint.setColor(Theme.multAlpha(getThemedColor(Theme.key_player_actionBarSubtitle), .1175f));
-                    canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(4), dp(4), bgPaint);
+                    canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), bgPaint);
                     if (links.draw(canvas)) {
                         invalidate();
                     }

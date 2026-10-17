@@ -2309,7 +2309,7 @@ public class FilterCreateActivity extends BaseFragment {
                 r = dp(4.4f);
                 AndroidUtilities.rectTmp.inset(dp(-4), dp(fontSize == 8 ? -3.66f : -2.33f));
             }
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, r, r, bgPaint);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), bgPaint);
 
             canvas.save();
             canvas.translate(x, y);
@@ -2344,7 +2344,7 @@ public class FilterCreateActivity extends BaseFragment {
             final float cy = (bottom + top) / 2f;
             final float height = dp(14.66f);
             AndroidUtilities.rectTmp.set(_x, cy - height / 2f, _x + this.text.getWidth() + dp(9.33f), cy + height / 2f);
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(4), dp(4), bgPaint);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), bgPaint);
             this.text.draw(canvas, _x + dp(4.66f), cy, color, 1.0f);
         }
     }
@@ -2821,7 +2821,7 @@ public class FilterCreateActivity extends BaseFragment {
                     setTextColor(color);
                     backgroundPaint.setColor(Theme.multAlpha(color, Theme.isCurrentThemeDark() ? .20f : .10f));
                     AndroidUtilities.rectTmp.set(getWidth() - getDrawable().getCurrentWidth() - dpf2(4.66f * 2), (getHeight() - dpf2(14.66f)) / 2f, getWidth(), (getHeight() + dpf2(14.66f)) / 2f);
-                    canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(4), dp(4), backgroundPaint);
+                    canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), backgroundPaint);
                     super.dispatchDraw(canvas);
                 }
             };

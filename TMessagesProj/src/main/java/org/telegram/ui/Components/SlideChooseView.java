@@ -222,6 +222,10 @@ public class SlideChooseView extends View {
         float selectedIndexAnimated = selectedIndexAnimatedHolder.set(selectedIndex);
         float movingAnimated = movingAnimatedHolder.set(moving ? 1 : 0);
         int cy = getMeasuredHeight() / 2 + AndroidUtilities.dp(11);
+        final boolean m3 = dashedFrom == -1 && org.telegram.marble.MarbleTheme.expressiveShapes();
+        if (m3) {
+            drawM3Track(canvas, cy, selectedIndexAnimated, movingAnimated);
+        }
 
         for (int a = 0; a < optionsStr.length; a++) {
             int cx = sideSide + (lineSize + gapSize * 2 + circleSize) * a + circleSize / 2;
@@ -230,8 +234,8 @@ public class SlideChooseView extends View {
             int color = ColorUtils.blendARGB(getThemedColor(Theme.key_switchTrack), Theme.multAlpha(getThemedColor(Theme.key_switchTrackChecked), minIndex != Integer.MIN_VALUE && a <= minIndex ? .50f : 1.0f), ut);
             paint.setColor(color);
             linePaint.setColor(color);
-            canvas.drawCircle(cx, cy, AndroidUtilities.lerp(circleSize / 2, AndroidUtilities.dp(6), t), paint);
-            if (a != 0) {
+            if (!m3) canvas.drawCircle(cx, cy, AndroidUtilities.lerp(circleSize / 2, AndroidUtilities.dp(6), t), paint);
+            if (a != 0 && !m3) {
                 int x = cx - circleSize / 2 - gapSize - lineSize;
                 int width = lineSize;
                 if (dashedFrom != -1 && a - 1 >= dashedFrom) {
@@ -285,6 +289,9 @@ public class SlideChooseView extends View {
             }
         }
 
+        if (m3) {
+            return;
+        }
         float cx = sideSide + (lineSize + gapSize * 2 + circleSize) * selectedIndexAnimated + circleSize / 2;
         paint.setColor(ColorUtils.setAlphaComponent(getThemedColor(Theme.key_switchTrackChecked), 80));
         canvas.drawCircle(cx, cy, AndroidUtilities.dp(12 * movingAnimated), paint);
@@ -318,5 +325,42 @@ public class SlideChooseView extends View {
         default void onTouchEnd() {
 
         }
+    }
+
+    private final android.graphics.RectF m3Rect = new android.graphics.RectF();
+
+    /** Marblegram: M3 Expressive discrete slider — thick track split by the handle, stop dots per step. */
+    private void drawM3Track(Canvas canvas, int cy, float selected, float moving) {
+        final int count = optionsStr.length;
+        final float step = lineSize + gapSize * 2 + circleSize;
+        final float x0 = sideSide + circleSize / 2f, x1 = x0 + step * (count - 1);
+        final float hx = x0 + step * selected;
+        final float h = AndroidUtilities.dp(12), r = h / 2f, inner = AndroidUtilities.dp(2), gap = AndroidUtilities.dp(5);
+        final int active = getThemedColor(Theme.key_switchTrackChecked);
+        final int inactive = ColorUtils.setAlphaComponent(active, 0x3d);
+        final int oldColor = paint.getColor();
+        if (hx - gap > x0 - r) {
+            paint.setColor(active);
+            m3Rect.set(x0 - r, cy - r, Math.max(x0 - r + inner * 2, hx - gap), cy + r);
+            canvas.drawRoundRect(m3Rect, org.telegram.marble.MarbleTheme.m3CornerPxF(Math.min(r, m3Rect.width() / 2f)), org.telegram.marble.MarbleTheme.m3CornerPxF(Math.min(r, m3Rect.width() / 2f)), paint);
+        }
+        if (x1 + r > hx + gap) {
+            paint.setColor(inactive);
+            m3Rect.set(Math.min(x1 + r - inner * 2, hx + gap), cy - r, x1 + r, cy + r);
+            canvas.drawRoundRect(m3Rect, org.telegram.marble.MarbleTheme.m3CornerPxF(Math.min(r, m3Rect.width() / 2f)), org.telegram.marble.MarbleTheme.m3CornerPxF(Math.min(r, m3Rect.width() / 2f)), paint);
+        }
+        // stop indicators
+        for (int a = 0; a < count; a++) {
+            float x = x0 + step * a;
+            if (Math.abs(x - hx) < gap + inner) continue;
+            paint.setColor(x < hx ? ColorUtils.setAlphaComponent(getThemedColor(Theme.key_windowBackgroundWhite), 0xcc) : active);
+            canvas.drawCircle(x, cy, AndroidUtilities.dp(2), paint);
+        }
+        // handle
+        paint.setColor(active);
+        final float hw = AndroidUtilities.dp(4) - AndroidUtilities.dp(1) * moving, hh = AndroidUtilities.dp(22);
+        m3Rect.set(hx - hw / 2f, cy - hh / 2f, hx + hw / 2f, cy + hh / 2f);
+        canvas.drawRoundRect(m3Rect, org.telegram.marble.MarbleTheme.m3CornerPxF(hw / 2f), org.telegram.marble.MarbleTheme.m3CornerPxF(hw / 2f), paint);
+        paint.setColor(oldColor);
     }
 }

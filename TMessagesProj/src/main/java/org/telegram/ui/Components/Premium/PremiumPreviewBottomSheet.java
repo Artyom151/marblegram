@@ -600,7 +600,7 @@ public class PremiumPreviewBottomSheet extends BottomSheetWithRecyclerListView i
                         protected void dispatchDraw(Canvas canvas) {
                             AndroidUtilities.rectTmp.set(imageView.getLeft(), imageView.getTop(), imageView.getRight(), imageView.getBottom());
                             gradientTools.gradientMatrix(0, 0, getMeasuredWidth(), totalGradientHeight, 0, -data.yOffset);
-                            canvas.drawRoundRect(AndroidUtilities.rectTmp, AndroidUtilities.dp(8), AndroidUtilities.dp(8), gradientTools.paint);
+                            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(8)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(8)), gradientTools.paint);
                             super.dispatchDraw(canvas);
                         }
                     };

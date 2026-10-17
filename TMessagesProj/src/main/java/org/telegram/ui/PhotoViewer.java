@@ -820,8 +820,8 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
             backgroundPaint.setAlpha((int) (wasAlpha * show));
             canvas.drawRoundRect(
                 AndroidUtilities.rectTmp,
-                dpf2(12),
-                dpf2(12),
+                org.telegram.marble.MarbleTheme.m3CornerPxF(dpf2(12)),
+                org.telegram.marble.MarbleTheme.m3CornerPxF(dpf2(12)),
                 backgroundPaint
             );
             backgroundPaint.setAlpha(wasAlpha);
@@ -2347,7 +2347,7 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
                 }
                 if (minX != Integer.MAX_VALUE && maxX != Integer.MIN_VALUE) {
                     rect.set(minX - dp(6), dp(6), maxX + dp(6), dp(6 + 85 + 12));
-                    c.drawRoundRect(rect, dp(8), dp(8), paint);
+                    c.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(8)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(8)), paint);
                 }
             }
         }
@@ -2448,7 +2448,7 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
             int cy = getMeasuredHeight() / 2;
             paint.setAlpha(255);
             rect.set(dp(1), cy - dp(14), getMeasuredWidth() - dp(1), cy + dp(14));
-            canvas.drawRoundRect(rect, dp(15), dp(15), paint);
+            canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(15)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(15)), paint);
             if (staticLayout != null) {
                 textPaint.setAlpha((int) ((1.0f - rotation) * 255));
                 canvas.save();
@@ -2726,7 +2726,7 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
                     progressPaint.setAlpha((int) (255 * alpha));
                 }
                 progressRect.set(x + diff, y + diff, x + sizeScaled - diff, y + sizeScaled - diff);
-                canvas.drawArc(progressRect, -90 + radOffset, Math.max(4, 360 * animatedProgressValue), false, progressPaint);
+                org.telegram.marble.WavyProgress.drawArc(canvas, progressRect, -90 + radOffset, Math.max(4, 360 * animatedProgressValue), progressPaint);
                 updateAnimation(true);
             } else {
                 updateAnimation(false);
@@ -5746,7 +5746,7 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
                     if (videoPlayer != null) {
                         videoPlayer.setLooping(playerLooping);
                     }
-                    loopItem.setEnabledByColor(playerLooping, 0xFFFFFFFF, 0xFF73B4EC);
+                    loopItem.setEnabledByColor(playerLooping, 0xFFFFFFFF, org.telegram.marble.MarbleTheme.editorAccent(0xFF73B4EC));
                     loopItem.setSelectorColor(playerLooping ? 0x0F73B4EC : 0x0fffffff);
                 } else if (id == gallery_menu_report) {
                     TLRPC.Photo photo = null;
@@ -5821,7 +5821,7 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
             @Override
             public void stateUpdated(boolean connected) {
                 if (castItem != null) {
-                    castItem.setEnabledByColor(connected, 0xFFFFFFFF, 0xFF73B4EC);
+                    castItem.setEnabledByColor(connected, 0xFFFFFFFF, org.telegram.marble.MarbleTheme.editorAccent(0xFF73B4EC));
                     castItem.setSelectorColor(connected ? 0x0F73B4EC : 0x0fffffff);
                 }
                 if (videoPlayer != null) {
@@ -5842,7 +5842,7 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
         castItemButton.setVisibility(View.INVISIBLE);
         if (castAvailable) {
             castItem = videoItem.addSubItem(gallery_menu_chromecast, R.drawable.menu_video_chromecast, getString(R.string.VideoPlayerChromecast));
-            castItem.setEnabledByColor(false, 0xFFFFFFFF, 0xFF73B4EC);
+            castItem.setEnabledByColor(false, 0xFFFFFFFF, org.telegram.marble.MarbleTheme.editorAccent(0xFF73B4EC));
             castItem.setSelectorColor(0x0fffffff);
             castItem.addView(castItemButton, 0, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.MATCH_PARENT));
         }
@@ -10739,7 +10739,7 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
         }
         videoPlayerControlFrameLayout.setSeekBarTransitionEnabled(playerLooping);
         videoPlayer.setLooping(playerLooping);
-        loopItem.setEnabledByColor(playerLooping, 0xFFFFFFFF, 0xFF73B4EC);
+        loopItem.setEnabledByColor(playerLooping, 0xFFFFFFFF, org.telegram.marble.MarbleTheme.editorAccent(0xFF73B4EC));
         loopItem.setSelectorColor(playerLooping ? 0x0F73B4EC : 0x0fffffff);
 
         if (currentMessageObject != null && currentMessageObject.forceSeekTo >= 0) {

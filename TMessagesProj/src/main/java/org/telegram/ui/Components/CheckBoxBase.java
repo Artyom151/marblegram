@@ -394,6 +394,20 @@ public class CheckBoxBase {
     }
 
     public void draw(Canvas canvas) {
+        // Marblegram: M3E expressive check — a short springy bounce while the selection animates
+        final float p = forbidden ? 1f : progress;
+        if (org.telegram.marble.MarbleTheme.expressiveShapes() && p > 0f && p < 1f) {
+            final float s = 1f + 0.14f * (float) Math.sin(Math.PI * p);
+            canvas.save();
+            canvas.scale(s, s, bounds.centerX(), bounds.centerY());
+            drawInternal(canvas);
+            canvas.restore();
+            return;
+        }
+        drawInternal(canvas);
+    }
+
+    private void drawInternal(Canvas canvas) {
         float rad = dp(size / 2);
         float outerRad = rad;
         if (backgroundType == 12 || backgroundType == 13) {
@@ -455,7 +469,7 @@ public class CheckBoxBase {
                 if (customRadius > 0) {
                     final float r = rad - dp(1.5f);
                     final float rr = lerp(r, customRadius, customRadiusFactor);
-                    canvas.drawRoundRect(cx - r, cy - r, cx + r, cy + r, rr, rr, backgroundPaint);
+                    canvas.drawRoundRect(cx - r, cy - r, cx + r, cy + r, org.telegram.marble.MarbleTheme.m3CornerPxF(rr), org.telegram.marble.MarbleTheme.m3CornerPxF(rr), backgroundPaint);
                 } else {
                     canvas.drawCircle(cx, cy, rad - dp(1.5f), backgroundPaint);
                 }
@@ -564,11 +578,11 @@ public class CheckBoxBase {
                 } else if (customRadius > 0) {
                     rad -= dp(0.5f);
                     final float rad2 = lerp(rad, customRadius, customRadiusFactor);
-                    canvas.drawRoundRect(sizeHalf - rad, sizeHalf - rad, sizeHalf + rad, sizeHalf + rad, rad2, rad2, circlePaint);
+                    canvas.drawRoundRect(sizeHalf - rad, sizeHalf - rad, sizeHalf + rad, sizeHalf + rad, org.telegram.marble.MarbleTheme.m3CornerPxF(rad2), org.telegram.marble.MarbleTheme.m3CornerPxF(rad2), circlePaint);
                     final float r = rad * (1.0f - roundProgress);
                     final float rr = lerp(r, customRadius, customRadiusFactor);
                     if (needSaveLayer && r > 0) {
-                        canvas.drawRoundRect(sizeHalf - r, sizeHalf - r, sizeHalf + r, sizeHalf + r, rr, rr, Theme.PAINT_CLEAR);
+                        canvas.drawRoundRect(sizeHalf - r, sizeHalf - r, sizeHalf + r, sizeHalf + r, org.telegram.marble.MarbleTheme.m3CornerPxF(rr), org.telegram.marble.MarbleTheme.m3CornerPxF(rr), Theme.PAINT_CLEAR);
                     }
                 } else {
                     rad -= dp(0.5f);

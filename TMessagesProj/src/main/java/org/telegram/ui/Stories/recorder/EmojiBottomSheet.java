@@ -1758,7 +1758,7 @@ public class EmojiBottomSheet extends BottomSheet implements NotificationCenter.
                 blurBitmapMatrix.postScale(16, 16);
                 blurBitmapMatrix.postTranslate(0, -getY());
                 blurBitmapShader.setLocalMatrix(blurBitmapMatrix);
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(14), dp(14), backgroundBlurPaint);
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(14)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(14)), backgroundBlurPaint);
             }
 
             boolean overStatusBar = AndroidUtilities.rectTmp.top < AndroidUtilities.statusBarHeight;
@@ -1766,7 +1766,7 @@ public class EmojiBottomSheet extends BottomSheet implements NotificationCenter.
                 this.overStatusBar = overStatusBar;
                 AndroidUtilities.setLightStatusBar(getWindow(), overStatusBar ? AndroidUtilities.computePerceivedBrightness(backgroundPaint.getColor()) >= .721f : false);
             }
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, (1f - statusBar) * dp(14), (1f - statusBar) * dp(14), backgroundPaint);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF((1f - statusBar) * dp(14)), org.telegram.marble.MarbleTheme.m3CornerPxF((1f - statusBar) * dp(14)), backgroundPaint);
             handleRect.set(
                 (getWidth() - dp(36)) / 2f,
                 y + dp(9.66f),
@@ -1775,7 +1775,7 @@ public class EmojiBottomSheet extends BottomSheet implements NotificationCenter.
             );
             handlePaint.setColor(0x51838383);
             handlePaint.setAlpha((int) (0x51 * (1f - statusBar)));
-            canvas.drawRoundRect(handleRect, dp(4), dp(4), handlePaint);
+            canvas.drawRoundRect(handleRect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), handlePaint);
             canvas.save();
             canvas.clipRect(AndroidUtilities.rectTmp);
             super.dispatchDraw(canvas);
@@ -2777,7 +2777,7 @@ public class EmojiBottomSheet extends BottomSheet implements NotificationCenter.
             selectPaint.setColor(0xFF363636);
 
             lerp(getRect((int) type), getRect((int) Math.ceil(type)), type - (int) type, selectRect);
-            canvas.drawRoundRect(selectRect, dp(20), dp(20), selectPaint);
+            canvas.drawRoundRect(selectRect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(20)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(20)), selectPaint);
 
             if (emojiLayout != null) {
                 canvas.save();
@@ -2987,7 +2987,7 @@ public class EmojiBottomSheet extends BottomSheet implements NotificationCenter.
                 final float scale = bounce.getScale(.05f);
                 canvas.save();
                 canvas.scale(scale, scale, bounds.centerX(), bounds.centerY());
-                canvas.drawRoundRect(bounds, dp(8), dp(8), bgPaint);
+                canvas.drawRoundRect(bounds, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(8)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(8)), bgPaint);
                 if (lockDrawable != null) {
                     canvas.saveLayerAlpha(bounds, 0xFF, Canvas.ALL_SAVE_FLAG);
                 }
@@ -3016,7 +3016,8 @@ public class EmojiBottomSheet extends BottomSheet implements NotificationCenter.
                     );
                     canvas.drawRoundRect(
                         AndroidUtilities.rectTmp,
-                        dp(6), dp(6),
+                        org.telegram.marble.MarbleTheme.m3CornerPxF(dp(6)),
+                        org.telegram.marble.MarbleTheme.m3CornerPxF(dp(6)),
                         lockPaint
                     );
                     lockDrawable.setBounds(

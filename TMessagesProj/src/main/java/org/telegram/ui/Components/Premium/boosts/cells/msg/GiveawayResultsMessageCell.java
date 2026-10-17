@@ -498,14 +498,14 @@ public class GiveawayResultsMessageCell {
                 centerX + ((textWidth + dp(2)) / 2f),
                 centerY + ((textHeight + dp(2)) / 2f)
         );
-        canvas.drawRoundRect(countRect, dp(11), dp(11), clipRectPaint);
+        canvas.drawRoundRect(countRect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(11)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(11)), clipRectPaint);
         countRect.set(
                 centerX - ((textWidth) / 2f),
                 centerY - ((textHeight) / 2f),
                 centerX + ((textWidth) / 2f),
                 centerY + ((textHeight) / 2f)
         );
-        canvas.drawRoundRect(countRect, dp(10), dp(10), counterBgPaint);
+        canvas.drawRoundRect(countRect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(10)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(10)), counterBgPaint);
         if (counterIcon != null) {
             final float s = .58f;
             counterIcon.setBounds((int) countRect.left + dp(5), (int) countRect.centerY() - dp(12 * s), (int) countRect.left + dp(5 + 28 * s), (int) countRect.centerY() + dp(12 * s));
@@ -559,7 +559,7 @@ public class GiveawayResultsMessageCell {
                     avatarImageReceivers[k].draw(canvas);
                     canvas.drawText(userTitles[k], 0, userTitles[k].length(), dp(24 + 6), dp(16), chatTextPaint);
                     chatRect.set(0, 0, userTitleWidths[k] + dp(24 + 6 + 10), dp(24));
-                    canvas.drawRoundRect(chatRect, dp(12), dp(12), chatBgPaint);
+                    canvas.drawRoundRect(chatRect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(12)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(12)), chatBgPaint);
 
                     clickRect[k].set(xRow, y, (int) (xRow + chatRect.width()), y + dp(24));
 

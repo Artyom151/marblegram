@@ -441,7 +441,7 @@ public class CacheChart extends View {
                 if (svgParticles) {
                     sectors[i].particle = SvgHelper.getBitmap(particles[i], AndroidUtilities.dp(16), AndroidUtilities.dp(16), 0xffffffff);
                 } else {
-                    sectors[i].particle = BitmapFactory.decodeResource(getContext().getResources(), particles[i]);
+                    sectors[i].particle = org.telegram.marble.MarbleBitmaps.decodeResource(getContext().getResources(), particles[i]);
                 }
             }
         }

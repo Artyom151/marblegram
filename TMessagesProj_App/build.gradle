@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'org.telegram.build-app-plugin'
+apply plugin: 'com.chaquo.python' // Marblegram Plugin SDK (Python)
 
 repositories {
     mavenCentral()
@@ -166,7 +167,7 @@ android {
     }
 
     defaultConfig {
-        minSdkVersion 23
+        minSdkVersion 24
         targetSdkVersion 36
         versionName APP_VERSION_NAME
         ndkVersion "27.2.12479018"
@@ -195,3 +196,13 @@ android {
 }
 
 apply plugin: 'com.google.gms.google-services'
+
+// Marblegram Plugin SDK: embedded CPython for Python plugins (no pip packages, plugin sources stay .py)
+chaquopy {
+    defaultConfig {
+        version = "3.11"
+        pyc {
+            src = false
+        }
+    }
+}

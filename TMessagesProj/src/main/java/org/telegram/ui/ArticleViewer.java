@@ -12047,7 +12047,7 @@ public class ArticleViewer extends IArticleViewer implements NotificationCenter.
         protected void onDraw(Canvas canvas) {
             int width = getMeasuredWidth() / 3;
             rect.set(width, dp(8), width * 2, dp(10));
-            canvas.drawRoundRect(rect, dp(1), dp(1), dividerPaint);
+            canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(1)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(1)), dividerPaint);
         }
     }
 
@@ -16116,7 +16116,7 @@ public class ArticleViewer extends IArticleViewer implements NotificationCenter.
                 if (attachedActionBar < 1f) {
                     shadowPaint.setColor(0);
                     shadowPaint.setShadowLayer(dp(18), 0, -dp(3), Theme.multAlpha(Color.BLACK, .26f * open));
-                    canvas.drawRoundRect(rect, r, r, shadowPaint);
+                    canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), shadowPaint);
                 }
 
                 if (r <= 0) {
@@ -16158,7 +16158,7 @@ public class ArticleViewer extends IArticleViewer implements NotificationCenter.
                     final float cx = getWidth() / 2f, cy = drawnTop + getListPaddingTop() / 2f - attachedActionBar * dp(8);
                     final float w = lerp(dp(32), dp(48), attachedActionBar);
                     rect.set(cx - w / 2f, cy - dp(2), cx + w / 2f, cy + dp(2));
-                    canvas.drawRoundRect(rect, rect.height() / 2f, rect.height() / 2f, handlePaint);
+                    canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(rect.height() / 2f), org.telegram.marble.MarbleTheme.m3CornerPxF(rect.height() / 2f), handlePaint);
                 }
 
                 canvas.restore();

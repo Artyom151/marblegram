@@ -2269,7 +2269,7 @@ public class ChatAttachAlertPhotoLayoutPreview extends ChatAttachAlert.AttachAle
                             Canvas bitmapCanvas = new Canvas(videoDurationBitmap);
 
                             AndroidUtilities.rectTmp.set(0, 0, width, height);
-                            bitmapCanvas.drawRoundRect(AndroidUtilities.rectTmp, AndroidUtilities.dp(4), AndroidUtilities.dp(4), Theme.chat_timeBackgroundPaint);
+                            bitmapCanvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(4)), Theme.chat_timeBackgroundPaint);
 
                             int imageLeft = (int) AndroidUtilities.dp(5),
                                 imageTop =  (int) ((height - videoPlayImage.getIntrinsicHeight()) / 2);
@@ -2602,7 +2602,7 @@ public class ChatAttachAlertPhotoLayoutPreview extends ChatAttachAlert.AttachAle
                         top + (height + buttonHeight) / 2f
                 );
                 buttonTextBgPaint.setColor(0x60000000);
-                canvas.drawRoundRect(buttonTextRect, buttonHeight / 2f, buttonHeight / 2f, buttonTextBgPaint);
+                canvas.drawRoundRect(buttonTextRect, org.telegram.marble.MarbleTheme.m3CornerPxF(buttonHeight / 2f), org.telegram.marble.MarbleTheme.m3CornerPxF(buttonHeight / 2f), buttonTextBgPaint);
                 buttonText.draw(canvas, left + width / 2f - buttonWidth / 2f + dp(14), top + height / 2f, 0xFFFFFFFF, 1f);
             }
         }

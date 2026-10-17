@@ -420,9 +420,9 @@ public class QuickShareSelectorDrawable extends Drawable implements Animator.Ani
         } else {
             final float r1 = Math.min(bubbleCurrent.width(), bubbleCurrent.height()) / 2f;
             final float r2 = Math.min(buttonCurrent.width(), buttonCurrent.height()) / 2f;
-            canvas.drawRoundRect(bubbleCurrent, r1, r1, paintBubbleBg);
+            canvas.drawRoundRect(bubbleCurrent, org.telegram.marble.MarbleTheme.m3CornerPxF(r1), org.telegram.marble.MarbleTheme.m3CornerPxF(r1), paintBubbleBg);
             if (!openAnimationCompleted) {
-                canvas.drawRoundRect(buttonCurrent, r2, r2, paintBubbleBg);
+                canvas.drawRoundRect(buttonCurrent, org.telegram.marble.MarbleTheme.m3CornerPxF(r2), org.telegram.marble.MarbleTheme.m3CornerPxF(r2), paintBubbleBg);
             }
         }
 

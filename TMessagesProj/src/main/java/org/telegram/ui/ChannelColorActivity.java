@@ -2376,7 +2376,7 @@ public class ChannelColorActivity extends BaseFragment implements NotificationCe
                             (getMeasuredHeight() + dp(12.4f)) / 2f
                     );
                     canvas.rotate(45f, getMeasuredWidth() / 2f, getMeasuredHeight() / 2f);
-                    canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(2.33f), dp(2.33f), paint3);
+                    canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(2.33f)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(2.33f)), paint3);
                     canvas.restore();
                 }
 

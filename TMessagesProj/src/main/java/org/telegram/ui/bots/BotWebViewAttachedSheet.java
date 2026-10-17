@@ -1628,7 +1628,7 @@ public class BotWebViewAttachedSheet implements NotificationCenter.NotificationC
             actionBarPaint.setColor(actionBarColor);
             float radius = dp(16) * (AndroidUtilities.isTablet() ? 1f : 1f - actionBarTransitionProgress);
             AndroidUtilities.rectTmp.set(swipeContainer.getLeft(), lerp(swipeContainer.getTranslationY(), 0, actionBarTransitionProgress), swipeContainer.getRight(), swipeContainer.getTranslationY() + dp(24) + radius);
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, radius, radius, actionBarPaint);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(radius), org.telegram.marble.MarbleTheme.m3CornerPxF(radius), actionBarPaint);
 
             AndroidUtilities.rectTmp.set(swipeContainer.getLeft(), swipeContainer.getTranslationY() + dp(24), swipeContainer.getRight(), getHeight());
             canvas.drawRect(AndroidUtilities.rectTmp, backgroundPaint);

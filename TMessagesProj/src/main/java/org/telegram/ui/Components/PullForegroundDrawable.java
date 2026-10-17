@@ -322,7 +322,7 @@ public class PullForegroundDrawable {
             } else {
                 rectF.set(startPadding, cell.getHeight() - visibleHeight + smallMargin - overscroll, startPadding + diameter, cell.getHeight() - smallMargin);
             }
-            canvas.drawRoundRect(rectF, radius, radius, paintSecondary);
+            canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(radius), org.telegram.marble.MarbleTheme.m3CornerPxF(radius), paintSecondary);
         }
 
         if (header) {

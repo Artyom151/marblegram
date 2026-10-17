@@ -262,7 +262,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
         if (underlineHeight != 0) {
             rectPaint.setColor(underlineColor);
             AndroidUtilities.rectTmp.set(0, height - underlineHeight, tabsContainer.getWidth(), height);
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, underlineHeight / 2f, underlineHeight / 2f, rectPaint);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(underlineHeight / 2f), org.telegram.marble.MarbleTheme.m3CornerPxF(underlineHeight / 2f), rectPaint);
         }
 
         View currentTab = tabsContainer.getChildAt(currentPosition);
@@ -296,7 +296,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
                 rectPaint.setColor(indicatorColor);
                 AndroidUtilities.rectTmp.set(lineLeft - AndroidUtilities.dp(11), getPaddingTop(), lineRight  + AndroidUtilities.dp(11), height - getPaddingBottom());
                 AndroidUtilities.rectTmp.offset(getPaddingLeft(), 0);
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, AndroidUtilities.rectTmp.height() / 2f, AndroidUtilities.rectTmp.height() / 2f, rectPaint);
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.rectTmp.height() / 2f), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.rectTmp.height() / 2f), rectPaint);
             }
         }
 

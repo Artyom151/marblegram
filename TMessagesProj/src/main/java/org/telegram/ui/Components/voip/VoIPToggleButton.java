@@ -150,6 +150,12 @@ public class VoIPToggleButton extends FrameLayout {
         float cy = dp(diameter) / 2f;
         float radius = dp(diameter) / 2f;
         if (drawBackground) {
+            if (org.telegram.marble.MarbleTheme.expressiveShapes()) {
+                // Marblegram: M3E icon toggle — circle when off, morphs to a rounded square when on
+                final float corner = AndroidUtilities.lerp(radius, radius * 0.55f, checkedProgress);
+                AndroidUtilities.rectTmp.set(cx - radius, cy - radius, cx + radius, cy + radius);
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(corner), org.telegram.marble.MarbleTheme.m3CornerPxF(corner), circlePaint);
+            } else
             canvas.drawCircle(cx, cy, radius, circlePaint);
         }
         if (rippleDrawable == null) {

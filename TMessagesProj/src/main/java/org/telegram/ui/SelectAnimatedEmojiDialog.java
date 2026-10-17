@@ -3426,7 +3426,7 @@ public class SelectAnimatedEmojiDialog extends FrameLayout implements Notificati
                 Paint paint = empty || drawable instanceof AnimatedEmojiDrawable && ((AnimatedEmojiDrawable) drawable).canOverrideColor() ? selectorAccentPaint : selectorPaint;
                 int wasAlpha = paint.getAlpha();
                 paint.setAlpha((int) (wasAlpha * getAlpha() * selectedProgress));
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, round, round, paint);
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(round), org.telegram.marble.MarbleTheme.m3CornerPxF(round), paint);
                 paint.setAlpha(wasAlpha);
             }
         }

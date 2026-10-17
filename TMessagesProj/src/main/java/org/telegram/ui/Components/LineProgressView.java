@@ -10,6 +10,7 @@ package org.telegram.ui.Components;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.util.Log;
@@ -107,18 +108,32 @@ public class LineProgressView extends View {
     }
 
     public void onDraw(Canvas canvas) {
+        if (org.telegram.marble.WavyProgress.enabled()) {
+            // Marblegram: M3E LinearWavyProgressIndicator (flat M3 linear when too thin for a wave)
+            int track = backColor != 0 ? backColor : androidx.core.graphics.ColorUtils.setAlphaComponent(progressColor, 0x3d);
+            progressPaint.setAlpha(255);
+            int a = (int) (255 * animatedAlphaValue);
+            org.telegram.marble.WavyProgress.drawLinear(canvas, 0, 0, getWidth(), getHeight(), animatedProgressValue,
+                androidx.core.graphics.ColorUtils.setAlphaComponent(progressColor, Color.alpha(progressColor) * a / 255),
+                androidx.core.graphics.ColorUtils.setAlphaComponent(track, Color.alpha(track) * a / 255), progressPaint);
+            updateAnimation();
+            if (getVisibility() == VISIBLE && animatedAlphaValue > 0) {
+                invalidate();
+            }
+            return;
+        }
         if (backColor != 0 && animatedProgressValue != 1) {
             progressPaint.setColor(backColor);
             progressPaint.setAlpha((int) (255 * animatedAlphaValue));
             int start = (int) (getWidth() * animatedProgressValue);
             rect.set(0, 0, getWidth(), getHeight());
-            canvas.drawRoundRect(rect, getHeight() / 2f, getHeight() / 2f, progressPaint);
+            canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(getHeight() / 2f), org.telegram.marble.MarbleTheme.m3CornerPxF(getHeight() / 2f), progressPaint);
         }
 
         progressPaint.setColor(progressColor);
         progressPaint.setAlpha((int) (255 * animatedAlphaValue));
         rect.set(0, 0, getWidth() * animatedProgressValue, getHeight());
-        canvas.drawRoundRect(rect, getHeight() / 2f, getHeight() / 2f, progressPaint);
+        canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(getHeight() / 2f), org.telegram.marble.MarbleTheme.m3CornerPxF(getHeight() / 2f), progressPaint);
 
         if (animatedAlphaValue > 0) {
             if (cellFlickerDrawable == null) {

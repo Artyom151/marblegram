@@ -223,7 +223,7 @@ public class AvatarPreviewPagerIndicator extends View implements ProfileGalleryV
                     canvas.clipRect(x + width * progress, y, x + width, y + AndroidUtilities.dp(2));
                     rect.set(x, y, x + width, y + AndroidUtilities.dp(2));
                     barPaint.setAlpha((int) (0x55 * alpha));
-                    canvas.drawRoundRect(rect, AndroidUtilities.dp(1), AndroidUtilities.dp(1), barPaint);
+                    canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(1)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(1)), barPaint);
                     baseAlpha = 0x50;
                     canvas.restore();
                     invalidate = true;
@@ -242,7 +242,7 @@ public class AvatarPreviewPagerIndicator extends View implements ProfileGalleryV
                         }
                         rect.set(x, y, x + width, y + AndroidUtilities.dp(2));
                         barPaint.setAlpha((int) ((0x55 + 0x30 * currentLoadingAnimationProgress) * alpha));
-                        canvas.drawRoundRect(rect, AndroidUtilities.dp(1), AndroidUtilities.dp(1), barPaint);
+                        canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(1)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(1)), barPaint);
                         invalidate = true;
                         baseAlpha = 0x50;
                     } else {
@@ -260,7 +260,7 @@ public class AvatarPreviewPagerIndicator extends View implements ProfileGalleryV
                 } else {
                     alphas[a] = 0.75f;
                 }
-                canvas.drawRoundRect(rect, AndroidUtilities.dp(1), AndroidUtilities.dp(1), a == selectedPosition ? selectedBarPaint : barPaint);
+                canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(1)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(1)), a == selectedPosition ? selectedBarPaint : barPaint);
             }
 
             if (overlayCountVisible == 2) {
@@ -313,7 +313,7 @@ public class AvatarPreviewPagerIndicator extends View implements ProfileGalleryV
                 invalidate();
             }
             canvas.scale(progressToCounter, progressToCounter, indicatorRect.centerX(), indicatorRect.centerY());
-            canvas.drawRoundRect(indicatorRect, radius, radius, backgroundPaint);
+            canvas.drawRoundRect(indicatorRect, org.telegram.marble.MarbleTheme.m3CornerPxF(radius), org.telegram.marble.MarbleTheme.m3CornerPxF(radius), backgroundPaint);
             canvas.drawText(getCurrentTitle(), indicatorRect.centerX(), indicatorRect.top + AndroidUtilities.dpf2(18.5f), textPaint);
             canvas.restore();
         }

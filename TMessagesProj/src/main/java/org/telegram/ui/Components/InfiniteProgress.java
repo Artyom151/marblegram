@@ -74,7 +74,7 @@ public class InfiniteProgress {
     public void draw(Canvas canvas, float cx, float cy, float scale) {
         cicleRect.set(cx - radius * scale, cy - radius * scale, cx + radius * scale, cy + radius * scale);
         progressPaint.setStrokeWidth(AndroidUtilities.dp(2) * scale);
-        canvas.drawArc(cicleRect, radOffset, currentCircleLength, false, progressPaint);
+        org.telegram.marble.WavyProgress.drawArc(canvas, cicleRect, radOffset, currentCircleLength, progressPaint);
         updateAnimation();
     }
 }

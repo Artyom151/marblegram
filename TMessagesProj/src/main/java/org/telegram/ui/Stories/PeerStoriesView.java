@@ -3656,8 +3656,8 @@ public class PeerStoriesView extends SizeNotifierFrameLayout implements Notifica
                 bitmapShaderTools.setBounds(getX(), -getY(), getX() + getMeasuredWidth(), -getY() + getMeasuredHeight());
                 AndroidUtilities.rectTmp.set(rect);
                 AndroidUtilities.rectTmp.offset(0, 0);
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, radius, radius, bitmapShaderTools.paint);
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, radius, radius, inputBackgroundPaint);
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(radius), org.telegram.marble.MarbleTheme.m3CornerPxF(radius), bitmapShaderTools.paint);
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(radius), org.telegram.marble.MarbleTheme.m3CornerPxF(radius), inputBackgroundPaint);
                 if (AndroidUtilities.rectTmp.top < getMeasuredHeight() - 1) {
                     canvas.drawRect(0, getMeasuredHeight(), getMeasuredWidth(), getMeasuredHeight() - 1, resourcesProvider.getPaint(Theme.key_paint_divider));
                 }
@@ -5210,7 +5210,7 @@ public class PeerStoriesView extends SizeNotifierFrameLayout implements Notifica
                             final float cy = (top + bottom) / 2f + dp(1.33f);
                             rect.set(x, cy - dp(7), x + this.text.getWidth() + dp(12), cy + dp(7));
                             bg.setColor(0xFFF7424E);
-                            canvas.drawRoundRect(rect, rect.height() / 2f, rect.height() / 2f, bg);
+                            canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(rect.height() / 2f), org.telegram.marble.MarbleTheme.m3CornerPxF(rect.height() / 2f), bg);
                             this.text.draw(canvas, dp(6) + x, cy, 0xFFFFFFFF, 1.0f);
                         }
                     }, 0, sb.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -7718,7 +7718,7 @@ public class PeerStoriesView extends SizeNotifierFrameLayout implements Notifica
                 inputFieldBackground.setAlpha((int) (0xFF * (1f - progressToDismiss) * getHideInterfaceAlpha() * (1f - outT)));
                 inputFieldBackground.draw(canvas);
             } else {
-                canvas.drawRoundRect(sharedResources.finalRect, radius, radius, inputBackgroundPaint);
+                canvas.drawRoundRect(sharedResources.finalRect, org.telegram.marble.MarbleTheme.m3CornerPxF(radius), org.telegram.marble.MarbleTheme.m3CornerPxF(radius), inputBackgroundPaint);
             }
             if (progressToKeyboard < 0.5f) {
                 canvas.save();
@@ -7746,7 +7746,7 @@ public class PeerStoriesView extends SizeNotifierFrameLayout implements Notifica
                 emojiKeyboardBackground.setAlpha(0xFF);
                 emojiKeyboardBackground.draw(canvas);
             } else {
-                canvas.drawRoundRect(sharedResources.popupRect, radius, radius, inputBackgroundPaint);
+                canvas.drawRoundRect(sharedResources.popupRect, org.telegram.marble.MarbleTheme.m3CornerPxF(radius), org.telegram.marble.MarbleTheme.m3CornerPxF(radius), inputBackgroundPaint);
             }
             boolean r = super.drawChild(canvas, child, drawingTime);
             canvas.restore();
@@ -7987,8 +7987,8 @@ public class PeerStoriesView extends SizeNotifierFrameLayout implements Notifica
                             -offsetX + getMeasuredWidth(),
                             -offsetY + getMeasuredHeight());
                     if (radius > 0) {
-                        canvas.drawRoundRect(rect, radius, radius, bitmapShaderTools.paint);
-                        canvas.drawRoundRect(rect, radius, radius, inputBackgroundPaint);
+                        canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(radius), org.telegram.marble.MarbleTheme.m3CornerPxF(radius), bitmapShaderTools.paint);
+                        canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(radius), org.telegram.marble.MarbleTheme.m3CornerPxF(radius), inputBackgroundPaint);
                     } else {
                         canvas.drawRect(rect, bitmapShaderTools.paint);
                         canvas.drawRect(rect, inputBackgroundPaint);

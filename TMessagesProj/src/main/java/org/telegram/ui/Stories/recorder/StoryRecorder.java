@@ -1181,7 +1181,7 @@ public class StoryRecorder implements NotificationCenter.NotificationCenterDeleg
                             fromSourceView.backgroundPaint.setShadowLayer(dp(2), 0, dp(3), Theme.multAlpha(0x33000000, alpha));
                         }
                         fromSourceView.backgroundPaint.setAlpha((int) (0xFF * alpha));
-                        canvas.drawRoundRect(rectF, r, r, fromSourceView.backgroundPaint);
+                        canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), fromSourceView.backgroundPaint);
                     }
                     if (fromSourceView.iconDrawable != null) {
                         rect.set(fromSourceView.iconDrawable.getBounds());
@@ -1866,7 +1866,7 @@ public class StoryRecorder implements NotificationCenter.NotificationCenterDeleg
                 }
                 topGradientPaint.setAlpha(0xFF);
                 AndroidUtilities.rectTmp.set(0, 0, getWidth(), dp(72 + 12) + top);
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(12), dp(12), topGradientPaint);
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(12)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(12)), topGradientPaint);
             }
             return r;
         }

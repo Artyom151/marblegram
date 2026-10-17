@@ -1472,6 +1472,14 @@ public class ActionBarMenuItem extends FrameLayout {
                 parentMenu.addView(searchContainer, 0, LayoutHelper.createLinear(0, LayoutHelper.MATCH_PARENT, 1.0f, searchItemPaddingStart + 6, 0, searchRightMargin, 0));
             }
             searchContainer.setVisibility(GONE);
+            if (!wrapSearchInScrollView && org.telegram.marble.MarbleTheme.expressiveShapes()) {
+                // Marblegram: M3 AppBarWithSearch — the expanded field sits in a surfaceContainerHigh pill
+                android.graphics.drawable.GradientDrawable pill = new android.graphics.drawable.GradientDrawable();
+                pill.setCornerRadius(AndroidUtilities.dp(100));
+                pill.setColor(org.telegram.marble.MarbleTheme.roles(resourcesProvider != null ? resourcesProvider.isDark() : Theme.isCurrentThemeDark()).surfaceContainerHigh);
+                searchContainer.setBackground(new android.graphics.drawable.InsetDrawable(pill, 0, AndroidUtilities.dp(8), 0, AndroidUtilities.dp(8)));
+                searchContainer.setPadding(AndroidUtilities.dp(10), 0, 0, 0);
+            }
 
             searchFieldCaption = new TextView(getContext());
             searchFieldCaption.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
@@ -2262,7 +2270,7 @@ public class ActionBarMenuItem extends FrameLayout {
 
         @Override
         protected void dispatchDraw(@NonNull Canvas canvas) {
-            canvas.drawRoundRect(0, 0, getWidth(), getHeight(), mBackgroundRadius, mBackgroundRadius, Theme.fillingPaint(mBackgroundColor));
+            canvas.drawRoundRect(0, 0, getWidth(), getHeight(), org.telegram.marble.MarbleTheme.m3CornerPxF(mBackgroundRadius), org.telegram.marble.MarbleTheme.m3CornerPxF(mBackgroundRadius), Theme.fillingPaint(mBackgroundColor));
             super.dispatchDraw(canvas);
             /*if (isCommunity && mDrawGradient) {
                 if (mGradientProtectionDrawable == null) {

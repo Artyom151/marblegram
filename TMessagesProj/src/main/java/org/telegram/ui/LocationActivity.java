@@ -1432,7 +1432,7 @@ public class LocationActivity extends BaseFragment implements NotificationCenter
                     int color = getThemedColor(Theme.key_sheet_scrollUp);
                     int alpha = Color.alpha(color);
                     Theme.dialogs_onlineCirclePaint.setColor(color);
-                    canvas.drawRoundRect(rect, dp(2), dp(2), Theme.dialogs_onlineCirclePaint);
+                    canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(2)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(2)), Theme.dialogs_onlineCirclePaint);
                 }
             }
         };
@@ -1689,7 +1689,7 @@ public class LocationActivity extends BaseFragment implements NotificationCenter
                 roundPaint.setShader(shader);
                 shader.setLocalMatrix(matrix);
                 bitmapRect.set(dp(6), dp(6), dp(50 + 6), dp(50 + 6));
-                canvas.drawRoundRect(bitmapRect, dp(25), dp(25), roundPaint);
+                canvas.drawRoundRect(bitmapRect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(25)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(25)), roundPaint);
             }
 
             canvas.restore();

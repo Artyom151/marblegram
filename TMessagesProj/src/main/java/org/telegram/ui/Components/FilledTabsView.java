@@ -104,7 +104,7 @@ public class FilledTabsView extends View {
         float x = contentLeft;
 
         AndroidUtilities.rectTmp.set(x, top, x + w, bottom);
-        canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(18), dp(18), backgroundPaint);
+        canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(18)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(18)), backgroundPaint);
 
         x += dp(4 + 12);
         for (int i = 0; i < tabs.length; ++i) {
@@ -124,7 +124,7 @@ public class FilledTabsView extends View {
         AndroidUtilities.rectTmp.set(left, top, right, bottom);
         selectedPath.rewind();
         selectedPath.addRoundRect(AndroidUtilities.rectTmp, dp(15), dp(15), Path.Direction.CW);
-        canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(15), dp(15), selectedPaint);
+        canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(15)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(15)), selectedPaint);
 
         drawTabsText(canvas, textLeft, H, textColor);
 

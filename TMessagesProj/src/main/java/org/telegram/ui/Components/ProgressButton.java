@@ -49,7 +49,7 @@ public class ProgressButton extends Button {
             int x = getMeasuredWidth() - dp(11);
             progressRect.set(x, dp(3), x + dp(8), dp(8 + 3));
             progressPaint.setAlpha(Math.min(255, (int) (progressAlpha * 255)));
-            canvas.drawArc(progressRect, angle, 220, false, progressPaint);
+            org.telegram.marble.WavyProgress.drawArc(canvas, progressRect, angle, 220, progressPaint);
             long newTime = System.currentTimeMillis();
             if (Math.abs(lastUpdateTime - System.currentTimeMillis()) < 1000) {
                 long delta = (newTime - lastUpdateTime);

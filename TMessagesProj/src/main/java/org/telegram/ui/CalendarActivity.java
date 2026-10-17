@@ -197,7 +197,7 @@ public class CalendarActivity extends BaseFragment implements NotificationCenter
                                     storiesPlaceDrawAbove = (canvas, bounds, alpha, opening) -> {
                                         blackoutPaint.setAlpha((int) (80 * alpha));
                                         float r = AndroidUtilities.lerp(0, Math.min(bounds.width(), bounds.height()) / 2f, alpha);
-                                        canvas.drawRoundRect(bounds, r, r, blackoutPaint);
+                                        canvas.drawRoundRect(bounds, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), blackoutPaint);
 
                                         float textAlpha = Utilities.clamp((alpha - .5f) / .5f, 1, 0);
                                         if (textAlpha > 0) {
@@ -1216,7 +1216,7 @@ public class CalendarActivity extends BaseFragment implements NotificationCenter
                     selectPaint.setAlpha((int) (v.alpha * (255 * 0.16f)));
                     AndroidUtilities.rectTmp.set(v.startX - selSize / 2f, cy - selSize / 2f, v.endX + selSize / 2f, cy + selSize / 2f);
                     int dp = AndroidUtilities.dp(32);
-                    canvas.drawRoundRect(AndroidUtilities.rectTmp, dp, dp, selectPaint);
+                    canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp), org.telegram.marble.MarbleTheme.m3CornerPxF(dp), selectPaint);
                 }
             }
             for (int i = 0; i < daysInMonth; i++) {

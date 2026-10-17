@@ -141,13 +141,13 @@ public class PremiumGiftTierCell extends ViewGroup {
             updateGradient();
 
             AndroidUtilities.rectTmp.set(priceTotalView.getLeft(), priceTotalView.getTop() + AndroidUtilities.dp(4), priceTotalView.getRight(), priceTotalView.getBottom() - AndroidUtilities.dp(4));
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, AndroidUtilities.dp(8), AndroidUtilities.dp(8), paint);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(8)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(8)), paint);
 
             AndroidUtilities.rectTmp.set(pricePerMonthView.getLeft(), AndroidUtilities.dp(42), pricePerMonthView.getRight(), AndroidUtilities.dp(54));
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, AndroidUtilities.dp(8), AndroidUtilities.dp(8), paint);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(8)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(8)), paint);
 
             AndroidUtilities.rectTmp.set(titleView.getLeft(), titleView.getTop() + AndroidUtilities.dp(4), titleView.getRight(), titleView.getBottom() - AndroidUtilities.dp(4));
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, AndroidUtilities.dp(8), AndroidUtilities.dp(8), paint);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(8)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(8)), paint);
 
             invalidate();
         } else {

@@ -165,12 +165,13 @@ public class CheckBoxSquare extends View {
         rectF.set(bounce, bounce, AndroidUtilities.dp(18) - bounce, AndroidUtilities.dp(18) - bounce);
 
         drawBitmap.eraseColor(0);
-        drawCanvas.drawRoundRect(rectF, AndroidUtilities.dp(4), AndroidUtilities.dp(4), Theme.checkboxSquare_backgroundPaint);
+        final float m3r = AndroidUtilities.dp(org.telegram.marble.MarbleTheme.expressiveShapes() ? 2 : 4); // Marblegram: M3 checkbox 2dp corners
+        drawCanvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(m3r), org.telegram.marble.MarbleTheme.m3CornerPxF(m3r), Theme.checkboxSquare_backgroundPaint);
 
         if (checkProgress != 1) {
             float rad = Math.min(AndroidUtilities.dp(7), AndroidUtilities.dp(7) * checkProgress + bounce);
             rectF.set(AndroidUtilities.dp(1.33f) + rad, AndroidUtilities.dp(1.33f) + rad, AndroidUtilities.dp(16.66f) - rad, AndroidUtilities.dp(16.66f) - rad);
-            drawCanvas.drawRoundRect(rectF, AndroidUtilities.dp(3), AndroidUtilities.dp(3), Theme.checkboxSquare_eraserPaint);
+            drawCanvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(Math.max(0, m3r - AndroidUtilities.dp(1))), org.telegram.marble.MarbleTheme.m3CornerPxF(Math.max(0, m3r - AndroidUtilities.dp(1))), Theme.checkboxSquare_eraserPaint);
         }
 
         if (progress > 0.5f) {

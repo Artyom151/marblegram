@@ -507,7 +507,7 @@ public class StoryMediaAreasView extends FrameLayout implements View.OnClickList
                         rectF.set(child2.getX(), child2.getY(), child2.getX() + child2.getMeasuredWidth(), child2.getY() + child2.getMeasuredHeight());
                         canvas.rotate(child2.getRotation(), rectF.centerX(), rectF.centerY());
                         cutPaint.setAlpha((int) (0xFF * alpha));
-                        canvas.drawRoundRect(rectF, rectF.height() * .2f, rectF.height() * .2f, cutPaint);
+                        canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(rectF.height() * .2f), org.telegram.marble.MarbleTheme.m3CornerPxF(rectF.height() * .2f), cutPaint);
                         canvas.restore();
                     }
                 }
@@ -765,14 +765,14 @@ public class StoryMediaAreasView extends FrameLayout implements View.OnClickList
                 gradient.setLocalMatrix(gradientMatrix);
                 gradientPaint.setShader(gradient);
                 AndroidUtilities.rectTmp.set(0, 0, getWidth(), getHeight());
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, r, r, gradientPaint);
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), gradientPaint);
 
                 strokeGradient.setLocalMatrix(gradientMatrix);
                 strokeGradientPaint.setShader(strokeGradient);
                 final float sw = AndroidUtilities.dpf2(1.5f);
                 strokeGradientPaint.setStrokeWidth(sw);
                 AndroidUtilities.rectTmp.inset(sw / 2f, sw / 2f);
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, r - sw / 2f, r - sw / 2f, strokeGradientPaint);
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(r - sw / 2f), org.telegram.marble.MarbleTheme.m3CornerPxF(r - sw / 2f), strokeGradientPaint);
 
                 invalidate();
             }

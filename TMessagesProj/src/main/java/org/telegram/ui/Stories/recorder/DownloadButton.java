@@ -466,7 +466,7 @@ public class DownloadButton extends ImageView {
                 canvas.scale(lerp(.8f, 1f, showT), lerp(.8f, 1f, showT), currentRect.centerX(), currentRect.centerY());
             }
             backgroundPaint.setAlpha((int) (0xcc * showT));
-            canvas.drawRoundRect(currentRect, dp(10), dp(10), backgroundPaint);
+            canvas.drawRoundRect(currentRect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(10)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(10)), backgroundPaint);
             canvas.save();
             canvas.clipRect(currentRect);
             if (t < 1) {

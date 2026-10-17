@@ -918,7 +918,7 @@ public class FolderBottomSheet extends BottomSheetWithRecyclerListView {
                     canvas.scale(countScale, countScale, AndroidUtilities.rectTmp2.centerX(), AndroidUtilities.rectTmp2.centerY());
                 }
                 paint.setAlpha((int) (0xFF * (1f - loadingT) * countAlpha * countAlpha));
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(10), dp(10), paint);
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(10)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(10)), paint);
 
                 AndroidUtilities.rectTmp2.offset(-dp(.3f), -dp(.4f));
                 countText.setAlpha((int) (0xFF * (1f - loadingT) * countAlpha));
@@ -1342,7 +1342,7 @@ public class FolderBottomSheet extends BottomSheetWithRecyclerListView {
                         (int) (cy + dp(9))
                     );
                     AndroidUtilities.rectTmp.set(AndroidUtilities.rectTmp2);
-                    canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(9), dp(9), selectedPaint);
+                    canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(9)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(9)), selectedPaint);
 
                     AndroidUtilities.rectTmp2.offset(-dp(.33f), -dp(.66f));
                     countText.setBounds(AndroidUtilities.rectTmp2);

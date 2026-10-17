@@ -963,8 +963,8 @@ public class WalletCard2DView extends FrameLayout implements SensorEventListener
             borderBounds.inset(-0.5f, -0.5f);
             canvas.drawRoundRect(
                     borderBounds,
-                    QR_BUTTON_CORNER_RADIUS + 0.5f,
-                    QR_BUTTON_CORNER_RADIUS + 0.5f,
+                    org.telegram.marble.MarbleTheme.m3CornerPxF(QR_BUTTON_CORNER_RADIUS + 0.5f),
+                    org.telegram.marble.MarbleTheme.m3CornerPxF(QR_BUTTON_CORNER_RADIUS + 0.5f),
                     qrBorderPaint
             );
             canvas.restoreToCount(save);

@@ -1450,7 +1450,7 @@ public class ViewPagerFixed extends FrameLayout {
                     }
 
                     rect.set(x, countTop, x + countWidth, countTop + dp(20));
-                    canvas.drawRoundRect(rect, 11.5f * AndroidUtilities.density, 11.5f * AndroidUtilities.density, counterPaint);
+                    canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(11.5f * AndroidUtilities.density), org.telegram.marble.MarbleTheme.m3CornerPxF(11.5f * AndroidUtilities.density), counterPaint);
 
                     if (counterText != null) {
                         if (currentTab.id != Integer.MAX_VALUE) {
@@ -2033,7 +2033,7 @@ public class ViewPagerFixed extends FrameLayout {
                         selectorPaint.setColor(Theme.multAlpha(textPaint.getColor(), .15f));
                         final float cy = height / 2f, h = dp(26);
                         AndroidUtilities.rectTmp.set(indicatorX - dp(12), cy - h / 2f, indicatorX + indicatorWidth + dp(12), cy + h / 2f);
-                        canvas.drawRoundRect(AndroidUtilities.rectTmp, AndroidUtilities.rectTmp.height() / 2f, AndroidUtilities.rectTmp.height() / 2f, selectorPaint);
+                        canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.rectTmp.height() / 2f), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.rectTmp.height() / 2f), selectorPaint);
                     } else {
                         lastDrawnIndicatorX = indicatorX;
                         lastDrawnIndicatorW = indicatorWidth;

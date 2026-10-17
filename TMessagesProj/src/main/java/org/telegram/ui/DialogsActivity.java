@@ -1928,7 +1928,7 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
                     selectorPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
                 }
                 selectorPaint.setColor(getThemedColor(Theme.key_featuredStickers_addButton));
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(4), dp(4), selectorPaint);
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), selectorPaint);
                 canvas.restore();
             } else {
                 lastDrawSelectorY = Integer.MIN_VALUE;
@@ -3774,7 +3774,7 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
                                     bound.set(getBounds());
                                     float insetY = (bound.height() - dp(28)) / 2f;
                                     bound.inset(0, insetY);
-                                    canvas.drawRoundRect(bound, dp(14), dp(14), paint);
+                                    canvas.drawRoundRect(bound, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(14)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(14)), paint);
                                 }
 
                                 @Override
@@ -4759,6 +4759,10 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
                     AccountFrozenAlert.show(currentAccount);
                     return;
                 }
+                if (org.telegram.marble.MarbleTheme.fabMenu() && !isArchive() && initialDialogsType == DIALOGS_TYPE_DEFAULT) {
+                    showMarbleFabMenu(v);
+                    return;
+                }
                 openWriteContacts();
             }
         });
@@ -5153,7 +5157,9 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
             filterTabsViewBackground.setRadius(dp(18));
             filterTabsViewBackground.setPadding(dp(6.666f));
             filterTabsView.setPadding(0, dp(7), 0, dp(7));
-            filterTabsView.setBlurredBackground(filterTabsViewBackground);
+            if (!org.telegram.marble.MarbleTheme.folderChips()) {
+                filterTabsView.setBlurredBackground(filterTabsViewBackground);
+            } // Marblegram: M3E ButtonGroup — only the buttons have containers, no shared panel
             contentView.addView(filterTabsView, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, 36 + 7 + 7, Gravity.TOP, 4, 0, 4, 0));
         }
 
@@ -13494,6 +13500,34 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
                 updateDialogsHint();
             }
         }, 0);
+    }
+
+    /** Marblegram: M3E FAB menu with the main "create" actions. */
+    private void showMarbleFabMenu(View fab) {
+        ArrayList<org.telegram.marble.MarbleFabMenu.Item> items = new ArrayList<>();
+        items.add(new org.telegram.marble.MarbleFabMenu.Item(R.drawable.msg_secret, getString(R.string.NewSecretChat), () -> {
+            Bundle args = new Bundle();
+            args.putBoolean("onlyUsers", true);
+            args.putBoolean("destroyAfterSelect", true);
+            args.putBoolean("createSecretChat", true);
+            args.putBoolean("allowBots", false);
+            args.putBoolean("allowSelf", false);
+            presentFragment(new ContactsActivity(args));
+        }));
+        items.add(new org.telegram.marble.MarbleFabMenu.Item(R.drawable.msg_channel, getString(R.string.NewChannel), () -> {
+            SharedPreferences preferences = MessagesController.getGlobalMainSettings();
+            if (!BuildVars.DEBUG_VERSION && preferences.getBoolean("channel_intro", false)) {
+                Bundle args = new Bundle();
+                args.putInt("step", 0);
+                presentFragment(new ChannelCreateActivity(args));
+            } else {
+                presentFragment(new ActionIntroActivity(ActionIntroActivity.ACTION_TYPE_CHANNEL_CREATE));
+                preferences.edit().putBoolean("channel_intro", true).commit();
+            }
+        }));
+        items.add(new org.telegram.marble.MarbleFabMenu.Item(R.drawable.msg_groups, getString(R.string.NewGroup), () -> presentFragment(new GroupCreateActivity(new Bundle()))));
+        items.add(new org.telegram.marble.MarbleFabMenu.Item(R.drawable.msg_message, getString(R.string.NewMessageTitle), this::openWriteContacts));
+        org.telegram.marble.MarbleFabMenu.show(fab, items);
     }
 
     private void openWriteContacts() {

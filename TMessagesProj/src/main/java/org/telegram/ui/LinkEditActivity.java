@@ -152,7 +152,7 @@ public class LinkEditActivity extends BaseFragment {
             public void draw(@NonNull Canvas canvas) {
                 p.setColor(Theme.getColor(Theme.key_telegram_color));
                 canvas.drawRoundRect(getBounds().left, getBounds().exactCenterY() - dp(14),
-                        getBounds().right, getBounds().exactCenterY() + dp(14), dp(14), dp(14), p);
+                        getBounds().right, getBounds().exactCenterY() + dp(14), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(14)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(14)), p);
             }
 
             @Override

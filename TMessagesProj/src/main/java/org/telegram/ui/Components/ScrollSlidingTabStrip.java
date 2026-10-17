@@ -806,15 +806,18 @@ public class ScrollSlidingTabStrip extends HorizontalScrollView {
             if (isGlassDesign) {
                 selectorPaint.setColor(getGlassIconColor(0.05f));
             } else {
-                selectorPaint.setColor(ColorUtils.setAlphaComponent(getThemedColor(Theme.key_chat_emojiPanelIcon), 0x2e));
+                // Marblegram: M3 tonal (secondaryContainer-like) selection instead of gray
+                selectorPaint.setColor(org.telegram.marble.MarbleTheme.isEnabled()
+                    ? ColorUtils.setAlphaComponent(getThemedColor(Theme.key_chat_emojiPanelIconSelected), 0x33)
+                    : ColorUtils.setAlphaComponent(getThemedColor(Theme.key_chat_emojiPanelIcon), 0x2e));
                 selectorPaint.setAlpha((int) (selectorPaint.getAlpha() * selectedAlpha));
             }
-            canvas.drawRoundRect(tabBounds, tabBounds.height() / 2, tabBounds.height() / 2, selectorPaint);
+            canvas.drawRoundRect(tabBounds, org.telegram.marble.MarbleTheme.m3CornerPxF(tabBounds.height() / 2), org.telegram.marble.MarbleTheme.m3CornerPxF(tabBounds.height() / 2), selectorPaint);
         }
 
         super.dispatchDraw(canvas);
 
-        if (!(isInEditMode() || tabCount == 0) && underlineHeight > 0) {
+        if (!(isInEditMode() || tabCount == 0) && underlineHeight > 0 && !org.telegram.marble.MarbleTheme.isEnabled()) { // Marblegram: no divider in M3
             rectPaint.setColor(underlineColor);
             canvas.drawRect(0, height - underlineHeight, tabsContainer.getWidth(), height, rectPaint);
         }

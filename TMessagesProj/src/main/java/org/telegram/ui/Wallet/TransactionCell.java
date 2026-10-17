@@ -578,7 +578,7 @@ public class TransactionCell extends FrameLayout implements Theme.Colorable {
                 new float[]{0f, .45f, .6f, 1f}, Shader.TileMode.CLAMP));
         pendingPaint.setAlpha(Math.round(150 * p * (float) Math.sin(wave * Math.PI)));
         pendingPaint.setStrokeWidth(dp(1.5f));
-        canvas.drawRoundRect(dp(1), dp(1), getWidth() - dp(1), getHeight() - dp(1), dp(16), dp(16), pendingPaint);
+        canvas.drawRoundRect(dp(1), dp(1), getWidth() - dp(1), getHeight() - dp(1), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(16)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(16)), pendingPaint);
         pendingPaint.setShader(null);
         if (isAttachedToWindow() && isShown() && getWindowVisibility() == VISIBLE) postInvalidateOnAnimation();
     }

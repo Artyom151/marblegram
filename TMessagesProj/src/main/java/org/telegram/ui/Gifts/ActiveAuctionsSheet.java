@@ -239,7 +239,7 @@ public class ActiveAuctionsSheet extends BottomSheetWithRecyclerListView impleme
 
         @Override
         protected void dispatchDraw(@NonNull Canvas canvas) {
-            canvas.drawRoundRect(dp(14), dp(9), getMeasuredWidth() - dp(14), getMeasuredHeight() - dp(9), dp(8), dp(8), paint);
+            canvas.drawRoundRect(dp(14), dp(9), getMeasuredWidth() - dp(14), getMeasuredHeight() - dp(9), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(8)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(8)), paint);
             super.dispatchDraw(canvas);
         }
     }

@@ -121,13 +121,13 @@ public class WallpaperCheckBoxView extends View {
     protected void onDraw(Canvas canvas) {
         rect.set(0, 0, getMeasuredWidth(), getMeasuredHeight());
         Theme.applyServiceShaderMatrixForView(this, parentView, resourcesProvider);
-        canvas.drawRoundRect(rect, getMeasuredHeight() / 2, getMeasuredHeight() / 2, getThemedPaint(Theme.key_paint_chatActionBackground));
+        canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(getMeasuredHeight() / 2), org.telegram.marble.MarbleTheme.m3CornerPxF(getMeasuredHeight() / 2), getThemedPaint(Theme.key_paint_chatActionBackground));
         boolean hasGradient = resourcesProvider == null ? Theme.hasGradientService() : resourcesProvider.hasGradientService();
         if (hasGradient) {
-            canvas.drawRoundRect(rect, getMeasuredHeight() / 2, getMeasuredHeight() / 2, getThemedPaint(Theme.key_paint_chatActionBackgroundDarken));
+            canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(getMeasuredHeight() / 2), org.telegram.marble.MarbleTheme.m3CornerPxF(getMeasuredHeight() / 2), getThemedPaint(Theme.key_paint_chatActionBackgroundDarken));
         }
         if (dimAmount > 0) {
-            canvas.drawRoundRect(rect, getMeasuredHeight() / 2, getMeasuredHeight() / 2, dimPaint);
+            canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(getMeasuredHeight() / 2), org.telegram.marble.MarbleTheme.m3CornerPxF(getMeasuredHeight() / 2), dimPaint);
         }
 
         textPaint.setColor(Theme.getColor(Theme.key_chat_serviceText, resourcesProvider));

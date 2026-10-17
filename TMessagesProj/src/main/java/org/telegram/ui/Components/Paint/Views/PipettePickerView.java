@@ -214,7 +214,7 @@ public class PipettePickerView extends View {
         canvas.drawPath(path, linePaint);
 
         dstRect.set(cx - pixelSize / 2, cy - pixelSize / 2, cx + pixelSize / 2, cy + pixelSize / 2);
-        canvas.drawRoundRect(dstRect, AndroidUtilities.dp(1), AndroidUtilities.dp(1), outlinePaint);
+        canvas.drawRoundRect(dstRect, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(1)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(1)), outlinePaint);
 
         canvas.restore();
     }

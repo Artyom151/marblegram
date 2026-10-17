@@ -232,7 +232,7 @@ public class ColorPicker extends FrameLayout {
                 int left = colorEditText[0].getLeft() - AndroidUtilities.dp(13);
                 int width = (int) (AndroidUtilities.dp(91) + (clearButton.getVisibility() == VISIBLE ? AndroidUtilities.dp(25) * clearButton.getAlpha() : 0));
                 rect.set(left, AndroidUtilities.dp(5), left + width, AndroidUtilities.dp(5 + 32));
-                canvas.drawRoundRect(rect, AndroidUtilities.dp(16), AndroidUtilities.dp(16), paint);
+                canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(16)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(16)), paint);
             }
         };
         linearLayout.setOrientation(LinearLayout.HORIZONTAL);
@@ -741,7 +741,7 @@ public class ColorPicker extends FrameLayout {
             colorGradient = new LinearGradient(sliderRect.left, sliderRect.top, sliderRect.right, sliderRect.top, new int[]{maxColor, minColor}, null, Shader.TileMode.CLAMP);
             valueSliderPaint.setShader(colorGradient);
         }
-        canvas.drawRoundRect(sliderRect, AndroidUtilities.dp(4), AndroidUtilities.dp(4), valueSliderPaint);
+        canvas.drawRoundRect(sliderRect, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(4)), valueSliderPaint);
         float value = minHsvBrightness == maxHsvBrightness ? 0.5f : (getBrightness() - minHsvBrightness) / (maxHsvBrightness - minHsvBrightness);
         drawPointerArrow(canvas, (int) (sliderRect.left + (1.0f - value) * sliderRect.width()), (int) sliderRect.centerY(), getColor(), true);
 

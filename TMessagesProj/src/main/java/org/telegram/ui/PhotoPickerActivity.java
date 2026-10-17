@@ -1176,11 +1176,11 @@ public class PhotoPickerActivity extends BaseFragment implements NotificationCen
                     textPaint.setColor(Theme.getColor(Theme.key_dialogRoundCheckBoxCheck));
                     paint.setColor(Theme.getColor(dialogBackgroundKey));
                     rect.set(cx - size / 2, 0, cx + size / 2, getMeasuredHeight());
-                    canvas.drawRoundRect(rect, AndroidUtilities.dp(12), AndroidUtilities.dp(12), paint);
+                    canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(12)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(12)), paint);
 
                     paint.setColor(Theme.getColor(Theme.key_dialogRoundCheckBox));
                     rect.set(cx - size / 2 + AndroidUtilities.dp(2), AndroidUtilities.dp(2), cx + size / 2 - AndroidUtilities.dp(2), getMeasuredHeight() - AndroidUtilities.dp(2));
-                    canvas.drawRoundRect(rect, AndroidUtilities.dp(10), AndroidUtilities.dp(10), paint);
+                    canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(10)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(10)), paint);
 
                     canvas.drawText(text, cx - textSize / 2, AndroidUtilities.dp(16.2f), textPaint);
                 }

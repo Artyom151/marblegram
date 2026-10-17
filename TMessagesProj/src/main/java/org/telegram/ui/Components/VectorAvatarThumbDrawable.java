@@ -120,7 +120,7 @@ public class VectorAvatarThumbDrawable extends Drawable implements AnimatedEmoji
         if (roundRadius == 0) {
             canvas.drawRect(getBounds(), gradientTools.paint);
         } else {
-            canvas.drawRoundRect(gradientTools.bounds, roundRadius, roundRadius, gradientTools.paint);
+            canvas.drawRoundRect(gradientTools.bounds, org.telegram.marble.MarbleTheme.m3CornerPxF(roundRadius), org.telegram.marble.MarbleTheme.m3CornerPxF(roundRadius), gradientTools.paint);
         }
         int cx = getBounds().centerX();
         int cy = getBounds().centerY();

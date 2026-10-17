@@ -453,9 +453,9 @@ public class LoginActivity extends BaseFragment implements NotificationCenter.No
             }
 
             canvas.clipPath(path);
-            canvas.drawRoundRect(boundsRect, radius, radius, paint);
+            canvas.drawRoundRect(boundsRect, org.telegram.marble.MarbleTheme.m3CornerPxF(radius), org.telegram.marble.MarbleTheme.m3CornerPxF(radius), paint);
             rect.right = boundsRect.right * progress;
-            canvas.drawRoundRect(rect, radius, radius, paint2);
+            canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(radius), org.telegram.marble.MarbleTheme.m3CornerPxF(radius), paint2);
 
             if (animating &= duration > 0 && progress < 1f) {
                 postInvalidateOnAnimation();

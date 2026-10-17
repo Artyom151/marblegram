@@ -385,7 +385,7 @@ public class MentionsContainerView extends FrameLayout implements NotificationCe
 
     public void drawRoundRect(Canvas canvas, Rect rectTmp, float r) {
         AndroidUtilities.rectTmp.set(rectTmp);
-        canvas.drawRoundRect(AndroidUtilities.rectTmp, r, r, paint);
+        canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), paint);
     }
 
     private Integer color;

@@ -449,7 +449,7 @@ public class AudioPlayerAlert extends BottomSheet implements NotificationCenter.
                     if (!isProfilePlaylist && rad != 1.0f) {
                         Theme.dialogs_onlineCirclePaint.setColor(getThemedColor(Theme.key_dialogBackground));
                         rect.set(backgroundPaddingLeft, backgroundPaddingTop + top, getMeasuredWidth() - backgroundPaddingLeft, backgroundPaddingTop + top + dp(24));
-                        canvas.drawRoundRect(rect, dp(12) * rad, dp(12) * rad, Theme.dialogs_onlineCirclePaint);
+                        canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(12) * rad), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(12) * rad), Theme.dialogs_onlineCirclePaint);
                     }
 
                     if (!isProfilePlaylist && rad != 0) {
@@ -460,7 +460,7 @@ public class AudioPlayerAlert extends BottomSheet implements NotificationCenter.
                         int alpha = Color.alpha(color);
                         Theme.dialogs_onlineCirclePaint.setColor(color);
                         Theme.dialogs_onlineCirclePaint.setAlpha((int) (alpha * alphaProgress * rad));
-                        canvas.drawRoundRect(rect, dp(2), dp(2), Theme.dialogs_onlineCirclePaint);
+                        canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(2)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(2)), Theme.dialogs_onlineCirclePaint);
                     }
 
                     if (isProfilePlaylist) {

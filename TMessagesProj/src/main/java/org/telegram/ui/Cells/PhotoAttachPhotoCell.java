@@ -253,7 +253,7 @@ public class PhotoAttachPhotoCell extends FrameLayout {
             @Override
             protected void onDraw(Canvas canvas) {
                 rect.set(0, 0, getMeasuredWidth(), getMeasuredHeight());
-                canvas.drawRoundRect(rect, dp(4), dp(4), Theme.chat_timeBackgroundPaint);
+                canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), Theme.chat_timeBackgroundPaint);
             }
         };
         videoInfoContainer.setWillNotDraw(false);

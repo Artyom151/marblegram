@@ -277,10 +277,10 @@ public class RecordedAudioPlayerView extends View {
         }
 
         handleRect.set(left - dp(7), rect.centerY() - dp(5.33f), left - dp(5.33f), rect.centerY() + dp(5.33f));
-        canvas.drawRoundRect(handleRect, handleRect.width() / 2f, handleRect.width() / 2f, handlePaint);
+        canvas.drawRoundRect(handleRect, org.telegram.marble.MarbleTheme.m3CornerPxF(handleRect.width() / 2f), org.telegram.marble.MarbleTheme.m3CornerPxF(handleRect.width() / 2f), handlePaint);
 
         handleRect.set(right + dp(5.33f), rect.centerY() - dp(5.33f), right + dp(7), rect.centerY() + dp(5.33f));
-        canvas.drawRoundRect(handleRect, handleRect.width() / 2f, handleRect.width() / 2f, handlePaint);
+        canvas.drawRoundRect(handleRect, org.telegram.marble.MarbleTheme.m3CornerPxF(handleRect.width() / 2f), org.telegram.marble.MarbleTheme.m3CornerPxF(handleRect.width() / 2f), handlePaint);
 
         leftHandleClickRect.set(left - dp(24), 0, left + dp(6), getHeight());
         rightHandleClickRect.set(right - dp(6), 0, right + dp(24), getHeight());
@@ -299,7 +299,7 @@ public class RecordedAudioPlayerView extends View {
             );
             final int wasAlpha = darkerBackgroundPaint.getAlpha();
             darkerBackgroundPaint.setAlpha((int) (wasAlpha * badgeAlpha));
-            canvas.drawRoundRect(badgeRect, badgeRect.height() / 2f, badgeRect.height() / 2f, darkerBackgroundPaint);
+            canvas.drawRoundRect(badgeRect, org.telegram.marble.MarbleTheme.m3CornerPxF(badgeRect.height() / 2f), org.telegram.marble.MarbleTheme.m3CornerPxF(badgeRect.height() / 2f), darkerBackgroundPaint);
             darkerBackgroundPaint.setAlpha(wasAlpha);
 
             badgeClickRect.set(badgeRect);

@@ -1,0 +1,11 @@
+{
+  "id": "pocket_tools",
+  "name": "Pocket Tools",
+  "author": "Marblegram",
+  "version": "1.0",
+  "description": "Быстрые команды без ключей: @weather город — погода, @rate 100 usd rub — курс валют, @calc 2^10*3 — калькулятор. Результат отправляется в чат вместо команды.",
+  "language": "python",
+  "main": "main.py",
+  "icon": "icon.png",
+  "min_sdk": 1
+}

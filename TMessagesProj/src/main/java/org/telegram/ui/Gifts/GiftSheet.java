@@ -2778,7 +2778,7 @@ public class GiftSheet extends BottomSheetWithRecyclerListView implements Notifi
                         DrawableUtils.setBoundsIncreasePadding(d, AndroidUtilities.rectTmp2);
                         d.draw(canvas);
                     }
-                    canvas.drawRoundRect(rect, r, r, paint);
+                    canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), paint);
                 } else {
                     final Drawable d;
                     if (withShadow) {
@@ -2790,7 +2790,7 @@ public class GiftSheet extends BottomSheetWithRecyclerListView implements Notifi
                     d.draw(canvas);
                 }
             } else {
-                canvas.drawRoundRect(rect, r, r, paint);
+                canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), paint);
             }
 
             final boolean clip = strokeColors != null || backdrop != null && !pattern.isEmpty();
@@ -2812,7 +2812,7 @@ public class GiftSheet extends BottomSheetWithRecyclerListView implements Notifi
                 strokeGradient.setLocalMatrix(strokeGradientMatrix);
                 strokePaint.setShader(strokeGradient);
                 strokePaint.setStrokeWidth(dp(4.66f));
-                canvas.drawRoundRect(rect, r, r, strokePaint);
+                canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), strokePaint);
             }
             if (backdrop != null && !pattern.isEmpty()) {
                 int color = backdrop.pattern_color | 0xFF000000;
@@ -2876,7 +2876,7 @@ public class GiftSheet extends BottomSheetWithRecyclerListView implements Notifi
                     final float b = lerp(-dpf2(2.33f), dpf2(3.33f), selected);
                     AndroidUtilities.rectTmp.inset(b, b);
                     final float r = lerp(this.r, dpf2(7.33f), selected);
-                    canvas.drawRoundRect(AndroidUtilities.rectTmp, r, r, selectedPaint);
+                    canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), selectedPaint);
                 } else if (selectionStyle == 1) {
                     selectedPaint.setColor(selectedColor != null ? selectedColor : Theme.getColor(selectedColorKey, resourcesProvider));
                     selectedPaint.setStrokeWidth(lerp(0, dpf2(3), selected));
@@ -2884,7 +2884,7 @@ public class GiftSheet extends BottomSheetWithRecyclerListView implements Notifi
                     final float b = lerp(0, dpf2(3) / 2.0f, selected);
                     AndroidUtilities.rectTmp.inset(b, b);
                     final float r = lerp(this.r, dpf2(10), selected);
-                    canvas.drawRoundRect(AndroidUtilities.rectTmp, r, r, selectedPaint);
+                    canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), selectedPaint);
                 }
             }
         }
@@ -3028,7 +3028,7 @@ public class GiftSheet extends BottomSheetWithRecyclerListView implements Notifi
                     lerp(flooredRect, ceiledRect, selected - flooredIndex, selectedRect);
 
                     final float r = selectedRect.height() / 2f;
-                    canvas.drawRoundRect(selectedRect, r, r, selectedPaint);
+                    canvas.drawRoundRect(selectedRect, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), selectedPaint);
 
                     super.dispatchDraw(canvas);
                 }

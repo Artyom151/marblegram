@@ -833,7 +833,7 @@ public class StoryCaptionView extends NestedScrollView implements ItemOptions.Sc
             final float s = bounce.getScale(.02f);
             canvas.scale(s, s, bounds.centerX(), bounds.centerY());
             final float r = lerp(dp(5), dp(11), smallT);
-            canvas.drawRoundRect(bounds, r, r, backgroundPaint);
+            canvas.drawRoundRect(bounds, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), backgroundPaint);
 
             canvas.save();
             clipRipple.rewind();
@@ -848,7 +848,7 @@ public class StoryCaptionView extends NestedScrollView implements ItemOptions.Sc
             AndroidUtilities.rectTmp.set(0, 0, dp(10), dp(42));
             linePaint.setColor(0xFFFFFFFF);
             linePaint.setAlpha((int) (0xFF * (1f - smallT)));
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(5), dp(5), linePaint);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(5)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(5)), linePaint);
             canvas.restore();
             int ellipsize = boxwidth - dp(20);
             if (boxwidth < width) {

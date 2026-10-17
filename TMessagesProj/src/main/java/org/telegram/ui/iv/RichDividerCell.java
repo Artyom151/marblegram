@@ -94,13 +94,13 @@ public class RichDividerCell extends RichBlockCell
         if (isCellSelected()) {
             canvas.drawRoundRect(
                 x1 - dp(12), 0, x2 + dp(12), dp(12),
-                dp(6), dp(6),
+                org.telegram.marble.MarbleTheme.m3CornerPxF(dp(6)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(6)),
                 selectionPaint
             );
         }
         final float top = (dp(12) - dp(1)) / 2f;
         AndroidUtilities.rectTmp.set(x1, top, x2, top + dp(1));
-        canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(.5f), dp(.5f), paint);
+        canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(.5f)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(.5f)), paint);
     }
 
     public static final class Factory extends UItem.UItemFactory<RichDividerCell> {

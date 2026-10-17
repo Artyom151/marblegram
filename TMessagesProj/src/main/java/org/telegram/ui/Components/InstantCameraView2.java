@@ -185,7 +185,7 @@ public final class InstantCameraView2 extends InstantCameraViewBase {
                 if (!drawInitialPlaceholder) return;
                 float radius = Math.min(getWidth(), getHeight()) * 0.5f;
                 AndroidUtilities.rectTmp.set(0, 0, getWidth(), getHeight());
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, radius, radius, placeholderDimPaint);
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(radius), org.telegram.marble.MarbleTheme.m3CornerPxF(radius), placeholderDimPaint);
                 AndroidUtilities.rectTmp.inset(dp(1), dp(1));
                 flickerDrawable.setParentWidth(getWidth());
                 flickerDrawable.draw(canvas, AndroidUtilities.rectTmp, radius, null);
@@ -195,7 +195,7 @@ public final class InstantCameraView2 extends InstantCameraViewBase {
         textureOverlayView.setOutlineProvider(new ViewOutlineProvider() {
             @Override
             public void getOutline(View target, Outline outline) {
-                outline.setOval(0, 0, target.getWidth(), target.getHeight());
+                outline.setRoundRect(0, 0, target.getWidth(), target.getHeight(), org.telegram.marble.MarbleTheme.roundVideoRadius(Math.min(target.getWidth(), target.getHeight())));
             }
         });
         textureOverlayView.setClipToOutline(true);
@@ -1305,7 +1305,7 @@ public final class InstantCameraView2 extends InstantCameraViewBase {
         view.setOutlineProvider(new ViewOutlineProvider() {
             @Override
             public void getOutline(View target, Outline outline) {
-                outline.setOval(0, 0, target.getWidth(), target.getHeight());
+                outline.setRoundRect(0, 0, target.getWidth(), target.getHeight(), org.telegram.marble.MarbleTheme.roundVideoRadius(Math.min(target.getWidth(), target.getHeight())));
             }
         });
         view.setClipToOutline(true);

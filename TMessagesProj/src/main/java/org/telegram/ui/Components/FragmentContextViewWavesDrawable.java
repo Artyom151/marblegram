@@ -154,10 +154,10 @@ public class FragmentContextViewWavesDrawable {
                 canvas.save();
 
                 canvas.clipPath(path);
-                canvas.drawRoundRect(left, top, right, bottom, dp(18), dp(18), paint);
+                canvas.drawRoundRect(left, top, right, bottom, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(18)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(18)), paint);
                 canvas.restore();
             } else {
-                canvas.drawRoundRect(left, top, right, bottom, dp(18), dp(18), paint);
+                canvas.drawRoundRect(left, top, right, bottom, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(18)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(18)), paint);
             }
         }
     }

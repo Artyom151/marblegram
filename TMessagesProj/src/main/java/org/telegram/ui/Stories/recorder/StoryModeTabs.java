@@ -58,7 +58,7 @@ public class StoryModeTabs extends FrameLayout implements FlashViews.Invertable 
                 setRect((int) Math.ceil(mode), b);
                 lerp(a, b, mode - (float) Math.floor(mode), c);
                 backgroundPaint.setColor(Theme.multAlpha(ColorUtils.blendARGB(Color.WHITE, Color.BLACK, invert), 0.15f));
-                canvas.drawRoundRect(c, c.height() / 2f, c.height() / 2f, backgroundPaint);
+                canvas.drawRoundRect(c, org.telegram.marble.MarbleTheme.m3CornerPxF(c.height() / 2f), org.telegram.marble.MarbleTheme.m3CornerPxF(c.height() / 2f), backgroundPaint);
 
                 super.dispatchDraw(canvas);
             }

@@ -93,6 +93,8 @@ public class ProfileMusicView extends View {
     private int backgroundColor;
     private boolean withShadows;
 
+    private boolean m3Chip;
+
     public void setColor(MessagesController.PeerColor peerColor) {
         int color1, color2;
         if (peerColor == null) {
@@ -102,7 +104,12 @@ public class ProfileMusicView extends View {
             color2 = peerColor.getBgColor2(Theme.isCurrentThemeDark());
         }
 
-        if (peerColor == null) {
+        m3Chip = peerColor == null && org.telegram.marble.MarbleTheme.isEnabled();
+        if (m3Chip) {
+            // Marblegram: M3E tonal assist chip for the profile "favorite track"
+            backgroundColor = org.telegram.marble.MarbleTheme.roles(Theme.isCurrentThemeDark()).secondaryContainer;
+            withShadows = false;
+        } else if (peerColor == null) {
             backgroundColor = Theme.getColor(Theme.key_windowBackgroundWhite, resourcesProvider);
             withShadows = true;
         } else {
@@ -117,6 +124,10 @@ public class ProfileMusicView extends View {
         final boolean useBlackText = parentExpanded < 0.8f && AndroidUtilities.computePerceivedBrightness(backgroundColor) > 0.85f;
         textColor = useBlackText ? Color.BLACK : Color.WHITE;
         icon.setColorFilter(useBlackText ? filterColorBlack : filterColorWhite);
+        if (m3Chip && parentExpanded < 0.8f) {
+            textColor = org.telegram.marble.MarbleTheme.roles(Theme.isCurrentThemeDark()).onSecondaryContainer;
+            icon.setColorFilter(new android.graphics.PorterDuffColorFilter(textColor, android.graphics.PorterDuff.Mode.SRC_IN));
+        }
         iconPaint.setColor(textColor);
         arrowPaint.setColor(Theme.multAlpha(textColor, 0.85f));
         invalidate();
@@ -283,9 +294,9 @@ public class ProfileMusicView extends View {
         int wasAlpha = backgroundPaint.getAlpha();
         backgroundPaint.setAlpha((int) (wasAlpha * alpha));
         if (withShadows && SharedConfig.shadowsInSections) {
-            canvas.drawRoundRect(rect, rect.height() / 2f, rect.height() / 2f, strokePaint);
+            canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(rect.height() / 2f), org.telegram.marble.MarbleTheme.m3CornerPxF(rect.height() / 2f), strokePaint);
         }
-        canvas.drawRoundRect(rect, rect.height() / 2f, rect.height() / 2f, backgroundPaint);
+        canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(rect.height() / 2f), org.telegram.marble.MarbleTheme.m3CornerPxF(rect.height() / 2f), backgroundPaint);
         backgroundPaint.setAlpha(wasAlpha);
 
         clipPath.rewind();

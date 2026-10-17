@@ -1779,7 +1779,7 @@ public class PasscodeView extends FrameLayout implements NotificationCenter.Noti
             matrix.postTranslate(-pos[0], -pos[1]);
             shader.setLocalMatrix(matrix);
             AndroidUtilities.rectTmp.set(getBounds());
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, rad, rad, paint);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(rad), org.telegram.marble.MarbleTheme.m3CornerPxF(rad), paint);
         }
 
         @Override

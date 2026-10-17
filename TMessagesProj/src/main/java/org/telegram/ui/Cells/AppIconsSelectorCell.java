@@ -239,11 +239,11 @@ public class AppIconsSelectorCell extends RecyclerListView implements Notificati
         public void draw(Canvas canvas) {
             float stroke = outlinePaint.getStrokeWidth();
             AndroidUtilities.rectTmp.set(iconView.getLeft() + stroke, iconView.getTop() + stroke, iconView.getRight() - stroke, iconView.getBottom() - stroke);
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, AndroidUtilities.dp(ICONS_ROUND_RADIUS), AndroidUtilities.dp(ICONS_ROUND_RADIUS), fillPaint);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(ICONS_ROUND_RADIUS)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(ICONS_ROUND_RADIUS)), fillPaint);
 
             super.draw(canvas);
 
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, AndroidUtilities.dp(ICONS_ROUND_RADIUS), AndroidUtilities.dp(ICONS_ROUND_RADIUS), outlinePaint);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(ICONS_ROUND_RADIUS)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(ICONS_ROUND_RADIUS)), outlinePaint);
         }
 
         private void setProgress(float progress) {

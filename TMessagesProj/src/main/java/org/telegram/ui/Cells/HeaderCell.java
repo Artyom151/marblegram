@@ -83,7 +83,7 @@ public class HeaderCell extends FrameLayout {
         if (animated) {
             animatedTextView = new AnimatedTextView(getContext());
             animatedTextView.setTextSize(AndroidUtilities.dp(14));
-            animatedTextView.setTypeface(AndroidUtilities.bold());
+            animatedTextView.setTypeface(org.telegram.marble.MarbleTheme.isEnabled() ? org.telegram.marble.MarbleTypography.emphasized() : AndroidUtilities.bold()); // Marblegram: M3 titleSmall
             animatedTextView.setGravity((LocaleController.isRTL ? Gravity.RIGHT : Gravity.LEFT) | Gravity.CENTER_VERTICAL);
             animatedTextView.setTextColor(getThemedColor(textColorKey));
             animatedTextView.setTag(textColorKey);
@@ -93,6 +93,11 @@ public class HeaderCell extends FrameLayout {
             textView = new TextView(getContext());
             textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
             textView.setTypeface(AndroidUtilities.bold());
+            if (org.telegram.marble.MarbleTheme.isEnabled()) {
+                // Marblegram: M3 titleSmall section header (emphasized weight, 0.1sp tracking)
+                textView.setTypeface(org.telegram.marble.MarbleTypography.emphasized());
+                textView.setLetterSpacing(0.007f);
+            }
             textView.setEllipsize(TextUtils.TruncateAt.END);
             textView.setGravity((LocaleController.isRTL ? Gravity.RIGHT : Gravity.LEFT) | Gravity.CENTER_VERTICAL);
             textView.setMinHeight(AndroidUtilities.dp(height - topMargin));

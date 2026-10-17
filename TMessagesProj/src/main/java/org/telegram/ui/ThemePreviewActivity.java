@@ -1492,24 +1492,24 @@ public class ThemePreviewActivity extends BaseFragment implements DownloadContro
 
                             shadowPaint.setColor(0);
                             shadowPaint.setShadowLayer(dpf2(1), 0, dpf2(.33f), ColorUtils.setAlphaComponent(0xff000000, (int) (27 * dimmingSlider.getAlpha())));
-                            canvas.drawRoundRect(AndroidUtilities.rectTmp, r, r, shadowPaint);
+                            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), shadowPaint);
 
                             Theme.applyServiceShaderMatrixForView(this, backgroundImage, themeDelegate);
 
                             Paint paint = themeDelegate.getPaint(Theme.key_paint_chatActionBackground);
                             final int wasAlpha1 = paint.getAlpha();
                             paint.setAlpha((int) (wasAlpha1 * dimmingSlider.getAlpha()));
-                            canvas.drawRoundRect(AndroidUtilities.rectTmp, r, r, paint);
+                            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), paint);
                             paint.setAlpha(wasAlpha1);
 
                             if (shouldShowBrightnessControll && dimAmount > 0) {
                                 dimPaint2.setColor(ColorUtils.setAlphaComponent(Color.BLACK, (int) (255 * dimAmount * progressToDarkTheme)));
-                                canvas.drawRoundRect(AndroidUtilities.rectTmp, r, r, dimPaint2);
+                                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), dimPaint2);
                             }
 
                             dimPaint.setColor(0x1effffff);
                             dimPaint.setAlpha((int) (0x1e * dimmingSlider.getAlpha()));
-                            canvas.drawRoundRect(AndroidUtilities.rectTmp, r, r, dimPaint);
+                            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), dimPaint);
 
                             super.dispatchDraw(canvas);
                         }
@@ -1595,9 +1595,9 @@ public class ThemePreviewActivity extends BaseFragment implements DownloadContro
                         protected void onDraw(Canvas canvas) {
                             rect.set(0, 0, getMeasuredWidth(), getMeasuredHeight());
                             Theme.applyServiceShaderMatrixForView(backgroundPlayAnimationView, backgroundImage, themeDelegate);
-                            canvas.drawRoundRect(rect, getMeasuredHeight() / 2, getMeasuredHeight() / 2, themeDelegate.getPaint(Theme.key_paint_chatActionBackground));
+                            canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(getMeasuredHeight() / 2), org.telegram.marble.MarbleTheme.m3CornerPxF(getMeasuredHeight() / 2), themeDelegate.getPaint(Theme.key_paint_chatActionBackground));
                             if (Theme.hasGradientService()) {
-                                canvas.drawRoundRect(rect, getMeasuredHeight() / 2, getMeasuredHeight() / 2, themeDelegate.getPaint(Theme.key_paint_chatActionBackgroundDarken));
+                                canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(getMeasuredHeight() / 2), org.telegram.marble.MarbleTheme.m3CornerPxF(getMeasuredHeight() / 2), themeDelegate.getPaint(Theme.key_paint_chatActionBackgroundDarken));
                             }
                         }
                     };
@@ -1760,9 +1760,9 @@ public class ThemePreviewActivity extends BaseFragment implements DownloadContro
                         protected void onDraw(Canvas canvas) {
                             rect.set(0, 0, getMeasuredWidth(), getMeasuredHeight());
                             Theme.applyServiceShaderMatrixForView(messagesPlayAnimationView, backgroundImage, themeDelegate);
-                            canvas.drawRoundRect(rect, getMeasuredHeight() / 2, getMeasuredHeight() / 2, themeDelegate.getPaint(Theme.key_paint_chatActionBackground));
+                            canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(getMeasuredHeight() / 2), org.telegram.marble.MarbleTheme.m3CornerPxF(getMeasuredHeight() / 2), themeDelegate.getPaint(Theme.key_paint_chatActionBackground));
                             if (Theme.hasGradientService()) {
-                                canvas.drawRoundRect(rect, getMeasuredHeight() / 2, getMeasuredHeight() / 2, themeDelegate.getPaint(Theme.key_paint_chatActionBackgroundDarken));
+                                canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(getMeasuredHeight() / 2), org.telegram.marble.MarbleTheme.m3CornerPxF(getMeasuredHeight() / 2), themeDelegate.getPaint(Theme.key_paint_chatActionBackgroundDarken));
                             }
                         }
                     };
@@ -5986,16 +5986,16 @@ public class ThemePreviewActivity extends BaseFragment implements DownloadContro
 
             final ColorFilter wasColorFilter = paint.getColorFilter();
             paint.setColorFilter(colorFilter);
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, r, r, paint);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), paint);
             paint.setColorFilter(wasColorFilter);
 
             if (shouldShowBrightnessControll && dimAmount > 0) {
                 dimPaint2.setColor(ColorUtils.setAlphaComponent(Color.BLACK, (int) (255 * dimAmount * progressToDarkTheme)));
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, r, r, dimPaint2);
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), dimPaint2);
             }
 
             dimPaint.setColor(0x1effffff);
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, r, r, dimPaint);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), dimPaint);
 
             final int textColor = Color.WHITE;
 

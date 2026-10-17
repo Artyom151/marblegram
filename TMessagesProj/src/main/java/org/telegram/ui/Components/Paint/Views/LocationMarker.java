@@ -398,7 +398,7 @@ public class LocationMarker extends View {
         }
 
         bounds.set(padx, pady, padx + w, pady + h);
-        canvas.drawRoundRect(bounds, .2f * h, .2f * h, outlinePaint);
+        canvas.drawRoundRect(bounds, org.telegram.marble.MarbleTheme.m3CornerPxF(.2f * h), org.telegram.marble.MarbleTheme.m3CornerPxF(.2f * h), outlinePaint);
 
         if (hasFlag) {
             float video = animatedVideo.set(isVideo);

@@ -260,7 +260,7 @@ public class UnreadCounterTextView extends View {
                 int lineWidth = (int) Math.ceil(layout.getLineWidth(0));
                 int x = (getMeasuredWidth() - lineWidth) / 2 + lineWidth - circleWidth / 2 + AndroidUtilities.dp(6);
                 rect.set(x, getMeasuredHeight() / 2 - AndroidUtilities.dp(10), x + circleWidth, getMeasuredHeight() / 2 + AndroidUtilities.dp(10));
-                canvas.drawRoundRect(rect, AndroidUtilities.dp(10), AndroidUtilities.dp(10), paint);
+                canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(10)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(10)), paint);
                 canvas.drawText(currentCounterString, rect.centerX() - textWidth / 2.0f, rect.top + AndroidUtilities.dp(14.5f), textPaint);
             }
         }

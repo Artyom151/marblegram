@@ -186,7 +186,7 @@ class QuickShareAvatarCell implements ValueAnimator.AnimatorUpdateListener {
         if (blurPaint != null) {
             cachedAlpha = blurPaint.getAlpha();
             blurPaint.setAlpha((int) (255 * textAlpha));
-            c.drawRoundRect(tmpRectF, r, r, blurPaint);
+            c.drawRoundRect(tmpRectF, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), blurPaint);
             blurPaint.setAlpha(cachedAlpha);
         } else {
             cell.applyServiceShaderMatrix(AndroidUtilities.displaySize.x, AndroidUtilities.displaySize.y, 0, 0);
@@ -195,14 +195,14 @@ class QuickShareAvatarCell implements ValueAnimator.AnimatorUpdateListener {
 
 
             bgPaint.setAlpha((int) ((hasGradientService ? cachedAlpha : (255 * 0.9f)) * textAlpha));
-            c.drawRoundRect(tmpRectF, r, r, bgPaint);
+            c.drawRoundRect(tmpRectF, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), bgPaint);
             bgPaint.setAlpha(cachedAlpha);
         }
 
         if (hasGradientService || blurPaint != null) {
             cachedAlpha = Theme.chat_actionBackgroundGradientDarkenPaint.getAlpha();
             Theme.chat_actionBackgroundGradientDarkenPaint.setAlpha((int) (cachedAlpha * textAlpha));
-            c.drawRoundRect(tmpRectF, r, r, Theme.chat_actionBackgroundGradientDarkenPaint);
+            c.drawRoundRect(tmpRectF, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), Theme.chat_actionBackgroundGradientDarkenPaint);
             Theme.chat_actionBackgroundGradientDarkenPaint.setAlpha(cachedAlpha);
         }
 

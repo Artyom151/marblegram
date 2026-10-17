@@ -58,3 +58,20 @@
 # Use -keep to explicitly keep any other classes shrinking would remove
 #-dontoptimize
 #-dontobfuscate
+# Marblegram Plugin SDK: scripts call these through reflection (LuaJ coercion, Chaquopy)
+-keep class org.luaj.** { *; }
+-dontwarn org.luaj.**
+-keep class org.telegram.marble.plugins.PluginApi { public *; }
+-keep class org.telegram.marble.plugins.PluginApi$Action { public *; }
+-keep class com.chaquo.python.** { *; }
+-dontwarn com.chaquo.python.**
+
+# Marblegram AI replies: Anthropic Java SDK (Jackson/Kotlin reflection)
+-keep class com.anthropic.** { *; }
+-dontwarn com.anthropic.**
+-keep class com.fasterxml.jackson.** { *; }
+-dontwarn com.fasterxml.jackson.**
+-keep class kotlin.Metadata { *; }
+-dontwarn kotlin.**
+-dontwarn okhttp3.**
+-dontwarn okio.**

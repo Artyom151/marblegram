@@ -1938,10 +1938,10 @@ public class DialogStoriesCell extends FrameLayout implements NotificationCenter
             addCirclePaint.setColor(Theme.multAlpha(getTextColor(), alpha));
 
             AndroidUtilities.rectTmp.set(cx2 - dp(1), cy2 - AndroidUtilities.dpf2(4.6f), cx2 + dp(1), cy2 + AndroidUtilities.dpf2(1.6f));
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(3), dp(3), addCirclePaint);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(3)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(3)), addCirclePaint);
 
             AndroidUtilities.rectTmp.set(cx2 - dp(1), cy2 + AndroidUtilities.dpf2(2.6f), cx2 + dp(1), cy2 + AndroidUtilities.dpf2(2.6f + 2));
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(3), dp(3), addCirclePaint);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(3)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(3)), addCirclePaint);
         }
 
         @Override

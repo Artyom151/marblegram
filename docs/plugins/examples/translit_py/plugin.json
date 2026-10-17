@@ -1,0 +1,10 @@
+{
+  "id": "translit_py",
+  "name": "Translit",
+  "author": "Marblegram",
+  "version": "1.0",
+  "description": "Сообщения, начинающиеся с «!ru », переводятся из латиницы в кириллицу.",
+  "language": "python",
+  "main": "main.py",
+  "min_sdk": 1
+}

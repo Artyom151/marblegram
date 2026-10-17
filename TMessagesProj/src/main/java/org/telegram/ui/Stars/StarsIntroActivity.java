@@ -1501,7 +1501,7 @@ public class StarsIntroActivity extends GradientHeaderActivity implements Notifi
                         backgroundPaint.setColor(Theme.getColor(Theme.key_windowBackgroundWhite, resourcesProvider));
                         AndroidUtilities.rectTmp.set(child.getX(), child.getY(), child.getX() + child.getWidth(), child.getY() + child.getHeight());
                         AndroidUtilities.rectTmp.inset(-dp(1.66f), -dp(1.66f));
-                        canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(13), dp(13), backgroundPaint);
+                        canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(13)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(13)), backgroundPaint);
                     }
                     return super.drawChild(canvas, child, drawingTime);
                 }
@@ -5100,7 +5100,7 @@ public class StarsIntroActivity extends GradientHeaderActivity implements Notifi
             @Override
             public void draw(@NonNull Canvas canvas, CharSequence text, int start, int end, float x, int top, int y, int bottom, @NonNull Paint paint) {
                 AndroidUtilities.rectTmp.set(x, (top + bottom - dp(20)) / 2f, x + dp(6 + 6) + layout.getCurrentWidth(), (top + bottom + dp(20)) / 2f);
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(4), dp(4), backgroundPaint);
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), backgroundPaint);
                 layout.draw(canvas, x + dp(6), (top + bottom) / 2f, color, 1f);
             }
         }, 0, refund.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);

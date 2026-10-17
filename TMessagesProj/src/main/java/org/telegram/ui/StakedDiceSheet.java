@@ -127,7 +127,7 @@ public class StakedDiceSheet extends BottomSheetWithRecyclerListView {
                 final float cy = (top + bottom) / 2.0f + dp(1);
                 bgPaint.setColor(Theme.getColor(Theme.key_featuredStickers_addButton, resourcesProvider));
                 AndroidUtilities.rectTmp.set(x, cy - dp(9), x + dp(16) + this.text.getCurrentWidth(), cy + dp(9));
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(9), dp(9), bgPaint);
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(9)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(9)), bgPaint);
                 this.text.draw(canvas, x + dp(8), cy, 0xFFFFFFFF, 1.0f);
             }
         }, betaIndex, title.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);

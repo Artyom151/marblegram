@@ -1,0 +1,109 @@
+# Marblegram — build APKs on GitHub Actions.
+#
+# Secrets (Settings → Secrets and variables → Actions):
+#   MARBLE_APP_ID, MARBLE_APP_HASH      Telegram API credentials from my.telegram.org (required for a working app;
+#                                       without them the public upstream stubs are used)
+#   RELEASE_KEYSTORE_BASE64             optional: base64 of your own release keystore (else the repo one is used)
+#   RELEASE_STORE_PASSWORD, RELEASE_KEY_ALIAS, RELEASE_KEY_PASSWORD   optional, for the keystore above
+#
+# Triggers: every push / PR builds a debug APK; a tag v* builds a release APK and attaches it to a GitHub Release.
+name: Build Marblegram
+
+on:
+  push:
+    branches: [marblegram, main, master]
+    tags: ['v*']
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      MARBLE_APP_ID: ${{ secrets.MARBLE_APP_ID }}
+      MARBLE_APP_HASH: ${{ secrets.MARBLE_APP_HASH }}
+      IS_RELEASE: ${{ startsWith(github.ref, 'refs/tags/v') }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Free disk space
+        run: |
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android/sdk/emulator /opt/ghc /usr/local/.ghcup
+          df -h /
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      # Chaquopy (Python plugin runtime) needs a host Python of the same minor version
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - uses: android-actions/setup-android@v3
+
+      - name: Install NDK and CMake
+        run: sdkmanager --install "ndk;27.2.12479018" "cmake;3.22.1" "platforms;android-36" "build-tools;36.0.0"
+
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          cache-read-only: ${{ github.ref != 'refs/heads/marblegram' }}
+
+      - name: Check that no Telegram API credentials are committed
+        run: |
+          grep -q 'BuildConfig.MARBLE_APP_ID' TMessagesProj/src/main/java/org/telegram/messenger/BuildVars.java
+          ! git ls-files --error-unmatch secrets.properties 2>/dev/null
+
+      - name: Release keystore
+        if: env.IS_RELEASE == 'true'
+        env:
+          KEYSTORE: ${{ secrets.RELEASE_KEYSTORE_BASE64 }}
+          STORE_PASSWORD: ${{ secrets.RELEASE_STORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.RELEASE_KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.RELEASE_KEY_PASSWORD }}
+        run: |
+          if [ -n "$KEYSTORE" ]; then
+            echo "$KEYSTORE" | base64 -d > TMessagesProj/config/release.keystore
+            {
+              echo "RELEASE_STORE_PASSWORD=$STORE_PASSWORD"
+              echo "RELEASE_KEY_ALIAS=$KEY_ALIAS"
+              echo "RELEASE_KEY_PASSWORD=$KEY_PASSWORD"
+            } >> gradle.properties
+          fi
+
+      - name: Build
+        run: |
+          TASK=assembleAfatDebug
+          [ "$IS_RELEASE" = true ] && TASK=assembleAfatRelease
+          ./gradlew ":TMessagesProj_App:$TASK" \
+            "-Dorg.gradle.jvmargs=-Xmx6g -XX:MaxMetaspaceSize=1g" \
+            --no-daemon --max-workers=4 --stacktrace
+
+      - name: Collect APKs
+        run: |
+          mkdir -p out
+          find TMessagesProj_App/build/outputs/apk -name '*.apk' -exec cp {} out/ \;
+          cd out && for f in *.apk; do mv "$f" "Marblegram-${GITHUB_REF_NAME//\//-}-$f"; done
+          ls -la
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: marblegram-${{ github.ref_name }}-${{ github.run_number }}
+          path: out/*.apk
+          retention-days: 14
+
+      - name: GitHub Release
+        if: env.IS_RELEASE == 'true'
+        uses: softprops/action-gh-release@v2
+        with:
+          files: out/*.apk
+          generate_release_notes: true

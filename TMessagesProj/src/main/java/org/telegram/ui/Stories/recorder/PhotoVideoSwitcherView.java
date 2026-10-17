@@ -159,7 +159,7 @@ public class PhotoVideoSwitcherView extends View implements FlashViews.Invertabl
         } else {
             lerp(photoRect, videoRect, t, selectorRect);
         }
-        canvas.drawRoundRect(selectorRect, h / 2f, h / 2f, selectorPaint);
+        canvas.drawRoundRect(selectorRect, org.telegram.marble.MarbleTheme.m3CornerPxF(h / 2f), org.telegram.marble.MarbleTheme.m3CornerPxF(h / 2f), selectorPaint);
 
         liveText.draw(canvas,  x - dp(4 + 12 + 12) - photoText.getWidth() - liveText.getWidth() - dp(4 + 12), cy, 0xFFFFFFFF, 1.0f);
         photoText.draw(canvas, x - dp(4 + 12) - photoText.getWidth(), cy, 0xFFFFFFFF, 1.0f);

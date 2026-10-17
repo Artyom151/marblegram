@@ -394,9 +394,9 @@ public class QrActivity extends BaseFragment {
         AndroidUtilities.rectTmp.set(0f, 0f, emojiThemeIcon.getWidth(), emojiThemeIcon.getHeight());
         Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         paint.setColor(Color.WHITE);
-        canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(5), dp(5), paint);
+        canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(5)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(5)), paint);
         paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_OUT));
-        Bitmap bitmap = BitmapFactory.decodeResource(ApplicationLoader.applicationContext.getResources(), R.drawable.msg_qr_mini);
+        Bitmap bitmap = org.telegram.marble.MarbleBitmaps.decodeResource(ApplicationLoader.applicationContext.getResources(), R.drawable.msg_qr_mini);
         canvas.drawBitmap(bitmap, (emojiThemeIcon.getWidth() - bitmap.getWidth()) * 0.5f, (emojiThemeIcon.getHeight() - bitmap.getHeight()) * 0.5f, paint);
         canvas.setBitmap(null);
 
@@ -1014,7 +1014,7 @@ public class QrActivity extends BaseFragment {
                 backgroundBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
                 Canvas canvas = new Canvas(backgroundBitmap);
                 RectF rect = new RectF(SHADOW_SIZE, SHADOW_SIZE, w - SHADOW_SIZE, getHeight() - SHADOW_SIZE);
-                canvas.drawRoundRect(rect, RADIUS, RADIUS, backgroundPaint);
+                canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(RADIUS), org.telegram.marble.MarbleTheme.m3CornerPxF(RADIUS), backgroundPaint);
                 if (setData) {
                     Utilities.themeQueue.postRunnable(() -> prepareContent(w, h));
                 }
@@ -1513,7 +1513,7 @@ public class QrActivity extends BaseFragment {
                         backgroundDrawable.draw(canvas);
                     } else {
                         AndroidUtilities.rectTmp.set(0, 0, getWidth() + dp(14), getHeight());
-                        canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(14), dp(14), backgroundPaint);
+                        canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(14)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(14)), backgroundPaint);
                     }
                     super.dispatchDraw(canvas);
                 }

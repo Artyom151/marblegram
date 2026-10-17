@@ -95,7 +95,7 @@ public class FireworksOverlay extends View {
                 rect.set(x - dp(typeSize), y - dp(2), x + dp(typeSize), y + dp(2));
                 canvas.save();
                 canvas.rotate(rotation, rect.centerX(), rect.centerY());
-                canvas.drawRoundRect(rect, dp(2), dp(2), paint[colorType]);
+                canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(2)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(2)), paint[colorType]);
                 canvas.restore();
             } else if (type == 2) {
                 Drawable drawable = null;

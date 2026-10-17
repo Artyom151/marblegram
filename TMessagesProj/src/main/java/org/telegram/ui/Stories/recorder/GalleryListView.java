@@ -696,7 +696,7 @@ public class GalleryListView extends FrameLayout implements NotificationCenter.N
             headerView.setAlpha(1f - actionBarT);
         }
         AndroidUtilities.rectTmp.set(0, top, getWidth(), getHeight() + dp(14));
-        canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(14), dp(14), backgroundPaint);
+        canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(14)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(14)), backgroundPaint);
         canvas.save();
         canvas.clipRect(0, top, getWidth(), getHeight());
         super.dispatchDraw(canvas);
@@ -1409,7 +1409,7 @@ public class GalleryListView extends FrameLayout implements NotificationCenter.N
 
             if (draftLayout != null) {
                 AndroidUtilities.rectTmp.set(dp(4), dp(4), dp(4 + 6) + draftLayoutWidth + dp(6), dp(5) + draftLayout.getHeight() + dp(2));
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(10), dp(10), durationBackgroundPaint);
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(10)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(10)), durationBackgroundPaint);
 
                 canvas.save();
                 canvas.translate(AndroidUtilities.rectTmp.left + dp(6) - draftLayoutLeft, AndroidUtilities.rectTmp.top + dp(1.33f));
@@ -1419,7 +1419,7 @@ public class GalleryListView extends FrameLayout implements NotificationCenter.N
 
             if (durationLayout != null) {
                 AndroidUtilities.rectTmp.set(dp(4), getHeight() - dp(4) - durationLayout.getHeight() - dp(2), dp(4) + (drawDurationPlay ? dp(16) : dp(4)) + durationLayoutWidth + dp(5), getHeight() - dp(4));
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(10), dp(10), durationBackgroundPaint);
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(10)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(10)), durationBackgroundPaint);
 
                 if (drawDurationPlay) {
                     durationPlayDrawable.setBounds(

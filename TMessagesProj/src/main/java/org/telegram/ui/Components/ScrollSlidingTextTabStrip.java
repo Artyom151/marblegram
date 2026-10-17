@@ -663,7 +663,11 @@ public class ScrollSlidingTextTabStrip extends HorizontalScrollView implements T
             );
         }
 //        selectorDrawable.setColor(processColor(Theme.getColor(tabLineColorKey, resourcesProvider)));
-        selectorDrawable.setColor(Theme.multAlpha(processColor(Theme.getColor(activeTextColorKey, resourcesProvider)), .15f));
+        if (org.telegram.marble.MarbleTheme.isEnabled() && resourcesProvider == null) {
+            selectorDrawable.setColor(org.telegram.marble.MarbleTheme.roles(Theme.isCurrentThemeDark()).primary);
+        } else {
+            selectorDrawable.setColor(Theme.multAlpha(processColor(Theme.getColor(activeTextColorKey, resourcesProvider)), .15f));
+        }
         invalidate();
     }
 

@@ -157,7 +157,7 @@ public class CanvasButton {
             if (rounded) {
                 paint.setPathEffect(null);
                 float rad = Math.min(drawingRects.get(0).width(), drawingRects.get(0).height()) / 2f;
-                canvas.drawRoundRect(drawingRects.get(0), rad, rad, paint);
+                canvas.drawRoundRect(drawingRects.get(0), org.telegram.marble.MarbleTheme.m3CornerPxF(rad), org.telegram.marble.MarbleTheme.m3CornerPxF(rad), paint);
             } else {
                 paint.setPathEffect(pathEffect);
                 canvas.drawRoundRect(drawingRects.get(0), 0, 0, paint);

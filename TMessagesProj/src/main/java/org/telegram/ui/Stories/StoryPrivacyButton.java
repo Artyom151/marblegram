@@ -166,11 +166,11 @@ public class StoryPrivacyButton extends View {
         final float crossfade = crossfadeT.set(0);
         if (crossfade > 0) {
             backgroundPaint[1].setAlpha(0xFF);
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(12), dp(12), backgroundPaint[1]);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(12)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(12)), backgroundPaint[1]);
         }
         if (crossfade < 1) {
             backgroundPaint[0].setAlpha((int) (0xFF * (1f - crossfade)));
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(12), dp(12), backgroundPaint[0]);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(12)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(12)), backgroundPaint[0]);
         }
 
         final float iconScale = 0.5f + Math.abs(crossfade - 0.5f);

@@ -549,7 +549,7 @@ public class ChatActivityEnterView extends FrameLayout implements
                 int heightRect = dp(26);
                 canvas.translate(dp(5), ((getMeasuredHeight() - heightRect) / 2f));
                 bgRect.set(-dp(5), 0f, (float) getMeasuredWidth() - getPaddingEnd(), (float) heightRect);
-                canvas.drawRoundRect(bgRect, heightRect / 2f, heightRect / 2f, gradientPaint);
+                canvas.drawRoundRect(bgRect, org.telegram.marble.MarbleTheme.m3CornerPxF(heightRect / 2f), org.telegram.marble.MarbleTheme.m3CornerPxF(heightRect / 2f), gradientPaint);
                 canvas.translate(getMeasuredWidth() - getPaddingEnd() - dp(6) - closeDrawable.getIntrinsicWidth(), dp(5));
                 closeDrawable.draw(canvas);
                 canvas.restore();
@@ -1574,7 +1574,7 @@ public class ChatActivityEnterView extends FrameLayout implements
                         (int) (rectF.right + dpf2(3)), (int) (rectF.bottom + dpf2(3))
                 );
                 lockShadowDrawable.draw(canvas);
-                canvas.drawRoundRect(rectF, dpf2(18), dpf2(18), lockBackgroundPaint);
+                canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dpf2(18)), org.telegram.marble.MarbleTheme.m3CornerPxF(dpf2(18)), lockBackgroundPaint);
             }
 
 
@@ -1634,7 +1634,7 @@ public class ChatActivityEnterView extends FrameLayout implements
 
             if (transformToPauseProgress > 0) {
                 if (periodBackgroundDrawable == null) {
-                    canvas.drawRoundRect(rectF, dpf2(3), dpf2(3), lockBackgroundPaint);
+                    canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dpf2(3)), org.telegram.marble.MarbleTheme.m3CornerPxF(dpf2(3)), lockBackgroundPaint);
                 }
 
                 path2.rewind();
@@ -1650,7 +1650,7 @@ public class ChatActivityEnterView extends FrameLayout implements
                 path2.addRoundRect(AndroidUtilities.rectTmp, radiiRight, Path.Direction.CW);
                 canvas.drawPath(path2, lockPaint);
             } else {
-                canvas.drawRoundRect(rectF, dpf2(3), dpf2(3), lockPaint);
+                canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dpf2(3)), org.telegram.marble.MarbleTheme.m3CornerPxF(dpf2(3)), lockPaint);
             }
             lockPaint.setAlpha(wasAlpha);
             lockOutlinePaint.setAlpha(wasAlpha);
@@ -1704,7 +1704,7 @@ public class ChatActivityEnterView extends FrameLayout implements
                             (int) (rectF.right + dpf2(3)), (int) (rectF.bottom + dpf2(3))
                     );
                     lockShadowDrawable.draw(canvas);
-                    canvas.drawRoundRect(rectF, dpf2(18), dpf2(18), lockBackgroundPaint);
+                    canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dpf2(18)), org.telegram.marble.MarbleTheme.m3CornerPxF(dpf2(18)), lockBackgroundPaint);
                 }
                 periodDrawable.setBounds((int) rectF.left, (int) rectF.top, (int) rectF.right, (int) rectF.bottom);
                 periodDrawable.draw(canvas);
@@ -3231,7 +3231,7 @@ public class ChatActivityEnterView extends FrameLayout implements
                         }
                     }
 
-                    final float r = dpf2(19);
+                    final float r = dpf2(org.telegram.marble.MarbleTheme.expressiveShapes() ? 14 : 19); // Marblegram: M3E square icon button
                     paint.setColor(getThemedColor(Theme.key_chat_messagePanelSend));
                     final float margin = dpf2(3);
                     final float height = dpf2(38);
@@ -3245,7 +3245,7 @@ public class ChatActivityEnterView extends FrameLayout implements
 
                     canvas.save();
                     canvas.scale(s, s, backgroundRect.centerX(), backgroundRect.centerY());
-                    canvas.drawRoundRect(backgroundRect, r, r, paint);
+                    canvas.drawRoundRect(backgroundRect, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), paint);
                     canvas.restore();
                 }
                 super.dispatchDraw(canvas);
@@ -15051,7 +15051,7 @@ public class ChatActivityEnterView extends FrameLayout implements
                     AndroidUtilities.rectTmp.set(right - w, cy - h / 2f, right, cy + h / 2f);
                     AndroidUtilities.rectTmp.inset(-dp(4), -dp(4));
                     final float r = Math.min(w, h) / 2f + dp(4);
-                    canvas.drawRoundRect(AndroidUtilities.rectTmp, r, r, scrimViewBackgroundPaint);
+                    canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), scrimViewBackgroundPaint);
                 }
 
                 final float countScale = count.isNotEmpty() * (1.0f - priceProgress);
@@ -15172,7 +15172,8 @@ public class ChatActivityEnterView extends FrameLayout implements
             updateColors();
             checkBackgroundRect();
             if (isNewDesignSendButton) {
-                canvas.drawRoundRect(backgroundRect, dp(RADIUS), dp(RADIUS), backgroundPaint);
+                final float m3r = org.telegram.marble.MarbleTheme.expressiveShapes() ? dp(14) : dp(RADIUS);
+                canvas.drawRoundRect(backgroundRect, org.telegram.marble.MarbleTheme.m3CornerPxF(m3r), org.telegram.marble.MarbleTheme.m3CornerPxF(m3r), backgroundPaint);
             }
 
             final boolean inactive = isInactive();
@@ -15284,7 +15285,7 @@ public class ChatActivityEnterView extends FrameLayout implements
                     } else {
                         float startAngle = -90f;
                         startAngle += (System.currentTimeMillis() % 3000L / 1000f * 120f) % 360f;
-                        canvas.drawArc(AndroidUtilities.rectTmp, startAngle, 360 * loadingAnimatedProgress.set(this.loadingProgress), false, loadingPaint);
+                        org.telegram.marble.WavyProgress.drawArc(canvas, AndroidUtilities.rectTmp, startAngle, 360 * loadingAnimatedProgress.set(this.loadingProgress), loadingPaint);
                     }
                     canvas.save();
                     final float s = AndroidUtilities.lerp(1f, .6f, loadingShown);

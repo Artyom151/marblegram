@@ -56,12 +56,24 @@ public class CircularProgressDrawable extends Drawable {
     }
 
     private float angleOffset;
+    private org.telegram.marble.LoadingIndicator m3Indicator;
     private final RectF bounds = new RectF();
 
     @Override
     public void draw(@NonNull Canvas canvas) {
         if (start < 0) {
             start = SystemClock.elapsedRealtime();
+        }
+        if (org.telegram.marble.MarbleTheme.isEnabled()) {
+            // Marblegram: indeterminate button/inline progress is an M3E shape-morphing LoadingIndicator
+            if (m3Indicator == null) {
+                m3Indicator = new org.telegram.marble.LoadingIndicator();
+            }
+            m3Indicator.setColor(paint.getColor());
+            m3Indicator.setAlpha(paint.getAlpha());
+            m3Indicator.draw(canvas, bounds.centerX(), bounds.centerY(), Math.max(bounds.width(), bounds.height()) * 1.15f, null);
+            invalidateSelf();
+            return;
         }
         updateSegment();
         canvas.drawArc(

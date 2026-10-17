@@ -175,7 +175,7 @@ public class CountrySelectBottomSheet extends BottomSheetWithRecyclerListView im
             protected void onDraw(Canvas canvas) {
                 p.setColor(getThemedColor(Theme.key_featuredStickers_addButton));
                 canvas.drawRoundRect(0, getHeight() / 2f - dp(14),
-                        getWidth(), getHeight() / 2f + dp(14), dp(14), dp(14), p);
+                        getWidth(), getHeight() / 2f + dp(14), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(14)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(14)), p);
                 super.onDraw(canvas);
             }
         };

@@ -250,7 +250,7 @@ public class CropRotationWheel extends FrameLayout {
         tempRect.top = (height - AndroidUtilities.dp(22)) / 2;
         tempRect.right = (width + AndroidUtilities.dp(2.5f)) / 2;
         tempRect.bottom =  (height + AndroidUtilities.dp(22)) / 2;
-        canvas.drawRoundRect(tempRect, AndroidUtilities.dp(2), AndroidUtilities.dp(2), bluePaint);
+        canvas.drawRoundRect(tempRect, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(2)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(2)), bluePaint);
 
         float tx = (width - degreesTextPaint.measureText(degreesText)) / 2;
         float ty = AndroidUtilities.dp(14);

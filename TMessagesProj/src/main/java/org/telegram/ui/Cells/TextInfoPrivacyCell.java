@@ -78,6 +78,11 @@ public class TextInfoPrivacyCell extends FrameLayout {
             }
         };
         textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
+        if (org.telegram.marble.MarbleTheme.expressiveTypography()) {
+            // Marblegram: M3 supporting text — bodySmall-ish size with 0.4sp tracking
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 13);
+            textView.setLetterSpacing(0.03f);
+        }
         textView.setGravity(LocaleController.isRTL ? Gravity.RIGHT : Gravity.LEFT);
         textView.setPadding(0, AndroidUtilities.dp(10), 0, AndroidUtilities.dp(17));
         textView.setMovementMethod(LinkMovementMethod.getInstance());

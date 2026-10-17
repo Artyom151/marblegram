@@ -87,7 +87,7 @@ public class VideoTimerView extends View implements FlashViews.Invertable {
             (getWidth() + w) / 2 + AndroidUtilities.dp(8),
             AndroidUtilities.dp(18 + 22)
         );
-        canvas.drawRoundRect(AndroidUtilities.rectTmp, AndroidUtilities.dp(18), AndroidUtilities.dp(18), backgroundPaint);
+        canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(18)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(18)), backgroundPaint);
 
         if (recordingT > 0) {
             long t = System.currentTimeMillis() % 2000L;

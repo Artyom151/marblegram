@@ -1238,6 +1238,9 @@ public class ChatActivity extends BaseFragment implements
     public final static int OPTION_VIEW_REPLIES_OR_THREAD = 27;
     public final static int OPTION_STATISTICS = 28;
     public final static int OPTION_TRANSLATE = 29;
+    public final static int OPTION_MARBLE_TRANSLATE = 3101;
+    public final static int OPTION_MARBLE_HISTORY = 3102;
+    public final static int OPTION_MARBLE_AI = 3103;
     public final static int OPTION_TRANSCRIBE = 30;
     public final static int OPTION_HIDE_SPONSORED_MESSAGE = 31;
     public final static int OPTION_VIEW_IN_TOPIC = 32;
@@ -3615,10 +3618,15 @@ public class ChatActivity extends BaseFragment implements
     @Override
     public View createView(Context context) {
         Timer t = Timer.create("ChatActivity.createView");
+        org.telegram.marble.plugins.PluginManager.getInstance().onChatOpen(dialog_id); // Marblegram Plugin SDK
 
         blurredBackgroundColorProvider = new BlurredBackgroundColorProviderThemed(themeDelegate, Theme.key_chat_messagePanelBackground) {
             @Override
             public int getBackgroundColor() {
+                if (org.telegram.marble.MarbleTheme.isEnabled()) {
+                    // Marblegram: input island / channel bottom bar = opaque M3 tonal container
+                    return org.telegram.marble.MarbleTheme.roles(themeDelegate != null ? themeDelegate.isDark() : Theme.isCurrentThemeDark()).surfaceContainerHigh;
+                }
                 if (!BlurredBackgroundProviderImpl.checkBlurEnabled(currentAccount, themeDelegate)) {
                     return ColorUtils.setAlphaComponent(getThemedColor(Theme.key_chat_messagePanelBackground), 255);
                 }
@@ -4998,7 +5006,7 @@ public class ChatActivity extends BaseFragment implements
                         outlineActionBackgroundPaint.setAlpha((int) (wasAlpha * iconProgress));
 
                         outlineActionBackgroundPaint.setStrokeWidth(width);
-                        canvas.drawRoundRect(AndroidUtilities.rectTmp, AndroidUtilities.dp(16) * outScale, AndroidUtilities.dp(16) * outScale, outlineActionBackgroundPaint);
+                        canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(16) * outScale), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(16) * outScale), outlineActionBackgroundPaint);
                         outlineActionBackgroundPaint.setStrokeWidth(wasWidth);
 
                         outlineActionBackgroundPaint.setAlpha(wasAlpha);
@@ -5011,7 +5019,7 @@ public class ChatActivity extends BaseFragment implements
                             outlineActionBackgroundDarkenPaint.setAlpha((int) (wasAlpha * iconProgress));
 
                             outlineActionBackgroundDarkenPaint.setStrokeWidth(width);
-                            canvas.drawRoundRect(AndroidUtilities.rectTmp, AndroidUtilities.dp(16) * outScale, AndroidUtilities.dp(16) * outScale, outlineActionBackgroundDarkenPaint);
+                            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(16) * outScale), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(16) * outScale), outlineActionBackgroundDarkenPaint);
                             outlineActionBackgroundDarkenPaint.setStrokeWidth(wasWidth);
                         }
                     }
@@ -7045,9 +7053,9 @@ public class ChatActivity extends BaseFragment implements
             protected void dispatchDraw(Canvas canvas) {
                 rect.set(0, 0, getWidth(), getHeight());
                 applyServiceShaderMatrix();
-                canvas.drawRoundRect(rect, dp(18), dp(18), getThemedPaint(Theme.key_paint_chatActionBackground));
+                canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(18)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(18)), getThemedPaint(Theme.key_paint_chatActionBackground));
                 if (themeDelegate != null ? themeDelegate.hasGradientService() : Theme.hasGradientService()) {
-                    canvas.drawRoundRect(rect, dp(18), dp(18), getThemedPaint(Theme.key_paint_chatActionBackgroundDarken));
+                    canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(18)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(18)), getThemedPaint(Theme.key_paint_chatActionBackgroundDarken));
                 }
                 super.dispatchDraw(canvas);
             }
@@ -12205,7 +12213,7 @@ public class ChatActivity extends BaseFragment implements
                         }
                         outline.setRoundRect(0, 0, view.getMeasuredWidth(), view.getMeasuredHeight(), maxRad);
                     } else {
-                        outline.setOval(0, 0, AndroidUtilities.roundPlayingMessageSize(isSideMenued()), AndroidUtilities.roundPlayingMessageSize(isSideMenued()));
+                        outline.setRoundRect(0, 0, AndroidUtilities.roundPlayingMessageSize(isSideMenued()), AndroidUtilities.roundPlayingMessageSize(isSideMenued()), org.telegram.marble.MarbleTheme.roundVideoRadius(AndroidUtilities.roundPlayingMessageSize(isSideMenued())));
                     }
                 }
             });
@@ -33425,6 +33433,25 @@ public class ChatActivity extends BaseFragment implements
         }
         boolean preserveDim = false;
         switch (option) {
+            case OPTION_MARBLE_AI: {
+                final MessageObject target = selectedObject;
+                org.telegram.marble.features.MarbleFeaturesUi.showAiReply(this, currentAccount, dialog_id, new ArrayList<>(messages), target, text -> {
+                    if (chatActivityEnterView != null) {
+                        chatActivityEnterView.setFieldText(text);
+                        showFieldPanelForReply(target);
+                    }
+                });
+                break;
+            }
+            case OPTION_MARBLE_HISTORY: {
+                org.telegram.marble.features.MarbleFeaturesUi.showEditHistory(this, currentAccount, selectedObject.getDialogId(), selectedObject.getId());
+                break;
+            }
+            case OPTION_MARBLE_TRANSLATE: {
+                CharSequence text = selectedObject.getMessageTextToTranslate(selectedObjectGroup, null);
+                org.telegram.marble.features.MarbleFeaturesUi.showTranslation(this, text == null ? null : text.toString());
+                break;
+            }
             case OPTION_RETRY: {
                 final MessageObject object = selectedObject;
                 final MessageObject.GroupedMessages group = selectedObjectGroup;
@@ -46024,6 +46051,21 @@ public class ChatActivity extends BaseFragment implements
                     items.add(LocaleController.getString(R.string.TranslateMessage));
                     options.add(OPTION_TRANSLATE);
                     icons.add(R.drawable.msg_translate);
+                    if (org.telegram.marble.MarbleTheme.isEnabled()) {
+                        items.add(LocaleController.getString(R.string.MarbleTranslateMenu));
+                        options.add(OPTION_MARBLE_TRANSLATE);
+                        icons.add(R.drawable.msg_translate);
+                    }
+                    if (org.telegram.marble.MarbleTheme.isEnabled() && !selectedObject.isOut() && chatActivityEnterView != null && chatActivityEnterView.hasText() == false) {
+                        items.add(LocaleController.getString(R.string.MarbleAiReply));
+                        options.add(OPTION_MARBLE_AI);
+                        icons.add(R.drawable.msg_bot);
+                    }
+                    if (org.telegram.marble.MarbleTheme.isEnabled() && selectedObject.messageOwner != null && selectedObject.messageOwner.edit_date != 0 && org.telegram.marble.features.MarbleHistory.saveEdited()) {
+                        items.add(LocaleController.getString(R.string.MarbleEditHistory));
+                        options.add(OPTION_MARBLE_HISTORY);
+                        icons.add(R.drawable.msg_log);
+                    }
                 }
                 if (message.canEditMessage(currentChat) && message.type != MessageObject.TYPE_POLL || chatMode == MODE_WELCOME_MESSAGES) {
                     items.add(LocaleController.getString(R.string.Edit));
@@ -46371,6 +46413,21 @@ public class ChatActivity extends BaseFragment implements
                     items.add(LocaleController.getString(R.string.TranslateMessage));
                     options.add(OPTION_TRANSLATE);
                     icons.add(R.drawable.msg_translate);
+                    if (org.telegram.marble.MarbleTheme.isEnabled()) {
+                        items.add(LocaleController.getString(R.string.MarbleTranslateMenu));
+                        options.add(OPTION_MARBLE_TRANSLATE);
+                        icons.add(R.drawable.msg_translate);
+                    }
+                    if (org.telegram.marble.MarbleTheme.isEnabled() && !selectedObject.isOut() && chatActivityEnterView != null && chatActivityEnterView.hasText() == false) {
+                        items.add(LocaleController.getString(R.string.MarbleAiReply));
+                        options.add(OPTION_MARBLE_AI);
+                        icons.add(R.drawable.msg_bot);
+                    }
+                    if (org.telegram.marble.MarbleTheme.isEnabled() && selectedObject.messageOwner != null && selectedObject.messageOwner.edit_date != 0 && org.telegram.marble.features.MarbleHistory.saveEdited()) {
+                        items.add(LocaleController.getString(R.string.MarbleEditHistory));
+                        options.add(OPTION_MARBLE_HISTORY);
+                        icons.add(R.drawable.msg_log);
+                    }
                 }
                 if (allowEdit || chatMode == MODE_WELCOME_MESSAGES) {
                     items.add(LocaleController.getString(R.string.Edit));

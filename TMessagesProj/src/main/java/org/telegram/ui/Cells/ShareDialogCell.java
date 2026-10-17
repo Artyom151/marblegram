@@ -372,10 +372,10 @@ public class ShareDialogCell extends FrameLayout implements NotificationCenter.N
                     AndroidUtilities.rectTmp.set(cx - w / 2.0f, cy - h / 2.0f, cx + w / 2.0f, cy + h / 2.0f);
                     AndroidUtilities.rectTmp.inset(-dp(1.33f), dp(-1.33f));
                     priceBackgroundPaint.setColor(getThemedColor(Theme.key_dialogBackground));
-                    canvas.drawRoundRect(AndroidUtilities.rectTmp, AndroidUtilities.rectTmp.height() / 2.0f, AndroidUtilities.rectTmp.height() / 2.0f, priceBackgroundPaint);
+                    canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.rectTmp.height() / 2.0f), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.rectTmp.height() / 2.0f), priceBackgroundPaint);
                     AndroidUtilities.rectTmp.inset(dp(1.33f), dp(1.33f));
                     priceBackgroundPaint.setColor(getThemedColor(Theme.key_dialogRoundCheckBox));
-                    canvas.drawRoundRect(AndroidUtilities.rectTmp, AndroidUtilities.rectTmp.height() / 2.0f, AndroidUtilities.rectTmp.height() / 2.0f, priceBackgroundPaint);
+                    canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.rectTmp.height() / 2.0f), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.rectTmp.height() / 2.0f), priceBackgroundPaint);
 
                     if (priceText != null) {
                         priceText.draw(canvas, cx - w / 2.0f + dp(5), cy, Color.WHITE, 1.0f);
@@ -450,7 +450,7 @@ public class ShareDialogCell extends FrameLayout implements NotificationCenter.N
         Theme.checkboxSquare_checkPaint.setAlpha((int) (checkBox.getProgress() * 255));
         int radius = dp(currentType == TYPE_CREATE ? 24 : 28);
         AndroidUtilities.rectTmp.set(cx - radius, cy - radius, cx + radius, cy + radius);
-        canvas.drawRoundRect(AndroidUtilities.rectTmp, imageView.getRoundRadius()[0], imageView.getRoundRadius()[0], Theme.checkboxSquare_checkPaint);
+        canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(imageView.getRoundRadius()[0]), org.telegram.marble.MarbleTheme.m3CornerPxF(imageView.getRoundRadius()[0]), Theme.checkboxSquare_checkPaint);
         super.onDraw(canvas);
     }
 
@@ -509,7 +509,7 @@ public class ShareDialogCell extends FrameLayout implements NotificationCenter.N
             AndroidUtilities.rectTmp.set(0, 0, getBounds().width(), getBounds().height());
             paint.setAlpha(alpha);
             float r2 = Math.min(getBounds().width(), getBounds().height()) / 2f * ((float) alpha / 0xFF);
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, r2, r2, paint);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(r2), org.telegram.marble.MarbleTheme.m3CornerPxF(r2), paint);
             canvas.restore();
 
             final int r = dp(lottieDrawable != null ? 20 : 15);

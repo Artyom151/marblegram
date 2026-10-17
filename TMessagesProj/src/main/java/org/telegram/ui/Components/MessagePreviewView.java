@@ -2150,7 +2150,7 @@ public class MessagePreviewView extends FrameLayout {
             }
 
             if (lowerInRange || higherInRange) {
-                canvas.drawRoundRect(selectRect, dp(13), dp(13), bgPaint);
+                canvas.drawRoundRect(selectRect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(13)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(13)), bgPaint);
             }
 
             for (int i = 0; i < tabs.size(); ++i) {

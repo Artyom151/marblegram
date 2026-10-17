@@ -40,9 +40,9 @@ public class ChatLoadingCell extends FrameLayout {
             protected void dispatchDraw(Canvas canvas) {
                 rect.set(0, 0, getWidth(), getHeight());
                 applyServiceShaderMatrix();
-                canvas.drawRoundRect(rect, dp(18), dp(18), getThemedPaint(Theme.key_paint_chatActionBackground));
+                canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(18)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(18)), getThemedPaint(Theme.key_paint_chatActionBackground));
                 if (hasGradientService()) {
-                    canvas.drawRoundRect(rect, dp(18), dp(18), getThemedPaint(Theme.key_paint_chatActionBackgroundDarken));
+                    canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(18)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(18)), getThemedPaint(Theme.key_paint_chatActionBackgroundDarken));
                 }
 
                 super.dispatchDraw(canvas);

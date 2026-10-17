@@ -209,7 +209,7 @@ public class TopicButton {
         paint.setColor(bgColor);
         paint.setAlpha((int) (0xFF * 0.15f * alpha));
         AndroidUtilities.rectTmp.set(0, 0, width, height);
-        canvas.drawRoundRect(AndroidUtilities.rectTmp, height / 2, height / 2, paint);
+        canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(height / 2), org.telegram.marble.MarbleTheme.m3CornerPxF(height / 2), paint);
 
         final float arrowWidth = dp(3.5f);
         final float arrowHeight = dp(8);

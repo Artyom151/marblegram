@@ -111,7 +111,7 @@ public class BoostCounterView extends View {
             canvas.scale(countScale, countScale, AndroidUtilities.rectTmp2.centerX(), AndroidUtilities.rectTmp2.centerY());
         }
 
-        canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(10), dp(10), bgPaint);
+        canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(10)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(10)), bgPaint);
         AndroidUtilities.rectTmp2.set(0, 0, (int) AndroidUtilities.rectTmp.width(), AndroidUtilities.dp(19));
         countText.setBounds(AndroidUtilities.rectTmp2);
         countText.draw(canvas);

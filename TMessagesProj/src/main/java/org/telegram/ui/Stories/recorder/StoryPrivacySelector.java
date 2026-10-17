@@ -92,7 +92,7 @@ public class StoryPrivacySelector extends View {
         );
         clickRect.set(rect);
         clickRect.inset(-dp(28), -dp(14));
-        canvas.drawRoundRect(rect, dp(15), dp(15), backgroundPaint);
+        canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(15)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(15)), backgroundPaint);
 
         if (rippleDrawable != null) {
             rippleDrawable.setBounds((int) rect.left, (int) rect.top, (int) rect.right, (int) rect.bottom);

@@ -87,8 +87,8 @@ public class StoryFailView extends FrameLayout {
 
         canvas.drawCircle(cx, cy, dp(10), redPaint);
         AndroidUtilities.rectTmp.set(cx - AndroidUtilities.dp(1), cy - AndroidUtilities.dpf2(4.6f), cx + AndroidUtilities.dp(1), cy + AndroidUtilities.dpf2(1.6f));
-        canvas.drawRoundRect(AndroidUtilities.rectTmp, AndroidUtilities.dp(3), AndroidUtilities.dp(3), whitePaint);
+        canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(3)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(3)), whitePaint);
         AndroidUtilities.rectTmp.set(cx - AndroidUtilities.dp(1), cy + AndroidUtilities.dpf2(2.6f), cx + AndroidUtilities.dp(1), cy + AndroidUtilities.dpf2(2.6f + 2));
-        canvas.drawRoundRect(AndroidUtilities.rectTmp, AndroidUtilities.dp(3), AndroidUtilities.dp(3), whitePaint);
+        canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(3)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(3)), whitePaint);
     }
 }
