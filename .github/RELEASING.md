@@ -1,7 +1,7 @@
 # Сборки и релизы Marblegram
 
 Push в `marblegram`, `main`, `master`, pull request и ручной запуск Actions →
-**Build Marblegram** собирают debug APK. Скачивание: завершённая сборка →
+**Build Marblegram** без заполненного `release_tag` собирают debug APK. Скачивание: завершённая сборка →
 Artifacts → `marblegram-<run-id>` (ZIP с APK и файлами проверки).
 
 Тег `v*` собирает release APK и автоматически публикует GitHub Release
@@ -41,7 +41,14 @@ base64 -w 0 marblegram-release.jks
 
 ## Публикация
 
-После загрузки изменений в свой GitHub-репозиторий создайте новый тег:
+Для ручной публикации откройте Actions → Build Marblegram → Run workflow,
+выберите ветку с нужными изменениями и заполните `release_tag`, например
+`v13.0.2-marblegram.1`. Будет собран release APK и создан релиз с этим тегом
+на коммите выбранной сборки. Используйте новый тег для новой версии.
+Если оставить поле пустым, собирается только debug APK, а job `release`
+получает статус **skipped**. При ошибке job `build` публикация также пропускается.
+
+Другой способ — после загрузки изменений создать и отправить тег:
 
 ```sh
 git tag v13.0.2-marblegram.1

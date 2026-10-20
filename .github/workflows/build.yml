@@ -6,13 +6,18 @@ on:
     tags: ['v*']
   pull_request:
   workflow_dispatch:
+    inputs:
+      release_tag:
+        description: 'Тег релиза (например v13.0.2-marblegram.1); пусто — только debug APK'
+        required: false
+        type: string
 
 permissions:
   contents: read
 
 concurrency:
   group: build-${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: ${{ !startsWith(github.ref, 'refs/tags/v') }}
+  cancel-in-progress: ${{ !startsWith(github.ref, 'refs/tags/v') && inputs.release_tag == '' }}
 
 jobs:
   build:
@@ -21,13 +26,23 @@ jobs:
     env:
       MARBLE_APP_ID: ${{ secrets.MARBLE_APP_ID }}
       MARBLE_APP_HASH: ${{ secrets.MARBLE_APP_HASH }}
-      IS_RELEASE: ${{ startsWith(github.ref, 'refs/tags/v') }}
+      IS_RELEASE: ${{ startsWith(github.ref, 'refs/tags/v') || (github.event_name == 'workflow_dispatch' && inputs.release_tag != '') }}
 
     steps:
       - uses: actions/checkout@v4
         with:
           submodules: recursive
           persist-credentials: false
+
+      - name: Validate manual release tag
+        if: github.event_name == 'workflow_dispatch' && inputs.release_tag != ''
+        env:
+          RELEASE_TAG: ${{ inputs.release_tag }}
+        run: |
+          if [[ "$RELEASE_TAG" != v* ]] || ! git check-ref-format "refs/tags/$RELEASE_TAG"; then
+            echo "::error::Release tag must be a valid Git tag starting with v"
+            exit 1
+          fi
 
       - name: Validate release configuration
         if: env.IS_RELEASE == 'true'
@@ -138,7 +153,7 @@ jobs:
           retention-days: 14
 
   release:
-    if: startsWith(github.ref, 'refs/tags/v')
+    if: startsWith(github.ref, 'refs/tags/v') || (github.event_name == 'workflow_dispatch' && inputs.release_tag != '')
     needs: build
     runs-on: ubuntu-24.04
     permissions:
@@ -169,6 +184,8 @@ jobs:
       - name: Publish GitHub Release
         uses: softprops/action-gh-release@v2
         with:
+          tag_name: ${{ inputs.release_tag || github.ref_name }}
+          target_commitish: ${{ github.sha }}
           files: out/*
           body_path: release-notes.md
           generate_release_notes: true
