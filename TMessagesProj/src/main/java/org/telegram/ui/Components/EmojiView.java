@@ -2696,7 +2696,10 @@ public class EmojiView extends FrameLayout implements
             typeTabs.setViewPager(pager);
             typeTabs.setShouldExpand(false);
             typeTabs.setIndicatorHeight(AndroidUtilities.dp(3));
-            typeTabs.setIndicatorColor(ColorUtils.setAlphaComponent(getThemedColor(Theme.key_chat_emojiPanelIconSelected), 20));
+            // Marblegram: M3 tonal secondaryContainer pill behind the selected type tab
+            typeTabs.setIndicatorColor(org.telegram.marble.MarbleTheme.expressiveShapes()
+                    ? org.telegram.marble.MarbleTheme.roles(Theme.isCurrentThemeDark()).secondaryContainer
+                    : ColorUtils.setAlphaComponent(getThemedColor(Theme.key_chat_emojiPanelIconSelected), 20));
             typeTabs.setUnderlineHeight(0);
             typeTabs.setTabPaddingLeftRight(AndroidUtilities.dp(11));
             typeTabs.setPadding(dp(4), dp(11), dp(4), dp(11));

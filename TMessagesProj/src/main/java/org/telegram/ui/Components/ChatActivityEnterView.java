@@ -2690,6 +2690,12 @@ public class ChatActivityEnterView extends FrameLayout implements
             @Override
             protected boolean drawChild(Canvas canvas, View child, long drawingTime) {
                 if (child != null && child == messageEditText) {
+                    if (org.telegram.marble.MarbleTheme.expressiveShapes()) { // Marblegram: M3 tonal pill behind the input text
+                        marbleInputPillPaint.setColor(org.telegram.marble.MarbleTheme.roles(Theme.isCurrentThemeDark()).surfaceContainerHigh);
+                        marbleInputPillRect.set(child.getLeft() - dp(6), child.getTop(), child.getRight() + dp(6), child.getBottom());
+                        final float pr = org.telegram.marble.MarbleTheme.m3CornerPxF(dp(22));
+                        canvas.drawRoundRect(marbleInputPillRect, pr, pr, marbleInputPillPaint);
+                    }
                     return drawMessageEditText(canvas, () -> super.drawChild(canvas, child, drawingTime));
                 }
                 if (shouldDrawRecordedAudioPanelInParent && child == recordedAudioPanel) {
@@ -15531,6 +15537,10 @@ public class ChatActivityEnterView extends FrameLayout implements
         gradientPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_OUT));
         gradientPaint.setShader(clipGradient);
     }
+
+    // Marblegram: M3 input field pill (drawn in drawChild when expressive shapes are on)
+    private final Paint marbleInputPillPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private final RectF marbleInputPillRect = new RectF();
 
     public boolean drawMessageEditText(Canvas canvas, Utilities.Callback0Return<Boolean> drawChild) {
         float topAlpha = topGradientAlpha.set(messageEditText.canScrollVertically(-1));
