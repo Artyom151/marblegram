@@ -1631,8 +1631,10 @@ public class FilterTabsView extends FrameLayout {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
+        // Marblegram: M3E chips are 36dp tall, the legacy 9dp inset would cut them
+        final float inset = org.telegram.marble.MarbleTheme.folderChips() ? 2 : 9;
         clipPath.rewind();
-        clipPath.addRoundRect(dp(9), dp(9), w - dp(9), h - dp(9),
+        clipPath.addRoundRect(dp(inset), dp(inset), w - dp(inset), h - dp(inset),
             dp(16), dp(16), Path.Direction.CW);
     }
 
