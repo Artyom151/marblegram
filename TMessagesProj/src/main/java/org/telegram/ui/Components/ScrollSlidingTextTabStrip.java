@@ -663,7 +663,14 @@ public class ScrollSlidingTextTabStrip extends HorizontalScrollView implements T
             );
         }
 //        selectorDrawable.setColor(processColor(Theme.getColor(tabLineColorKey, resourcesProvider)));
-        if (org.telegram.marble.MarbleTheme.isEnabled() && resourcesProvider == null) {
+        if (org.telegram.marble.MarbleTheme.expressiveShapes() && resourcesProvider == null) {
+            // Marblegram: M3 pill tab - tonal primaryContainer indicator with onPrimaryContainer label
+            final org.telegram.marble.MarbleTheme.Roles roles = org.telegram.marble.MarbleTheme.roles(Theme.isCurrentThemeDark());
+            selectorDrawable.setColor(roles.primaryContainer);
+            if (currentPosition >= 0 && currentPosition < count) {
+                ((TextView) tabsContainer.getChildAt(currentPosition)).setTextColor(roles.onPrimaryContainer);
+            }
+        } else if (org.telegram.marble.MarbleTheme.isEnabled() && resourcesProvider == null) {
             selectorDrawable.setColor(org.telegram.marble.MarbleTheme.roles(Theme.isCurrentThemeDark()).primary);
         } else {
             selectorDrawable.setColor(Theme.multAlpha(processColor(Theme.getColor(activeTextColorKey, resourcesProvider)), .15f));

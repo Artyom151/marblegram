@@ -114,7 +114,8 @@ public class TextDetailCell extends FrameLayout {
             valueTextView.setLines(1);
             valueTextView.setSingleLine(true);
         }
-        valueTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 13);
+        // Marblegram: M3 bodyMedium for the value line of info rows
+        valueTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, org.telegram.marble.MarbleTheme.expressiveTypography() ? 14 : 13);
         valueTextView.setGravity(LocaleController.isRTL ? Gravity.RIGHT : Gravity.LEFT);
         valueTextView.setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO);
         valueTextView.setEllipsize(TextUtils.TruncateAt.END);
