@@ -787,7 +787,7 @@ public class BoostsActivity extends GradientHeaderActivity implements Notificati
         public void draw(Canvas canvas) {
             rect.set(0, 0, getWidth(), getHeight());
             Paint p = setDarkGradientLocation((((ViewGroup) getParent()).getX() + getX()), ((ViewGroup) getParent().getParent().getParent()).getY());
-            canvas.drawRoundRect(rect, AndroidUtilities.dp(10), AndroidUtilities.dp(10), p);
+            canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(10)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(10)), p);
             invalidate();
             super.draw(canvas);
         }

@@ -61,11 +61,11 @@ public class ChatListCell extends LinearLayout {
 
             rect.set(AndroidUtilities.dp(1), AndroidUtilities.dp(1), getMeasuredWidth() - AndroidUtilities.dp(1), AndroidUtilities.dp(73));
             Theme.chat_instantViewRectPaint.setColor(Color.argb((int) (43 * button.getProgress()), r, g, b));
-            canvas.drawRoundRect(rect, AndroidUtilities.dp(6), AndroidUtilities.dp(6), Theme.chat_instantViewRectPaint);
+            canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(6)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(6)), Theme.chat_instantViewRectPaint);
 
             rect.set(0, 0, getMeasuredWidth(), AndroidUtilities.dp(74));
             Theme.dialogs_onlineCirclePaint.setColor(Color.argb((int) (31 * (1.0f - button.getProgress())), r, g, b));
-            canvas.drawRoundRect(rect, AndroidUtilities.dp(6), AndroidUtilities.dp(6), Theme.dialogs_onlineCirclePaint);
+            canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(6)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(6)), Theme.dialogs_onlineCirclePaint);
 
             String text = isThreeLines ? LocaleController.getString(R.string.ChatListExpanded) : LocaleController.getString(R.string.ChatListDefault);
             int width = (int) Math.ceil(textPaint.measureText(text));
@@ -82,10 +82,10 @@ public class ChatListCell extends LinearLayout {
                     Theme.dialogs_onlineCirclePaint.setColor(Color.argb(i == 0 ? 204 : 90, r, g, b));
                     if (isThreeLines) {
                         rect.set(AndroidUtilities.dp(41), cy - AndroidUtilities.dp(8.3f - i * 7), getMeasuredWidth() - AndroidUtilities.dp(i == 0 ? 72 : 48), cy - AndroidUtilities.dp(8.3f - 3 - i * 7));
-                        canvas.drawRoundRect(rect, AndroidUtilities.dpf2(1.5f), AndroidUtilities.dpf2(1.5f), Theme.dialogs_onlineCirclePaint);
+                        canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dpf2(1.5f)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dpf2(1.5f)), Theme.dialogs_onlineCirclePaint);
                     } else {
                         rect.set(AndroidUtilities.dp(41), cy - AndroidUtilities.dp(7 - i * 10), getMeasuredWidth() - AndroidUtilities.dp(i == 0 ? 72 : 48), cy - AndroidUtilities.dp(7 - 4 - i * 10));
-                        canvas.drawRoundRect(rect, AndroidUtilities.dp(2), AndroidUtilities.dp(2), Theme.dialogs_onlineCirclePaint);
+                        canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(2)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(2)), Theme.dialogs_onlineCirclePaint);
                     }
                 }
             }

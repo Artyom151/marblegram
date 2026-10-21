@@ -142,7 +142,7 @@ public class RichMathCell extends RichBlockCell
         }
         if (bitmap != null && isCellSelected()) {
             selectionRect(rect);
-            canvas.drawRoundRect(rect[0], rect[1], rect[2], rect[3], dp(4), dp(4), selectionPaint);
+            canvas.drawRoundRect(rect[0], rect[1], rect[2], rect[3], org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), selectionPaint);
         }
     }
 

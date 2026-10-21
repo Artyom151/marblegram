@@ -158,7 +158,7 @@ public class PremiumAppIconsPreviewView extends FrameLayout implements PagerHead
             canvas.restore();
             invalidate();
             AndroidUtilities.rectTmp.set(0, 0, getWidth(), getHeight());
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, AndroidUtilities.dp(AppIconsSelectorCell.ICONS_ROUND_RADIUS), AndroidUtilities.dp(AppIconsSelectorCell.ICONS_ROUND_RADIUS), paint);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(AppIconsSelectorCell.ICONS_ROUND_RADIUS)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(AppIconsSelectorCell.ICONS_ROUND_RADIUS)), paint);
 
             super.draw(canvas);
         }

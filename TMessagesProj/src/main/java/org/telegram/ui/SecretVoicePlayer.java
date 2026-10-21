@@ -485,7 +485,7 @@ public class SecretVoicePlayer extends Dialog {
                     progressPaint.setStrokeCap(Paint.Cap.ROUND);
                     AndroidUtilities.rectTmp.set(rect);
                     AndroidUtilities.rectTmp.inset(dp(7), dp(7));
-                    canvas.drawArc(AndroidUtilities.rectTmp, -90, -360 * (1f - progress), false, progressPaint);
+                    org.telegram.marble.WavyProgress.drawArc(canvas, AndroidUtilities.rectTmp, -90, -360 * (1f - progress), progressPaint);
                     if (timerParticles == null) {
                         timerParticles = new TimerParticles(120);
                         timerParticles.big = true;

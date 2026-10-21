@@ -159,7 +159,7 @@ public class ColorPickerBottomSheet extends BottomSheet {
                 AndroidUtilities.rectTmp.set((getMeasuredWidth() - w) / 2f, y, (getMeasuredWidth() + w) / 2f, y + AndroidUtilities.dp(4));
                 int color = 0xff5B5B5B;
                 Theme.dialogs_onlineCirclePaint.setColor(color);
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, AndroidUtilities.dp(2), AndroidUtilities.dp(2), Theme.dialogs_onlineCirclePaint);
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(2)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(2)), Theme.dialogs_onlineCirclePaint);
             }
         };
         scrollView.addView(linearLayout);
@@ -516,8 +516,8 @@ public class ColorPickerBottomSheet extends BottomSheet {
             super.onDraw(canvas);
 
             AndroidUtilities.rectTmp.set(getPaddingLeft(), getPaddingTop(), getWidth() - getPaddingRight(), getHeight() - getPaddingBottom());
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, AndroidUtilities.dp(8), AndroidUtilities.dp(8), gradientPaint);
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, AndroidUtilities.dp(8), AndroidUtilities.dp(8), whiteBlackPaint);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(8)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(8)), gradientPaint);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(8)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(8)), whiteBlackPaint);
 
             float outlineRad = AndroidUtilities.dp(13);
             float rad2 = outlineRad - outlinePaint.getStrokeWidth() / 2;
@@ -926,7 +926,7 @@ public class ColorPickerBottomSheet extends BottomSheet {
             PaintColorsListView.drawCheckerboard(canvas, AndroidUtilities.rectTmp, AndroidUtilities.dp(6));
             canvas.restore();
             AndroidUtilities.rectTmp.set(rad, y - rad, getWidth() - rad, y + rad);
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, AndroidUtilities.dp(16), AndroidUtilities.dp(16), colorPaint);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(16)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(16)), colorPaint);
 
             float outlineRad = AndroidUtilities.dp(13);
             float rad2 = outlineRad - outlinePaint.getStrokeWidth() / 2;
@@ -1040,7 +1040,7 @@ public class ColorPickerBottomSheet extends BottomSheet {
             float y = getHeight() / 2f;
             float rad = AndroidUtilities.dp(6);
             AndroidUtilities.rectTmp.set(rad, y - rad, getWidth() - rad, y + rad);
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, AndroidUtilities.dp(16), AndroidUtilities.dp(16), colorPaint);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(16)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(16)), colorPaint);
 
             float val;
             switch (mode) {

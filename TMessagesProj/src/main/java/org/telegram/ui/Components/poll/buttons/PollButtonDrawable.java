@@ -336,9 +336,9 @@ public class PollButtonDrawable extends Drawable implements DownloadController.F
                 if (isWebPage && !isWebPageWithPreview) {
                     webPageBgPaint.setColor(ColorUtils.setAlphaComponent(Theme.getColor(
                             messageObject.isOutOwner() ? Theme.key_chat_messageTextOut : Theme.key_chat_messageTextIn), 16));
-                    canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(5), dp(5), webPageBgPaint);
+                    canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(5)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(5)), webPageBgPaint);
                 } else {
-                    canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(5), dp(5), darkenPaint);
+                    canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(5)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(5)), darkenPaint);
                 }
             }
             if (isWebPage) {

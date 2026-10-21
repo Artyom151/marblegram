@@ -91,6 +91,10 @@ public class TextSettingsCell extends FrameLayout {
         valueTextView = new AnimatedTextView(context, true, true, !LocaleController.isRTL);
         valueTextView.setAnimationProperties(.55f, 0, 320, CubicBezierInterpolator.EASE_OUT_QUINT);
         valueTextView.setTextSize(AndroidUtilities.dp(16));
+        if (org.telegram.marble.MarbleTheme.expressiveTypography()) {
+            valueTextView.setTypeface(org.telegram.marble.MarbleTypography.label()); // Marblegram: M3 trailing label (labelLarge weight)
+            valueTextView.setTextSize(AndroidUtilities.dp(14));
+        }
         valueTextView.setGravity((LocaleController.isRTL ? Gravity.LEFT : Gravity.RIGHT) | Gravity.CENTER_VERTICAL);
         valueTextView.setTextColor(Theme.getColor(Theme.key_windowBackgroundWhiteValueText, resourcesProvider));
         addView(valueTextView, LayoutHelper.createFrame(LayoutHelper.WRAP_CONTENT, LayoutHelper.MATCH_PARENT, (LocaleController.isRTL ? Gravity.LEFT : Gravity.RIGHT) | Gravity.TOP, padding - 4, 0, padding - 4, 0));
@@ -357,7 +361,7 @@ public class TextSettingsCell extends FrameLayout {
                 AndroidUtilities.rectTmp.left = getMeasuredWidth() - AndroidUtilities.rectTmp.left;
                 AndroidUtilities.rectTmp.right = getMeasuredWidth() - AndroidUtilities.rectTmp.right;
             }
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, AndroidUtilities.dp(3), AndroidUtilities.dp(3), paint);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(3)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(3)), paint);
             invalidate();
         }
         valueTextView.setAlpha(1f - drawLoadingProgress);

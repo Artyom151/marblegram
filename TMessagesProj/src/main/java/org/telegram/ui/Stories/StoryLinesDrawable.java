@@ -141,7 +141,11 @@ public class StoryLinesDrawable {
                         rectTmp.left =  Utilities.clamp(AndroidUtilities.lerp(rectTmp.left, (a - index) * fullWidth + dp(5), zoomT), fullWidth - dp(5), dp(5));
                         rectTmp.right = Utilities.clamp(AndroidUtilities.lerp(rectTmp.right, (a - index + 1) * fullWidth - dp(5), zoomT), fullWidth - dp(5), dp(5));
                     }
-                    canvas.drawRoundRect(rectTmp, rr, rr, barPaint);
+                    if (org.telegram.marble.MarbleTheme.expressiveShapes() && zoomT == 0 && progress > 0) {
+                        // Marblegram: M3E linear indicator — a gap between the played part and the remaining track
+                        rectTmp.left = Math.min(rectTmp.right, rectTmp.left + sectionWidth * progress + dp(3));
+                    }
+                    if (rectTmp.width() > 0) canvas.drawRoundRect(rectTmp, rr, rr, barPaint);
                     // baseAlpha = 0x50;
                 } else {
                     currentProgress = 1.0f;

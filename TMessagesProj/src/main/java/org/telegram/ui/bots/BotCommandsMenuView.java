@@ -160,7 +160,7 @@ public class BotCommandsMenuView extends View {
 
             if (drawBackgroundDrawable) {
                 rectTmp.set(0, 0, AndroidUtilities.dp(40) + (menuTextWidth + AndroidUtilities.dp(4)) * expandProgress, getMeasuredHeight());
-                canvas.drawRoundRect(rectTmp, AndroidUtilities.dp(16), AndroidUtilities.dp(16), paint);
+                canvas.drawRoundRect(rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(16)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(16)), paint);
                 backgroundDrawable.setBounds((int) rectTmp.left, (int) rectTmp.top, (int) rectTmp.right, (int) rectTmp.bottom);
                 backgroundDrawable.draw(canvas);
             }

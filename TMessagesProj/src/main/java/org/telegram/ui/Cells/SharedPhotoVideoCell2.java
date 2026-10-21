@@ -748,7 +748,7 @@ public class SharedPhotoVideoCell2 extends FrameLayout {
                     final Paint timeBackgroundPaint = Theme.getThemePaint(Theme.key_paint_chatTimeBackground);
                     int oldAlpha = timeBackgroundPaint.getAlpha();
                     timeBackgroundPaint.setAlpha((int) (oldAlpha * (1f - spoilerRevealProgress) * .35f));
-                    canvas.drawRoundRect(AndroidUtilities.rectTmp, r, r, timeBackgroundPaint);
+                    canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), timeBackgroundPaint);
                     timeBackgroundPaint.setAlpha(oldAlpha);
 
                     canvas.save();
@@ -894,7 +894,7 @@ public class SharedPhotoVideoCell2 extends FrameLayout {
         AndroidUtilities.rectTmp.set(0, 0, width, dp(17));
         int oldAlpha = Theme.chat_timeBackgroundPaint.getAlpha();
         Theme.chat_timeBackgroundPaint.setAlpha((int) (oldAlpha * alpha));
-        canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(4), dp(4), Theme.chat_timeBackgroundPaint);
+        canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), Theme.chat_timeBackgroundPaint);
         Theme.chat_timeBackgroundPaint.setAlpha(oldAlpha);
         if (drawVideoIcon) {
             canvas.save();
@@ -996,7 +996,7 @@ public class SharedPhotoVideoCell2 extends FrameLayout {
         AndroidUtilities.rectTmp.set(0, 0, width, dp(17));
         int oldAlpha = Theme.chat_timeBackgroundPaint.getAlpha();
         Theme.chat_timeBackgroundPaint.setAlpha((int) (oldAlpha * alpha));
-        canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(4), dp(4), Theme.chat_timeBackgroundPaint);
+        canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), Theme.chat_timeBackgroundPaint);
         Theme.chat_timeBackgroundPaint.setAlpha(oldAlpha);
 
         canvas.save();
@@ -1267,7 +1267,7 @@ public class SharedPhotoVideoCell2 extends FrameLayout {
             if (bitmap != null) {
                 return bitmap;
             }
-            bitmap = BitmapFactory.decodeResource(context.getResources(), resId);
+            bitmap = org.telegram.marble.MarbleBitmaps.decodeResource(context.getResources(), resId);
             Bitmap shadowBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
             Canvas canvas = new Canvas(shadowBitmap);
             Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG);

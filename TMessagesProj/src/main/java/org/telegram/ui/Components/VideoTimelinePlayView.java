@@ -545,7 +545,7 @@ public class VideoTimelinePlayView extends View {
                 drawBlur(canvas, AndroidUtilities.rectTmp);
                 canvas.restore();
             } else {
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(6), dp(6), dimPaint);
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(6)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(6)), dimPaint);
             }
             reloadFrames(0);
         } else {
@@ -603,7 +603,7 @@ public class VideoTimelinePlayView extends View {
             canvas.saveLayerAlpha(0, 0, getWidth(), getHeight(), 0xFF, Canvas.ALL_SAVE_FLAG);
             rect3.set(startX - dpf2(10), top, endX + dpf2(10), end);
             whitePaint.setAlpha(0xFF);
-            canvas.drawRoundRect(rect3, dpf2(6), dpf2(6), whitePaint);
+            canvas.drawRoundRect(rect3, org.telegram.marble.MarbleTheme.m3CornerPxF(dpf2(6)), org.telegram.marble.MarbleTheme.m3CornerPxF(dpf2(6)), whitePaint);
             rect3.set(startX, top + dpf2(2), endX, end - dpf2(2));
             canvas.drawRect(rect3, cutPaint);
             canvas.restore();
@@ -611,11 +611,11 @@ public class VideoTimelinePlayView extends View {
             final float hw = dp(2), hh = dp(10);
             float hx = startX - (dpf2(10) - hw) / 2f, hy = top + (end - top - hh) / 2f;
             rect3.set(hx, hy, hx - hw, hy + hh);
-            canvas.drawRoundRect(rect3, dpf2(6), dpf2(6), handlePaint);
+            canvas.drawRoundRect(rect3, org.telegram.marble.MarbleTheme.m3CornerPxF(dpf2(6)), org.telegram.marble.MarbleTheme.m3CornerPxF(dpf2(6)), handlePaint);
 
             hx = endX + (dpf2(10) - hw) / 2f;
             rect3.set(hx, hy, hx + hw, hy + hh);
-            canvas.drawRoundRect(rect3, dpf2(6), dpf2(6), handlePaint);
+            canvas.drawRoundRect(rect3, org.telegram.marble.MarbleTheme.m3CornerPxF(dpf2(6)), org.telegram.marble.MarbleTheme.m3CornerPxF(dpf2(6)), handlePaint);
         }
 
         float loopT = loopProgress.set(0);
@@ -644,9 +644,9 @@ public class VideoTimelinePlayView extends View {
         float cx = px + dp(10) + width * progress;
         rect3.set(cx - dpf2(1.5f), top, cx + dpf2(1.5f), end);
         rect3.inset(-dpf2(0.66f), -dpf2(0.66f));
-        canvas.drawRoundRect(rect3, dp(6), dp(6), shadowPaint);
+        canvas.drawRoundRect(rect3, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(6)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(6)), shadowPaint);
         rect3.set(cx - dpf2(1.5f), top, cx + dpf2(1.5f), end);
-        canvas.drawRoundRect(rect3, dp(6), dp(6), paint);
+        canvas.drawRoundRect(rect3, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(6)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(6)), paint);
     }
 
     private static class BitmapFrame {

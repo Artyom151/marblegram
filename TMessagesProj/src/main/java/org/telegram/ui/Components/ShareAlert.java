@@ -289,7 +289,7 @@ public class ShareAlert extends BottomSheet implements NotificationCenter.Notifi
                         paint.setShader(linearGradient);
                     }
                     rect.set(0, 0, getMeasuredWidth(), getMeasuredHeight());
-                    canvas.drawRoundRect(rect, dp(18), dp(18), paint);
+                    canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(18)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(18)), paint);
                 }
             };
             addView(slidingView, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, 36, Gravity.LEFT | Gravity.TOP, 14, 0, 14, 0));
@@ -948,7 +948,7 @@ public class ShareAlert extends BottomSheet implements NotificationCenter.Notifi
                     rect1.set((getMeasuredWidth() - w) / 2, y, (getMeasuredWidth() + w) / 2, y + dp(4));
                     Theme.dialogs_onlineCirclePaint.setColor(getThemedColor(Theme.key_sheet_scrollUp));
                     Theme.dialogs_onlineCirclePaint.setAlpha((int) (Theme.dialogs_onlineCirclePaint.getAlpha() * (1f - pinAlpha)));
-                    canvas.drawRoundRect(rect1, dp(2), dp(2), Theme.dialogs_onlineCirclePaint);
+                    canvas.drawRoundRect(rect1, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(2)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(2)), Theme.dialogs_onlineCirclePaint);
                 }
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

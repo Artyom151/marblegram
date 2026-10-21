@@ -329,7 +329,7 @@ public class CaptionStory extends CaptionContainerView {
         if (lock > 0) {
             final float sz = dpf2(19.33f) / 2f * lock * alpha;
             AndroidUtilities.rectTmp.set(cx - sz, cy - sz, cx + sz, cy + sz);
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(5.33f), dp(5.33f), whitePaint);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(5.33f)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(5.33f)), whitePaint);
         }
         canvas.restore();
 
@@ -400,17 +400,17 @@ public class CaptionStory extends CaptionContainerView {
         final float r = lerp(dp(18), dp(14), lock);
         lockShadowPaint.setShadowLayer(dp(1), 0, dp(.66f), Theme.multAlpha(0x20000000, scale));
         lockShadowPaint.setColor(0);
-        canvas.drawRoundRect(lockBounds, r, r, lockShadowPaint);
+        canvas.drawRoundRect(lockBounds, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), lockShadowPaint);
 
         Paint backgroundBlurPaint = backgroundBlur.getPaint(scale);
         if (backgroundBlurPaint == null) {
             lockBackgroundPaint.setColor(0x40000000);
             lockBackgroundPaint.setAlpha((int) (0x40 * scale));
-            canvas.drawRoundRect(lockBounds, r, r, lockBackgroundPaint);
+            canvas.drawRoundRect(lockBounds, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), lockBackgroundPaint);
         } else {
-            canvas.drawRoundRect(lockBounds, r, r, backgroundBlurPaint);
+            canvas.drawRoundRect(lockBounds, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), backgroundBlurPaint);
             backgroundPaint.setAlpha((int) (0x33 * scale));
-            canvas.drawRoundRect(lockBounds, r, r, backgroundPaint);
+            canvas.drawRoundRect(lockBounds, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), backgroundPaint);
         }
 
         canvas.save();
@@ -425,7 +425,7 @@ public class CaptionStory extends CaptionContainerView {
         canvas.rotate(12 * lockProgress * (1f - lock), cx, lockRectY);
 
         lockRect.set(cx - lockRectW / 2f, lockRectY - lockRectH / 2f, cx + lockRectW / 2f, lockRectY + lockRectH / 2f);
-        canvas.drawRoundRect(lockRect, dp(3.66f), dp(3.66f), lockPaint);
+        canvas.drawRoundRect(lockRect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(3.66f)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(3.66f)), lockPaint);
 
         if (lock < 1) {
             canvas.save();

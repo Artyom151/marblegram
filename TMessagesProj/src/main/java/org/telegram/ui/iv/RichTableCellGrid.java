@@ -824,7 +824,7 @@ public class RichTableCellGrid extends ViewGroup {
 
         selRect.set(colStarts[0] + halfStroke, rowStarts[0] + halfStroke,
             colStarts[model.colCount] - halfStroke, rowStarts[model.rowCount] - halfStroke);
-        canvas.drawRoundRect(selRect, r, r, linePaint);
+        canvas.drawRoundRect(selRect, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), linePaint);
 
         for (int c = 1; c < model.colCount; c++) {
             int x = colStarts[c];

@@ -1,0 +1,10 @@
+{
+  "id": "smart_mentions",
+  "name": "Smart Mentions",
+  "author": "Marblegram",
+  "version": "1.0",
+  "description": "@gemini вопрос — ответ Gemini прямо в чат. @wiki тема — краткая справка из Википедии (язык определяется сам, можно @wiki:en). Ключ Gemini бесплатно: aistudio.google.com → Get API key.",
+  "language": "python",
+  "main": "main.py",
+  "min_sdk": 1
+}

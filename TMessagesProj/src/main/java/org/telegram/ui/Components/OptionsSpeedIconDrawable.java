@@ -110,7 +110,7 @@ public class OptionsSpeedIconDrawable extends Drawable {
                 tcx + dpf2(1.5f) + textDrawable.getCurrentWidth() / 2f,
                 tcy + dpf2(5)
             );
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, dpf2(2), dpf2(2), paint);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dpf2(2)), org.telegram.marble.MarbleTheme.m3CornerPxF(dpf2(2)), paint);
 
             canvas.save();
             textDrawable.setBounds(tcx, tcy, tcx, tcy);

@@ -377,7 +377,7 @@ public class PollItemMenu extends Dialog {
                     clipPath.addRoundRect(AndroidUtilities.rectTmp, dp(8), dp(8), Path.Direction.CW);
                     shadowPaint.setColor(0);
                     shadowPaint.setShadowLayer(dp(2), 0, dp(.66f), Theme.multAlpha(0xFF000000, .20f * openProgress));
-                    canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(8), dp(8), shadowPaint);
+                    canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(8)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(8)), shadowPaint);
                     canvas.clipPath(clipPath);
                     super.onDraw(canvas);
                     canvas.restore();

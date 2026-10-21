@@ -521,7 +521,8 @@ public class RichAudioCell extends RichBlockCell
         if (isCellSelected()) {
             canvas.drawRoundRect(
                 (blockRtl ? 0 : blockInset()) + dp(8), dp(2), getWidth() - (blockRtl ? blockInset() : 0) - dp(8), dp(64),
-                dp(8), dp(8),
+                org.telegram.marble.MarbleTheme.m3CornerPxF(dp(8)),
+                org.telegram.marble.MarbleTheme.m3CornerPxF(dp(8)),
                 selectionPaint
             );
         }

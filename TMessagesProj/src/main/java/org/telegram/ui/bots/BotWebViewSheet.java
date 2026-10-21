@@ -2621,7 +2621,7 @@ public class BotWebViewSheet extends Dialog implements NotificationCenter.Notifi
                 actionBarPaint.setColor(actionBarColor);
                 float radius = AndroidUtilities.dp(16) * (AndroidUtilities.isTablet() ? 1f : 1f - actionBarTransitionProgress);
                 AndroidUtilities.rectTmp.set(lerp(swipeContainer.getLeft(), 0, fullscreenProgress), lerp(swipeContainer.getTranslationY(), 0, actionBarTransitionProgress), swipeContainer.getRight(), swipeContainer.getTranslationY() + AndroidUtilities.dp(24) + radius);
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, radius, radius, actionBarPaint);
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(radius), org.telegram.marble.MarbleTheme.m3CornerPxF(radius), actionBarPaint);
 
                 AndroidUtilities.rectTmp.set(lerp(swipeContainer.getLeft(), 0, fullscreenProgress), swipeContainer.getTranslationY() + AndroidUtilities.dp(24), lerp(swipeContainer.getRight(), getWidth(), fullscreenProgress), getHeight() - bottomTabsHeight);
                 canvas.drawRect(AndroidUtilities.rectTmp, backgroundPaint);

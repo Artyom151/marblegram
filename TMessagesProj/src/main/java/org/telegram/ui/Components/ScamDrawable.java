@@ -82,7 +82,7 @@ public class ScamDrawable extends Drawable {
     @Override
     public void draw(Canvas canvas) {
         rect.set(getBounds());
-        canvas.drawRoundRect(rect, AndroidUtilities.dp(2), AndroidUtilities.dp(2), paint);
+        canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(2)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(2)), paint);
         canvas.drawText(text, rect.left + AndroidUtilities.dp(5), rect.top + AndroidUtilities.dp(12), textPaint);
     }
 

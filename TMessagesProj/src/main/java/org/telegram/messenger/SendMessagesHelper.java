@@ -4415,6 +4415,14 @@ public class SendMessagesHelper extends BaseController implements NotificationCe
     }
 
     public void sendMessage(SendMessageParams sendMessageParams) {
+        if (sendMessageParams.message != null && sendMessageParams.retryMessageObject == null) {
+            // Marblegram Plugin SDK: on_send_message may rewrite or cancel the text
+            final String pluginText = org.telegram.marble.plugins.PluginManager.getInstance().onSendMessage(sendMessageParams.peer, sendMessageParams.message);
+            if (pluginText == null) {
+                return;
+            }
+            sendMessageParams.message = pluginText;
+        }
         final SendMessageChatArguments sendMessageChatArguments = sendMessageParams.sendMessageChatArguments != null ?
                 sendMessageParams.sendMessageChatArguments : SendMessageChatArguments.EMPTY;
         String message = sendMessageParams.message;

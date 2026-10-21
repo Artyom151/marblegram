@@ -1537,7 +1537,7 @@ public class AIEditorAlert extends BottomSheetWithRecyclerListView implements No
                     }
                     lerp(floorRect, ceilRect, t, rect);
                     selectorPaint.setColor(Theme.multAlpha(Theme.getColor(Theme.key_featuredStickers_addButton, resourcesProvider), .10f));
-                    canvas.drawRoundRect(rect, dp(roundRadiusDp), dp(roundRadiusDp), selectorPaint);
+                    canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(roundRadiusDp)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(roundRadiusDp)), selectorPaint);
 
                     for (int i = 0; i < getChildCount(); ++i) {
                         final View child = getChildAt(i);
@@ -1918,7 +1918,7 @@ public class AIEditorAlert extends BottomSheetWithRecyclerListView implements No
             canvas.saveLayerAlpha(AndroidUtilities.rectTmp, 0xFF, Canvas.ALL_SAVE_FLAG);
 
             this.paint.setColor(paint.getColor());
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(5), dp(5), this.paint);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(5)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(5)), this.paint);
 
             this.text.draw(canvas, x + dp(3.33f), cy, 0xFFFFFFFF, 1.0f);
 

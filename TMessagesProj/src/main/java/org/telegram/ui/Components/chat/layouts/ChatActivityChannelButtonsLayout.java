@@ -439,7 +439,7 @@ public class ChatActivityChannelButtonsLayout extends FrameLayout implements Fac
             );
             backgroundAccentPaint.setColor(accentColor);
             backgroundAccentPaint.setAlpha(accentAlpha);
-            canvas.drawRoundRect(tmpRect, dp(19), dp(19), backgroundAccentPaint);
+            canvas.drawRoundRect(tmpRect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(19)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(19)), backgroundAccentPaint);
         }
 
         super.dispatchDraw(canvas);

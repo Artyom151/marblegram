@@ -196,7 +196,7 @@ public class CallSwipeView extends View {
 			} else {
 				tmpRect.set(0, 0, viewToDrag.getTranslationX() + getDraggedViewWidth(), getHeight());
 			}
-			canvas.drawRoundRect(tmpRect, getHeight() / 2, getHeight() / 2, pullBgPaint);
+			canvas.drawRoundRect(tmpRect, org.telegram.marble.MarbleTheme.m3CornerPxF(getHeight() / 2), org.telegram.marble.MarbleTheme.m3CornerPxF(getHeight() / 2), pullBgPaint);
 		}
 		canvas.save();
 		if (dragFromRight) {

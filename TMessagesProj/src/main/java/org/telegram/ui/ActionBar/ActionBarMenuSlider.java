@@ -329,7 +329,7 @@ public class ActionBarMenuSlider extends FrameLayout {
 
         AndroidUtilities.rectTmp.set(getPaddingLeft(), getPaddingTop(), getWidth() - getPaddingRight(), getHeight() - getPaddingBottom());
         if (drawShadow) {
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(roundRadiusDp), dp(roundRadiusDp), shadowPaint);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(roundRadiusDp)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(roundRadiusDp)), shadowPaint);
         }
 
         if (drawBlur) {
@@ -346,20 +346,20 @@ public class ActionBarMenuSlider extends FrameLayout {
                 }
 
                 pseudoBlurPaint.setAlpha((int) (0xFF * (1f - blurAlpha)));
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(roundRadiusDp), dp(roundRadiusDp), pseudoBlurPaint);
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(roundRadiusDp)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(roundRadiusDp)), pseudoBlurPaint);
             }
 
             if (blurBitmap != null && value < 1 && blurAlpha > 0) {
                 blurPaint.setAlpha((int) (0xFF * blurAlpha));
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(roundRadiusDp), dp(roundRadiusDp), blurPaint);
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(roundRadiusDp)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(roundRadiusDp)), blurPaint);
             }
 
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(roundRadiusDp), dp(roundRadiusDp), brightenBlurPaint);
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(roundRadiusDp), dp(roundRadiusDp), darkenBlurPaint);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(roundRadiusDp)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(roundRadiusDp)), brightenBlurPaint);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(roundRadiusDp)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(roundRadiusDp)), darkenBlurPaint);
 
             fillPaint.setColor(Color.WHITE);
         } else {
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(roundRadiusDp), dp(roundRadiusDp), backgroundPaint);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(roundRadiusDp)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(roundRadiusDp)), backgroundPaint);
         }
         drawStops(canvas);
 
@@ -371,7 +371,7 @@ public class ActionBarMenuSlider extends FrameLayout {
             canvas.save();
             canvas.clipRect(getPaddingLeft(), getPaddingTop(), getPaddingLeft() + (getWidth() - getPaddingLeft() - getPaddingRight()) * value, getHeight() - getPaddingBottom());
         }
-        canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(roundRadiusDp), dp(roundRadiusDp), fillPaint);
+        canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(roundRadiusDp)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(roundRadiusDp)), fillPaint);
         drawStops(canvas);
 
         if (!backgroundDark) {

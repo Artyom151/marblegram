@@ -24,7 +24,7 @@ public class EmojiRationalLayout extends LinearLayout {
     protected void dispatchDraw(Canvas canvas) {
         bgRect.set(0, 0, getWidth(), getHeight());
         backgroundProvider.setDarkTranslation(getX(), getY());
-        canvas.drawRoundRect(bgRect, dp(20), dp(20), backgroundProvider.getDarkPaint());
+        canvas.drawRoundRect(bgRect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(20)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(20)), backgroundProvider.getDarkPaint());
         super.dispatchDraw(canvas);
     }
 }

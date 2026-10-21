@@ -293,9 +293,9 @@ public class UserInfoCell extends View implements NotificationCenter.Notificatio
         canvas.scale(s2, s2, fullBounds.centerX(), fullBounds.centerY());
         applyServiceShaderMatrix();
         Paint backgroundPaint = Theme.getThemePaint(Theme.key_paint_chatActionBackground, resourcesProvider);
-        canvas.drawRoundRect(fullBounds, dp(16), dp(16), backgroundPaint);
+        canvas.drawRoundRect(fullBounds, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(16)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(16)), backgroundPaint);
         if (hasGradientService()) {
-            canvas.drawRoundRect(fullBounds, dp(16), dp(16), Theme.getThemePaint(Theme.key_paint_chatActionBackgroundDarken, resourcesProvider));
+            canvas.drawRoundRect(fullBounds, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(16)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(16)), Theme.getThemePaint(Theme.key_paint_chatActionBackgroundDarken, resourcesProvider));
         }
 
         canvas.translate(0, (getHeight() - height) / 2.0f);

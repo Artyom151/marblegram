@@ -88,9 +88,9 @@ public class SharedMediaFastScrollTooltip extends FrameLayout {
             for (int i = 0; i < 7; i++) {
                 int y = AndroidUtilities.dp(3) + i * (rectSize + AndroidUtilities.dp(1));
                 AndroidUtilities.rectTmp.set(0, y, rectSize, y + rectSize);
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, AndroidUtilities.dp(2), AndroidUtilities.dp(2), paint);
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(2)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(2)), paint);
                 AndroidUtilities.rectTmp.set(rectSize + AndroidUtilities.dp(1), y, rectSize + AndroidUtilities.dp(1) + rectSize, y + rectSize);
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, AndroidUtilities.dp(2), AndroidUtilities.dp(2), paint);
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(2)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(2)), paint);
             }
             canvas.restore();
 
@@ -102,11 +102,11 @@ public class SharedMediaFastScrollTooltip extends FrameLayout {
 
             float y = AndroidUtilities.dp(3) + (getMeasuredHeight() - AndroidUtilities.dp(15 + 6)) * p;
             AndroidUtilities.rectTmp.set(getMeasuredWidth() - AndroidUtilities.dp(3), y, getMeasuredWidth(), y + AndroidUtilities.dp(15));
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, AndroidUtilities.dp(1.5f), AndroidUtilities.dp(1.5f), paint2);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(1.5f)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(1.5f)), paint2);
             float cy = AndroidUtilities.rectTmp.centerY();
             float cx = rectSize + AndroidUtilities.dp(0.5f);
             AndroidUtilities.rectTmp.set(cx - AndroidUtilities.dp(8), cy - AndroidUtilities.dp(3), cx + AndroidUtilities.dp(8), cy + AndroidUtilities.dp(3));
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, AndroidUtilities.dp(3), AndroidUtilities.dp(3), paint2);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(3)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(3)), paint2);
 
             this.progress += 16 / 1000f;
             if (this.progress > 1f) {

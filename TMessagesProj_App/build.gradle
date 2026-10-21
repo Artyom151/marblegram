@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'org.telegram.build-app-plugin'
+apply plugin: 'com.chaquo.python' // Marblegram Plugin SDK (Python)
 
 repositories {
     mavenCentral()
@@ -122,7 +123,7 @@ android {
     productFlavors {
         bundleAfat {
             ndk {
-                abiFilters "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
+                abiFilters(*(project.hasProperty("marbleAbi") ? project.property("marbleAbi").split(",") : ["armeabi-v7a", "arm64-v8a", "x86", "x86_64"])) // Marblegram: -PmarbleAbi=arm64-v8a for fast device installs
             }
             ext {
                 abiVersionCode = 1
@@ -131,7 +132,7 @@ android {
         }
         afat {
             ndk {
-                abiFilters "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
+                abiFilters(*(project.hasProperty("marbleAbi") ? project.property("marbleAbi").split(",") : ["armeabi-v7a", "arm64-v8a", "x86", "x86_64"])) // Marblegram: -PmarbleAbi=arm64-v8a for fast device installs
             }
             sourceSets.debug {
                 manifest.srcFile '../TMessagesProj/config/debug/AndroidManifest_SDK23.xml'
@@ -166,7 +167,7 @@ android {
     }
 
     defaultConfig {
-        minSdkVersion 23
+        minSdkVersion 24
         targetSdkVersion 36
         versionName APP_VERSION_NAME
         ndkVersion "27.2.12479018"
@@ -195,3 +196,13 @@ android {
 }
 
 apply plugin: 'com.google.gms.google-services'
+
+// Marblegram Plugin SDK: embedded CPython for Python plugins (no pip packages, plugin sources stay .py)
+chaquopy {
+    defaultConfig {
+        version = "3.11"
+        pyc {
+            src = false
+        }
+    }
+}

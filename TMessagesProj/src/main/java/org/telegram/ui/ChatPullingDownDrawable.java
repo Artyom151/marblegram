@@ -396,9 +396,9 @@ public class ChatPullingDownDrawable implements NotificationCenter.NotificationC
             float y = AndroidUtilities.dp(20) * (1f - swipeToReleaseProgress) - AndroidUtilities.dp(36) * swipeToReleaseProgress + bounceOffset;
             AndroidUtilities.rectTmp.set((lastWidth - chatNameWidth) / 2f, y, lastWidth - (lastWidth - chatNameWidth) / 2f, y + chatNameLayout.getHeight());
             AndroidUtilities.rectTmp.inset(-AndroidUtilities.dp(8), -AndroidUtilities.dp(4));
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, AndroidUtilities.dp(15), AndroidUtilities.dp(15), getThemedPaint(Theme.key_paint_chatActionBackground));
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(15)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(15)), getThemedPaint(Theme.key_paint_chatActionBackground));
             if (hasGradientService()) {
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, AndroidUtilities.dp(15), AndroidUtilities.dp(15), Theme.chat_actionBackgroundGradientDarkenPaint);
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(15)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(15)), Theme.chat_actionBackgroundGradientDarkenPaint);
             }
 
             canvas.save();
@@ -429,7 +429,7 @@ public class ChatPullingDownDrawable implements NotificationCenter.NotificationC
                 canvas.translate(cx + AndroidUtilities.dp(12), top - AndroidUtilities.dp(6));
                 counterDrawable.updateBackgroundRect();
                 counterDrawable.rectF.inset(-AndroidUtilities.dp(2), -AndroidUtilities.dp(2));
-                canvas.drawRoundRect(counterDrawable.rectF, counterDrawable.rectF.height() / 2f, counterDrawable.rectF.height() / 2f, xRefPaint);
+                canvas.drawRoundRect(counterDrawable.rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(counterDrawable.rectF.height() / 2f), org.telegram.marble.MarbleTheme.m3CornerPxF(counterDrawable.rectF.height() / 2f), xRefPaint);
                 canvas.restore();
 
                 canvas.save();
@@ -507,12 +507,12 @@ public class ChatPullingDownDrawable implements NotificationCenter.NotificationC
         } else {
             int oldAlpha1 = getThemedPaint(Theme.key_paint_chatActionBackground).getAlpha();
             getThemedPaint(Theme.key_paint_chatActionBackground).setAlpha((int) (oldAlpha1 * alpha));
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, circleRadius, circleRadius, getThemedPaint(Theme.key_paint_chatActionBackground));
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(circleRadius), org.telegram.marble.MarbleTheme.m3CornerPxF(circleRadius), getThemedPaint(Theme.key_paint_chatActionBackground));
             getThemedPaint(Theme.key_paint_chatActionBackground).setAlpha(oldAlpha1);
             if (hasGradientService()) {
                 int oldAlpha2 = Theme.chat_actionBackgroundGradientDarkenPaint.getAlpha();
                 Theme.chat_actionBackgroundGradientDarkenPaint.setAlpha((int) (oldAlpha2 * alpha));
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, circleRadius, circleRadius, Theme.chat_actionBackgroundGradientDarkenPaint);
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(circleRadius), org.telegram.marble.MarbleTheme.m3CornerPxF(circleRadius), Theme.chat_actionBackgroundGradientDarkenPaint);
                 Theme.chat_actionBackgroundGradientDarkenPaint.setAlpha(oldAlpha2);
             }
         }

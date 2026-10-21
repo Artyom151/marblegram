@@ -154,14 +154,30 @@ public class GlassTabView extends FrameLayout implements MainTabsLayout.Tab, Fac
         if (selectedFactor > 0 && !skipDrawSelector) {
             final float alpha = AnimatorUtils.DECELERATE_INTERPOLATOR.getInterpolation(selectedFactor);
 
-            paintCounterBackground.setColor(Theme.multAlpha(colorSelected, 0.09f * alpha));
+            if (org.telegram.marble.MarbleTheme.isEnabled()) {
+                // Marblegram: M3 NavigationBar active indicator — 56x32 secondaryContainer pill behind the icon only,
+                // expanding horizontally from the center like the M3E spring animation
+                paintCounterBackground.setColor(Theme.multAlpha(org.telegram.marble.MarbleTheme.roles(Theme.isCurrentThemeDark()).secondaryContainer, alpha));
+                final android.view.View iconView = imageView.getVisibility() == VISIBLE || backupImageView == null ? imageView : backupImageView;
+                final float cx = viewWidth / 2f, cy = iconView.getTop() + iconView.getHeight() / 2f;
+                final float hw = dp(28) * (0.4f + 0.6f * selectedFactor), hh = dp(16);
+                tmpRectF.set(cx - hw, cy - hh, cx + hw, cy + hh);
+                canvas.drawRoundRect(tmpRectF, org.telegram.marble.MarbleTheme.m3CornerPxF(hh), org.telegram.marble.MarbleTheme.m3CornerPxF(hh), paintCounterBackground);
+            }
+            if (org.telegram.marble.MarbleTheme.isEnabled()) {
+                // drawn above
+            } else {
+                paintCounterBackground.setColor(Theme.multAlpha(colorSelected, 0.09f * alpha));
+            }
             tmpRectF.set(0, 0, viewWidth, getHeight());
             final float r = Math.min(tmpRectF.width(), tmpRectF.height()) / 2f;
             final float s = lerp(0.6f, 1, selectedFactor) * MathUtils.clamp(attachScale, 0, 1);
-            canvas.save();
-            canvas.scale(s, s, tmpRectF.centerX(), tmpRectF.centerY());
-            canvas.drawRoundRect(tmpRectF, r, r, paintCounterBackground);
-            canvas.restore();
+            if (!org.telegram.marble.MarbleTheme.isEnabled()) {
+                canvas.save();
+                canvas.scale(s, s, tmpRectF.centerX(), tmpRectF.centerY());
+                canvas.drawRoundRect(tmpRectF, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), paintCounterBackground);
+                canvas.restore();
+            }
         }
 
         final float hasCounter = (usePremiumCounter ? 1f : isHasCounterAnimator.getFloatValue()) * attachScale;
@@ -190,7 +206,7 @@ public class GlassTabView extends FrameLayout implements MainTabsLayout.Tab, Fac
             );
 
             canvas.scale(hasCounter, hasCounter, cx, cy);
-            canvas.drawRoundRect(tmpRectF, rOuter, rOuter, Theme.PAINT_CLEAR);
+            canvas.drawRoundRect(tmpRectF, org.telegram.marble.MarbleTheme.m3CornerPxF(rOuter), org.telegram.marble.MarbleTheme.m3CornerPxF(rOuter), Theme.PAINT_CLEAR);
             tmpRectF.inset(gap, gap);
 
             if (usePremiumCounter) {
@@ -199,14 +215,14 @@ public class GlassTabView extends FrameLayout implements MainTabsLayout.Tab, Fac
                 }
 
                 PremiumGradient.getInstance().updateMainGradientMatrix(0, 0, dp(96), dp(16), 0, 0);
-                canvas.drawRoundRect(tmpRectF, rInner, rInner, PremiumGradient.getInstance().getMainGradientPaint());
+                canvas.drawRoundRect(tmpRectF, org.telegram.marble.MarbleTheme.m3CornerPxF(rInner), org.telegram.marble.MarbleTheme.m3CornerPxF(rInner), PremiumGradient.getInstance().getMainGradientPaint());
                 int x = (int)(cx - dpf2(7f));
                 int y = (int)(cy - dpf2(7f));
                 premiumStarDrawable.setBounds(x, y, x + dp(14), y + dp(14));
                 premiumStarDrawable.draw(canvas);
             } else {
                 paintCounterBackground.setColor(ColorUtils.blendARGB(Theme.getColor(Theme.key_telegram_color), Theme.getColor(Theme.key_fill_RedNormal), isHasCounterErrorAnimator.getFloatValue()));
-                canvas.drawRoundRect(tmpRectF, rInner, rInner, paintCounterBackground);
+                canvas.drawRoundRect(tmpRectF, org.telegram.marble.MarbleTheme.m3CornerPxF(rInner), org.telegram.marble.MarbleTheme.m3CornerPxF(rInner), paintCounterBackground);
                 counter.setBounds(tmpRectF);
                 counter.draw(canvas);
             }
@@ -279,6 +295,22 @@ public class GlassTabView extends FrameLayout implements MainTabsLayout.Tab, Fac
 
     private void checkPlayAnimation(boolean animated) {
         final boolean isSelected = isSelectedAnimator.getValue();
+
+        if (tabAnimation != null && org.telegram.marble.MarbleTheme.isEnabled()) {
+            // Marblegram: M3 navigation icons — outlined when idle, filled when selected
+            int res = 0;
+            switch (tabAnimation) {
+                case CHATS: res = isSelected ? R.drawable.marble_tab_chats_filled : R.drawable.marble_tab_chats; break;
+                case CONTACTS: res = isSelected ? R.drawable.marble_tab_contacts_filled : R.drawable.marble_tab_contacts; break;
+                case SETTINGS: res = isSelected ? R.drawable.marble_tab_settings_filled : R.drawable.marble_tab_settings; break;
+                case CALLS: res = isSelected ? R.drawable.marble_tab_calls_filled : R.drawable.marble_tab_calls; break;
+            }
+            if (res != 0) {
+                imageView.clearAnimationDrawable();
+                imageView.setImageResource(res);
+                return;
+            }
+        }
 
         if (tabAnimationBot !=  null) {
             boolean animatedIcon = true;

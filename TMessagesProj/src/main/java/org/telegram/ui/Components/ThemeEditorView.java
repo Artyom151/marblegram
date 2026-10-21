@@ -736,14 +736,14 @@ public class ThemeEditorView {
                     if (radProgress != 1.0f) {
                         Theme.dialogs_onlineCirclePaint.setColor(0xffffffff);
                         rect1.set(backgroundPaddingLeft, backgroundPaddingTop + top, getMeasuredWidth() - backgroundPaddingLeft, backgroundPaddingTop + top + AndroidUtilities.dp(24));
-                        canvas.drawRoundRect(rect1, AndroidUtilities.dp(12) * radProgress, AndroidUtilities.dp(12) * radProgress, Theme.dialogs_onlineCirclePaint);
+                        canvas.drawRoundRect(rect1, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(12) * radProgress), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(12) * radProgress), Theme.dialogs_onlineCirclePaint);
                     }
 
                     int w = AndroidUtilities.dp(36);
                     rect1.set((getMeasuredWidth() - w) / 2, y, (getMeasuredWidth() + w) / 2, y + AndroidUtilities.dp(4));
                     Theme.dialogs_onlineCirclePaint.setColor(0xffe1e4e8);
                     Theme.dialogs_onlineCirclePaint.setAlpha((int) (255 * listView.getAlpha()));
-                    canvas.drawRoundRect(rect1, AndroidUtilities.dp(2), AndroidUtilities.dp(2), Theme.dialogs_onlineCirclePaint);
+                    canvas.drawRoundRect(rect1, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(2)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(2)), Theme.dialogs_onlineCirclePaint);
 
                     if (statusBarHeight > 0) {
                         Theme.dialogs_onlineCirclePaint.setColor(Theme.getColor(Theme.key_dialogBackground));

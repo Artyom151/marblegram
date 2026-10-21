@@ -496,7 +496,7 @@ public class RadialProgress {
                     miniProgressPaint.setAlpha((int) (255 * overrideAlpha));
                 }
                 cicleRect.set(cx - AndroidUtilities.dp(halfSize - 2) * alpha, cy - AndroidUtilities.dp(halfSize - 2) * alpha, cx + AndroidUtilities.dp(halfSize - 2) * alpha, cy + AndroidUtilities.dp(halfSize - 2) * alpha);
-                canvas.drawArc(cicleRect, -90 + radOffset, Math.max(4, 360 * animatedProgressValue), false, miniProgressPaint);
+                org.telegram.marble.WavyProgress.drawArc(canvas, cicleRect, -90 + radOffset, Math.max(4, 360 * animatedProgressValue), miniProgressPaint);
                 updateAnimation(true);
             } else {
                 updateAnimation(false);
@@ -553,7 +553,7 @@ public class RadialProgress {
         if (roundRectProgress) {
             float r = oval.height() * 0.32f;
             if (Math.abs(sweepAngle) == 360) {
-                canvas.drawRoundRect(oval, r, r, paint);
+                canvas.drawRoundRect(oval, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), paint);
                 return;
             }
             float endAngle = startAngle + sweepAngle;
@@ -580,7 +580,7 @@ public class RadialProgress {
                 drawArc(canvas, oval, startAngle + 90, sweepAngle - 90, useCenter, paint);
             }
         } else {
-            canvas.drawArc(oval, startAngle, sweepAngle, useCenter, paint);
+            org.telegram.marble.WavyProgress.drawArc(canvas, oval, startAngle, sweepAngle, paint);
         }
     }
 

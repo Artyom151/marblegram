@@ -136,7 +136,7 @@ public class SeekSpeedDrawable extends Drawable {
         canvas.clipRect(speedRect);
 
         backgroundPaint.setColor(Theme.multAlpha(0xFF000000, 0.4f * shown));
-        canvas.drawRoundRect(speedRect, speedRect.height() / 2f, speedRect.height() / 2f, backgroundPaint);
+        canvas.drawRoundRect(speedRect, org.telegram.marble.MarbleTheme.m3CornerPxF(speedRect.height() / 2f), org.telegram.marble.MarbleTheme.m3CornerPxF(speedRect.height() / 2f), backgroundPaint);
         speedText.setBounds(speedRect);
 
         float p;
@@ -201,7 +201,7 @@ public class SeekSpeedDrawable extends Drawable {
             canvas.translate(hintRect.centerX(), hintRect.top);
             canvas.drawPath(hintArrow, backgroundPaint);
             canvas.restore();
-            canvas.drawRoundRect(hintRect, dp(8), dp(8), backgroundPaint);
+            canvas.drawRoundRect(hintRect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(8)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(8)), backgroundPaint);
 
             hintDrawable.setBounds((int) hintRect.left + dp(11), (int) hintRect.centerY() - dp(24) / 2, (int) hintRect.left + dp(11 + 24), (int) hintRect.centerY() + dp(24) / 2);
             hintDrawable.setAlpha((int) (0xFF * hintShown));

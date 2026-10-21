@@ -542,13 +542,13 @@ public class UsersAlertBase extends BottomSheet {
                 if (radProgress != 1.0f) {
                     Theme.dialogs_onlineCirclePaint.setColor(backgroundColor);
                     rect.set(backgroundPaddingLeft, backgroundPaddingTop + top, getMeasuredWidth() - backgroundPaddingLeft, backgroundPaddingTop + top + AndroidUtilities.dp(24));
-                    canvas.drawRoundRect(rect, AndroidUtilities.dp(12) * radProgress, AndroidUtilities.dp(12) * radProgress, Theme.dialogs_onlineCirclePaint);
+                    canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(12) * radProgress), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(12) * radProgress), Theme.dialogs_onlineCirclePaint);
                 }
 
                 int w = AndroidUtilities.dp(36);
                 rect.set((getMeasuredWidth() - w) / 2, y, (getMeasuredWidth() + w) / 2, y + AndroidUtilities.dp(4));
                 Theme.dialogs_onlineCirclePaint.setColor(Theme.getColor(keyScrollUp));
-                canvas.drawRoundRect(rect, AndroidUtilities.dp(2), AndroidUtilities.dp(2), Theme.dialogs_onlineCirclePaint);
+                canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(2)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(2)), Theme.dialogs_onlineCirclePaint);
             }
             if (statusBarHeight > 0) {
                 Theme.dialogs_onlineCirclePaint.setColor(backgroundColor);

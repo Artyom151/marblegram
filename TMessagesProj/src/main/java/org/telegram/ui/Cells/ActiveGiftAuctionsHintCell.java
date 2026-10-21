@@ -301,7 +301,7 @@ public class ActiveGiftAuctionsHintCell extends FrameLayout implements GiftAucti
             final int o = l - dp(30);
             canvas.save();
             canvas.translate(o, 0);
-            canvas.drawRoundRect(0, 0, getWidth() - o, getHeight(), dp(14), dp(14), fillPaint);
+            canvas.drawRoundRect(0, 0, getWidth() - o, getHeight(), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(14)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(14)), fillPaint);
             canvas.restore();
 
             textView.setBounds(l, 0, getMeasuredWidth() - dp(8), getMeasuredHeight() - dp(1));

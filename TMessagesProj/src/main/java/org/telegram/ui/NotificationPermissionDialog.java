@@ -241,9 +241,9 @@ public class NotificationPermissionDialog extends BottomSheet implements Notific
             AndroidUtilities.rectTmp.set((getWidth() - w) / 2f, (getHeight() - h) / 2f, (getWidth() + w) / 2f, (getHeight() + h) / 2f);
 
             strokePaint.setAlpha((int) (0xFF * alpha));
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, AndroidUtilities.dp(30), AndroidUtilities.dp(30), strokePaint);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(30)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(30)), strokePaint);
             fillPaint.setAlpha((int) (0xFF * alpha));
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, AndroidUtilities.dp(30), AndroidUtilities.dp(30), fillPaint);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(30)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(30)), fillPaint);
 
             canvas.save();
             canvas.translate(0, -AndroidUtilities.dp(1));

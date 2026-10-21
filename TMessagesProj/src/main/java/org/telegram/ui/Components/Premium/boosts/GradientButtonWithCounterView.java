@@ -44,7 +44,7 @@ public class GradientButtonWithCounterView extends ButtonWithCounterView {
 
         rect.set(0, 0, getMeasuredWidth(), getMeasuredHeight());
         PremiumGradient.getInstance().updateMainGradientMatrix(0, 0, getMeasuredWidth(), getMeasuredHeight(), -getMeasuredWidth() * 0.1f * progress, 0);
-        canvas.drawRoundRect(rect, dp(8), dp(8), PremiumGradient.getInstance().getMainGradientPaint());
+        canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(8)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(8)), PremiumGradient.getInstance().getMainGradientPaint());
         flickerDrawable.setParentWidth(getMeasuredWidth());
         flickerDrawable.draw(canvas, rect, dp(8), null);
         super.onDraw(canvas);

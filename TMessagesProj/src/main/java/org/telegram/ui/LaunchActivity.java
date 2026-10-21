@@ -419,6 +419,10 @@ public class LaunchActivity extends BasePermissionsActivity implements INavigati
             if (intent != null && intent.getAction() != null) {
                 if (Intent.ACTION_SEND.equals(intent.getAction()) || Intent.ACTION_SEND_MULTIPLE.equals(intent.getAction())) {
                     super.onCreate(savedInstanceState);
+        AndroidUtilities.runOnUIThread(() -> {
+            org.telegram.marble.features.MarbleHistory.getInstance().init();
+            org.telegram.marble.plugins.PluginManager.getInstance().init();
+        }, 300); // Marblegram features + Plugin SDK
                     finish();
                     return;
                 } else if (Intent.ACTION_VIEW.equals(intent.getAction())) {
@@ -6970,6 +6974,7 @@ public class LaunchActivity extends BasePermissionsActivity implements INavigati
     @Override
     protected void onResume() {
         super.onResume();
+        org.telegram.marble.MarbleTheme.checkDynamicColorsChanged();
         isResumed = true;
         pipActivityHandler.onResume();
         if (onResumeStaticCallback != null) {
@@ -7125,6 +7130,7 @@ public class LaunchActivity extends BasePermissionsActivity implements INavigati
         AndroidUtilities.checkDisplaySize(this, newConfig);
         AndroidUtilities.setPreferredMaxRefreshRate(getWindow());
         super.onConfigurationChanged(newConfig);
+        org.telegram.marble.MarbleTheme.checkDynamicColorsChanged();
         pipActivityHandler.onConfigurationChanged(newConfig);
         AndroidUtilities.resetTabletFlag();
         invalidateTabletMode();

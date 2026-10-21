@@ -670,7 +670,7 @@ public class EmojiPacksAlert extends BottomSheet implements NotificationCenter.N
             int w = AndroidUtilities.dp(36);
             y += AndroidUtilities.dp(10);
             AndroidUtilities.rectTmp.set((getMeasuredWidth() - w) / 2, y, (getMeasuredWidth() + w) / 2, y + AndroidUtilities.dp(4));
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, AndroidUtilities.dp(2), AndroidUtilities.dp(2), Theme.dialogs_onlineCirclePaint);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(2)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(2)), Theme.dialogs_onlineCirclePaint);
 
             shadowView.setVisibility(listView.canScrollVertically(1) || removeButtonView.getVisibility() == View.VISIBLE ? View.VISIBLE : View.INVISIBLE);
             if (listView != null) {

@@ -556,11 +556,11 @@ public class CaptionContainerView extends FrameLayout {
                     Paint blurPaint = mentionBackgroundBlur.getPaint(1f);
                     if (blurPaint == null) {
                         CaptionContainerView.this.backgroundPaint.setAlpha(0x80);
-                        canvas.drawRoundRect(rectF, radius, radius, CaptionContainerView.this.backgroundPaint);
+                        canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(radius), org.telegram.marble.MarbleTheme.m3CornerPxF(radius), CaptionContainerView.this.backgroundPaint);
                     } else {
-                        canvas.drawRoundRect(rectF, radius, radius, blurPaint);
+                        canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(radius), org.telegram.marble.MarbleTheme.m3CornerPxF(radius), blurPaint);
                         CaptionContainerView.this.backgroundPaint.setAlpha(0x50);
-                        canvas.drawRoundRect(rectF, radius, radius, CaptionContainerView.this.backgroundPaint);
+                        canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(radius), org.telegram.marble.MarbleTheme.m3CornerPxF(radius), CaptionContainerView.this.backgroundPaint);
                     }
                 }
             }
@@ -937,7 +937,7 @@ public class CaptionContainerView extends FrameLayout {
 
         AndroidUtilities.rectTmp.set(bounds.left + dp(10), top + dp(10), bounds.right - dp(10), top + dp(10 + 42));
         if (bgBlurPaint != null) {
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(5), dp(5), bgBlurPaint);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(5)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(5)), bgBlurPaint);
         }
 
         if (textBlurPaint != null) {
@@ -1075,21 +1075,21 @@ public class CaptionContainerView extends FrameLayout {
         } else if (customBlur()) {
             drawBlur(backgroundBlur, canvas, bounds, r, false, 0, 0, true, 1.0f);
             backgroundPaint.setAlpha((int) (lerp(0x26, 0x40, keyboardT)));
-            canvas.drawRoundRect(bounds, r, r, backgroundPaint);
+            canvas.drawRoundRect(bounds, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), backgroundPaint);
         } else {
             Paint[] blurPaints = backgroundBlur.getPaints(1f, 0, 0);
             if (blurPaints == null || blurPaints[1] == null) {
                 backgroundPaint.setAlpha(0x80);
-                canvas.drawRoundRect(bounds, r, r, backgroundPaint);
+                canvas.drawRoundRect(bounds, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), backgroundPaint);
             } else {
                 if (blurPaints[0] != null) {
-                    canvas.drawRoundRect(bounds, r, r, blurPaints[0]);
+                    canvas.drawRoundRect(bounds, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), blurPaints[0]);
                 }
                 if (blurPaints[1] != null) {
-                    canvas.drawRoundRect(bounds, r, r, blurPaints[1]);
+                    canvas.drawRoundRect(bounds, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), blurPaints[1]);
                 }
                 backgroundPaint.setAlpha(0x33);
-                canvas.drawRoundRect(bounds, r, r, backgroundPaint);
+                canvas.drawRoundRect(bounds, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), backgroundPaint);
             }
         }
 
@@ -1138,7 +1138,7 @@ public class CaptionContainerView extends FrameLayout {
             collapseGradientMatrix.preScale(Math.max(1, R) / 16f, Math.max(1, R) / 16f);
             collapseGradient.setLocalMatrix(collapseGradientMatrix);
             canvas.save();
-            canvas.drawRoundRect(bounds, r, r, collapsePaint);
+            canvas.drawRoundRect(bounds, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), collapsePaint);
             canvas.restore();
             canvas.restore();
 
@@ -1149,7 +1149,7 @@ public class CaptionContainerView extends FrameLayout {
             collapseGradientMatrix.preScale(Math.max(1, R) / 16f, Math.max(1, R) / 16f);
             collapseOutGradient.setLocalMatrix(collapseGradientMatrix);
             canvas.save();
-            canvas.drawRoundRect(bounds, r, r, collapseOutPaint);
+            canvas.drawRoundRect(bounds, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), collapseOutPaint);
             canvas.restore();
             canvas.restore();
 
@@ -1268,10 +1268,10 @@ public class CaptionContainerView extends FrameLayout {
             blurBitmapMatrix.postTranslate(-x, -y);
             blurBitmapShader.setLocalMatrix(blurBitmapMatrix);
             blurPaint.setAlpha((int) (0xFF * keyboardT * alpha));
-            canvas.drawRoundRect(rectF, r, r, blurPaint);
+            canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), blurPaint);
         }
         backgroundPaint.setAlpha((int) (blurPaint == null ? 0x80 : lerp(0x80, 0x99, keyboardT) * alpha));
-        canvas.drawRoundRect(rectF, r, r, backgroundPaint);
+        canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), backgroundPaint);
     }
 
     @Override

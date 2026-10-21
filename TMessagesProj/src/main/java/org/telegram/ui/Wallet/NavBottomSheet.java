@@ -305,7 +305,7 @@ public class NavBottomSheet extends BottomSheet {
                     getHeight() + dp(8)
             );
             final float r = AndroidUtilities.lerp(dp(14), 0, actionBarT);
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, r, r, backgroundPaint);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), backgroundPaint);
             if (topBulletinContainer != null) {
                 float sheetTop = containerView.getY() + top + backgroundPaddingTop;
                 float minBottom = AndroidUtilities.statusBarHeight + dp(56) + topBulletinContainer.getHeight();

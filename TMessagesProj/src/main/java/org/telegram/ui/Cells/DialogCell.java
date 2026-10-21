@@ -1256,8 +1256,10 @@ public class DialogCell extends BaseCell implements StoriesListPlaceProvider.Ava
 
             Theme.dialogs_namePaint[1].setTextSize(dp(16));
             Theme.dialogs_nameEncryptedPaint[1].setTextSize(dp(16));
-            Theme.dialogs_messagePaint[1].setTextSize(dp(15));
-            Theme.dialogs_messagePrintingPaint[1].setTextSize(dp(15));
+            // Marblegram: M3 list item — supporting text bodyMedium (14sp)
+            final int m3MessageSize = org.telegram.marble.MarbleTheme.expressiveTypography() ? 14 : 15;
+            Theme.dialogs_messagePaint[1].setTextSize(dp(m3MessageSize));
+            Theme.dialogs_messagePrintingPaint[1].setTextSize(dp(m3MessageSize));
 
             Theme.dialogs_messagePaint[1].setColor(Theme.dialogs_messagePaint[1].linkColor = Theme.getColor(Theme.key_chats_message_threeLines, resourcesProvider));
             paintIndex = 1;
@@ -4028,7 +4030,7 @@ public class DialogCell extends BaseCell implements StoriesListPlaceProvider.Ava
         if (isSelected) {
             rect.set(0, 0, getMeasuredWidth(), AndroidUtilities.lerp(getMeasuredHeight(), getCollapsedHeight(), rightFragmentOpenedProgress));
             rect.offset(0, -translateY + collapseOffset);
-            canvas.drawRoundRect(rect, cornersRadius, cornersRadius, Theme.dialogs_tabletSeletedPaint);
+            canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(cornersRadius), org.telegram.marble.MarbleTheme.m3CornerPxF(cornersRadius), Theme.dialogs_tabletSeletedPaint);
         }
 
         canvas.save();
@@ -4072,20 +4074,20 @@ public class DialogCell extends BaseCell implements StoriesListPlaceProvider.Ava
                 Theme.dialogs_pinnedPaint.setColor(Theme.getColor(Theme.key_windowBackgroundWhite, resourcesProvider));
                 rect.set(getMeasuredWidth() - dp(64), 0, getMeasuredWidth(), getMeasuredHeight());
                 rect.offset(0, -translateY);
-                canvas.drawRoundRect(rect, cornersRadius, cornersRadius, Theme.dialogs_pinnedPaint);
+                canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(cornersRadius), org.telegram.marble.MarbleTheme.m3CornerPxF(cornersRadius), Theme.dialogs_pinnedPaint);
 
                 if (isSelected) {
-                    canvas.drawRoundRect(rect, cornersRadius, cornersRadius, Theme.dialogs_tabletSeletedPaint);
+                    canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(cornersRadius), org.telegram.marble.MarbleTheme.m3CornerPxF(cornersRadius), Theme.dialogs_tabletSeletedPaint);
                 }
 
                 if (currentDialogFolderId != 0 && (!SharedConfig.archiveHidden || archiveBackgroundProgress != 0)) {
                     Theme.dialogs_pinnedPaint.setColor(AndroidUtilities.getOffsetColor(0, Theme.getColor(Theme.key_chats_pinnedOverlay, resourcesProvider), archiveBackgroundProgress, 1.0f));
                     Theme.dialogs_pinnedPaint.setAlpha((int) (Theme.dialogs_pinnedPaint.getAlpha() * (1f - rightFragmentOpenedProgress)));
-                    // canvas.drawRoundRect(rect, cornersRadius, cornersRadius, Theme.dialogs_pinnedPaint);
+                    // canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(cornersRadius), org.telegram.marble.MarbleTheme.m3CornerPxF(cornersRadius), Theme.dialogs_pinnedPaint);
                 } else if (getIsPinned() || drawPinBackground) {
                     Theme.dialogs_pinnedPaint.setColor(Theme.getColor(Theme.key_chats_pinnedOverlay, resourcesProvider));
                     Theme.dialogs_pinnedPaint.setAlpha((int) (Theme.dialogs_pinnedPaint.getAlpha() * (1f - rightFragmentOpenedProgress)));
-                    // canvas.drawRoundRect(rect, cornersRadius, cornersRadius, Theme.dialogs_pinnedPaint);
+                    // canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(cornersRadius), org.telegram.marble.MarbleTheme.m3CornerPxF(cornersRadius), Theme.dialogs_pinnedPaint);
                 }
                 canvas.restore();
             }
@@ -4182,7 +4184,7 @@ public class DialogCell extends BaseCell implements StoriesListPlaceProvider.Ava
 
                     int a = timeTextPaint.getAlpha();
                     timeTextPaint.setAlpha(27);
-                    canvas.drawRoundRect(l, y, r, y + dp(17), dp(17 / 2f), dp(17 / 2f), timeTextPaint);
+                    canvas.drawRoundRect(l, y, r, y + dp(17), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(17 / 2f)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(17 / 2f)), timeTextPaint);
                     timeTextPaint.setAlpha(a);
 
                     pd.draw(canvas);
@@ -4558,7 +4560,7 @@ public class DialogCell extends BaseCell implements StoriesListPlaceProvider.Ava
             if (drawError) {
                 Theme.dialogs_errorDrawable.setAlpha((int) ((1.0f - reorderIconProgress) * 255));
                 rect.set(errorLeft, errorTop, errorLeft + dp(BADGE_SIZE), errorTop + dp(BADGE_SIZE));
-                canvas.drawRoundRect(rect, 10.5f * AndroidUtilities.density, 10.5f * AndroidUtilities.density, Theme.dialogs_errorPaint);
+                canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(10.5f * AndroidUtilities.density), org.telegram.marble.MarbleTheme.m3CornerPxF(10.5f * AndroidUtilities.density), Theme.dialogs_errorPaint);
                 setDrawableBounds(Theme.dialogs_errorDrawable, errorLeft + dp(4.5f), errorTop + dp(5));
                 Theme.dialogs_errorDrawable.draw(canvas);
             } else if ((drawCount || drawMention) && drawCount2 || countChangeProgress != 1f || drawReactionMention || reactionsMentionsChangeProgress != 1f || drawPollVotesMention || pollVotesMentionsVisibility > 0) {
@@ -4571,7 +4573,7 @@ public class DialogCell extends BaseCell implements StoriesListPlaceProvider.Ava
                         int x = mentionLeft;
                         rect.set(x, countTop, x + mentionWidth + dp(BADGE_TEXT_PADDING * 2), countTop + dp(BADGE_SIZE));
                         Paint paint = drawCounterMuted && folderId != 0 ? Theme.dialogs_countGrayPaint : Theme.dialogs_countPaint;
-                        canvas.drawRoundRect(rect, rect.height() / 2f, rect.height() / 2f, paint);
+                        canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(rect.height() / 2f), org.telegram.marble.MarbleTheme.m3CornerPxF(rect.height() / 2f), paint);
                         Theme.dialogs_countTextPaint2.setAlpha((int) ((1.0f - reorderIconProgress) * 255));
 
                         canvas.save();
@@ -4628,7 +4630,7 @@ public class DialogCell extends BaseCell implements StoriesListPlaceProvider.Ava
                 final float scale = openButtonBounce.getScale(.05f);
                 canvas.scale(scale, scale, openButtonRect.centerX(), openButtonRect.centerY());
                 openButtonBackgroundPaint.setColor(Theme.getColor(Theme.key_featuredStickers_addButton, resourcesProvider));
-                canvas.drawRoundRect(openButtonRect, openButtonRect.height() / 2.0f, openButtonRect.height() / 2.0f, openButtonBackgroundPaint);
+                canvas.drawRoundRect(openButtonRect, org.telegram.marble.MarbleTheme.m3CornerPxF(openButtonRect.height() / 2.0f), org.telegram.marble.MarbleTheme.m3CornerPxF(openButtonRect.height() / 2.0f), openButtonBackgroundPaint);
                 if (openButtonText != null) {
                     openButtonText.draw(canvas, openButtonRect.left + dp(13), openButtonRect.centerY(), Theme.getColor(Theme.key_featuredStickers_buttonText, resourcesProvider), 1.0f);
                 }
@@ -5206,13 +5208,13 @@ public class DialogCell extends BaseCell implements StoriesListPlaceProvider.Ava
                         canvas.scale(chatCallProgress * checkProgress, chatCallProgress * checkProgress, left, top);
                     }
                     rect.set(left - dp(1), top - size1, left + dp(1), top + size1);
-                    canvas.drawRoundRect(rect, dp(1), dp(1), Theme.dialogs_onlineCirclePaint);
+                    canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(1)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(1)), Theme.dialogs_onlineCirclePaint);
 
                     rect.set(left - dp(5), top - size2, left - dp(3), top + size2);
-                    canvas.drawRoundRect(rect, dp(1), dp(1), Theme.dialogs_onlineCirclePaint);
+                    canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(1)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(1)), Theme.dialogs_onlineCirclePaint);
 
                     rect.set(left + dp(3), top - size2, left + dp(5), top + size2);
-                    canvas.drawRoundRect(rect, dp(1), dp(1), Theme.dialogs_onlineCirclePaint);
+                    canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(1)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(1)), Theme.dialogs_onlineCirclePaint);
                     if (chatCallProgress < 1.0f || checkProgress < 1.0f) {
                         canvas.restore();
                     }
@@ -5337,9 +5339,9 @@ public class DialogCell extends BaseCell implements StoriesListPlaceProvider.Ava
                         canvas.drawPath(counterPath, counterPaintOutline);
                     }
                 } else {
-                    canvas.drawRoundRect(rect, dp(11.5f), dp(11.5f), paint);
+                    canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(11.5f)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(11.5f)), paint);
                     if (outline) {
-                        canvas.drawRoundRect(rect, dp(11.5f), dp(11.5f), counterPaintOutline);
+                        canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(11.5f)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(11.5f)), counterPaintOutline);
                     }
                 }
                 if (drawLayout != null) {
@@ -5389,9 +5391,9 @@ public class DialogCell extends BaseCell implements StoriesListPlaceProvider.Ava
                         canvas.drawPath(counterPath, counterPaintOutline);
                     }
                 } else {
-                    canvas.drawRoundRect(rect, dp(11.5f), dp(11.5f), paint);
+                    canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(11.5f)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(11.5f)), paint);
                     if (outline) {
-                        canvas.drawRoundRect(rect, dp(11.5f), dp(11.5f), counterPaintOutline);
+                        canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(11.5f)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(11.5f)), counterPaintOutline);
                     }
                 }
                 if (countAnimationStableLayout != null) {

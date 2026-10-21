@@ -59,7 +59,7 @@ public final class RoundVideoProgressView extends FrameLayout {
                 getHeight() - ringInset
         );
         canvas.drawOval(arcBounds, backgroundPaint);
-        canvas.drawArc(arcBounds, -90f, progress * 360f, false, progressPaint);
+        org.telegram.marble.WavyProgress.drawArc(canvas, arcBounds, -90f, progress * 360f, progressPaint);
     }
 
     private static void configureStroke(Paint paint, float alpha) {

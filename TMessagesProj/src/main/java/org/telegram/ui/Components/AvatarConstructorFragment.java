@@ -927,7 +927,7 @@ public class AvatarConstructorFragment extends BaseFragment {
             } else {
                 float roundRadius = lerp(radius, 0, p);
                 AndroidUtilities.rectTmp.set(cx - size, cy - size, cx + size, cy + size);
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, roundRadius, roundRadius, paint);
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(roundRadius), org.telegram.marble.MarbleTheme.m3CornerPxF(roundRadius), paint);
             }
         }
 

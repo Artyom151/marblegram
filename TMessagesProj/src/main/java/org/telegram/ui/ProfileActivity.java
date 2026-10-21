@@ -1131,7 +1131,7 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
                     rect.set(0f, 0f, thisWidth, thisHeight);
                     placeholderPaint.setAlpha((int) (alpha * foregroundAlpha * 255f));
                     final int radius = foregroundImageReceiver.getRoundRadius()[0];
-                    canvas.drawRoundRect(rect, radius, radius, placeholderPaint);
+                    canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(radius), org.telegram.marble.MarbleTheme.m3CornerPxF(radius), placeholderPaint);
                 }
             }
 
@@ -1594,7 +1594,7 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
                         canvas.clipRect(x + width * progress, y, x + width, y + AndroidUtilities.dp(2));
                         rect.set(x, y, x + width, y + AndroidUtilities.dp(2));
                         barPaint.setAlpha((int) (0x55 * alpha));
-                        canvas.drawRoundRect(rect, AndroidUtilities.dp(1), AndroidUtilities.dp(1), barPaint);
+                        canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(1)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(1)), barPaint);
                         baseAlpha = 0x50;
                         canvas.restore();
                         invalidate = true;
@@ -1613,7 +1613,7 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
                             }
                             rect.set(x, y, x + width, y + AndroidUtilities.dp(2));
                             barPaint.setAlpha((int) ((0x55 + 0x30 * currentLoadingAnimationProgress) * alpha));
-                            canvas.drawRoundRect(rect, AndroidUtilities.dp(1), AndroidUtilities.dp(1), barPaint);
+                            canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(1)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(1)), barPaint);
                             invalidate = true;
                             baseAlpha = 0x50;
                         } else {
@@ -1632,7 +1632,7 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
                         alphas[a] = 0.75f;
                     }
 
-                    canvas.drawRoundRect(rect, AndroidUtilities.dp(1), AndroidUtilities.dp(1), a == selectedPosition ? selectedBarPaint : barPaint);
+                    canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(1)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(1)), a == selectedPosition ? selectedBarPaint : barPaint);
                 }
 
                 if (overlayCountVisible == 2) {
@@ -2040,7 +2040,7 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
         @Override
         protected void onDraw(Canvas canvas) {
             final float radius = AndroidUtilities.dpf2(12);
-            canvas.drawRoundRect(indicatorRect, radius, radius, backgroundPaint);
+            canvas.drawRoundRect(indicatorRect, org.telegram.marble.MarbleTheme.m3CornerPxF(radius), org.telegram.marble.MarbleTheme.m3CornerPxF(radius), backgroundPaint);
             canvas.drawText(getCurrentTitle(), indicatorRect.centerX(), indicatorRect.top + AndroidUtilities.dpf2(18.5f), textPaint);
         }
 
@@ -16108,7 +16108,7 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
             canvas.scale(s, s, AndroidUtilities.rectTmp.centerX(), AndroidUtilities.rectTmp.centerY());
             final int wasAlpha = backgroundPaint.getAlpha();
             backgroundPaint.setAlpha((int) (wasAlpha * alpha));
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(20), dp(20), backgroundPaint);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(20)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(20)), backgroundPaint);
             backgroundPaint.setAlpha(wasAlpha);
             textDrawable.setTextColor(textColor);
             textDrawable.setAlpha((int) (0xFF * alpha));

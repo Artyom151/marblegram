@@ -893,12 +893,17 @@ final class RoundVideoOverlayRenderer {
         configureTexture(TEXTURE_MASK, GLES20.GL_LINEAR);
         ByteBuffer mask = ByteBuffer.allocateDirect(outputSize * outputSize);
         float center = outputSize * 0.5f;
-        float radius = center + 2f;
+        // Marblegram: rounded-square mask, corner from settings (100% = circle, 0% = full square)
+        float halfSize = center + 2f;
+        float rr = halfSize * org.telegram.marble.MarbleTheme.roundVideoCorner() / 100f;
         for (int y = 0; y < outputSize; y++) {
             float dy = y + 0.5f - center;
             for (int x = 0; x < outputSize; x++) {
                 float dx = x + 0.5f - center;
-                float coverage = radius + 0.5f - (float) Math.sqrt(dx * dx + dy * dy);
+                float qx = Math.abs(dx) - (halfSize - rr), qy = Math.abs(dy) - (halfSize - rr);
+                float outside = (float) Math.sqrt(Math.max(qx, 0f) * Math.max(qx, 0f) + Math.max(qy, 0f) * Math.max(qy, 0f));
+                float sdf = outside + Math.min(Math.max(qx, qy), 0f) - rr;
+                float coverage = 0.5f - sdf;
                 mask.put((byte) Math.round(Math.max(0f, Math.min(1f, coverage)) * 255f));
             }
         }

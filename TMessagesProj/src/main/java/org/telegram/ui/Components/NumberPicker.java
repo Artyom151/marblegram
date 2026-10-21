@@ -821,7 +821,16 @@ public class NumberPicker extends LinearLayout {
             y += mSelectorElementHeight;
         }
 
-        if (drawDividers) {
+        if (drawDividers && org.telegram.marble.MarbleTheme.expressiveShapes()) {
+            // Marblegram: M3 picker — tonal pill behind the selected value instead of two divider lines
+            final int c = mSelectionDivider.getColor();
+            mSelectionDivider.setColor(androidx.core.graphics.ColorUtils.setAlphaComponent(c, 0x2E));
+            final float inset = AndroidUtilities.dp(4);
+            AndroidUtilities.rectTmp.set(inset, mTopSelectionDividerTop, getWidth() - inset, mBottomSelectionDividerBottom);
+            final float r = AndroidUtilities.rectTmp.height() / 2f;
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), mSelectionDivider);
+            mSelectionDivider.setColor(c);
+        } else if (drawDividers) {
             int topOfTopDivider = mTopSelectionDividerTop;
             int bottomOfTopDivider = topOfTopDivider + mSelectionDividerHeight;
             canvas.drawRect(0, topOfTopDivider, getRight(), bottomOfTopDivider, mSelectionDivider);

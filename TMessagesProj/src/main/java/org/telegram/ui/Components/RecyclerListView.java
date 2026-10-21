@@ -799,7 +799,7 @@ public class RecyclerListView extends RecyclerView implements IBlur3Capture {
             rect.set(scrollX, AndroidUtilities.dp(12) + y, scrollX + AndroidUtilities.dp(5), AndroidUtilities.dp(12 + 30) + y);
             if (type == LETTER_TYPE) {
                 paint.setColor(ColorUtils.blendARGB(inactiveColor, activeColor, bubbleProgress));
-                canvas.drawRoundRect(rect, AndroidUtilities.dp(2), AndroidUtilities.dp(2), paint);
+                canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(2)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(2)), paint);
             } else {
                 paint.setColor(ColorUtils.blendARGB(Theme.getColor(Theme.key_windowBackgroundWhite, resourcesProvider), Color.WHITE, 0.1f));
 
@@ -2699,6 +2699,7 @@ public class RecyclerListView extends RecyclerView implements IBlur3Capture {
         if (overlayContainer != null) {
             overlayContainer.draw(canvas);
         }
+        drawM3SegmentGaps(canvas);
 
         if (skipDrawSection) {
 
@@ -3281,10 +3282,10 @@ public class RecyclerListView extends RecyclerView implements IBlur3Capture {
     }
 
     public void setSections() {
-        setSections(dp(12), dp(16), false);
+        setSections(dp(12), dp(org.telegram.marble.MarbleTheme.expressiveShapes() ? 24 : 16), false);
     }
     public void setSections(boolean topPadding) {
-        setSections(dp(12), dp(16), topPadding);
+        setSections(dp(12), dp(org.telegram.marble.MarbleTheme.expressiveShapes() ? 24 : 16), topPadding);
     }
     public void setSections(int padding, float roundRadius, boolean topPadding) {
         setSections(
@@ -3599,9 +3600,9 @@ public class RecyclerListView extends RecyclerView implements IBlur3Capture {
         sectionBackgroundPaint.setColor(multAlpha(Theme.getColor(Theme.key_windowBackgroundWhite, resourcesProvider), alpha));
         if (topRadius == bottomRadius) {
             if (SharedConfig.shadowsInSections) {
-                canvas.drawRoundRect(rect, topRadius, topRadius, sectionBackgroundStrokePaint);
+                canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(topRadius), org.telegram.marble.MarbleTheme.m3CornerPxF(topRadius), sectionBackgroundStrokePaint);
             }
-            canvas.drawRoundRect(rect, topRadius, topRadius, sectionBackgroundPaint);
+            canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(topRadius), org.telegram.marble.MarbleTheme.m3CornerPxF(topRadius), sectionBackgroundPaint);
         } else {
             sectionBackgroundPath.rewind();
             radii[0] = radii[1] = radii[2] = radii[3] = topRadius;
@@ -3911,5 +3912,48 @@ public class RecyclerListView extends RecyclerView implements IBlur3Capture {
 
             return new float[]{drawFrom, drawTo, topRadius, bottomRadius, alpha};
         }
+    }
+
+    private final ArrayList<View> m3SegmentChildren = new ArrayList<>();
+    private final Path m3GapPath = new Path(), m3GapCut = new Path();
+    private final Paint m3GapPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+
+    /**
+     * Marblegram: M3 Expressive SegmentedListItem — consecutive items inside a section are split by
+     * 2dp gaps with 4dp inner corners (outer corners come from the section radius).
+     */
+    private void drawM3SegmentGaps(Canvas canvas) {
+        if (sectionsItemDecoration == null || drawSectionBackground == null || !org.telegram.marble.MarbleTheme.segmentedLists()) {
+            return;
+        }
+        m3SegmentChildren.clear();
+        for (int i = 0; i < getChildCount(); ++i) {
+            final View child = getChildAt(i);
+            if (child != emptyView && child.getVisibility() == View.VISIBLE && child.getAlpha() > 0.5f && sectionsItemDecoration.isSectionItem.run(child)) {
+                m3SegmentChildren.add(child);
+            }
+        }
+        if (m3SegmentChildren.size() < 2) {
+            return;
+        }
+        java.util.Collections.sort(m3SegmentChildren, (a, b) -> Float.compare(top(a), top(b)));
+        final float gap = AndroidUtilities.dp(2), r = AndroidUtilities.dp(4);
+        final float x0 = getPaddingLeft() + sectionsItemDecoration.padding, x1 = getWidth() - getPaddingRight() - sectionsItemDecoration.padding;
+        m3GapPaint.setColor(Theme.getColor(Theme.key_windowBackgroundGray, resourcesProvider));
+        m3GapPath.rewind();
+        for (int i = 0; i + 1 < m3SegmentChildren.size(); ++i) {
+            final float y = bottom(m3SegmentChildren.get(i));
+            if (Math.abs(top(m3SegmentChildren.get(i + 1)) - y) > 1f) {
+                continue;
+            }
+            m3GapCut.rewind();
+            m3GapCut.addRect(x0, y - gap / 2f - r, x1, y + gap / 2f + r, Path.Direction.CW);
+            final Path items = new Path();
+            items.addRoundRect(x0, y - gap / 2f - 2 * r, x1, y - gap / 2f, r, r, Path.Direction.CW);
+            items.addRoundRect(x0, y + gap / 2f, x1, y + gap / 2f + 2 * r, r, r, Path.Direction.CW);
+            m3GapCut.op(items, Path.Op.DIFFERENCE);
+            m3GapPath.op(m3GapCut, Path.Op.UNION);
+        }
+        canvas.drawPath(m3GapPath, m3GapPaint);
     }
 }

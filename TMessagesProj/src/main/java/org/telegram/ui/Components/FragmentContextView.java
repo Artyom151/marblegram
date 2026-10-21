@@ -359,7 +359,7 @@ public class FragmentContextView extends FrameLayout implements NotificationCent
                     canvas.scale(s, s, notifyButtonRect.centerX(), notifyButtonRect.centerY());
                     canvas.translate(x, y);
                     AndroidUtilities.rectTmp.set(0, 0, width, dp(28));
-                    canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(16), dp(16), gradientPaint);
+                    canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(16)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(16)), gradientPaint);
                     canvas.translate(dp(12), dp(6));
                     notifyText.setBounds(0, 0, AndroidUtilities.displaySize.x, dp(16));
                     notifyText.draw(canvas);
@@ -2669,7 +2669,14 @@ public class FragmentContextView extends FrameLayout implements NotificationCent
                 final float top = bottom - dpf2(2);
 
                 progressPaint.setColor(getThemedColor(Theme.key_telegram_color));
-                canvas.drawRoundRect(left, top, p, bottom, dpf2(1), dpf2(1), progressPaint);
+                if (org.telegram.marble.MarbleTheme.wavyProgress()) {
+                    // Marblegram: M3E linear wavy indicator for the now-playing bar
+                    final int c = getThemedColor(Theme.key_telegram_color);
+                    org.telegram.marble.WavyProgress.drawLinear(canvas, dp(8), bottom - dp(9), getMeasuredWidth() - dp(8), bottom - dp(1),
+                        playingMessageObject.audioProgress, c, androidx.core.graphics.ColorUtils.setAlphaComponent(c, 0x40), progressPaint);
+                    if (!MediaController.getInstance().isMessagePaused()) invalidate();
+                } else
+                canvas.drawRoundRect(left, top, p, bottom, org.telegram.marble.MarbleTheme.m3CornerPxF(dpf2(1)), org.telegram.marble.MarbleTheme.m3CornerPxF(dpf2(1)), progressPaint);
             }
         }
         wasDraw = true;

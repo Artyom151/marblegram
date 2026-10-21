@@ -158,9 +158,9 @@ public class CounterView extends View {
                     canvas.scale(circleScale, circleScale, rectF.centerX(), rectF.centerY());
                     needRestore = true;
                 }
-                canvas.drawRoundRect(rectF, radius * AndroidUtilities.density, radius * AndroidUtilities.density, circlePaint);
+                canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(radius * AndroidUtilities.density), org.telegram.marble.MarbleTheme.m3CornerPxF(radius * AndroidUtilities.density), circlePaint);
                 if (addServiceGradient && Theme.hasGradientService()) {
-                    canvas.drawRoundRect(rectF, radius * AndroidUtilities.density, radius * AndroidUtilities.density, Theme.chat_actionBackgroundGradientDarkenPaint);
+                    canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(radius * AndroidUtilities.density), org.telegram.marble.MarbleTheme.m3CornerPxF(radius * AndroidUtilities.density), Theme.chat_actionBackgroundGradientDarkenPaint);
                 }
                 if (needRestore) {
                     canvas.restore();
@@ -365,9 +365,9 @@ public class CounterView extends View {
                         canvas.scale(circleScale, circleScale, rectF.centerX(), rectF.centerY());
                     }
                     if (drawBackground && circlePaint != null) {
-                        canvas.drawRoundRect(rectF, radius * AndroidUtilities.density, radius * AndroidUtilities.density, circlePaint);
+                        canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(radius * AndroidUtilities.density), org.telegram.marble.MarbleTheme.m3CornerPxF(radius * AndroidUtilities.density), circlePaint);
                         if (addServiceGradient && Theme.hasGradientService()) {
-                            canvas.drawRoundRect(rectF, radius * AndroidUtilities.density, radius * AndroidUtilities.density, Theme.chat_actionBackgroundGradientDarkenPaint);
+                            canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(radius * AndroidUtilities.density), org.telegram.marble.MarbleTheme.m3CornerPxF(radius * AndroidUtilities.density), Theme.chat_actionBackgroundGradientDarkenPaint);
                         }
                     }
                     if (needRestore) {

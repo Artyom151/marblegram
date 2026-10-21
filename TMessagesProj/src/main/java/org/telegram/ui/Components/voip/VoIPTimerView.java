@@ -106,7 +106,7 @@ public class VoIPTimerView extends View {
             for (int i = 0; i < 4; i++) {
                 Paint p = i + 1 > signalBarCount ? inactivePaint : activePaint;
                 rectF.set(AndroidUtilities.dpf2(4.16f) * i, AndroidUtilities.dpf2(2.75f) * (3 - i), AndroidUtilities.dpf2(4.16f) * i + AndroidUtilities.dpf2(2.75f), AndroidUtilities.dp(11));
-                canvas.drawRoundRect(rectF, AndroidUtilities.dpf2(0.7f), AndroidUtilities.dpf2(0.7f), p);
+                canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dpf2(0.7f)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dpf2(0.7f)), p);
             }
         }
         canvas.restore();

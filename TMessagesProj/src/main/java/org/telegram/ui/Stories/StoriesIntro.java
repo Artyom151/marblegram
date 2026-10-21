@@ -276,7 +276,7 @@ public class StoriesIntro extends FrameLayout {
                 float backgroundOffset = AndroidUtilities.dpf2(4) * (1f - progress);
                 rectF.set(backgroundOffset, backgroundOffset, getMeasuredWidth() - backgroundOffset * 2, getMeasuredHeight() - backgroundOffset * 2);
                 backgroundPaint.setAlpha((int) (30 * progress));
-                canvas.drawRoundRect(rectF, AndroidUtilities.dpf2(12f), AndroidUtilities.dpf2(12f), backgroundPaint);
+                canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dpf2(12f)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dpf2(12f)), backgroundPaint);
                 canvas.save();
                 canvas.scale(1 + 0.05f * progress, 1 + 0.05f * progress, getMeasuredWidth() / 2f, getMeasuredHeight() / 2f);
             }

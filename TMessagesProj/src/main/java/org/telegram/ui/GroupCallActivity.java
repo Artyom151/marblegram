@@ -2883,7 +2883,7 @@ public class GroupCallActivity extends BottomSheet implements NotificationCenter
                     if (rad != 1.0f) {
                         Theme.dialogs_onlineCirclePaint.setColor(backgroundColor);
                         rect.set(backgroundPaddingLeft, backgroundPaddingTop + top, getMeasuredWidth() - backgroundPaddingLeft, backgroundPaddingTop + top + dp(24));
-                        canvas.drawRoundRect(rect, dp(12) * rad, dp(12) * rad, Theme.dialogs_onlineCirclePaint);
+                        canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(12) * rad), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(12) * rad), Theme.dialogs_onlineCirclePaint);
                     }
 
                     int finalColor = Color.argb((int) (255 * actionBar.getAlpha()), (int) (Color.red(backgroundColor) * 0.8f), (int) (Color.green(backgroundColor) * 0.8f), (int) (Color.blue(backgroundColor) * 0.8f));
@@ -3242,7 +3242,7 @@ public class GroupCallActivity extends BottomSheet implements NotificationCenter
                                     int h = (int) (scrimView.getMeasuredHeight() + (scrimView.getClipHeight() - scrimView.getMeasuredHeight()) * pr);
                                     rect.set(0, 0, child.getMeasuredWidth(), h);
                                     scrimView.setAboutVisibleProgress(listViewBackgroundPaint.getColor(), progress);
-                                    canvas.drawRoundRect(rect, dp(13), dp(13), listViewBackgroundPaint);
+                                    canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(13)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(13)), listViewBackgroundPaint);
                                     child.draw(canvas);
                                     canvas.restore();
                                 }
@@ -3517,7 +3517,7 @@ public class GroupCallActivity extends BottomSheet implements NotificationCenter
                     int itemsWidth = AndroidUtilities.isTablet() ? Math.min(dp(420), getMeasuredWidth()) : getMeasuredWidth();
                     int padding = (getMeasuredWidth() - itemsWidth) >> 1;
                     rect.set(padding, minTop, getMeasuredWidth() - padding, Math.min(getMeasuredHeight() - getTranslationY(), maxBottom));
-                    canvas.drawRoundRect(rect, dp(13), dp(13), listViewBackgroundPaint);
+                    canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(13)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(13)), listViewBackgroundPaint);
                 }
 
                 canvas.save();
@@ -4280,7 +4280,7 @@ public class GroupCallActivity extends BottomSheet implements NotificationCenter
                         rect.set(cx - w, cy - h, cx + w, cy + h);
                         float rad = dp(4) + (buttonRadius - dp(4));
                         paint.setAlpha((int) (paint.getAlpha() * switchToButtonProgress));
-                        canvas.drawRoundRect(rect, rad, rad, paint);
+                        canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(rad), org.telegram.marble.MarbleTheme.m3CornerPxF(rad), paint);
 
                         if (i == 1 && currentState.currentState == MUTE_BUTTON_STATE_CONNECTING) {
                             if (isRtmpStream()) {
@@ -4299,7 +4299,7 @@ public class GroupCallActivity extends BottomSheet implements NotificationCenter
 
                             canvas.save();
                             canvas.scale(scheduleButtonTextView.getScaleX(), scheduleButtonTextView.getScaleY(), rect.centerX(), rect.centerY());
-                            canvas.drawRoundRect(rect, dp(4), dp(4), paint);
+                            canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), paint);
                             canvas.restore();
                         }
                     }
@@ -4806,7 +4806,7 @@ public class GroupCallActivity extends BottomSheet implements NotificationCenter
             @Override
             protected void onDraw(Canvas canvas) {
                 rect.set(0, 0, getWidth(), getHeight());
-                canvas.drawRoundRect(rect, dp(12), dp(12), liveLabelPaint);
+                canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(12)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(12)), liveLabelPaint);
                 super.onDraw(canvas);
             }
         };
@@ -5612,7 +5612,7 @@ public class GroupCallActivity extends BottomSheet implements NotificationCenter
                 protected void onDraw(Canvas canvas) {
                     tmpPaint.setColor(0xFF00FF00);
                     tmpRectF.set(0, 0, getMeasuredWidth(),  getMeasuredHeight());
-                    canvas.drawRoundRect(tmpRectF, dp(8), dp(8), tmpPaint);
+                    canvas.drawRoundRect(tmpRectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(8)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(8)), tmpPaint);
                     super.onDraw(canvas);
                 }
 
@@ -5621,7 +5621,7 @@ public class GroupCallActivity extends BottomSheet implements NotificationCenter
 
 
                     tmpRectF.set(0, 0, getMeasuredWidth(),  getMeasuredHeight());
-                    canvas.drawRoundRect(tmpRectF, dp(8), dp(8), tmpPaint);
+                    canvas.drawRoundRect(tmpRectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(8)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(8)), tmpPaint);
                     super.dispatchDraw(canvas);
                 }
             };
@@ -10023,7 +10023,7 @@ public class GroupCallActivity extends BottomSheet implements NotificationCenter
                 (totalWidth + width) / 2.0f,
                 height
             );
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, r, r, backgroundPaint);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), backgroundPaint);
 //            if (alertProgress > 0) {
                 clipPath.rewind();
                 clipPath.addRoundRect(AndroidUtilities.rectTmp, r, r, Path.Direction.CW);
@@ -10506,7 +10506,7 @@ public class GroupCallActivity extends BottomSheet implements NotificationCenter
             @Override
             public void drawRoundRect(Canvas canvas, RectF rect, float radius, float offsetX, float offsetY, int alpha, boolean isWindow) {
                 if (radius > 0) {
-                    canvas.drawRoundRect(rect, radius, radius, bgPaint);
+                    canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(radius), org.telegram.marble.MarbleTheme.m3CornerPxF(radius), bgPaint);
                 } else {
                     canvas.drawRect(rect, bgPaint);
                 }

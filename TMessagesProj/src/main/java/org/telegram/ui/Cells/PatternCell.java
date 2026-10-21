@@ -234,7 +234,7 @@ public class PatternCell extends BackupImageView implements DownloadController.F
                 backgroundPaint.setColor(backgroundColor);
             }
             rect.set(0, 0, getMeasuredWidth(), getMeasuredHeight());
-            canvas.drawRoundRect(rect, AndroidUtilities.dp(6), AndroidUtilities.dp(6), backgroundPaint);
+            canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(6)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(6)), backgroundPaint);
         }
 
         super.onDraw(canvas);

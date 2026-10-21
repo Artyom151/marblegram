@@ -405,7 +405,7 @@ public class GiftPremiumBottomSheet extends BottomSheetWithRecyclerListView impl
                                 if (discountView.getVisibility() == VISIBLE) {
                                     AndroidUtilities.rectTmp.set(discountView.getLeft(), discountView.getTop(), discountView.getRight(), discountView.getBottom());
                                     gradientTools.gradientMatrix(0, 0, getMeasuredWidth(), totalGradientHeight, 0, -tier.yOffset);
-                                    canvas.drawRoundRect(AndroidUtilities.rectTmp, AndroidUtilities.dp(6), AndroidUtilities.dp(6), gradientTools.paint);
+                                    canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(6)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(6)), gradientTools.paint);
                                 }
 
                                 float progress = progressRef.get();
@@ -413,7 +413,7 @@ public class GiftPremiumBottomSheet extends BottomSheetWithRecyclerListView impl
                                 outlineGradient.paint.setAlpha((int) (progress * alpha));
                                 AndroidUtilities.rectTmp.set(AndroidUtilities.dp(20), AndroidUtilities.dp(3), getWidth() - AndroidUtilities.dp(20), getHeight() - AndroidUtilities.dp(3));
                                 outlineGradient.gradientMatrix(0, 0, getMeasuredWidth(), getMeasuredHeight(), 0, 0);
-                                canvas.drawRoundRect(AndroidUtilities.rectTmp, AndroidUtilities.dp(12), AndroidUtilities.dp(12), outlineGradient.paint);
+                                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(12)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(12)), outlineGradient.paint);
                                 outlineGradient.paint.setAlpha(alpha);
 
                                 super.dispatchDraw(canvas);

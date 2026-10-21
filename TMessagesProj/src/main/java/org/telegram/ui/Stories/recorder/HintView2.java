@@ -89,7 +89,7 @@ public class HintView2 extends View {
     private boolean closeButton;
 
     private boolean roundWithCornerEffect = true;
-    protected float rounding = dp(8);
+    protected float rounding = dp(org.telegram.marble.MarbleTheme.expressiveShapes() ? 12 : 8); // Marblegram: M3 rich tooltip corner
     private final RectF innerPadding = new RectF(dp(11), dp(6), dp(11), dp(7));
     private float closeButtonMargin = dp(2);
     private float arrowHalfWidth = dp(7);

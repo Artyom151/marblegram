@@ -372,7 +372,7 @@ public class ReportBottomSheet extends BottomSheet {
             top = Math.max(AndroidUtilities.statusBarHeight, top) - AndroidUtilities.statusBarHeight * actionBarT;
             AndroidUtilities.rectTmp.set(backgroundPaddingLeft, top, getWidth() - backgroundPaddingLeft, getHeight() + dp(8));
             final float r = AndroidUtilities.lerp(dp(14), 0, actionBarT);
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, r, r, backgroundPaint);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), backgroundPaint);
             canvas.save();
             path.rewind();
             path.addRoundRect(AndroidUtilities.rectTmp, r, r, Path.Direction.CW);

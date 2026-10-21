@@ -102,8 +102,18 @@ public class ContextProgressView extends View {
         int x = getMeasuredWidth() / 2 - AndroidUtilities.dp(9);
         int y = getMeasuredHeight() / 2 - AndroidUtilities.dp(9);
         cicleRect.set(x, y, x + AndroidUtilities.dp(18), y + AndroidUtilities.dp(18));
+        if (org.telegram.marble.MarbleTheme.isEnabled()) {
+            if (m3Indicator == null) {
+                m3Indicator = new org.telegram.marble.LoadingIndicator();
+            }
+            m3Indicator.setColor(outerPaint.getColor());
+            m3Indicator.setAlpha(outerPaint.getAlpha());
+            m3Indicator.draw(canvas, getMeasuredWidth() / 2f, getMeasuredHeight() / 2f, AndroidUtilities.dp(22), this);
+            return;
+        }
         canvas.drawCircle(getMeasuredWidth() / 2, getMeasuredHeight() / 2, AndroidUtilities.dp(9), innerPaint);
         canvas.drawArc(cicleRect, -90 + radOffset, 90, false, outerPaint);
         invalidate();
     }
+    private org.telegram.marble.LoadingIndicator m3Indicator;
 }

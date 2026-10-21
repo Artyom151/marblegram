@@ -130,13 +130,13 @@ public class ReactionTabHolderView extends FrameLayout {
     protected void dispatchDraw(Canvas canvas) {
         rect.set(0, 0, getWidth(), getHeight());
 
-        canvas.drawRoundRect(rect, radius, radius, bgPaint);
+        canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(radius), org.telegram.marble.MarbleTheme.m3CornerPxF(radius), bgPaint);
         super.dispatchDraw(canvas);
 
 //        outlinePaint.setAlpha((int) (outlineProgress * 0xFF));
 //        float w = outlinePaint.getStrokeWidth();
 //        rect.set(w, w, getWidth() - w, getHeight() - w);
-//        canvas.drawRoundRect(rect, radius, radius, outlinePaint);
+//        canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(radius), org.telegram.marble.MarbleTheme.m3CornerPxF(radius), outlinePaint);
     }
 
     @Override

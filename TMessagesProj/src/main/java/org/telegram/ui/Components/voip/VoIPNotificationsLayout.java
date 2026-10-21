@@ -257,13 +257,13 @@ public class VoIPNotificationsLayout extends LinearLayout {
             int oldDarkAlpha = backgroundProvider.getDarkPaint(ignoreShader).getAlpha();
             canvas.saveLayerAlpha(0, 0, getMeasuredWidth(), getMeasuredHeight(), oldDarkAlpha, Canvas.ALL_SAVE_FLAG);
             backgroundProvider.getDarkPaint(ignoreShader).setAlpha(255);
-            canvas.drawRoundRect(bgRect, dp(16), dp(16), backgroundProvider.getDarkPaint(ignoreShader));
+            canvas.drawRoundRect(bgRect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(16)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(16)), backgroundProvider.getDarkPaint(ignoreShader));
             backgroundProvider.getDarkPaint(ignoreShader).setAlpha(oldDarkAlpha);
 
             if (backgroundProvider.isReveal()) {
                 int oldRevealDarkAlpha = backgroundProvider.getRevealDarkPaint().getAlpha();
                 backgroundProvider.getRevealDarkPaint().setAlpha(255);
-                canvas.drawRoundRect(bgRect, dp(16), dp(16), backgroundProvider.getRevealDarkPaint());
+                canvas.drawRoundRect(bgRect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(16)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(16)), backgroundProvider.getRevealDarkPaint());
                 backgroundProvider.getRevealDarkPaint().setAlpha(oldRevealDarkAlpha);
             }
             canvas.restore();

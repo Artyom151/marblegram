@@ -1,0 +1,10 @@
+{
+  "id": "hello_lua",
+  "name": "Hello Lua",
+  "author": "Marblegram",
+  "version": "1.0",
+  "description": "Отвечает pong на !ping, считает ваши сообщения и добавляет кнопку.",
+  "language": "lua",
+  "main": "main.lua",
+  "min_sdk": 1
+}

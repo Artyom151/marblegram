@@ -1159,7 +1159,7 @@ public class BlurringShader {
                                 bounds.bottom - rect.bottom
                             );
                             dimPaint.setColor(0x66000000);
-                            canvas.drawRoundRect(AndroidUtilities.rectTmp, r, r, dimPaint);
+                            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), dimPaint);
                         } else {
                             if (r > 0) {
                                 AndroidUtilities.rectTmp.set(bounds);
@@ -1172,7 +1172,7 @@ public class BlurringShader {
                                     drawRect(canvas, 0, 0, 1, false);
                                     canvas.restore();
                                 } else {
-                                    canvas.drawRoundRect(AndroidUtilities.rectTmp, r, r, paint);
+                                    canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), paint);
                                 }
                             } else {
                                 if (manager != null && manager.hasRenderNode()) {
@@ -1188,7 +1188,7 @@ public class BlurringShader {
                             dimPaint.setColor(0x66000000);
                             if (r > 0) {
                                 AndroidUtilities.rectTmp.set(bounds);
-                                canvas.drawRoundRect(AndroidUtilities.rectTmp, r, r, dimPaint);
+                                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), dimPaint);
                             } else {
                                 canvas.drawRect(bounds, dimPaint);
                             }
@@ -1200,7 +1200,7 @@ public class BlurringShader {
                         dimPaint.setColor(-14145495);
                         if (r > 0) {
                             AndroidUtilities.rectTmp.set(bounds);
-                            canvas.drawRoundRect(AndroidUtilities.rectTmp, r, r, dimPaint);
+                            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), dimPaint);
                         } else {
                             canvas.drawRect(bounds, dimPaint);
                         }

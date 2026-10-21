@@ -72,7 +72,7 @@ public class VoIPStatusTextView extends FrameLayout {
                 float x = getX() + ((View) getParent()).getX() + VoIPStatusTextView.this.getX() + ((View) VoIPStatusTextView.this.getParent()).getX();
                 float y = getY() + ((View) getParent()).getY() + VoIPStatusTextView.this.getY() + ((View) VoIPStatusTextView.this.getParent()).getY();
                 backgroundProvider.setDarkTranslation(x, y);
-                canvas.drawRoundRect(bgRect, dp(16), dp(16), backgroundProvider.getDarkPaint());
+                canvas.drawRoundRect(bgRect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(16)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(16)), backgroundProvider.getDarkPaint());
                 super.onDraw(canvas);
             }
         };

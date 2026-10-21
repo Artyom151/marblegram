@@ -334,7 +334,7 @@ public class PaidReactionButton extends View {
                 canvas.scale(scale, scale);
                 canvas.translate(-w / 2f, -h / 2f);
 
-                canvas.drawRoundRect(0, 0, w, h, h / 2, h / 2, backgroundPaint);
+                canvas.drawRoundRect(0, 0, w, h, org.telegram.marble.MarbleTheme.m3CornerPxF(h / 2), org.telegram.marble.MarbleTheme.m3CornerPxF(h / 2), backgroundPaint);
                 imageReceiver.draw(canvas);
 
                 text.draw(canvas, dp(2 + 14 + 2), h / 2, 0xFFFFFFFF, alpha);
@@ -472,10 +472,10 @@ public class PaidReactionButton extends View {
             AndroidUtilities.rectTmp.set(getWidth() - countTextWidth, 0, getWidth(), dp(13));
             canvas.scale(s, s, AndroidUtilities.rectTmp.centerX(), AndroidUtilities.rectTmp.centerY());
             AndroidUtilities.rectTmp.inset(-dp(2), -dp(2));
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, AndroidUtilities.rectTmp.height() / 2, AndroidUtilities.rectTmp.height() / 2, clearPaint);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.rectTmp.height() / 2), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.rectTmp.height() / 2), clearPaint);
 
             AndroidUtilities.rectTmp.set(getWidth() - countTextWidth, 0, getWidth(), dp(13));
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, AndroidUtilities.rectTmp.height() / 2, AndroidUtilities.rectTmp.height() / 2, backgroundPaint);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.rectTmp.height() / 2), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.rectTmp.height() / 2), backgroundPaint);
             canvas.translate(AndroidUtilities.rectTmp.left + (countTextWidth - countText.getCurrentWidth()) / 2.0f, dp(6.33f));
             countText.setTextColor(ColorUtils.blendARGB(0xFF697278, 0xFFFFFFFF, filled));
             countText.draw(canvas);

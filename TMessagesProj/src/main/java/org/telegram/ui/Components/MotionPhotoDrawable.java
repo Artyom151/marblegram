@@ -67,7 +67,7 @@ public class MotionPhotoDrawable extends Drawable {
         final float r = dpf2(10.66f);
 
         AndroidUtilities.rectTmp.set(cx - r, cy - r, cx + r, cy + r);
-        canvas.drawRoundRect(AndroidUtilities.rectTmp, dpf2(8.33f), dpf2(8.33f), strokePaint);
+        canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dpf2(8.33f)), org.telegram.marble.MarbleTheme.m3CornerPxF(dpf2(8.33f)), strokePaint);
 
         if (d > 0) {
             canvas.saveLayerAlpha(AndroidUtilities.rectTmp, 0xFF, Canvas.ALL_SAVE_FLAG);

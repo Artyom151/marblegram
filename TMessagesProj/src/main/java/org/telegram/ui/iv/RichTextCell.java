@@ -1441,7 +1441,7 @@ public class RichTextCell extends FrameLayout implements Theme.Colorable, TextSe
             }
             final int r = bgLeft > 0 || bgRight < getWidth() ? dp(8) : 0;
             canvas.drawRoundRect(bgLeft, dp(CODE_BACKGROUND_OUTER_VPAD_DP), bgRight,
-                getHeight() - dp(CODE_BACKGROUND_OUTER_VPAD_DP), r, r, bgPaint);
+                getHeight() - dp(CODE_BACKGROUND_OUTER_VPAD_DP), org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), bgPaint);
         } else if (currentRow != null && currentRow.block instanceof TL_iv.pageBlockBlockquote) {
             if (quoteLine == null) {
                 quoteLine = new ReplyMessageLine(this);
@@ -1530,7 +1530,7 @@ public class RichTextCell extends FrameLayout implements Theme.Colorable, TextSe
                 right += dp(4);
                 bottom += dp(2);
                 bgPaint.setColor(Theme.multAlpha(Theme.getColor(Theme.key_windowBackgroundWhiteBlackText, resourcesProvider), .05f));
-                canvas.drawRoundRect(left, top, right, bottom, dp(4), dp(4), bgPaint);
+                canvas.drawRoundRect(left, top, right, bottom, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), bgPaint);
             }
         }
         TextSelectionHelper.ArticleTextSelectionHelper helper = delegate != null ? delegate.getSelectionHelper() : null;

@@ -31,7 +31,7 @@ public class CommunityAvatarDrawable extends Drawable {
 
     @Override
     public void draw(@NonNull Canvas canvas) {
-        canvas.drawRoundRect(getBounds().left, getBounds().top, getBounds().right, getBounds().bottom, radius, radius, paint);
+        canvas.drawRoundRect(getBounds().left, getBounds().top, getBounds().right, getBounds().bottom, org.telegram.marble.MarbleTheme.m3CornerPxF(radius), org.telegram.marble.MarbleTheme.m3CornerPxF(radius), paint);
         DrawableUtils.setBounds(drawable, getBounds().exactCenterX(), getBounds().exactCenterY(), dp(36), dp(36), Gravity.CENTER);
         drawable.draw(canvas);
     }

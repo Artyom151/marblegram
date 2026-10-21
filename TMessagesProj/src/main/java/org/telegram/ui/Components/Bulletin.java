@@ -1920,7 +1920,7 @@ public class Bulletin {
                         segment0 += CircularProgressDrawable.interpolator.getInterpolation((t - (667 + i * 1350)) / 667f) * 250;
                     }
                     strokePaint.setColor(Theme.multAlpha(0xFFFFFFFF, 1.0f * (1.0f - done)));
-                    canvas.drawArc(rect, -90 - segment0, -360 * Math.max(.02f, progress), false, strokePaint);
+                    org.telegram.marble.WavyProgress.drawArc(canvas, rect, -90 - segment0, -360 * Math.max(.02f, progress), strokePaint);
 
                     if (progress < 1 && done < 1) {
                         invalidate();
@@ -2441,7 +2441,7 @@ public class Bulletin {
                 canvas.restore();
             }
 
-            canvas.drawArc(rect, -90, -360 * (Math.max(0, timeLeft) / 5000.0f), false, progressPaint);
+            org.telegram.marble.WavyProgress.drawArc(canvas, rect, -90, -360 * (Math.max(0, timeLeft) / 5000.0f), progressPaint);
 
             if (lastUpdateTime != 0) {
                 long newTime = System.currentTimeMillis();

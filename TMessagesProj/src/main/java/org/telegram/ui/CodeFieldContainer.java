@@ -67,7 +67,7 @@ public class CodeFieldContainer extends LinearLayout {
                     AndroidUtilities.rectTmp.inset(offset, offset);
                 }
 
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, AndroidUtilities.dp(4), AndroidUtilities.dp(4), paint);
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(4)), paint);
             }
         }
         super.dispatchDraw(canvas);

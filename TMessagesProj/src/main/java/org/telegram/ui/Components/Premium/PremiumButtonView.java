@@ -279,10 +279,10 @@ public class PremiumButtonView extends FrameLayout implements Loadable {
             }
             if (drawGradient) {
                 PremiumGradient.getInstance().updateMainGradientMatrix(0, 0, getMeasuredWidth(), getMeasuredHeight(), -getMeasuredWidth() * 0.1f * progress, 0);
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, radius, radius, PremiumGradient.getInstance().getMainGradientPaint());
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(radius), org.telegram.marble.MarbleTheme.m3CornerPxF(radius), PremiumGradient.getInstance().getMainGradientPaint());
             } else {
                 paintOverlayPaint.setAlpha(255);
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, radius, radius, paintOverlayPaint);
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(radius), org.telegram.marble.MarbleTheme.m3CornerPxF(radius), paintOverlayPaint);
             }
             invalidate();
         }
@@ -299,10 +299,10 @@ public class PremiumButtonView extends FrameLayout implements Loadable {
                 path.addCircle(getMeasuredWidth() / 2f, getMeasuredHeight() / 2f, Math.max(getMeasuredWidth(), getMeasuredHeight()) * 1.4f * overlayProgress, Path.Direction.CW);
                 canvas.save();
                 canvas.clipPath(path);
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, radius, radius, paintOverlayPaint);
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(radius), org.telegram.marble.MarbleTheme.m3CornerPxF(radius), paintOverlayPaint);
                 canvas.restore();
             } else {
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, radius, radius, paintOverlayPaint);
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(radius), org.telegram.marble.MarbleTheme.m3CornerPxF(radius), paintOverlayPaint);
             }
 
         }

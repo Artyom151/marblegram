@@ -89,7 +89,7 @@ public class DialogCellTags {
             Theme.dialogs_tagPaint.setColor(Theme.multAlpha(color, Theme.isCurrentThemeDark() ? .20f : .10f));
 
             AndroidUtilities.rectTmp.set(0, 0, width, dp(heightDp));
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(4), dp(4), Theme.dialogs_tagPaint);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), Theme.dialogs_tagPaint);
             text.draw(canvas, dp(padDp), dp(heightDp) / 2f, color, 1.0f);
         }
     }

@@ -845,7 +845,7 @@ public class StickersAlert extends BottomSheet implements NotificationCenter.Not
                 if (radProgress != 1.0f) {
                     Theme.dialogs_onlineCirclePaint.setColor(getThemedColor(Theme.key_dialogBackground));
                     rect.set(backgroundPaddingLeft, backgroundPaddingTop + top, getMeasuredWidth() - backgroundPaddingLeft, backgroundPaddingTop + top + AndroidUtilities.dp(24));
-                    canvas.drawRoundRect(rect, AndroidUtilities.dp(12) * radProgress, AndroidUtilities.dp(12) * radProgress, Theme.dialogs_onlineCirclePaint);
+                    canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(12) * radProgress), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(12) * radProgress), Theme.dialogs_onlineCirclePaint);
                 }
 
                 float statusBarProgress = statusBarHeight / (float) AndroidUtilities.statusBarHeight;
@@ -854,7 +854,7 @@ public class StickersAlert extends BottomSheet implements NotificationCenter.Not
                 rect.set((getMeasuredWidth() - w) / 2, y, (getMeasuredWidth() + w) / 2, y + AndroidUtilities.dp(4));
                 Theme.dialogs_onlineCirclePaint.setColor(getThemedColor(Theme.key_sheet_scrollUp));
                 Theme.dialogs_onlineCirclePaint.setAlpha((int) (Theme.dialogs_onlineCirclePaint.getAlpha() * Math.max(0, Math.min(1f, (y - AndroidUtilities.statusBarHeight) / (float) AndroidUtilities.dp(16)))));
-                canvas.drawRoundRect(rect, AndroidUtilities.dp(2), AndroidUtilities.dp(2), Theme.dialogs_onlineCirclePaint);
+                canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(2)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(2)), Theme.dialogs_onlineCirclePaint);
 
                 updateLightStatusBar(statusBarHeight > AndroidUtilities.statusBarHeight / 2);
                 if (statusBarHeight > 0) {

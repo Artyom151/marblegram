@@ -460,7 +460,16 @@ public class VideoPlayerSeekBar {
 
         // circle
         setPaintColor(ColorUtils.blendARGB(circleColor, getProgress() == 0 ? Color.TRANSPARENT : smallLineColor, transitionProgress), 1f - transitionProgress);
-        canvas.drawCircle(rect.right, rect.centerY(), circleRadius * (1f - loopBack), paint);
+        if (org.telegram.marble.MarbleTheme.isEnabled()) {
+            // Marblegram: M3E slider handle — a vertical pill that narrows while dragging
+            final float s = circleRadius * (1f - loopBack) / AndroidUtilities.dp(6);
+            final float hw = AndroidUtilities.dpf2(pressed ? 1.5f : 2f) * Math.min(1f, s);
+            final float hh = AndroidUtilities.dp(11) * Math.min(1.2f, s);
+            AndroidUtilities.rectTmp.set(rect.right - hw, rect.centerY() - hh, rect.right + hw, rect.centerY() + hh);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(hw), org.telegram.marble.MarbleTheme.m3CornerPxF(hw), paint);
+        } else {
+            canvas.drawCircle(rect.right, rect.centerY(), circleRadius * (1f - loopBack), paint);
+        }
 
         drawTimestampLabel(canvas);
     }
@@ -474,7 +483,7 @@ public class VideoPlayerSeekBar {
     private void drawProgressBar(Canvas canvas, RectF rect, Paint paint) {
         float radius = AndroidUtilities.dp(AndroidUtilities.lerp(2, 1, transitionProgress));
         if (timestamps == null || timestamps.isEmpty()) {
-            canvas.drawRoundRect(rect, radius, radius, paint);
+            canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(radius), org.telegram.marble.MarbleTheme.m3CornerPxF(radius), paint);
         } else {
             float lineWidth = rect.bottom - rect.top;
             float left = horizontalPadding + AndroidUtilities.lerp(thumbWidth / 2f, 0, transitionProgress);

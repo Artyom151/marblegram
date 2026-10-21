@@ -35,7 +35,7 @@ public class HideEmojiTextView extends TextView {
     protected void onDraw(Canvas canvas) {
         bgRect.set(0, 0, getWidth(), getHeight());
         backgroundProvider.setDarkTranslation(getX() + ((View) getParent()).getX(), getY() + ((View) getParent()).getY());
-        canvas.drawRoundRect(bgRect, dp(16), dp(16), backgroundProvider.getDarkPaint());
+        canvas.drawRoundRect(bgRect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(16)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(16)), backgroundProvider.getDarkPaint());
         super.onDraw(canvas);
     }
 }

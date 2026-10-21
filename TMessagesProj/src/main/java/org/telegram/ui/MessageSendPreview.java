@@ -419,7 +419,7 @@ public class MessageSendPreview extends Dialog implements NotificationCenter.Not
                     final float r = AndroidUtilities.rectTmp.height() / 2f;
                     backgroundPaint.setColor(0x1e000000);
                     backgroundPaint.setAlpha((int) (0x1e * effectDrawable.isNotEmpty() * openProgress));
-                    canvas.drawRoundRect(AndroidUtilities.rectTmp, r, r, backgroundPaint);
+                    canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), backgroundPaint);
                     effectDrawable.setBounds(AndroidUtilities.rectTmp2);
                     effectDrawable.setAlpha((int) (0xFF * openProgress));
                     effectDrawable.draw(canvas);
@@ -1964,7 +1964,7 @@ public class MessageSendPreview extends Dialog implements NotificationCenter.Not
             cy + buttonHeight / 2f
         );
         canvas.save();
-        canvas.drawRoundRect(AndroidUtilities.rectTmp, buttonHeight / 2f, buttonHeight / 2f, buttonBgPaint);
+        canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(buttonHeight / 2f), org.telegram.marble.MarbleTheme.m3CornerPxF(buttonHeight / 2f), buttonBgPaint);
         buttonText.draw(canvas, cx - buttonWidth / 2f + dp(14), cy, 0xFFFFFFFF, 1f);
         canvas.restore();
     }

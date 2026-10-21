@@ -82,7 +82,7 @@ public class ButtonSpan extends ReplacementSpan {
         canvas.scale(s, s, AndroidUtilities.rectTmp.centerX(), AndroidUtilities.rectTmp.centerY());
         final int color = forcedColor != null ? forcedColor : Theme.getColor(Theme.key_featuredStickers_addButton, resourcesProvider);
         backgroundPaint.setColor(Theme.multAlpha(color, .15f));
-        canvas.drawRoundRect(AndroidUtilities.rectTmp, h / 2, h / 2, backgroundPaint);
+        canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(h / 2), org.telegram.marble.MarbleTheme.m3CornerPxF(h / 2), backgroundPaint);
         this.text.draw(canvas, x + dp(7), (top + bottom) / 2f, color, 1f);
         canvas.restore();
     }

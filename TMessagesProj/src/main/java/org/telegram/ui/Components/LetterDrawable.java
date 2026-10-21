@@ -121,7 +121,7 @@ public class LetterDrawable extends Drawable {
         }
         if (style == STYLE_DEFAULT) {
             rect.set(bounds.left, bounds.top, bounds.right, bounds.bottom);
-            canvas.drawRoundRect(rect, dp(8), dp(8), paint);
+            canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(8)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(8)), paint);
         }
         canvas.save();
         if (scale != 1) {

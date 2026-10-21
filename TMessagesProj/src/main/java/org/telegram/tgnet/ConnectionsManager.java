@@ -396,6 +396,12 @@ public class ConnectionsManager extends BaseController {
     }
 
     private void sendRequestInternal(TLObject object, RequestDelegate onComplete, RequestDelegateTimestamp onCompleteTimestamp, QuickAckDelegate onQuickAck, WriteToSocketDelegate onWriteToSocket, int flags, int datacenterId, int connectionType, boolean immediate, int requestToken) {
+        if (org.telegram.marble.features.MarbleGhost.shouldDrop(object)) {
+            return; // Marblegram ghost mode: this request never reaches the server
+        }
+        if (!org.telegram.marble.plugins.PluginManager.getInstance().onRequest(object)) {
+            return; // Marblegram plugin SDK: a plugin's on_request() dropped it
+        }
         if (BuildVars.LOGS_ENABLED) {
             FileLog.d("send request " + object + " with token = " + requestToken);
         }

@@ -1793,7 +1793,7 @@ public class LiveCommentsView extends FrameLayout implements NotificationCenter.
                         final float cy = (top + bottom) / 2f + dp(0);
                         rect.set(x, cy - dp(6), x + this.text.getWidth() + dp(8), cy + dp(6));
                         bg.setColor(0xFFF7424E);
-                        canvas.drawRoundRect(rect, rect.height() / 2f, rect.height() / 2f, bg);
+                        canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(rect.height() / 2f), org.telegram.marble.MarbleTheme.m3CornerPxF(rect.height() / 2f), bg);
                         this.text.draw(canvas, dp(4) + x, cy, 0xFFFFFFFF, 1.0f);
                     }
                 }, index, name.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -1829,7 +1829,7 @@ public class LiveCommentsView extends FrameLayout implements NotificationCenter.
             if (layout.getBackground() == null) {
                 backgroundPaint.setColor(Theme.multAlpha(0xFF000000, 0.50f * progress));
                 AndroidUtilities.rectTmp.set(layout.getX(), layout.getY(), layout.getX() + layout.getWidth(), layout.getY() + layout.getHeight());
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(13), dp(13), backgroundPaint);
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(13)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(13)), backgroundPaint);
             }
             this.draw(canvas);
         }

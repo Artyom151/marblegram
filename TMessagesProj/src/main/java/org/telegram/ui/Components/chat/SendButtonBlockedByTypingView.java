@@ -85,7 +85,7 @@ public class SendButtonBlockedByTypingView extends View {
         if (factorStop > 0) {
             final float s = dp(6.666f) * factorStop;
             final float r = dp(2.666f) * factorStop;
-            canvas.drawRoundRect(cx - s, cy - s, cx + s, cy + s, r, r, Theme.fillingPaint(0xFFFFFFFF));
+            canvas.drawRoundRect(cx - s, cy - s, cx + s, cy + s, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), Theme.fillingPaint(0xFFFFFFFF));
         }
     }
 }

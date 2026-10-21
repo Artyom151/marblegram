@@ -211,7 +211,7 @@ public class CommunityEditActivity extends BaseFragment implements ImageUpdater.
             protected void onDraw(Canvas canvas) {
                 p.setColor(getThemedColor(Theme.key_featuredStickers_addButton));
                 canvas.drawRoundRect(0, getHeight() / 2f - dp(14),
-                        getWidth(), getHeight() / 2f + dp(14), dp(14), dp(14), p);
+                        getWidth(), getHeight() / 2f + dp(14), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(14)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(14)), p);
                 super.onDraw(canvas);
             }
         };
@@ -237,7 +237,7 @@ public class CommunityEditActivity extends BaseFragment implements ImageUpdater.
                 if (avatarImage != null && avatarImage.getImageReceiver().hasNotThumb()) {
                     paint.setColor(0x55000000);
                     paint.setAlpha((int) (0x55 * avatarImage.getImageReceiver().getCurrentAlpha()));
-                    canvas.drawRoundRect(0, 0, getWidth(), getHeight(), dp(20), dp(20), paint);
+                    canvas.drawRoundRect(0, 0, getWidth(), getHeight(), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(20)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(20)), paint);
                 }
             }
         };

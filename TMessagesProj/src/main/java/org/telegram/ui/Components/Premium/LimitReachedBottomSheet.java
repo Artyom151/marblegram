@@ -2885,7 +2885,7 @@ public class LimitReachedBottomSheet extends BottomSheetWithRecyclerListView imp
                     canvas.translate(AndroidUtilities.rectTmp.left, AndroidUtilities.rectTmp.top);
                     AndroidUtilities.rectTmp.set(0, 0, AndroidUtilities.rectTmp.width(), AndroidUtilities.rectTmp.height());
                     gradientTools.gradientMatrix(AndroidUtilities.rectTmp);
-                    canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(15), dp(15), gradientTools.paint);
+                    canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(15)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(15)), gradientTools.paint);
                     canvas.restore();
 
                     super.dispatchDraw(canvas);

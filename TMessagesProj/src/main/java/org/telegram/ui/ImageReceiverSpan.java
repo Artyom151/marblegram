@@ -96,7 +96,7 @@ public class ImageReceiverSpan extends ReplacementSpan {
         final float t = translateY + (top + bottom) / 2f - dp(sz) / 2f;
         if (shadowEnabled) {
             AndroidUtilities.rectTmp.set(l, t, l + dp(sz), t + dp(sz));
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, radius, radius, shadowPaint);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(radius), org.telegram.marble.MarbleTheme.m3CornerPxF(radius), shadowPaint);
         }
         imageReceiver.setImageCoords(l, t, dp(sz), dp(sz));
         imageReceiver.setAlpha(paint.getAlpha() / 255f);

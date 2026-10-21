@@ -568,13 +568,13 @@ public class ThemesHorizontalListCell extends RecyclerListView implements Notifi
                         }
                         shaderMatrix.preScale(scale, scale);
                         bitmapShader.setLocalMatrix(shaderMatrix);
-                        canvas.drawRoundRect(rect, AndroidUtilities.dp(6), AndroidUtilities.dp(6), bitmapPaint);
+                        canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(6)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(6)), bitmapPaint);
                     } else {
                         backgroundDrawable.setBounds((int) rect.left, (int) rect.top, (int) rect.right, (int) rect.bottom);
                         backgroundDrawable.draw(canvas);
                     }
                 } else {
-                    canvas.drawRoundRect(rect, AndroidUtilities.dp(6), AndroidUtilities.dp(6), paint);
+                    canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(6)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(6)), paint);
                 }
 
                 button.setColor(0x66ffffff, 0xffffffff);
@@ -583,12 +583,12 @@ public class ThemesHorizontalListCell extends RecyclerListView implements Notifi
                     if ("Day".equals(themeInfo.name) || "Arctic Blue".equals(themeInfo.name)) {
                         button.setColor(0xffb3b3b3, blend(oldCheckColor, checkColor));
                         Theme.chat_instantViewRectPaint.setColor(0x2bb0b5ba);
-                        canvas.drawRoundRect(rect, AndroidUtilities.dp(6), AndroidUtilities.dp(6), Theme.chat_instantViewRectPaint);
+                        canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(6)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(6)), Theme.chat_instantViewRectPaint);
                     }
                 } else if (hasWhiteBackground) {
                     button.setColor(0xffb3b3b3, themeInfo.getPreviewOutColor());
                     Theme.chat_instantViewRectPaint.setColor(0x2bb0b5ba);
-                    canvas.drawRoundRect(rect, AndroidUtilities.dp(6), AndroidUtilities.dp(6), Theme.chat_instantViewRectPaint);
+                    canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(6)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(6)), Theme.chat_instantViewRectPaint);
                 }
 
                 inDrawable.setBounds(x + AndroidUtilities.dp(6), AndroidUtilities.dp(22), x + AndroidUtilities.dp(6 + 43), AndroidUtilities.dp(22 + 14));
@@ -608,7 +608,7 @@ public class ThemesHorizontalListCell extends RecyclerListView implements Notifi
             if (themeInfo.info != null && themeInfo.info.document == null) {
                 button.setAlpha(0.0f);
                 Theme.chat_instantViewRectPaint.setColor(0x2bb0b5ba);
-                canvas.drawRoundRect(rect, AndroidUtilities.dp(6), AndroidUtilities.dp(6), Theme.chat_instantViewRectPaint);
+                canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(6)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(6)), Theme.chat_instantViewRectPaint);
                 if (loadingDrawable != null) {
                     int newColor = Theme.getColor(Theme.key_windowBackgroundWhiteGrayText7);
                     if (loadingColor != newColor) {
@@ -623,7 +623,7 @@ public class ThemesHorizontalListCell extends RecyclerListView implements Notifi
                 button.setAlpha(1.0f - placeholderAlpha);
                 paint.setColor(Theme.getColor(Theme.key_windowBackgroundGray));
                 paint.setAlpha((int) (placeholderAlpha * 255));
-                canvas.drawRoundRect(rect, AndroidUtilities.dp(6), AndroidUtilities.dp(6), paint);
+                canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(6)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(6)), paint);
                 if (loadingDrawable != null) {
                     int newColor = Theme.getColor(Theme.key_windowBackgroundWhiteGrayText7);
                     if (loadingColor != newColor) {

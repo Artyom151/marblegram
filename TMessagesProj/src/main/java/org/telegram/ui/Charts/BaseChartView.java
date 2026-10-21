@@ -1642,7 +1642,7 @@ public abstract class BaseChartView<T extends ChartData, L extends LineViewData>
 
                 rectF.set(0, 0, w, h);
                 canvas.drawColor(Theme.getColor(Theme.key_windowBackgroundWhite, resourcesProvider));
-                canvas.drawRoundRect(rectF, AndroidUtilities.dp(6), AndroidUtilities.dp(6), xRefP);
+                canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(6)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(6)), xRefP);
             }
 
 

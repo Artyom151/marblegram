@@ -163,10 +163,25 @@ public class FragmentFloatingButton extends FrameLayout implements FactorAnimato
         } else {
             imageView.setColorFilter(Theme.getColor(Theme.key_chats_actionIcon, resourcesProvider), PorterDuff.Mode.SRC_IN);
             progressView.setProgressColor(Theme.getColor(Theme.key_chats_actionIcon, resourcesProvider));
-            setBackground(Theme.createSimpleSelectorCircleDrawable(dp(48),
-                Theme.getColor(Theme.key_featuredStickers_addButton, resourcesProvider),
-                Theme.getColor(Theme.key_featuredStickers_addButtonPressed, resourcesProvider)
-            ));
+            if (org.telegram.marble.MarbleTheme.expressiveShapes()) {
+                // M3 Expressive FAB: primaryContainer, rounded square (16dp at 56dp => 14dp at 48dp)
+                setBackground(Theme.createSimpleSelectorRoundRectDrawable(dp(14),
+                    Theme.getColor(Theme.key_chats_actionBackground, resourcesProvider),
+                    Theme.getColor(Theme.key_chats_actionPressedBackground, resourcesProvider)
+                ));
+                setOutlineProvider(new android.view.ViewOutlineProvider() {
+                    @Override
+                    public void getOutline(View view, android.graphics.Outline outline) {
+                        outline.setRoundRect(0, 0, view.getWidth(), view.getHeight(), dp(14));
+                    }
+                });
+            } else {
+                setBackground(Theme.createSimpleSelectorCircleDrawable(dp(48),
+                    Theme.getColor(Theme.key_featuredStickers_addButton, resourcesProvider),
+                    Theme.getColor(Theme.key_featuredStickers_addButtonPressed, resourcesProvider)
+                ));
+                setOutlineProvider(ViewOutlineProviderImpl.BOUNDS_OVAL);
+            }
         }
     }
 

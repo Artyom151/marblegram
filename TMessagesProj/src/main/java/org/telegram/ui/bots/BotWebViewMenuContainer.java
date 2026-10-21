@@ -850,7 +850,7 @@ public class BotWebViewMenuContainer extends FrameLayout implements Notification
 
         float radius = AndroidUtilities.dp(16) * (1f - actionBarTransitionProgress);
         AndroidUtilities.rectTmp.set(0, AndroidUtilities.lerp(swipeContainer.getTranslationY(), 0, actionBarTransitionProgress), getWidth(), swipeContainer.getTranslationY() + AndroidUtilities.dp(24) + radius);
-        canvas.drawRoundRect(AndroidUtilities.rectTmp, radius, radius,actionBarPaint );
+        canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(radius), org.telegram.marble.MarbleTheme.m3CornerPxF(radius),actionBarPaint );
 
         AndroidUtilities.rectTmp.set(0, swipeContainer.getTranslationY() + AndroidUtilities.dp(24), getWidth(), getHeight() + radius);
         canvas.drawRect(AndroidUtilities.rectTmp, backgroundPaint);

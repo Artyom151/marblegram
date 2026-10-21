@@ -185,6 +185,14 @@ public class PaintToolsView extends LinearLayout {
         float rad = Math.min(v.getWidth() - v.getPaddingLeft() - v.getPaddingRight(), v.getHeight() - v.getPaddingTop() - v.getPaddingBottom()) / 2f + AndroidUtilities.dp(3) + AndroidUtilities.dp(3) * scale;
         float cx = v.getX() + v.getWidth() / 2f + getOffsetForIndex(selectedIndex);
         float nextCx = (next != null ? next.getX() + next.getWidth() / 2f : 0f) + (nextSelectedIndex != -1 ? getOffsetForIndex(nextSelectedIndex) : 0f);
+        if (org.telegram.marble.MarbleTheme.expressiveShapes()) {
+            // Marblegram: M3E navigation-style indicator — a pill that stretches towards the next tool
+            final float x = AndroidUtilities.lerp(cx, nextCx, pr), y = v.getY() + v.getHeight() / 2f;
+            final float stretch = next != null ? Math.abs(nextCx - cx) * 0.5f * (float) Math.sin(Math.PI * pr) : 0;
+            final float hw = rad * 1.15f + stretch / 2f, hh = rad * 0.9f;
+            AndroidUtilities.rectTmp.set(x - hw, y - hh, x + hw, y + hh);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(hh), org.telegram.marble.MarbleTheme.m3CornerPxF(hh), selectorPaint);
+        } else
         canvas.drawCircle(
             AndroidUtilities.lerp(cx, nextCx, pr),
             v.getY() + v.getHeight() / 2f,

@@ -75,7 +75,7 @@ public class DiscountSpan extends ReplacementSpan {
         AndroidUtilities.rectTmp.set(x, y, x + width, y + height);
         float r = dp(4f);
         AndroidUtilities.rectTmp.inset(dp(-4.5f), dp(-1.66f));
-        canvas.drawRoundRect(AndroidUtilities.rectTmp, r, r, bgPaint);
+        canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), bgPaint);
         canvas.save();
         canvas.translate(x, y);
         layout.draw(canvas);

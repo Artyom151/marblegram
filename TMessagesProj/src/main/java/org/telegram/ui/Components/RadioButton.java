@@ -157,6 +157,10 @@ public class RadioButton extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
+        if (icon == null && org.telegram.marble.MarbleTheme.isEnabled()) {
+            drawM3(canvas);
+            return;
+        }
         float circleProgress;
         if (progress <= 0.5f) {
             paint.setColor(color);
@@ -198,6 +202,31 @@ public class RadioButton extends View {
                     (int) (getHeight() / 2f + icon.getIntrinsicHeight() / 2f)
             );
             icon.draw(canvas);
+        }
+    }
+
+    private Paint m3RingPaint, m3DotPaint;
+
+    /** Marblegram: M3 radio — 2dp ring (outline → primary) and an overshooting inner dot. */
+    private void drawM3(Canvas canvas) {
+        if (m3RingPaint == null) {
+            m3RingPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+            m3RingPaint.setStyle(Paint.Style.STROKE);
+            m3DotPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        }
+        final float p = Utilities.clamp(progress, 1, 0);
+        final int c = ColorUtils.blendARGB(color, checkedColor, p);
+        final float cx = getMeasuredWidth() / 2f, cy = getMeasuredHeight() / 2f;
+        final float stroke = AndroidUtilities.dp(2);
+        final float outer = Math.min(size, AndroidUtilities.dp(20)) / 2f - stroke / 2f;
+        m3RingPaint.setStrokeWidth(stroke);
+        m3RingPaint.setColor(c);
+        canvas.drawCircle(cx, cy, outer, m3RingPaint);
+        if (p > 0) {
+            // expressive overshoot: 0 → 1.15 → 1
+            final float s = p < 0.7f ? p / 0.7f * 1.15f : 1.15f - (p - 0.7f) / 0.3f * 0.15f;
+            m3DotPaint.setColor(c);
+            canvas.drawCircle(cx, cy, AndroidUtilities.dp(5) * s, m3DotPaint);
         }
     }
 }

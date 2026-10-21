@@ -211,14 +211,14 @@ public abstract class PrivateVideoPreviewDialogNew extends FrameLayout implement
                 AndroidUtilities.rectTmp.set(0, 0, getMeasuredWidth(), getMeasuredHeight());
                 gradientPaint[strangeCurrentPage].setAlpha(255);
                 int round = AndroidUtilities.dp(8) + (int) ((AndroidUtilities.dp(26) - AndroidUtilities.dp(8)) * (1f - openProgress1));
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, round, round, gradientPaint[strangeCurrentPage]);
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(round), org.telegram.marble.MarbleTheme.m3CornerPxF(round), gradientPaint[strangeCurrentPage]);
                 if (pageOffset > 0 && strangeCurrentPage + 1 < gradientPaint.length) {
                     gradientPaint[strangeCurrentPage + 1].setAlpha((int) (255 * pageOffset));
-                    canvas.drawRoundRect(AndroidUtilities.rectTmp, round, round, gradientPaint[strangeCurrentPage + 1]);
+                    canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(round), org.telegram.marble.MarbleTheme.m3CornerPxF(round), gradientPaint[strangeCurrentPage + 1]);
                 }
                 if (openProgress1 < 1f) {
                     whitePaint.setAlpha((int) (255 * (1f - openProgress1)));
-                    canvas.drawRoundRect(AndroidUtilities.rectTmp, round, round, whitePaint);
+                    canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(round), org.telegram.marble.MarbleTheme.m3CornerPxF(round), whitePaint);
                 }
                 super.onDraw(canvas);
 

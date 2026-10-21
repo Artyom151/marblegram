@@ -332,7 +332,7 @@ public class MessageDrawable extends Drawable {
         } else if (overrideRounding > 0) {
             newRad = 0;
         } else {
-            newRad = dp(SharedConfig.bubbleRadius);
+            newRad = dp(bubbleRadius());
         }
         int idx;
         if (isTopNear && isBottomNear) {
@@ -452,7 +452,7 @@ public class MessageDrawable extends Drawable {
         if (gradientShader == null && !isSelected && crossfadeFromDrawable == null) {
             return null;
         }
-        int newRad = dp(SharedConfig.bubbleRadius);
+        int newRad = dp(bubbleRadius());
         int idx;
         if (isTopNear && isBottomNear) {
             idx = 3;
@@ -575,14 +575,14 @@ public class MessageDrawable extends Drawable {
             rad = overrideRoundRadius;
             nearRad = overrideRoundRadius;
         } else if (overrideRounding > 0) {
-            rad = AndroidUtilities.lerp(dp(SharedConfig.bubbleRadius), Math.min(bounds.width(), bounds.height()) / 2, overrideRounding);
-            nearRad = AndroidUtilities.lerp(dp(Math.min(6, SharedConfig.bubbleRadius)), Math.min(bounds.width(), bounds.height()) / 2, overrideRounding);
+            rad = AndroidUtilities.lerp(dp(bubbleRadius()), Math.min(bounds.width(), bounds.height()) / 2, overrideRounding);
+            nearRad = AndroidUtilities.lerp(dp(nearBubbleRadius()), Math.min(bounds.width(), bounds.height()) / 2, overrideRounding);
         } else if (currentType == TYPE_PREVIEW) {
             rad = dp(6);
             nearRad = dp(6);
         } else {
-            rad = dp(SharedConfig.bubbleRadius);
-            nearRad = dp(Math.min(6, SharedConfig.bubbleRadius));
+            rad = dp(bubbleRadius());
+            nearRad = dp(nearBubbleRadius());
         }
         int smallRad = dp(6);
 
@@ -638,14 +638,14 @@ public class MessageDrawable extends Drawable {
             rad = overrideRoundRadius;
             nearRad = overrideRoundRadius;
         } else if (overrideRounding > 0) {
-            rad = AndroidUtilities.lerp(dp(SharedConfig.bubbleRadius), Math.min(bounds.width(), bounds.height()) / 2, overrideRounding);
-            nearRad = AndroidUtilities.lerp(dp(Math.min(6, SharedConfig.bubbleRadius)), Math.min(bounds.width(), bounds.height()) / 2, overrideRounding);
+            rad = AndroidUtilities.lerp(dp(bubbleRadius()), Math.min(bounds.width(), bounds.height()) / 2, overrideRounding);
+            nearRad = AndroidUtilities.lerp(dp(nearBubbleRadius()), Math.min(bounds.width(), bounds.height()) / 2, overrideRounding);
         } else if (currentType == TYPE_PREVIEW) {
             rad = dp(6);
             nearRad = dp(6);
         } else {
-            rad = dp(SharedConfig.bubbleRadius);
-            nearRad = dp(Math.min(6, SharedConfig.bubbleRadius));
+            rad = dp(bubbleRadius());
+            nearRad = dp(nearBubbleRadius());
         }
         int smallRad = dp(6);
         int top = Math.max(bounds.top, 0);
@@ -875,5 +875,14 @@ public class MessageDrawable extends Drawable {
         public Path getPath() {
             return path;
         }
+    }
+
+    /** Marblegram: M3 Expressive message containers use larger 20dp corners and 8dp joined corners. */
+    private static int bubbleRadius() {
+        return org.telegram.marble.MarbleTheme.expressiveShapes() ? org.telegram.marble.MarbleTheme.bubbleRadius() : SharedConfig.bubbleRadius;
+    }
+
+    private static int nearBubbleRadius() {
+        return org.telegram.marble.MarbleTheme.expressiveShapes() ? Math.min(8, org.telegram.marble.MarbleTheme.bubbleRadius()) : Math.min(6, SharedConfig.bubbleRadius);
     }
 }

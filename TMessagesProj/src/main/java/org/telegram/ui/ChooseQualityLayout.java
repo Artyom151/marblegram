@@ -220,11 +220,11 @@ public class ChooseQualityLayout {
 
             if (top_w > 0) {
                 rect.set(right - top_w, cy_top - h / 2f, right, cy_top + h / 2f);
-                canvas.drawRoundRect(rect, dp(3), dp(3), bgLinePaint);
+                canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(3)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(3)), bgLinePaint);
             }
             if (bottom_w > 0) {
                 rect.set(right - bottom_w, cy_bottom - h / 2f, right, cy_bottom + h / 2f);
-                canvas.drawRoundRect(rect, dp(3), dp(3), bgLinePaint);
+                canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(3)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(3)), bgLinePaint);
             }
 
             if (top_w * (1.0f - casting) > 0) {
@@ -232,7 +232,7 @@ public class ChooseQualityLayout {
                 topText.setAlpha((int) (0xFF * topText.isNotEmpty() * (1.0f - casting)));
                 rect.set(right - top_w, cy_top - h / 2f, right, cy_top + h / 2f);
                 rect.inset(dp(1), dp(1));
-                canvas.drawRoundRect(rect, dp(3), dp(3), bgPaint);
+                canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(3)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(3)), bgPaint);
                 rect.inset(-dp(1), -dp(1));
                 topText.setBounds(rect);
                 topText.draw(canvas);
@@ -262,7 +262,7 @@ public class ChooseQualityLayout {
                 bottomText.setAlpha((int) (0xFF * bottomText.isNotEmpty()));
                 rect.set(right - bottom_w, cy_bottom - h / 2f, right, cy_bottom + h / 2f);
                 rect.inset(dp(1), dp(1));
-                canvas.drawRoundRect(rect, dp(3), dp(3), bgPaint);
+                canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(3)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(3)), bgPaint);
                 rect.inset(-dp(1), -dp(1));
                 bottomText.setBounds(rect);
                 bottomText.draw(canvas);

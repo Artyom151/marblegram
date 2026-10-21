@@ -1666,7 +1666,7 @@ public class SelfStoryViewsPage extends FrameLayout implements NotificationCente
                 allViewersView.setAlpha(allViewersAlpha);
                 contactsViewersView.setAlpha(contactsAlpha);
                 float r = rectF.height() / 2f;
-                canvas.drawRoundRect(rectF, r, r, selectedPaint);
+                canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), selectedPaint);
             }
             super.dispatchDraw(canvas);
         }

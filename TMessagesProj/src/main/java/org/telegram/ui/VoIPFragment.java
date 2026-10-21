@@ -3246,7 +3246,7 @@ public class VoIPFragment implements
             final float width = dp(4) + avatarsDrawable.getUsedWidth() + dp(7) + text.getCurrentWidth() + dp(13);
             final float height = dp(30);
             AndroidUtilities.rectTmp.set((getWidth() - width) / 2f, 0, (getWidth() + width) / 2f, getHeight());
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, height / 2f, height / 2f, backgroundPaint);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(height / 2f), org.telegram.marble.MarbleTheme.m3CornerPxF(height / 2f), backgroundPaint);
 
             canvas.save();
             canvas.translate(AndroidUtilities.rectTmp.left + dp(4), 0);

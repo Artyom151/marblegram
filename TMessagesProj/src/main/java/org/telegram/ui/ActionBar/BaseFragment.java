@@ -543,6 +543,7 @@ public abstract class BaseFragment {
     @CallSuper
     public void onResume() {
         isPaused = false;
+        org.telegram.marble.plugins.PluginManager.getInstance().onFragmentResume(this); // Marblegram plugin SDK
         if (actionBar != null) {
             actionBar.onResume();
         }

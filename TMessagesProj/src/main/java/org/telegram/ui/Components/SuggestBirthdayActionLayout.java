@@ -144,7 +144,7 @@ public class SuggestBirthdayActionLayout {
             );
             final float s = bounce.getScale(0.1f);
             canvas.scale(s, s, buttonRect.centerX(), buttonRect.centerY());
-            canvas.drawRoundRect(buttonRect, buttonHeight / 2f, buttonHeight / 2f, buttonPaint);
+            canvas.drawRoundRect(buttonRect, org.telegram.marble.MarbleTheme.m3CornerPxF(buttonHeight / 2f), org.telegram.marble.MarbleTheme.m3CornerPxF(buttonHeight / 2f), buttonPaint);
             button.draw(canvas, buttonRect.left + dp(13), buttonRect.centerY(), 0xFFFFFFFF, 1.0f);
             canvas.restore();
         }

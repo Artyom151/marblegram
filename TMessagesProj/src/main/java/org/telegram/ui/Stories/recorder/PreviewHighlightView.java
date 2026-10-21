@@ -66,7 +66,7 @@ public class PreviewHighlightView extends FrameLayout {
                 for (int i = 0; i < storiesCount; ++i) {
                     rectF.set(x, dpf2(8), x + w, dpf2(8 + 2));
                     barPaint.setAlpha(i < storiesCount - 1 ? 0xff : 0x55 + 0x30);
-                    canvas.drawRoundRect(rectF, dpf2(1), dpf2(1), barPaint);
+                    canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dpf2(1)), org.telegram.marble.MarbleTheme.m3CornerPxF(dpf2(1)), barPaint);
                     x += w + dpf2(2);
                 }
             }

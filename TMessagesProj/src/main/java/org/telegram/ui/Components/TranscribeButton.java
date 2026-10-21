@@ -412,14 +412,14 @@ public class TranscribeButton {
         }
         AndroidUtilities.rectTmp.set(0, -dp(.4f), dp(6.666f), dp(8.333f + .4f));
         canvas.scale(alpha, alpha, AndroidUtilities.rectTmp.centerX(), AndroidUtilities.rectTmp.centerY());
-        canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(2), dp(2), clipLockPaint);
+        canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(2)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(2)), clipLockPaint);
         if (lockPaint == null) {
             lockPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         }
         lockPaint.setColor(iconColor);
         lockPaint.setAlpha((int) (0xFF * alpha));
         AndroidUtilities.rectTmp.set(0, dp(3.33f), dp(6.666f), dp(3.33f + 5));
-        canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(1.33f), dp(1.33f), lockPaint);
+        canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(1.33f)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(1.33f)), lockPaint);
         if (lockHandlePath == null || Math.abs(lockHandlePathDensity - AndroidUtilities.density) > 0.1f) {
             lockHandlePathDensity = AndroidUtilities.density;
             lockHandlePath = new Path();

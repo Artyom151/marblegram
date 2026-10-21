@@ -474,7 +474,7 @@ public class ChatGreetingsView extends LinearLayout {
                 Theme.applyServiceShaderMatrix(getMeasuredWidth(), backgroundHeight, viewTranslationX, viewTop + dp(4));
             }
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                canvas.drawRoundRect(0, 0, getWidth(), getHeight(), dp(16), dp(16), Theme.getThemePaint(Theme.key_paint_chatActionBackground, resourcesProvider));
+                canvas.drawRoundRect(0, 0, getWidth(), getHeight(), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(16)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(16)), Theme.getThemePaint(Theme.key_paint_chatActionBackground, resourcesProvider));
             }
         }
         if (!wasDraw) {

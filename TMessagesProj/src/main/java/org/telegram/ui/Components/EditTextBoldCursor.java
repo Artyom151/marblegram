@@ -1032,6 +1032,16 @@ public class EditTextBoldCursor extends EditTextEffects {
                     activeLineWidth = maxWidth * lineActivenessT;
                 }
                 int lineThickness = (int) ((lineActive ? 1 : lineActivenessT) * dp(2));
+                if (org.telegram.marble.MarbleTheme.expressiveShapes()) {
+                    // Marblegram: M3 filled text field active indicator with rounded caps
+                    AndroidUtilities.rectTmp.set(
+                        getScrollX() + Math.max(0, centerX - activeLineWidth / 2),
+                        bottom - lineThickness,
+                        getScrollX() + Math.min(centerX + activeLineWidth / 2, getMeasuredWidth()),
+                        bottom
+                    );
+                    canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(lineThickness / 2f), org.telegram.marble.MarbleTheme.m3CornerPxF(lineThickness / 2f), activeLinePaint);
+                } else
                 canvas.drawRect(
                     getScrollX() + Math.max(0, centerX - activeLineWidth / 2),
                     bottom - lineThickness,

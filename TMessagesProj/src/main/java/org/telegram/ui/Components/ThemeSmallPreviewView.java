@@ -653,12 +653,12 @@ public class ThemeSmallPreviewView extends FrameLayout implements NotificationCe
                     outlineBackgroundPaint.setAlpha((int) (wasAlpha * alpha));
                     float padding = INNER_RECT_SPACE;
                     AndroidUtilities.rectTmp.set(padding, padding, getWidth() - padding, getHeight() - padding);
-                    canvas.drawRoundRect(AndroidUtilities.rectTmp, INNER_RADIUS, INNER_RADIUS, outlineBackgroundPaint);
+                    canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(INNER_RADIUS), org.telegram.marble.MarbleTheme.m3CornerPxF(INNER_RADIUS), outlineBackgroundPaint);
                     outlineBackgroundPaint.setAlpha(wasAlpha);
                 }
                 canvas.restore();
             } else if (!(chatThemeItem != null && chatThemeItem.chatTheme != null && chatThemeItem.chatTheme.isAnyStub() && chatBackgroundDrawable != null)) {
-                canvas.drawRoundRect(rectF, INNER_RADIUS, INNER_RADIUS, backgroundFillPaint);
+                canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(INNER_RADIUS), org.telegram.marble.MarbleTheme.m3CornerPxF(INNER_RADIUS), backgroundFillPaint);
             }
         }
 
@@ -672,7 +672,7 @@ public class ThemeSmallPreviewView extends FrameLayout implements NotificationCe
                 strokePaint.setAlpha((int) (selectionProgress * alpha * 255));
                 float rectSpace = strokePaint.getStrokeWidth() * 0.5f + AndroidUtilities.dp(4) * (1f - selectionProgress);
                 rectF.set(rectSpace, rectSpace, getWidth() - rectSpace, getHeight() - rectSpace);
-                canvas.drawRoundRect(rectF, STROKE_RADIUS, STROKE_RADIUS, strokePaint);
+                canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(STROKE_RADIUS), org.telegram.marble.MarbleTheme.m3CornerPxF(STROKE_RADIUS), strokePaint);
             }
             outBubblePaintSecond.setAlpha((int) (255 * alpha));
             inBubblePaint.setAlpha((int) (255 * alpha));
@@ -680,7 +680,7 @@ public class ThemeSmallPreviewView extends FrameLayout implements NotificationCe
 
             if (chatThemeItem.chatTheme == null || (chatThemeItem.chatTheme.isAnyStub() && chatThemeItem.chatTheme.wallpaper == null)) {
                 if (fallbackWallpaper == null) {
-                    canvas.drawRoundRect(rectF, INNER_RADIUS, INNER_RADIUS, backgroundFillPaint);
+                    canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(INNER_RADIUS), org.telegram.marble.MarbleTheme.m3CornerPxF(INNER_RADIUS), backgroundFillPaint);
                     canvas.save();
                     StaticLayout textLayout = getNoThemeStaticLayout();
                     canvas.translate((getWidth() - textLayout.getWidth()) * 0.5f, AndroidUtilities.dp(18));
@@ -708,7 +708,7 @@ public class ThemeSmallPreviewView extends FrameLayout implements NotificationCe
 
                     Paint paint = currentType == TYPE_CHANNEL ? inBubblePaint : outBubblePaintSecond;
                     if (currentType == TYPE_DEFAULT || currentType == TYPE_CHANNEL) {
-                        canvas.drawRoundRect(rectF, rectF.height() * 0.5f, rectF.height() * 0.5f, paint);
+                        canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(rectF.height() * 0.5f), org.telegram.marble.MarbleTheme.m3CornerPxF(rectF.height() * 0.5f), paint);
                     } else {
                         messageDrawableOut.setBounds((int) rectF.left, (int) rectF.top - AndroidUtilities.dp(2), (int) rectF.right + AndroidUtilities.dp(4), (int) rectF.bottom + AndroidUtilities.dp(2));
                         messageDrawableOut.setRoundRadius((int) (rectF.height() * 0.5f));
@@ -728,7 +728,7 @@ public class ThemeSmallPreviewView extends FrameLayout implements NotificationCe
                     }
 
                     if (currentType == TYPE_DEFAULT || currentType == TYPE_CHANNEL) {
-                        canvas.drawRoundRect(rectF, rectF.height() * 0.5f, rectF.height() * 0.5f, inBubblePaint);
+                        canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(rectF.height() * 0.5f), org.telegram.marble.MarbleTheme.m3CornerPxF(rectF.height() * 0.5f), inBubblePaint);
 
                         if (themeUserByUserId != 0) {
                             float cy = rectF.centerY();

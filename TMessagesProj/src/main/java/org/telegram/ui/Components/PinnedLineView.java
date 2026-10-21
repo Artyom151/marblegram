@@ -189,14 +189,14 @@ public class PinnedLineView extends View {
             rectF.set(0, startY + linePadding, getMeasuredWidth(), startY + lineH - linePadding);
             if (replaceInProgress && i >= animateToTotal) {
                 paint.setColor(ColorUtils.setAlphaComponent(color, (int) ((Color.alpha(color) / 255f) * 76 * (1f - animationProgress))));
-                canvas.drawRoundRect(rectF, r, r, paint);
+                canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), paint);
                 paint.setColor(ColorUtils.setAlphaComponent(color, (int) ((Color.alpha(color) / 255f) * 76)));
             } else if (replaceInProgress && i >= animateFromTotal) {
                 paint.setColor(ColorUtils.setAlphaComponent(color, (int) ((Color.alpha(color) / 255f) * 76 * animationProgress)));
-                canvas.drawRoundRect(rectF, r, r, paint);
+                canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), paint);
                 paint.setColor(ColorUtils.setAlphaComponent(color, (int) ((Color.alpha(color) / 255f) * 76)));
             } else {
-                canvas.drawRoundRect(rectF, r, r, paint);
+                canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), paint);
             }
 
         }
@@ -204,11 +204,11 @@ public class PinnedLineView extends View {
         if (animationInProgress) {
             float startY = viewPadding + (animateFromPosition * (1f - animationProgress) + animateToPosition * animationProgress) * lineH - startOffset;
             rectF.set(0, startY + linePadding, getMeasuredWidth(), startY + lineH - linePadding);
-            canvas.drawRoundRect(rectF, r, r, selectedPaint);
+            canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), selectedPaint);
         } else {
             float startY = viewPadding + selectedPosition * lineH - startOffset;
             rectF.set(0, startY + linePadding, getMeasuredWidth(), startY + lineH - linePadding);
-            canvas.drawRoundRect(rectF, r, r, selectedPaint);
+            canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), selectedPaint);
         }
 
         final boolean drawFade = needDrawFade;

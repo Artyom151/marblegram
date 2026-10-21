@@ -421,7 +421,7 @@ public class StickerMasksAlert extends BottomSheet implements NotificationCenter
                 if (rad != 1.0f) {
                     Theme.dialogs_onlineCirclePaint.setColor(0xff252525);
                     rect.set(backgroundPaddingLeft, backgroundPaddingTop + top, getMeasuredWidth() - backgroundPaddingLeft, backgroundPaddingTop + top + AndroidUtilities.dp(24));
-                    canvas.drawRoundRect(rect, AndroidUtilities.dp(12) * rad, AndroidUtilities.dp(12) * rad, Theme.dialogs_onlineCirclePaint);
+                    canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(12) * rad), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(12) * rad), Theme.dialogs_onlineCirclePaint);
                 }
 
                 long newTime = SystemClock.elapsedRealtime();
@@ -438,7 +438,7 @@ public class StickerMasksAlert extends BottomSheet implements NotificationCenter
                     int alpha = Color.alpha(color);
                     Theme.dialogs_onlineCirclePaint.setColor(color);
                     Theme.dialogs_onlineCirclePaint.setAlpha((int) (alpha * alphaProgress * rad));
-                    canvas.drawRoundRect(rect, AndroidUtilities.dp(2), AndroidUtilities.dp(2), Theme.dialogs_onlineCirclePaint);
+                    canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(2)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(2)), Theme.dialogs_onlineCirclePaint);
                     if (statusBarProgress > 0.0f) {
                         statusBarProgress -= dt / 180.0f;
                         if (statusBarProgress < 0.0f) {

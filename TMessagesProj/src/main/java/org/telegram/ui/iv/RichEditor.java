@@ -423,7 +423,7 @@ public class RichEditor extends BaseFragment implements NotificationCenter.Notif
                     animateInputBackground.setBounds(tempRect);
 
                     rect.inset(dp(7), dp(7));
-                    canvas.drawRoundRect(rect, rad, rad, bgPaint);
+                    canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(rad), org.telegram.marble.MarbleTheme.m3CornerPxF(rad), bgPaint);
 
                     if (animateEnterView != null) {
                         canvas.save();
@@ -1164,7 +1164,8 @@ public class RichEditor extends BaseFragment implements NotificationCenter.Notif
                 bounds.top + vertPadding,
                 bounds.right - horizPadding,
                 bounds.bottom - vertPadding + dp(6) * dragging,
-                radius, radius,
+                org.telegram.marble.MarbleTheme.m3CornerPxF(radius),
+                org.telegram.marble.MarbleTheme.m3CornerPxF(radius),
                 paint
             );
         }

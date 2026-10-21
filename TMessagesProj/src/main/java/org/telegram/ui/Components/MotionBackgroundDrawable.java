@@ -572,9 +572,9 @@ public class MotionBackgroundDrawable extends Drawable {
                         motionBackgroundPaint.applyPatternMatrix(matrix);
                         motionBackgroundPaint.applyGradientMatrix(rect);
 
-                        canvas.drawRoundRect(rect, roundRadius, roundRadius, paint);
+                        canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(roundRadius), org.telegram.marble.MarbleTheme.m3CornerPxF(roundRadius), paint);
                     } else {
-                        canvas.drawRoundRect(rect, roundRadius, roundRadius, paint2);
+                        canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(roundRadius), org.telegram.marble.MarbleTheme.m3CornerPxF(roundRadius), paint2);
                     }
                     drawGiftImageForNegativeIntensity(canvas, x, y + tr, maxScale);
                 }
@@ -591,7 +591,7 @@ public class MotionBackgroundDrawable extends Drawable {
 
                 rect.set(bounds.left, bounds.top, bounds.right, bounds.bottom);
                 if (!isUseFastRender) {
-                    canvas.drawRoundRect(rect, roundRadius, roundRadius, paint);
+                    canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(roundRadius), org.telegram.marble.MarbleTheme.m3CornerPxF(roundRadius), paint);
                 }
             } else {
                 canvas.translate(0, tr);

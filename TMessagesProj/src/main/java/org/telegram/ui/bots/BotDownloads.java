@@ -753,7 +753,7 @@ public class BotDownloads {
 ////                        length += -animatedProgress.set(progress) * 360 * hasPercent;
 ////                    }
                     strokePaint.setColor(Theme.multAlpha(0xFFFFFFFF, 1.0f * (1.0f - done)));
-                    canvas.drawArc(rect, -90 - segment0, -360 * Math.max(.02f, animatedProgress.set(progress)) * hasPercent, false, strokePaint);
+                    org.telegram.marble.WavyProgress.drawArc(canvas, rect, -90 - segment0, -360 * Math.max(.02f, animatedProgress.set(progress)) * hasPercent, strokePaint);
                     invalidateSelf();
                     canvas.restore();
                 }
@@ -839,7 +839,7 @@ public class BotDownloads {
             public void draw(@NonNull Canvas canvas) {
                 rect.set(getBounds());
                 rect.inset(dp(8), dp(8));
-                canvas.drawRoundRect(rect, r, r, paint);
+                canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), paint);
 
                 final float arrowAlpha = this.arrowProgress.set(arrow);
                 final float arrowX = rect.right + dp(8) - this.arrowX.set(arrowMargin);

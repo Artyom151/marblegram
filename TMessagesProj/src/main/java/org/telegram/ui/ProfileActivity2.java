@@ -900,7 +900,7 @@ public class ProfileActivity2 extends BaseFragment implements
     public void drawBackgroundRect(Canvas canvas, RectF rect, float r, float alpha) {
         sectionPaint.setShadowLayer(dpf2(1.5f), 0, 0, multAlpha(Color.BLACK & 0x20FFFFFF, alpha));
         sectionPaint.setColor(multAlpha(getThemedColor(Theme.key_windowBackgroundWhite), alpha));
-        canvas.drawRoundRect(rect, r, r, sectionPaint);
+        canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), sectionPaint);
     }
 
     @Override
