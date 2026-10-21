@@ -1829,7 +1829,14 @@ public class ProfileGiftsContainer extends FrameLayout implements NotificationCe
 //        setBackgroundColor(backgroundColor = Theme.getColor(Theme.key_windowBackgroundGray, resourcesProvider));
 //        tabsView.setBackgroundColor(backgroundColor);
         button.updateColors();
-        button.setBackground(Theme.createRoundRectDrawable(dp(19), processColor(Theme.getColor(Theme.key_featuredStickers_addButton, resourcesProvider))));
+        if (org.telegram.marble.MarbleTheme.expressiveShapes()) {
+            // Marblegram: M3E extended FAB style for the "Добавить" / send button - tonal pill from MarbleTheme roles
+            final org.telegram.marble.MarbleTheme.Roles roles = org.telegram.marble.MarbleTheme.roles(Theme.isCurrentThemeDark());
+            button.setBackground(Theme.createRoundRectDrawable(dp(28), roles.primaryContainer));
+            button.setTextColor(roles.onPrimaryContainer);
+        } else {
+            button.setBackground(Theme.createRoundRectDrawable(dp(19), processColor(Theme.getColor(Theme.key_featuredStickers_addButton, resourcesProvider))));
+        }
         View[] pages = viewPager.getViewPages();
         if (pages != null) {
             for (int i = 0; i < pages.length; ++i) {
