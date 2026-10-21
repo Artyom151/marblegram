@@ -22399,6 +22399,21 @@ public class ChatActivity extends BaseFragment implements
             ArrayList<Integer> sentMessages = null;
             if (args.length > 6) sentMessages = (ArrayList<Integer>) args[6];
             boolean movedToScheduled = args.length > 4 && (boolean) args[4] || sentMessages != null && !sentMessages.isEmpty();
+            // Marblegram: a deletion pushed by the other party (3 args, not our own action) stays in the chat
+            // dimmed with a trash marker when "save deleted" is on. Our own deletions carry more args and are removed as usual.
+            if (args.length == 3 && !sent && chatMode == 0 && org.telegram.marble.features.MarbleHistory.saveDeleted()) {
+                ArrayList<Integer> remaining = new ArrayList<>();
+                for (Integer msg_id : markAsDeletedMessages) {
+                    MessageObject kept = messagesDict[0].get(msg_id);
+                    if (kept != null && kept.messageOwner != null) {
+                        kept.marbleDeleted = true;
+                    } else {
+                        remaining.add(msg_id);
+                    }
+                }
+                markAsDeletedMessages = remaining;
+                updateVisibleRows();
+            }
             final ArrayList<MessageObject> messages = new ArrayList<>();
             MessageObject conversionMessage = null;
             boolean conversion = false;
