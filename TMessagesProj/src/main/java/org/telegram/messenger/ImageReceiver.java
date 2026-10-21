@@ -425,6 +425,7 @@ public class ImageReceiver implements NotificationCenter.NotificationCenterDeleg
     }
 
     public void setForUserOrChat(TLObject object, Drawable avatarDrawable, Object parentObject, boolean animationEnabled, int vectorType, boolean big) {
+        marbleAvatar = true;
         if (parentObject == null) {
             parentObject = object;
         }
@@ -1876,8 +1877,18 @@ public class ImageReceiver implements NotificationCenter.NotificationCenterDeleg
     }
 
     public boolean draw(Canvas canvas) {
+        if ((marbleAvatar || staticThumbDrawable instanceof org.telegram.ui.Components.AvatarDrawable) && org.telegram.marble.MarbleShapeClip.shouldClip(this, imageW, imageH, roundRadius[0])) {
+            canvas.save();
+            org.telegram.marble.MarbleShapeClip.clip(canvas, imageX + imageW / 2f, imageY + imageH / 2f, Math.min(imageW, imageH) / 2f);
+            boolean r = draw(canvas, null);
+            canvas.restore();
+            return r;
+        }
         return draw(canvas, null);
     }
+
+    /** Marblegram: avatar images are clipped to the selected M3 Expressive shape. */
+    public boolean marbleAvatar;
 
     public boolean draw(Canvas canvas, BackgroundThreadDrawHolder backgroundThreadDrawHolder) {
         boolean result = false;

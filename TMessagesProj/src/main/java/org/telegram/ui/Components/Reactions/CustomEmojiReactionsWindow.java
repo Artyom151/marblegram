@@ -883,7 +883,7 @@ public class CustomEmojiReactionsWindow {
                     blurredBackgroundDrawable.draw(canvas);
                 } else {
                     shadow.draw(canvas);
-                    canvas.drawRoundRect(drawingRect, radius, radius, backgroundPaint);
+                    canvas.drawRoundRect(drawingRect, org.telegram.marble.MarbleTheme.m3CornerPxF(radius), org.telegram.marble.MarbleTheme.m3CornerPxF(radius), backgroundPaint);
                 }
             }
             if (reactionsContainerLayout.hintView != null) {
@@ -1031,7 +1031,7 @@ public class CustomEmojiReactionsWindow {
                                 float finalSize = AndroidUtilities.lerp(fromSize, toSize / scale, enterTransitionProgress);
                                 AndroidUtilities.rectTmp.set(cx - finalSize / 2f, cy - finalSize / 2f, cx + finalSize / 2f, cy + finalSize / 2f);
                                 float rectRadius = AndroidUtilities.lerp(fromSize / 2f, dp(4), enterTransitionProgress);
-                                canvas.drawRoundRect(AndroidUtilities.rectTmp, rectRadius, rectRadius, selectAnimatedEmojiDialog.selectorPaint);
+                                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(rectRadius), org.telegram.marble.MarbleTheme.m3CornerPxF(rectRadius), selectAnimatedEmojiDialog.selectorPaint);
                             }
                             holderView.drawSelected = false;
                             if (fromRoundRadiusLb != 0 || toRoundRadiusLb != 0) {

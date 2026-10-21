@@ -170,7 +170,7 @@ final class WalletCard3D {
                 diamondTexture = createEmptyTexture();
                 GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
                 GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, diamondTexture);
-                Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.wallet_card_diamond);
+                Bitmap bitmap = org.telegram.marble.MarbleBitmaps.decodeResource(context.getResources(), R.drawable.wallet_card_diamond);
                 setMipmappedTextureParameters();
                 GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, bitmap, 0);
                 GLES20.glGenerateMipmap(GLES20.GL_TEXTURE_2D);
@@ -470,8 +470,8 @@ final class WalletCard3D {
                         buttonRight,
                         QR_BUTTON_BOTTOM
                 ),
-                QR_BUTTON_CORNER_RADIUS,
-                QR_BUTTON_CORNER_RADIUS,
+                org.telegram.marble.MarbleTheme.m3CornerPxF(QR_BUTTON_CORNER_RADIUS),
+                org.telegram.marble.MarbleTheme.m3CornerPxF(QR_BUTTON_CORNER_RADIUS),
                 buttonPaint
         );
 

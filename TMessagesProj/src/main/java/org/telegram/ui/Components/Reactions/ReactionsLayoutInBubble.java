@@ -974,7 +974,7 @@ public class ReactionsLayoutInBubble {
                 }
                 canvas.drawPath(tagPath, paint);
             } else {
-                canvas.drawRoundRect(rectF, r, r, paint);
+                canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), paint);
             }
         }
 
@@ -1126,7 +1126,7 @@ public class ReactionsLayoutInBubble {
             if (drawOverlayScrim && getDrawServiceShaderBackground() < 1 && parentView instanceof ChatMessageCell) {
                 MessageDrawable messageBackground = ((ChatMessageCell) parentView).getCurrentBackgroundDrawable(false);
                 if (messageBackground != null && !isTag) {
-                    canvas.drawRoundRect(AndroidUtilities.rectTmp, rad, rad, messageBackground.getPaint());
+                    canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(rad), org.telegram.marble.MarbleTheme.m3CornerPxF(rad), messageBackground.getPaint());
                 }
             }
             if (cutTagCircle) {

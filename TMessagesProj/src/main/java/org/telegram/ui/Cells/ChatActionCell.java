@@ -3198,7 +3198,7 @@ public class ChatActionCell extends BaseCell implements DownloadController.FileD
                 }
                 giftReleasedBackgroundPaint.setColor(Theme.isCurrentThemeDark() ? 0x10FFFFFF : 0x10000000);
                 AndroidUtilities.rectTmp.set(_x, _cy - dp(8), _x + _w, _cy + dp(8));
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(8), dp(8), giftReleasedBackgroundPaint);
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(8)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(8)), giftReleasedBackgroundPaint);
                 giftPremiumReleasedText
                     .draw(canvas, _x + dp(6), _cy, 0xCCFFFFFF, 1.0f);
                 y += dp(16 + 8);
@@ -3359,19 +3359,19 @@ public class ChatActionCell extends BaseCell implements DownloadController.FileD
 
             if (giftPremiumButtonLayout != null) {
                 Paint backgroundPaint = getThemedPaint(Theme.key_paint_chatActionBackgroundSelected);
-                canvas.drawRoundRect(giftButtonRect, dp(15), dp(15), backgroundPaint);
+                canvas.drawRoundRect(giftButtonRect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(15)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(15)), backgroundPaint);
                 if (hasGradientService()) {
-                    canvas.drawRoundRect(giftButtonRect, dp(15), dp(15), getThemedPaint(Theme.key_paint_chatActionBackgroundDarken));
+                    canvas.drawRoundRect(giftButtonRect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(15)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(15)), getThemedPaint(Theme.key_paint_chatActionBackgroundDarken));
                 }
                 if (dimAmount > 0) {
-                    canvas.drawRoundRect(giftButtonRect, dp(15), dp(15), dimPaint);
+                    canvas.drawRoundRect(giftButtonRect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(15)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(15)), dimPaint);
                 }
 
                 if (getMessageObject().type == MessageObject.TYPE_GIFT_THEME_UPDATE || getMessageObject().type == MessageObject.TYPE_COMMUNITY_CHANGED || getMessageObject().type == MessageObject.TYPE_GIFT_OFFER) {
                     final boolean isDark = themeDelegate != null ? themeDelegate.isDark() : Theme.isCurrentThemeDark();
                     int sC = dimPaint.getColor();
                     dimPaint.setColor(isDark ? 0x24FFFFFF : 0x10000000);
-                    canvas.drawRoundRect(giftButtonRect, dp(15), dp(15), dimPaint);
+                    canvas.drawRoundRect(giftButtonRect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(15)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(15)), dimPaint);
                     dimPaint.setColor(sC);
                 }
 
@@ -3739,16 +3739,16 @@ public class ChatActionCell extends BaseCell implements DownloadController.FileD
             );
             canvas.save();
             walletActionLayout.applyCardTransform(canvas, x, y);
-            canvas.drawRoundRect(walletActionRect, dp(20), dp(20), backgroundPaint);
+            canvas.drawRoundRect(walletActionRect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(20)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(20)), backgroundPaint);
             if (hasGradientService() && darkenBackgroundPaint.getAlpha() > 0) {
-                canvas.drawRoundRect(walletActionRect, dp(20), dp(20), darkenBackgroundPaint);
+                canvas.drawRoundRect(walletActionRect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(20)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(20)), darkenBackgroundPaint);
             }
             if (dimAmount > 0) {
                 int wasAlpha = dimPaint.getAlpha();
                 if (fromParent) {
                     dimPaint.setAlpha((int) (wasAlpha * getAlpha()));
                 }
-                canvas.drawRoundRect(walletActionRect, dp(20), dp(20), dimPaint);
+                canvas.drawRoundRect(walletActionRect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(20)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(20)), dimPaint);
                 dimPaint.setAlpha(wasAlpha);
             }
             canvas.restore();
@@ -3764,10 +3764,10 @@ public class ChatActionCell extends BaseCell implements DownloadController.FileD
                 backgroundRect = new RectF();
             }
             backgroundRect.set(AndroidUtilities.rectTmp);
-            canvas.drawRoundRect(backgroundRect, dp(16), dp(16), backgroundPaint);
+            canvas.drawRoundRect(backgroundRect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(16)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(16)), backgroundPaint);
 
             if (hasGradientService()) {
-                canvas.drawRoundRect(backgroundRect, dp(16), dp(16), darkenBackgroundPaint);
+                canvas.drawRoundRect(backgroundRect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(16)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(16)), darkenBackgroundPaint);
             }
         } else if (birthdayLayout != null) {
             final float w = birthdayLayout.width();
@@ -3777,10 +3777,10 @@ public class ChatActionCell extends BaseCell implements DownloadController.FileD
                 backgroundRect = new RectF();
             }
             backgroundRect.set(x, dp(4), x + w, dp(4) + h);
-            canvas.drawRoundRect(backgroundRect, dp(16), dp(16), backgroundPaint);
+            canvas.drawRoundRect(backgroundRect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(16)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(16)), backgroundPaint);
 
             if (hasGradientService()) {
-                canvas.drawRoundRect(backgroundRect, dp(16), dp(16), darkenBackgroundPaint);
+                canvas.drawRoundRect(backgroundRect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(16)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(16)), darkenBackgroundPaint);
             }
         } else if (isButtonLayout(messageObject)) {
             float x = (getWidth() - giftRectSize) / 2f;
@@ -3816,10 +3816,10 @@ public class ChatActionCell extends BaseCell implements DownloadController.FileD
             }
 
             if (!backgroundDrawn) {
-                canvas.drawRoundRect(backgroundRect, dp(20), dp(20), backgroundPaint);
+                canvas.drawRoundRect(backgroundRect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(20)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(20)), backgroundPaint);
 
                 if (hasGradientService()) {
-                    canvas.drawRoundRect(backgroundRect, dp(20), dp(20), darkenBackgroundPaint);
+                    canvas.drawRoundRect(backgroundRect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(20)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(20)), darkenBackgroundPaint);
                 }
             }
         }

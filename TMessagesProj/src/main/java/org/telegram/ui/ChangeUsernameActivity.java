@@ -1106,10 +1106,10 @@ public class ChangeUsernameActivity extends BaseFragment {
             dragPaint.setColor(Theme.getColor(Theme.key_stickers_menu));
             dragPaint.setAlpha((int) (dragPaint.getAlpha() * activeValue));
             AndroidUtilities.rectTmp.set(getWidth() - dp(37), dp(25), getWidth() - dp(21), dp(25 + 2));
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(.3f), dp(.3f), dragPaint);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(.3f)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(.3f)), dragPaint);
 
             AndroidUtilities.rectTmp.set(getWidth() - dp(37), dp(25 + 6), getWidth() - dp(21), dp(25 + 2 + 6));
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(.3f), dp(.3f), dragPaint);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(.3f)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(.3f)), dragPaint);
         }
     }
 

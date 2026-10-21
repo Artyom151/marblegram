@@ -311,7 +311,7 @@ public class AlertDialog extends Dialog implements Drawable.Callback, Notificati
 
         backgroundPaddings = new Rect();
         if (progressStyle != ALERT_TYPE_SPINNER || blurredBackground) {
-            shadowDrawable = context.getResources().getDrawable(R.drawable.popup_fixed_alert4).mutate();
+            shadowDrawable = org.telegram.marble.MarbleTheme.expressiveShapes() ? org.telegram.marble.MarbleSurfaceDrawable.dialog() : context.getResources().getDrawable(R.drawable.popup_fixed_alert4).mutate();
             blurOpacity = progressStyle == ALERT_TYPE_SPINNER ? 0.55f : (isDark ? 0.80f : 0.985f);
             shadowDrawable.setColorFilter(new PorterDuffColorFilter(backgroundColor, PorterDuff.Mode.MULTIPLY));
             shadowDrawable.getPadding(backgroundPaddings);
@@ -582,7 +582,7 @@ public class AlertDialog extends Dialog implements Drawable.Callback, Notificati
                 float blurAlpha = blurPaintAlpha.set(blurPaint != null ? 1f : 0f);
                 if (blurPaint != null) {
                     blurPaint.setAlpha((int) (0xFF * blurAlpha));
-                    canvas.drawRoundRect(AndroidUtilities.rectTmp, r, r, blurPaint);
+                    canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), blurPaint);
                 }
 
                 // draw dim above blur
@@ -590,12 +590,12 @@ public class AlertDialog extends Dialog implements Drawable.Callback, Notificati
                     dimBlurPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
                     dimBlurPaint.setColor(ColorUtils.setAlphaComponent(0xff000000, (int) (0xFF * dimAlpha)));
                 }
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, r, r, dimBlurPaint);
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), dimBlurPaint);
 
                 // draw background
                 backgroundPaint.setColor(backgroundColor);
                 backgroundPaint.setAlpha((int) (backgroundPaint.getAlpha() * (blurAlpha * (blurOpacity - 1f) + 1f)));
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, r, r, backgroundPaint);
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), backgroundPaint);
             }
             super.draw(canvas);
         }
@@ -790,7 +790,7 @@ public class AlertDialog extends Dialog implements Drawable.Callback, Notificati
             titleTextView.cacheType = AnimatedEmojiDrawable.CACHE_TYPE_ALERT_PREVIEW;
             titleTextView.setText(title);
             titleTextView.setTextColor(getThemedColor(Theme.key_dialogTextBlack));
-            titleTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
+            titleTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, org.telegram.marble.MarbleTheme.expressiveTypography() ? 24 : 20); // M3 headlineSmall
             titleTextView.setTypeface(AndroidUtilities.bold());
             titleTextView.setGravity((topAnimationIsNew ? Gravity.CENTER_HORIZONTAL : LocaleController.isRTL ? Gravity.RIGHT : Gravity.LEFT) | Gravity.TOP);
             titleContainer.addView(titleTextView, LayoutHelper.createFrame(LayoutHelper.WRAP_CONTENT, LayoutHelper.WRAP_CONTENT, (topAnimationIsNew ? Gravity.CENTER_HORIZONTAL : LocaleController.isRTL ? Gravity.RIGHT : Gravity.LEFT) | Gravity.TOP, 0, 19, 0, topAnimationIsNew ? 4 : (subtitle != null ? 2 : (items != null ? 14 : 10))));
@@ -849,7 +849,7 @@ public class AlertDialog extends Dialog implements Drawable.Callback, Notificati
         messageTextView = new EffectsTextView(getContext());
         NotificationCenter.listenEmojiLoading(messageTextView);
         messageTextView.setTextColor(getThemedColor(topAnimationIsNew ? Theme.key_windowBackgroundWhiteGrayText : Theme.key_dialogTextBlack));
-        messageTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16);
+        messageTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, org.telegram.marble.MarbleTheme.expressiveTypography() ? 14 : 16); // M3 bodyMedium
         messageTextView.setMovementMethod(new AndroidUtilities.LinkMovementMethodMy());
         messageTextView.setLinkTextColor(getThemedColor(Theme.key_dialogTextLink));
         if (!messageTextViewClickable) {
@@ -1125,7 +1125,7 @@ public class AlertDialog extends Dialog implements Drawable.Callback, Notificati
                 };
                 textView.setMinWidth(dp(64));
                 textView.setTag(Dialog.BUTTON_POSITIVE);
-                textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16);
+                textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, org.telegram.marble.MarbleTheme.expressiveTypography() ? 14 : 16); // M3 labelLarge
                 textView.setTextColor(getThemedColor(dialogButtonColorKey));
                 textView.setGravity(Gravity.CENTER);
                 textView.setTypeface(AndroidUtilities.bold());
@@ -1164,7 +1164,7 @@ public class AlertDialog extends Dialog implements Drawable.Callback, Notificati
                 };
                 textView.setMinWidth(dp(64));
                 textView.setTag(Dialog.BUTTON_NEGATIVE);
-                textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16);
+                textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, org.telegram.marble.MarbleTheme.expressiveTypography() ? 14 : 16); // M3 labelLarge
                 textView.setTextColor(getThemedColor(dialogButtonColorKey));
                 textView.setGravity(Gravity.CENTER);
                 textView.setTypeface(AndroidUtilities.bold());
@@ -1205,7 +1205,7 @@ public class AlertDialog extends Dialog implements Drawable.Callback, Notificati
                 };
                 textView.setMinWidth(dp(64));
                 textView.setTag(Dialog.BUTTON_NEUTRAL);
-                textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16);
+                textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, org.telegram.marble.MarbleTheme.expressiveTypography() ? 14 : 16); // M3 labelLarge
                 textView.setTextColor(getThemedColor(dialogButtonColorKey));
                 textView.setGravity(Gravity.CENTER);
                 textView.setTypeface(AndroidUtilities.bold());
@@ -1246,7 +1246,7 @@ public class AlertDialog extends Dialog implements Drawable.Callback, Notificati
                 };
                 textView.setMinWidth(dp(64));
                 textView.setTag(AlertDialog.BUTTON_NEGATIVE_2);
-                textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16);
+                textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, org.telegram.marble.MarbleTheme.expressiveTypography() ? 14 : 16); // M3 labelLarge
                 textView.setTextColor(getThemedColor(dialogButtonColorKey));
                 textView.setGravity(Gravity.CENTER);
                 textView.setTypeface(AndroidUtilities.bold());

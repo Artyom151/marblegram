@@ -76,6 +76,7 @@ public class FlickerLoadingView extends View implements Theme.Colorable {
     private boolean showDate = true;
     private boolean useHeaderOffset;
     private boolean isSingleCell;
+    private org.telegram.marble.LoadingIndicator m3Indicator;
 
     private int viewType;
     private int paddingTop;
@@ -158,6 +159,20 @@ public class FlickerLoadingView extends View implements Theme.Colorable {
 
     @Override
     protected void onDraw(Canvas canvas) {
+        if (getViewType() == DIALOG_CELL_TYPE && !isSingleCell && org.telegram.marble.MarbleTheme.isEnabled()) {
+            // Marblegram: chat list loading uses ContainedLoadingIndicator instead of skeleton cells
+            if (m3Indicator == null) {
+                m3Indicator = new org.telegram.marble.LoadingIndicator();
+            }
+            org.telegram.marble.MarbleTheme.Roles roles = org.telegram.marble.MarbleTheme.roles(Theme.isCurrentThemeDark());
+            final boolean contained = org.telegram.marble.MarbleTheme.containedLoading();
+            m3Indicator.setContainerColor(contained ? roles.primaryContainer : 0);
+            m3Indicator.setColor(contained ? roles.onPrimaryContainer : roles.primary);
+            float top = paddingTop;
+            float cy = top + Math.max(dp(96), (getMeasuredHeight() - top) / 2f - dp(48));
+            m3Indicator.draw(canvas, getMeasuredWidth() / 2f, cy, dp(48), this);
+            return;
+        }
         Paint paint = this.paint;
         if (globalGradientView != null) {
             if (getParent() != null) {
@@ -191,22 +206,22 @@ public class FlickerLoadingView extends View implements Theme.Colorable {
 
                 rectF.set(dp(76), h + dp(16), dp(148), h + dp(24));
                 checkRtl(rectF);
-                canvas.drawRoundRect(rectF, dp(4), dp(4), paint);
+                canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), paint);
 
                 rectF.set(dp(76), h + dp(38), dp(268), h + dp(46));
                 checkRtl(rectF);
-                canvas.drawRoundRect(rectF, dp(4), dp(4), paint);
+                canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), paint);
 
                 if (SharedConfig.useThreeLinesLayout) {
                     rectF.set(dp(76), h + dp(46 + 8), dp(220), h + dp(46 + 8 + 8));
                     checkRtl(rectF);
-                    canvas.drawRoundRect(rectF, dp(4), dp(4), paint);
+                    canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), paint);
                 }
 
                 if (showDate) {
                     rectF.set(getMeasuredWidth() - dp(50), h + dp(16), getMeasuredWidth() - dp(12), h + dp(24));
                     checkRtl(rectF);
-                    canvas.drawRoundRect(rectF, dp(4), dp(4), paint);
+                    canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), paint);
                 }
 
                 h += getCellHeight(getMeasuredWidth());
@@ -225,22 +240,22 @@ public class FlickerLoadingView extends View implements Theme.Colorable {
                 canvas.translate(0, -dp(4));
                 rectF.set(dp(50), h + dp(16), dp(148), h + dp(24));
                 checkRtl(rectF);
-                canvas.drawRoundRect(rectF, dp(4), dp(4), paint);
+                canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), paint);
 
                 rectF.set(dp(50), h + dp(38), dp(268), h + dp(46));
                 checkRtl(rectF);
-                canvas.drawRoundRect(rectF, dp(4), dp(4), paint);
+                canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), paint);
 
                 if (SharedConfig.useThreeLinesLayout) {
                     rectF.set(dp(50), h + dp(46 + 8), dp(220), h + dp(46 + 8 + 8));
                     checkRtl(rectF);
-                    canvas.drawRoundRect(rectF, dp(4), dp(4), paint);
+                    canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), paint);
                 }
 
                 if (showDate) {
                     rectF.set(getMeasuredWidth() - dp(50), h + dp(16), getMeasuredWidth() - dp(12), h + dp(24));
                     checkRtl(rectF);
-                    canvas.drawRoundRect(rectF, dp(4), dp(4), paint);
+                    canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), paint);
                 }
                 canvas.restore();
 
@@ -260,15 +275,15 @@ public class FlickerLoadingView extends View implements Theme.Colorable {
                 int firstNameWidth = k % 2 == 0 ? 52 : 72;
                 rectF.set(dp(textStart), h + dp(20), dp(textStart + firstNameWidth), h + dp(28));
                 checkRtl(rectF);
-                canvas.drawRoundRect(rectF, dp(4), dp(4), paint);
+                canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), paint);
 
                 rectF.set(dp(textStart + firstNameWidth + 8), h + dp(20), dp(textStart + firstNameWidth + 8 + 84), h + dp(28));
                 checkRtl(rectF);
-                canvas.drawRoundRect(rectF, dp(4), dp(4), paint);
+                canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), paint);
 
                 rectF.set(dp(textStart), h + dp(42), dp(textStart + 64), h + dp(50));
                 checkRtl(rectF);
-                canvas.drawRoundRect(rectF, dp(4), dp(4), paint);
+                canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), paint);
 
                 canvas.drawLine(dp(textStart), h + getCellHeight(getMeasuredWidth()), getMeasuredWidth(), h + getCellHeight(getMeasuredWidth()), paint);
 
@@ -288,24 +303,24 @@ public class FlickerLoadingView extends View implements Theme.Colorable {
                     canvas.drawCircle(paddingLeft + dp(36), h + dp(35), dp(23), paint);
                 } else {
                     rectF.set(paddingLeft + dp(15), h + dp(6), paddingLeft + dp(61), h + dp(52));
-                    canvas.drawRoundRect(rectF, dp(8), dp(8), paint);
+                    canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(8)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(8)), paint);
                 }
 
                 final float textLeft = paddingLeft + dp(71);
                 final float textRight = Math.max(textLeft, getMeasuredWidth() - dp(transaction ? 76 : 20));
                 rectF.set(textLeft, h + dp(14), Math.min(textLeft + dp(100), textRight), h + dp(22));
-                canvas.drawRoundRect(rectF, dp(4), dp(4), paint);
+                canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), paint);
 
                 rectF.set(textLeft, h + dp(transaction ? 33 : 36), Math.min(textLeft + dp(140), textRight), h + dp(transaction ? 41 : 44));
-                canvas.drawRoundRect(rectF, dp(4), dp(4), paint);
+                canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), paint);
 
                 if (transaction) {
                     rectF.set(textLeft, h + dp(51), Math.min(textLeft + dp(80), textRight), h + dp(59));
-                    canvas.drawRoundRect(rectF, dp(4), dp(4), paint);
+                    canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), paint);
 
                     if (getMeasuredWidth() - dp(68) >= textLeft) {
                         rectF.set(getMeasuredWidth() - dp(68), h + dp(15), getMeasuredWidth() - dp(20), h + dp(23));
-                        canvas.drawRoundRect(rectF, dp(4), dp(4), paint);
+                        canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), paint);
                     }
                 }
 
@@ -325,11 +340,11 @@ public class FlickerLoadingView extends View implements Theme.Colorable {
                 int titleWidth = k % 2 == 0 ? 92 : 128;
                 rectF.set(dp(textStart), h + dp(16), dp(textStart + titleWidth), h + dp(24));
                 checkRtl(rectF);
-                canvas.drawRoundRect(rectF, dp(4), dp(4), paint);
+                canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), paint);
 
                 rectF.set(dp(textStart), h + dp(38), dp(textStart + 164), h + dp(46));
                 checkRtl(rectF);
-                canvas.drawRoundRect(rectF, dp(4), dp(4), paint);
+                canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), paint);
 
                 canvas.drawLine(dp(textStart), h + getCellHeight(getMeasuredWidth()), getMeasuredWidth(), h + getCellHeight(getMeasuredWidth()), paint);
 
@@ -347,16 +362,16 @@ public class FlickerLoadingView extends View implements Theme.Colorable {
 
                 rectF.set(dp(68), h + dp(20), dp(140), h + dp(28));
                 checkRtl(rectF);
-                canvas.drawRoundRect(rectF, dp(4), dp(4), paint);
+                canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), paint);
 
                 rectF.set(dp(68), h + dp(42), dp(260), h + dp(50));
                 checkRtl(rectF);
-                canvas.drawRoundRect(rectF, dp(4), dp(4), paint);
+                canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), paint);
 
                 if (showDate) {
                     rectF.set(getMeasuredWidth() - dp(50), h + dp(20), getMeasuredWidth() - dp(12), h + dp(28));
                     checkRtl(rectF);
-                    canvas.drawRoundRect(rectF, dp(4), dp(4), paint);
+                    canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), paint);
                 }
 
                 h += getCellHeight(getMeasuredWidth());
@@ -388,20 +403,20 @@ public class FlickerLoadingView extends View implements Theme.Colorable {
             while (h <= getMeasuredHeight()) {
                 rectF.set(dp(12), h + dp(8), dp(52), h + dp(48));
                 checkRtl(rectF);
-                canvas.drawRoundRect(rectF, dp(4), dp(4), paint);
+                canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), paint);
 
                 rectF.set(dp(68), h + dp(12), dp(140), h + dp(20));
                 checkRtl(rectF);
-                canvas.drawRoundRect(rectF, dp(4), dp(4), paint);
+                canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), paint);
 
                 rectF.set(dp(68), h + dp(34), dp(260), h + dp(42));
                 checkRtl(rectF);
-                canvas.drawRoundRect(rectF, dp(4), dp(4), paint);
+                canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), paint);
 
                 if (showDate) {
                     rectF.set(getMeasuredWidth() - dp(50), h + dp(12), getMeasuredWidth() - dp(12), h + dp(20));
                     checkRtl(rectF);
-                    canvas.drawRoundRect(rectF, dp(4), dp(4), paint);
+                    canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), paint);
                 }
 
                 h += getCellHeight(getMeasuredWidth());
@@ -418,16 +433,16 @@ public class FlickerLoadingView extends View implements Theme.Colorable {
 
                 rectF.set(dp(68), h + dp(12), dp(140), h + dp(20));
                 checkRtl(rectF);
-                canvas.drawRoundRect(rectF, dp(4), dp(4), paint);
+                canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), paint);
 
                 rectF.set(dp(68), h + dp(34), dp(260), h + dp(42));
                 checkRtl(rectF);
-                canvas.drawRoundRect(rectF, dp(4), dp(4), paint);
+                canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), paint);
 
                 if (showDate) {
                     rectF.set(getMeasuredWidth() - dp(50), h + dp(12), getMeasuredWidth() - dp(12), h + dp(20));
                     checkRtl(rectF);
-                    canvas.drawRoundRect(rectF, dp(4), dp(4), paint);
+                    canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), paint);
                 }
 
                 h += getCellHeight(getMeasuredWidth());
@@ -441,24 +456,24 @@ public class FlickerLoadingView extends View implements Theme.Colorable {
             while (h <= getMeasuredHeight()) {
                 rectF.set(dp(10), h + dp(11), dp(62), h + dp(11 + 52));
                 checkRtl(rectF);
-                canvas.drawRoundRect(rectF, dp(4), dp(4), paint);
+                canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), paint);
 
                 rectF.set(dp(68), h + dp(12), dp(140), h + dp(20));
                 checkRtl(rectF);
-                canvas.drawRoundRect(rectF, dp(4), dp(4), paint);
+                canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), paint);
 
                 rectF.set(dp(68), h + dp(34), dp(268), h + dp(42));
                 checkRtl(rectF);
-                canvas.drawRoundRect(rectF, dp(4), dp(4), paint);
+                canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), paint);
 
                 rectF.set(dp(68), h + dp(34 + 20), dp(120 + 68), h + dp(42 + 20));
                 checkRtl(rectF);
-                canvas.drawRoundRect(rectF, dp(4), dp(4), paint);
+                canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), paint);
 
                 if (showDate) {
                     rectF.set(getMeasuredWidth() - dp(50), h + dp(12), getMeasuredWidth() - dp(12), h + dp(20));
                     checkRtl(rectF);
-                    canvas.drawRoundRect(rectF, dp(4), dp(4), paint);
+                    canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), paint);
                 }
 
                 h += getCellHeight(getMeasuredWidth());
@@ -475,16 +490,16 @@ public class FlickerLoadingView extends View implements Theme.Colorable {
 
                 rectF.set(paddingLeft + dp(68), h + dp(17), paddingLeft + dp(260), h + dp(25));
                 checkRtl(rectF);
-                canvas.drawRoundRect(rectF, dp(4), dp(4), paint);
+                canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), paint);
 
                 rectF.set(paddingLeft + dp(68), h + dp(39), paddingLeft + dp(140), h + dp(47));
                 checkRtl(rectF);
-                canvas.drawRoundRect(rectF, dp(4), dp(4), paint);
+                canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), paint);
 
                 if (showDate) {
                     rectF.set(getMeasuredWidth() - dp(50), h + dp(20), getMeasuredWidth() - dp(12), h + dp(28));
                     checkRtl(rectF);
-                    canvas.drawRoundRect(rectF, dp(4), dp(4), paint);
+                    canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), paint);
                 }
 
                 h += getCellHeight(getMeasuredWidth());
@@ -501,11 +516,11 @@ public class FlickerLoadingView extends View implements Theme.Colorable {
 
                 rectF.set(paddingLeft + dp(68), h + dp(17), paddingLeft + dp(260), h + dp(25));
                 checkRtl(rectF);
-                canvas.drawRoundRect(rectF, dp(4), dp(4), paint);
+                canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), paint);
 
                 rectF.set(paddingLeft + dp(68), h + dp(39), paddingLeft + dp(140), h + dp(47));
                 checkRtl(rectF);
-                canvas.drawRoundRect(rectF, dp(4), dp(4), paint);
+                canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), paint);
 
                 h += getCellHeight(getMeasuredWidth());
                 k++;
@@ -521,11 +536,11 @@ public class FlickerLoadingView extends View implements Theme.Colorable {
 
                 rectF.set(paddingLeft + dp(13+46+13), h + dp(17), paddingLeft + dp(260), h + dp(25));
                 checkRtl(rectF);
-                canvas.drawRoundRect(rectF, dp(4), dp(4), paint);
+                canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), paint);
 
                 rectF.set(paddingLeft + dp(13+46+13), h + dp(39), paddingLeft + dp(140), h + dp(47));
                 checkRtl(rectF);
-                canvas.drawRoundRect(rectF, dp(4), dp(4), paint);
+                canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), paint);
 
                 h += getCellHeight(getMeasuredWidth());
                 k++;
@@ -556,16 +571,16 @@ public class FlickerLoadingView extends View implements Theme.Colorable {
 
                 rectF.set(paddingLeft + dp(68), h + dp(17), paddingLeft + dp(140), h + dp(25));
                 checkRtl(rectF);
-                canvas.drawRoundRect(rectF, dp(4), dp(4), paint);
+                canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), paint);
 
                 rectF.set(paddingLeft + dp(68), h + dp(39), paddingLeft + dp(260), h + dp(47));
                 checkRtl(rectF);
-                canvas.drawRoundRect(rectF, dp(4), dp(4), paint);
+                canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), paint);
 
                 if (showDate) {
                     rectF.set(getMeasuredWidth() - dp(50), h + dp(20), getMeasuredWidth() - dp(12), h + dp(28));
                     checkRtl(rectF);
-                    canvas.drawRoundRect(rectF, dp(4), dp(4), paint);
+                    canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), paint);
                 }
 
                 h += getCellHeight(getMeasuredWidth());
@@ -583,16 +598,16 @@ public class FlickerLoadingView extends View implements Theme.Colorable {
 
                 rectF.set(dp(72), h + dp(16), dp(268), h + dp(24));
                 checkRtl(rectF);
-                canvas.drawRoundRect(rectF, dp(4), dp(4), paint);
+                canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), paint);
 
                 rectF.set(dp(72), h + dp(38), dp(140), h + dp(46));
                 checkRtl(rectF);
-                canvas.drawRoundRect(rectF, dp(4), dp(4), paint);
+                canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), paint);
 
                 if (showDate) {
                     rectF.set(getMeasuredWidth() - dp(50), h + dp(16), getMeasuredWidth() - dp(12), h + dp(24));
                     checkRtl(rectF);
-                    canvas.drawRoundRect(rectF, dp(4), dp(4), paint);
+                    canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), paint);
                 }
 
                 h += getCellHeight(getMeasuredWidth());
@@ -606,15 +621,15 @@ public class FlickerLoadingView extends View implements Theme.Colorable {
             while (h <= getMeasuredHeight()) {
                 rectF.set(dp(18), dp((36 - 8) / 2f), getMeasuredWidth() * 0.5f + dp(40 * randomParams[0]), dp((36 - 8) / 2f) + dp(8));
                 checkRtl(rectF);
-                canvas.drawRoundRect(rectF, dp(4), dp(4), paint);
+                canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), paint);
 
                 rectF.set(getMeasuredWidth() - dp(18), dp((36 - 8) / 2f), getMeasuredWidth() - getMeasuredWidth() * 0.2f - dp(20 * randomParams[0]), dp((36 - 8) / 2f) + dp(8));
                 checkRtl(rectF);
-                canvas.drawRoundRect(rectF, dp(4), dp(4), paint);
+                canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), paint);
 
 //                rectF.set(AndroidUtilities.dp(), AndroidUtilities.dp((36 - 8) / 2), AndroidUtilities.dp(268), AndroidUtilities.dp((36 - 8) / 2) + AndroidUtilities.dp(8));
 //                checkRtl(rectF);
-//                canvas.drawRoundRect(rectF, AndroidUtilities.dp(4), AndroidUtilities.dp(4), paint);
+//                canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(4)), paint);
 
                 h += getCellHeight(getMeasuredWidth());
                 k++;
@@ -634,7 +649,7 @@ public class FlickerLoadingView extends View implements Theme.Colorable {
 
                     float y = h + dp(7) + dp(56) + dp(16);
                     AndroidUtilities.rectTmp.set(cx - dp(24), y - dp(4), cx + dp(24), y + dp(4));
-                    canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(4), dp(4), paint);
+                    canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), paint);
                 }
                 h += getCellHeight(getMeasuredWidth());
                 k++;
@@ -646,7 +661,7 @@ public class FlickerLoadingView extends View implements Theme.Colorable {
             float cy = getMeasuredHeight() / 2f;
 
             AndroidUtilities.rectTmp.set(dp(40), cy - dp(4), getMeasuredWidth() - dp(120), cy + dp(4));
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(4), dp(4), paint);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), paint);
 
             if (backgroundPaint == null) {
                 backgroundPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -672,24 +687,24 @@ public class FlickerLoadingView extends View implements Theme.Colorable {
                 backgroundPaint.setColor(Theme.getColor(Theme.key_dialogBackground, resourcesProvider));
 
                 AndroidUtilities.rectTmp.set(x + dp(4), dp(4), x + itemWidth - dp(4), getMeasuredHeight() - dp(4));
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(6), dp(6), paint);
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(6)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(6)), paint);
 
                 if (getViewType() == CHAT_THEMES_TYPE) {
                     float bubbleTop = INNER_RECT_SPACE + dp(8);
                     float bubbleLeft = INNER_RECT_SPACE + dp(22);
                     rectF.set(x + bubbleLeft, bubbleTop, x + bubbleLeft + BUBBLE_WIDTH, bubbleTop + BUBBLE_HEIGHT);
-                    canvas.drawRoundRect(rectF, rectF.height() * 0.5f, rectF.height() * 0.5f, backgroundPaint);
+                    canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(rectF.height() * 0.5f), org.telegram.marble.MarbleTheme.m3CornerPxF(rectF.height() * 0.5f), backgroundPaint);
                     bubbleLeft = INNER_RECT_SPACE + dp(5);
                     bubbleTop += BUBBLE_HEIGHT + dp(4);
                     rectF.set(x + bubbleLeft, bubbleTop, x + bubbleLeft + BUBBLE_WIDTH, bubbleTop + BUBBLE_HEIGHT);
-                    canvas.drawRoundRect(rectF, rectF.height() * 0.5f, rectF.height() * 0.5f, backgroundPaint);
+                    canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(rectF.height() * 0.5f), org.telegram.marble.MarbleTheme.m3CornerPxF(rectF.height() * 0.5f), backgroundPaint);
                 } else if (getViewType() == QR_TYPE) {
                     float radius = dp(5);
                     float squareSize = dp(32);
                     float left = x + (itemWidth - squareSize) / 2;
                     int top = dp(21);
                     AndroidUtilities.rectTmp.set(left, top, left + squareSize, top + dp(32));
-                    canvas.drawRoundRect(AndroidUtilities.rectTmp, radius, radius, backgroundPaint);
+                    canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(radius), org.telegram.marble.MarbleTheme.m3CornerPxF(radius), backgroundPaint);
                 }
 
 
@@ -705,16 +720,16 @@ public class FlickerLoadingView extends View implements Theme.Colorable {
 
                 rectF.set(paddingLeft + dp(74), h + dp(12), paddingLeft + dp(260), h + dp(20));
                 checkRtl(rectF);
-                canvas.drawRoundRect(rectF, rectRadius, rectRadius, paint);
+                canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(rectRadius), org.telegram.marble.MarbleTheme.m3CornerPxF(rectRadius), paint);
 
                 rectF.set(paddingLeft + dp(74), h + dp(36), paddingLeft + dp(140), h + dp(42));
                 checkRtl(rectF);
-                canvas.drawRoundRect(rectF, rectRadius, rectRadius, paint);
+                canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(rectRadius), org.telegram.marble.MarbleTheme.m3CornerPxF(rectRadius), paint);
 
                 if (memberRequestButtonWidth > 0) {
                     rectF.set(paddingLeft + dp(73), h + dp(62), paddingLeft + dp(73) + memberRequestButtonWidth, h + dp(62 + 32));
                     checkRtl(rectF);
-                    canvas.drawRoundRect(rectF, rectRadius, rectRadius, paint);
+                    canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(rectRadius), org.telegram.marble.MarbleTheme.m3CornerPxF(rectRadius), paint);
                 }
 
                 h += getCellHeight(getMeasuredWidth());
@@ -731,7 +746,7 @@ public class FlickerLoadingView extends View implements Theme.Colorable {
 
                 rectF.set(paddingLeft + dp(58), h + dp(20), getWidth() - dp(53), h + dp(28));
                 checkRtl(rectF);
-                canvas.drawRoundRect(rectF, dp(8), dp(8), paint);
+                canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(8)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(8)), paint);
 
                 if (k < 4) {
                     r = dp(12);
@@ -746,11 +761,11 @@ public class FlickerLoadingView extends View implements Theme.Colorable {
             }
             rectF.set(paddingLeft + dp(8), h + dp(20), getWidth() - dp(8), h + dp(28));
             checkRtl(rectF);
-            canvas.drawRoundRect(rectF, dp(8), dp(8), paint);
+            canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(8)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(8)), paint);
 
             rectF.set(paddingLeft + dp(8), h + dp(36), getWidth() - dp(53), h + dp(44));
             checkRtl(rectF);
-            canvas.drawRoundRect(rectF, dp(8), dp(8), paint);
+            canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(8)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(8)), paint);
 
         } else if (viewType == LIMIT_REACHED_GROUPS) {
             int k = 0;
@@ -760,11 +775,11 @@ public class FlickerLoadingView extends View implements Theme.Colorable {
 
                 rectF.set(dp(74), h + dp(16), dp(140), h + dp(24));
                 checkRtl(rectF);
-                canvas.drawRoundRect(rectF, dp(4), dp(4), paint);
+                canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), paint);
 
                 rectF.set(dp(74), h + dp(38), dp(260), h + dp(46));
                 checkRtl(rectF);
-                canvas.drawRoundRect(rectF, dp(4), dp(4), paint);
+                canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), paint);
 
                 h += getCellHeight(getMeasuredWidth());
                 k++;
@@ -780,11 +795,11 @@ public class FlickerLoadingView extends View implements Theme.Colorable {
 
                 rectF.set(dp(76), h + dp(16), dp(140), h + dp(24));
                 checkRtl(rectF);
-                canvas.drawRoundRect(rectF, dp(4), dp(4), paint);
+                canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), paint);
 
                 rectF.set(dp(76), h + dp(38), dp(260), h + dp(46));
                 checkRtl(rectF);
-                canvas.drawRoundRect(rectF, dp(4), dp(4), paint);
+                canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), paint);
 
                 h += getCellHeight(getMeasuredWidth());
                 k++;
@@ -800,7 +815,7 @@ public class FlickerLoadingView extends View implements Theme.Colorable {
 
                 rectF.set(dp(76), h + dp(21), dp(220), h + dp(29));
                // checkRtl(rectF);
-                canvas.drawRoundRect(rectF, dp(4), dp(4), paint);
+                canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), paint);
 
                 h += getCellHeight(getMeasuredWidth());
                 k++;
@@ -816,11 +831,11 @@ public class FlickerLoadingView extends View implements Theme.Colorable {
 
                 rectF.set(dp(60), h + dp(21), dp(190), h + dp(29));
                 checkRtl(rectF);
-                canvas.drawRoundRect(rectF, dp(4), dp(4), paint);
+                canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), paint);
 
                 rectF.set(getMeasuredWidth() - dp(16), h + dp(21), getMeasuredWidth() - dp(62), h + dp(29));
                 checkRtl(rectF);
-                canvas.drawRoundRect(rectF, dp(4), dp(4), paint);
+                canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), paint);
 
                 h += getCellHeight(getMeasuredWidth());
                 k++;
@@ -836,16 +851,16 @@ public class FlickerLoadingView extends View implements Theme.Colorable {
 
                 rectF.set(paddingLeft + dp(68), h + dp(17), paddingLeft + dp(260), h + dp(25));
                 checkRtl(rectF);
-                canvas.drawRoundRect(rectF, dp(4), dp(4), paint);
+                canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), paint);
 
                 rectF.set(paddingLeft + dp(68), h + dp(39), paddingLeft + dp(140), h + dp(47));
                 checkRtl(rectF);
-                canvas.drawRoundRect(rectF, dp(4), dp(4), paint);
+                canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), paint);
 
                 if (showDate) {
                     rectF.set(getMeasuredWidth() - dp(50), h + dp(20), getMeasuredWidth() - dp(12), h + dp(28));
                     checkRtl(rectF);
-                    canvas.drawRoundRect(rectF, dp(4), dp(4), paint);
+                    canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), paint);
                 }
 
                 h += getCellHeight(getMeasuredWidth());
@@ -861,11 +876,11 @@ public class FlickerLoadingView extends View implements Theme.Colorable {
 
                 rectF.set(paddingLeft + dp(18), h + (cellHeight - dp(22)) / 2f, paddingLeft + dp(40), h + (cellHeight + dp(22)) / 2f);
                 checkRtl(rectF);
-                canvas.drawRoundRect(rectF, dp(11), dp(11), paint);
+                canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(11)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(11)), paint);
 
                 rectF.set(paddingLeft + dp(58), h + (cellHeight - dp(8)) / 2f, Math.min(paddingLeft + dp(58 + 74), getMeasuredWidth() - dp(19)), h + (cellHeight + dp(8)) / 2f);
                 checkRtl(rectF);
-                canvas.drawRoundRect(rectF, dp(4), dp(4), paint);
+                canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), paint);
 
                 h += cellHeight;
                 k++;
@@ -880,15 +895,15 @@ public class FlickerLoadingView extends View implements Theme.Colorable {
 
                 rectF.set(paddingLeft + dp(10), h + (cellHeight - dp(32)) / 2f, paddingLeft + dp(10 + 32), h + (cellHeight + dp(32)) / 2f);
                 checkRtl(rectF);
-                canvas.drawRoundRect(rectF, dp(6), dp(6), paint);
+                canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(6)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(6)), paint);
 
                 rectF.set(paddingLeft + dp(64), h + (cellHeight - dp(14) - dp(10)) / 2f, Math.min(paddingLeft + dp(64 + 54), getMeasuredWidth() - dp(19)), h + (cellHeight - dp(14) + dp(10)) / 2f);
                 checkRtl(rectF);
-                canvas.drawRoundRect(rectF, dp(4), dp(4), paint);
+                canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), paint);
 
                 rectF.set(paddingLeft + dp(64), h + (cellHeight + dp(14) - dp(8)) / 2f, Math.min(paddingLeft + dp(64 + 80), getMeasuredWidth() - dp(19)), h + (cellHeight + dp(14) + dp(8)) / 2f);
                 checkRtl(rectF);
-                canvas.drawRoundRect(rectF, dp(4), dp(4), paint);
+                canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), paint);
 
                 h += cellHeight;
                 k++;
@@ -899,7 +914,7 @@ public class FlickerLoadingView extends View implements Theme.Colorable {
         } else if (getViewType() == STAR_GIFT || getViewType() == STAR_GIFT_SELECT || getViewType() == STAR_GIFT_SHORTER) {
             rectF.set(paddingLeft, paddingTop, getMeasuredWidth() - paddingLeft, getMeasuredHeight() - paddingTop);
             rectF.inset(dp(3.33f), dp(4));
-            canvas.drawRoundRect(rectF, dp(11), dp(11), paint);
+            canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(11)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(11)), paint);
         }
         invalidate();
     }

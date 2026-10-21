@@ -107,7 +107,7 @@ public class StoriesVolumeControl extends View {
             float rad =  getMeasuredHeight() / 2f;
             paint.setAlpha((int) (255 * progressToVisible.get()));
             AndroidUtilities.rectTmp.set(0, 0, getMeasuredWidth() * volumeProgress.get(), getMeasuredHeight());
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, rad, rad, paint);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(rad), org.telegram.marble.MarbleTheme.m3CornerPxF(rad), paint);
         }
     }
 

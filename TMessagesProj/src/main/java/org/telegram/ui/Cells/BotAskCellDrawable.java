@@ -120,9 +120,9 @@ public class BotAskCellDrawable extends Drawable {
 
     public void draw(Canvas canvas) {
         Paint backgroundPaint = Theme.getThemePaint(Theme.key_paint_chatActionBackground, resourcesProvider);
-        canvas.drawRoundRect(tmpRect, dp(16), dp(16), backgroundPaint);
+        canvas.drawRoundRect(tmpRect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(16)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(16)), backgroundPaint);
         if (hasGradientService()) {
-            canvas.drawRoundRect(tmpRect, dp(16), dp(16), Theme.getThemePaint(Theme.key_paint_chatActionBackgroundDarken, resourcesProvider));
+            canvas.drawRoundRect(tmpRect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(16)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(16)), Theme.getThemePaint(Theme.key_paint_chatActionBackgroundDarken, resourcesProvider));
         }
 
         canvas.save();

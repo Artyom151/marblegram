@@ -99,7 +99,7 @@ public class PollAttachedMediaLink extends PollAttachedMedia implements Drawable
 
         progressDrawable.setBounds(0, 0, w, h);
         paint.setColor(ColorUtils.blendARGB(Theme.getColor(Theme.key_windowBackgroundGray), 0x40000000, animatorHasImage.getFloatValue()));
-        canvas.drawRoundRect(0, 0, w, h, dp(7), dp(7), paint);
+        canvas.drawRoundRect(0, 0, w, h, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(7)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(7)), paint);
 
         drawable.setColorFilter(colorFilterState.get(ColorUtils.blendARGB(Theme.getColor(Theme.key_pollCreateIcons), 0xFFFFFFFF, animatorHasImage.getFloatValue()), PorterDuff.Mode.SRC_IN));
         DrawableUtils.setBounds(drawable, w / 2f, h / 2f, dp(24), dp(24), Gravity.CENTER);

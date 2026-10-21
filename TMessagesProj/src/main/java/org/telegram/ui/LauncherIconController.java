@@ -34,7 +34,13 @@ public class LauncherIconController {
     }
 
     public enum LauncherIcon {
-        DEFAULT("DefaultIcon", R.drawable.icon_background_sa, R.mipmap.icon_foreground_sa, R.string.AppIconDefault),
+        DEFAULT("DefaultIcon", R.drawable.marble_icon_background, R.drawable.marble_icon_foreground, R.string.AppIconDefault),
+        MARBLE_SUNNY("MarbleSunnyIcon", R.drawable.marble_sunny_background, R.drawable.marble_sunny_foreground, R.string.MarbleIconSunny),
+        MARBLE_CLOVER("MarbleCloverIcon", R.drawable.marble_clover_background, R.drawable.marble_clover_foreground, R.string.MarbleIconClover),
+        MARBLE_PENTAGON("MarblePentagonIcon", R.drawable.marble_pentagon_background, R.drawable.marble_pentagon_foreground, R.string.MarbleIconPentagon),
+        MARBLE_BURST("MarbleBurstIcon", R.drawable.marble_burst_background, R.drawable.marble_burst_foreground, R.string.MarbleIconBurst),
+        MARBLE_PILL("MarblePillIcon", R.drawable.marble_pill_background, R.drawable.marble_pill_foreground, R.string.MarbleIconPill),
+        MARBLE_NIGHT("MarbleNightIcon", R.drawable.marble_night_background, R.drawable.marble_night_foreground, R.string.MarbleIconNight),
         VINTAGE("VintageIcon", R.drawable.icon_6_background_sa, R.mipmap.icon_6_foreground_sa, R.string.AppIconVintage),
         AQUA("AquaIcon", R.drawable.icon_4_background_sa, R.mipmap.icon_foreground_sa, R.string.AppIconAqua),
         PREMIUM("PremiumIcon", R.drawable.icon_3_background_sa, R.mipmap.icon_3_foreground_sa, R.string.AppIconPremium, true),

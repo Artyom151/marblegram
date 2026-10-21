@@ -420,7 +420,8 @@ public class SetupEmojiStatusSheet {
             );
             canvas.drawRoundRect(
                 rect,
-                height / 2f, height / 2f,
+                org.telegram.marble.MarbleTheme.m3CornerPxF(height / 2f),
+                org.telegram.marble.MarbleTheme.m3CornerPxF(height / 2f),
                 backgroundPaint
             );
             userImageReceiver.setImageCoords(rect.left, rect.top, dp(32), dp(32));

@@ -610,7 +610,7 @@ public class ProfileStoriesView extends View implements NotificationCenter.Notif
                 boolean isForum = ChatObject.isForum(UserConfig.selectedAccount, dialogId);
                 if (isForum) {
                     float r = rect2.height() * 0.32f;
-                    canvas.drawRoundRect(rect2, r, r, paint);
+                    canvas.drawRoundRect(rect2, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), paint);
                 } else {
                     canvas.drawCircle(rect2.centerX(), rect2.centerY(), rect2.width() / 2f, paint);
                 }
@@ -904,7 +904,7 @@ public class ProfileStoriesView extends View implements NotificationCenter.Notif
         if (isForum) {
             float r = oval.height() * 0.32f;
             if (Math.abs(sweepAngle) == 360) {
-                canvas.drawRoundRect(oval, r, r, paint);
+                canvas.drawRoundRect(oval, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), paint);
                 return;
             }
             startAngle = startAngle + sweepAngle;

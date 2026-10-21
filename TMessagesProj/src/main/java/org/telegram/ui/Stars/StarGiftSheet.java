@@ -7579,8 +7579,8 @@ public class StarGiftSheet extends BottomSheetWithRecyclerListView implements No
                         rect.top + dp(6),
                         rect.left + dp(6 + 14) + Math.max(countdownText.getCurrentWidth(), dp(3)),
                         rect.top + dp(6 + 17),
-                        dp(17 / 2f),
-                        dp(17 / 2f),
+                        org.telegram.marble.MarbleTheme.m3CornerPxF(dp(17 / 2f)),
+                        org.telegram.marble.MarbleTheme.m3CornerPxF(dp(17 / 2f)),
                         countdownPaint
                     );
                     canvas.save();
@@ -10681,7 +10681,7 @@ public class StarGiftSheet extends BottomSheetWithRecyclerListView implements No
                     gradient[i].setLocalMatrix(gradientMatrix);
                     paint.setShader(gradient[i]);
                     paint.setAlpha((int) (0xFF * alpha));
-                    canvas.drawRoundRect(rect, r, r, paint);
+                    canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), paint);
                 }
 
                 if (icon != null) {
@@ -10752,7 +10752,7 @@ public class StarGiftSheet extends BottomSheetWithRecyclerListView implements No
                     gradient[i].setLocalMatrix(gradientMatrix);
                     backgroundPaint.setShader(gradient[i]);
                     backgroundPaint.setAlpha((int) (0xFF * alpha));
-                    canvas.drawRoundRect(AndroidUtilities.rectTmp, r, r, backgroundPaint);
+                    canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), backgroundPaint);
                 }
 
                 clipPath.rewind();
@@ -10803,7 +10803,7 @@ public class StarGiftSheet extends BottomSheetWithRecyclerListView implements No
         @Override
         public void draw(@NonNull Canvas canvas) {
             AndroidUtilities.rectTmp.set(getBounds());
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, radius, radius, paint);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(radius), org.telegram.marble.MarbleTheme.m3CornerPxF(radius), paint);
             AndroidUtilities.drawStroke(canvas, AndroidUtilities.rectTmp, radius);
         }
 

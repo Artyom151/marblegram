@@ -8716,7 +8716,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
                                 photoImage.setAllowDecodeSingleFrame(true);
                                 boolean autoDownload = false;
                                 if (MessageObject.isRoundVideoDocument(document)) {
-                                    photoImage.setRoundRadius(AndroidUtilities.roundMessageSize / 2);
+                                    photoImage.setRoundRadius(org.telegram.marble.MarbleTheme.roundVideoRadius(AndroidUtilities.roundMessageSize));
                                     canChangeRadius = false;
                                     autoDownload = DownloadController.getInstance(currentAccount).canDownloadMedia(currentMessageObject);
                                 } else if (MessageObject.isGifDocument(document, messageObject.hasValidGroupId())) {
@@ -15638,7 +15638,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
                 Theme.chat_instantViewPaint.setColor(Theme.chat_replyNamePaint.getColor());
                 int wasInstantViewAlpha = Theme.chat_instantViewPaint.getAlpha();
                 Theme.chat_instantViewPaint.setAlpha((int) (wasAlpha * .11f));
-                canvas.drawRoundRect(rect, rect.height(), rect.height(), Theme.chat_instantViewPaint);
+                canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(rect.height()), org.telegram.marble.MarbleTheme.m3CornerPxF(rect.height()), Theme.chat_instantViewPaint);
                 Theme.chat_instantViewPaint.setAlpha(wasInstantViewAlpha);
 
                 Theme.chat_titleLabelTextPaint.setColor(Theme.chat_replyNamePaint.getColor());
@@ -15711,7 +15711,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
                     photoImage.setImageY(linkPreviewY);
                     rect.set(x, photoImage.getImageY(), x + imageBackgroundSideWidth, photoImage.getImageY2());
                     Theme.chat_instantViewPaint.setColor(ColorUtils.setAlphaComponent(imageBackgroundSideColor, (int) (255 * alpha)));
-                    canvas.drawRoundRect(rect, dp(4), dp(4), Theme.chat_instantViewPaint);
+                    canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), Theme.chat_instantViewPaint);
                 } else {
                     photoImage.setImageX(tx + linkX + dp(10));
                     photoImage.setImageY(linkPreviewY);
@@ -15763,7 +15763,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
                     } else if (imageBackgroundSideColor != 0) {
                         canvas.drawRect(photoImage.getImageX(), photoImage.getImageY(), photoImage.getImageX2(), photoImage.getImageY2(), Theme.chat_instantViewPaint);
                     } else {
-                        canvas.drawRoundRect(rect, dp(4), dp(4), Theme.chat_instantViewPaint);
+                        canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), Theme.chat_instantViewPaint);
                     }
                     Theme.chat_instantViewPaint.setShader(null);
                     Theme.chat_instantViewPaint.setAlpha(255);
@@ -15959,7 +15959,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
             int oldAlpha = timeBackgroundPaint.getAlpha();
             timeBackgroundPaint.setAlpha((int) (oldAlpha * controlsAlpha));
             Theme.chat_durationPaint.setAlpha((int) (255 * controlsAlpha));
-            canvas.drawRoundRect(rect, dp(4), dp(4), timeBackgroundPaint);
+            canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), timeBackgroundPaint);
             timeBackgroundPaint.setAlpha(oldAlpha);
             canvas.save();
             canvas.translate(x, y);
@@ -15976,7 +15976,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
                     y = (int) (photoImage.getImageY() + dp(6));
                     int height = dp(documentAttachType == DOCUMENT_ATTACH_TYPE_WALLPAPER ? 14.5f : 16.5f);
                     rect.set(x - dp(4), y - dp(1.5f), x + durationWidth + dp(4), y + height);
-                    canvas.drawRoundRect(rect, dp(4), dp(4), timeBackgroundPaint);
+                    canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), timeBackgroundPaint);
                 } else {
                     x = linkX;
                     y = linkPreviewY;
@@ -15985,7 +15985,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
                 x = (int) (photoImage.getImageX() + photoImage.getImageWidth() - dp(8) - durationWidth);
                 y = (int) (photoImage.getImageY() + photoImage.getImageHeight() - dp(19));
                 rect.set(x - dp(4), y - dp(1.5f), x + durationWidth + dp(4), y + dp(14.5f));
-                canvas.drawRoundRect(rect, dp(4), dp(4), getThemedPaint(Theme.key_paint_chatTimeBackground));
+                canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), getThemedPaint(Theme.key_paint_chatTimeBackground));
             }
 
             canvas.save();
@@ -16124,7 +16124,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
                     instantButtonLoading.draw(canvas);
                     invalidate();
                 }
-                canvas.drawRoundRect(instantButtonRect, dp(6), dp(6), Theme.chat_instantViewButtonPaint);
+                canvas.drawRoundRect(instantButtonRect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(6)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(6)), Theme.chat_instantViewButtonPaint);
                 if (drawInstantViewType == 0) {
                     setDrawableBounds(instantDrawable, instantTextLeftX + instantTextX + linkX - dp(15), instantY + dp(11.5f), dp(9), dp(13));
                     instantDrawable.setAlpha((int) (0xFF * alpha));
@@ -16239,7 +16239,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
                 final float s2 = factCheckWhatBounce != null ? factCheckWhatBounce.getScale(0.1f) : 1f;
                 canvas.save();
                 canvas.scale(s2, s2, AndroidUtilities.rectTmp.centerX(), AndroidUtilities.rectTmp.centerY());
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(17), dp(17), factCheckLine.backgroundPaint);
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(17)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(17)), factCheckLine.backgroundPaint);
                 factCheckWhat.draw(canvas, bx + dp(5), dp(12), textColor, alpha);
                 canvas.restore();
             }
@@ -16561,9 +16561,9 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
                 final float br = dp(1);
                 for (int n = 0; n < separatorsCount + 1; n++) {
                     rect.set(x1 + partWidth * n, y, x1 + partWidth * n + blockWidth, y + button.height);
-                    canvas.drawRoundRect(rect, br, br, getThemedPaint(Theme.key_paint_chatActionBackground));
+                    canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(br), org.telegram.marble.MarbleTheme.m3CornerPxF(br), getThemedPaint(Theme.key_paint_chatActionBackground));
                     if (hasGradientService()) {
-                        canvas.drawRoundRect(rect, br, br, Theme.chat_actionBackgroundGradientDarkenPaint);
+                        canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(br), org.telegram.marble.MarbleTheme.m3CornerPxF(br), Theme.chat_actionBackgroundGradientDarkenPaint);
                     }
                 }
 
@@ -20891,19 +20891,19 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
         if (alpha != 1f) {
             int oldAlpha = getThemedPaint(Theme.key_paint_chatActionBackground).getAlpha();
             getThemedPaint(Theme.key_paint_chatActionBackground).setAlpha((int) (alpha * oldAlpha));
-            canvas.drawRoundRect(rect, radius, radius, getThemedPaint(Theme.key_paint_chatActionBackground));
+            canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(radius), org.telegram.marble.MarbleTheme.m3CornerPxF(radius), getThemedPaint(Theme.key_paint_chatActionBackground));
             getThemedPaint(Theme.key_paint_chatActionBackground).setAlpha(oldAlpha);
         } else {
-            canvas.drawRoundRect(rect, radius, radius, getThemedPaint(sideButtonPressed ? Theme.key_paint_chatActionBackgroundSelected : Theme.key_paint_chatActionBackground));
+            canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(radius), org.telegram.marble.MarbleTheme.m3CornerPxF(radius), getThemedPaint(sideButtonPressed ? Theme.key_paint_chatActionBackgroundSelected : Theme.key_paint_chatActionBackground));
         }
         if (hasGradientService()) {
             if (alpha != 1f) {
                 int oldAlpha = Theme.chat_actionBackgroundGradientDarkenPaint.getAlpha();
                 Theme.chat_actionBackgroundGradientDarkenPaint.setAlpha((int) (alpha * oldAlpha));
-                canvas.drawRoundRect(rect, radius, radius, Theme.chat_actionBackgroundGradientDarkenPaint);
+                canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(radius), org.telegram.marble.MarbleTheme.m3CornerPxF(radius), Theme.chat_actionBackgroundGradientDarkenPaint);
                 Theme.chat_actionBackgroundGradientDarkenPaint.setAlpha(oldAlpha);
             } else {
-                canvas.drawRoundRect(rect, radius, radius, Theme.chat_actionBackgroundGradientDarkenPaint);
+                canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(radius), org.telegram.marble.MarbleTheme.m3CornerPxF(radius), Theme.chat_actionBackgroundGradientDarkenPaint);
             }
         }
     }
@@ -20945,19 +20945,19 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
         if (alpha != 1f) {
             int oldAlpha = getThemedPaint(Theme.key_paint_chatActionBackground).getAlpha();
             getThemedPaint(Theme.key_paint_chatActionBackground).setAlpha((int) (alpha * oldAlpha));
-            canvas.drawRoundRect(rect, dp(16), dp(16), getThemedPaint(Theme.key_paint_chatActionBackground));
+            canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(16)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(16)), getThemedPaint(Theme.key_paint_chatActionBackground));
             getThemedPaint(Theme.key_paint_chatActionBackground).setAlpha(oldAlpha);
         } else {
-            canvas.drawRoundRect(rect, dp(16), dp(16), getThemedPaint(sideButtonPressed ? Theme.key_paint_chatActionBackgroundSelected : Theme.key_paint_chatActionBackground));
+            canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(16)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(16)), getThemedPaint(sideButtonPressed ? Theme.key_paint_chatActionBackgroundSelected : Theme.key_paint_chatActionBackground));
         }
         if (hasGradientService()) {
             if (alpha != 1f) {
                 int oldAlpha = Theme.chat_actionBackgroundGradientDarkenPaint.getAlpha();
                 Theme.chat_actionBackgroundGradientDarkenPaint.setAlpha((int) (alpha * oldAlpha));
-                canvas.drawRoundRect(rect, dp(16), dp(16), Theme.chat_actionBackgroundGradientDarkenPaint);
+                canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(16)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(16)), Theme.chat_actionBackgroundGradientDarkenPaint);
                 Theme.chat_actionBackgroundGradientDarkenPaint.setAlpha(oldAlpha);
             } else {
-                canvas.drawRoundRect(rect, dp(16), dp(16), Theme.chat_actionBackgroundGradientDarkenPaint);
+                canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(16)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(16)), Theme.chat_actionBackgroundGradientDarkenPaint);
             }
         }
 
@@ -21728,10 +21728,10 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
                     canvas.drawPath(sideButtonPath2, getThemedPaint(Theme.key_paint_chatActionBackgroundSelected));
                 }
             } else {
-                canvas.drawRoundRect(rect, dp(16), dp(16), getThemedPaint(sideButtonPressed ? Theme.key_paint_chatActionBackgroundSelected : Theme.key_paint_chatActionBackground));
+                canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(16)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(16)), getThemedPaint(sideButtonPressed ? Theme.key_paint_chatActionBackgroundSelected : Theme.key_paint_chatActionBackground));
             }
             if (hasGradientService()) {
-                canvas.drawRoundRect(rect, dp(16), dp(16), Theme.chat_actionBackgroundGradientDarkenPaint);
+                canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(16)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(16)), Theme.chat_actionBackgroundGradientDarkenPaint);
             }
 
             if (drawSideButton == 2) {
@@ -21782,9 +21782,9 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
             rect.set(summarizeButtonX, summarizeButtonY, summarizeButtonX + dp(32), summarizeButtonY + dp(32));
 
             applyServiceShaderMatrix();
-            canvas.drawRoundRect(rect, dp(16), dp(16), getThemedPaint(sideButtonPressed ? Theme.key_paint_chatActionBackgroundSelected : Theme.key_paint_chatActionBackground));
+            canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(16)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(16)), getThemedPaint(sideButtonPressed ? Theme.key_paint_chatActionBackgroundSelected : Theme.key_paint_chatActionBackground));
             if (hasGradientService()) {
-                canvas.drawRoundRect(rect, dp(16), dp(16), Theme.chat_actionBackgroundGradientDarkenPaint);
+                canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(16)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(16)), Theme.chat_actionBackgroundGradientDarkenPaint);
             }
 
             if (summarizeIcon == null) {
@@ -22040,11 +22040,11 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
                 applyServiceShaderMatrix();
                 oldAlpha = getThemedPaint(Theme.key_paint_chatActionBackground).getAlpha();
                 getThemedPaint(Theme.key_paint_chatActionBackground).setAlpha((int) (alphaProgress * oldAlpha * replyForwardAlpha));
-                canvas.drawRoundRect(rect, dp(6), dp(6), getThemedPaint(Theme.key_paint_chatActionBackground));
+                canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(6)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(6)), getThemedPaint(Theme.key_paint_chatActionBackground));
                 if (hasGradientService()) {
                     int oldAlpha2 = Theme.chat_actionBackgroundGradientDarkenPaint.getAlpha();
                     Theme.chat_actionBackgroundGradientDarkenPaint.setAlpha((int) (oldAlpha2 * timeAlpha * replyForwardAlpha));
-                    canvas.drawRoundRect(rect, dp(6), dp(6), Theme.chat_actionBackgroundGradientDarkenPaint);
+                    canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(6)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(6)), Theme.chat_actionBackgroundGradientDarkenPaint);
                     Theme.chat_actionBackgroundGradientDarkenPaint.setAlpha(oldAlpha2);
                 }
 
@@ -22315,7 +22315,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
                     }
                     final int wasAlpha = Theme.chat_adminPaint.getAlpha();
                     Theme.chat_adminPaint.setAlpha((int) (wasAlpha * 0.12f));
-                    canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(8), dp(8), Theme.chat_adminPaint);
+                    canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(8)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(8)), Theme.chat_adminPaint);
                     Theme.chat_adminPaint.setAlpha(wasAlpha);
                 }
                 adminLayout.draw(canvas);
@@ -22365,18 +22365,18 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
                 applyServiceShaderMatrix();
                 int oldAlpha = getThemedPaint(Theme.key_paint_chatActionBackground).getAlpha();
                 getThemedPaint(Theme.key_paint_chatActionBackground).setAlpha((int) (oldAlpha * timeAlpha * replyForwardAlpha));
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(8.66f), dp(8.66f), getThemedPaint(Theme.key_paint_chatActionBackground));
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(8.66f)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(8.66f)), getThemedPaint(Theme.key_paint_chatActionBackground));
                 getThemedPaint(Theme.key_paint_chatActionBackground).setAlpha(oldAlpha);
                 if (hasGradientService()) {
                     oldAlpha = Theme.chat_actionBackgroundGradientDarkenPaint.getAlpha();
                     Theme.chat_actionBackgroundGradientDarkenPaint.setAlpha((int) (oldAlpha * timeAlpha * replyForwardAlpha));
-                    canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(8.66f), dp(8.66f), Theme.chat_actionBackgroundGradientDarkenPaint);
+                    canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(8.66f)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(8.66f)), Theme.chat_actionBackgroundGradientDarkenPaint);
                     Theme.chat_actionBackgroundGradientDarkenPaint.setAlpha(oldAlpha);
                 }
             } else {
                 final int wasAlpha = Theme.chat_ephemeralPaint.getAlpha();
                 Theme.chat_ephemeralPaint.setAlpha((int) (wasAlpha * 0.12f));
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(8.66f), dp(8.66f), Theme.chat_ephemeralPaint);
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(8.66f)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(8.66f)), Theme.chat_ephemeralPaint);
                 Theme.chat_ephemeralPaint.setAlpha(wasAlpha);
             }
 
@@ -22456,13 +22456,13 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
                         oldAlpha1 = getThemedPaint(Theme.key_paint_chatActionBackground).getAlpha();
                         getThemedPaint(Theme.key_paint_chatActionBackground).setAlpha((int) (oldAlpha1 * animatingAlpha * replyForwardAlpha));
                     }
-                    canvas.drawRoundRect(rect, dp(6), dp(6), getThemedPaint(Theme.key_paint_chatActionBackground));
+                    canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(6)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(6)), getThemedPaint(Theme.key_paint_chatActionBackground));
                     if (hasGradientService()) {
                         if (animatingAlpha != 1f || replyForwardAlpha != 1f) {
                             oldAlpha2 = Theme.chat_actionBackgroundGradientDarkenPaint.getAlpha();
                             Theme.chat_actionBackgroundGradientDarkenPaint.setAlpha((int) (oldAlpha2 * animatingAlpha * replyForwardAlpha));
                         }
-                        canvas.drawRoundRect(rect, dp(6), dp(6), Theme.chat_actionBackgroundGradientDarkenPaint);
+                        canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(6)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(6)), Theme.chat_actionBackgroundGradientDarkenPaint);
                     }
                 } else {
                     applyServiceShaderMatrix(getMeasuredWidth(), backgroundHeight, getX() + forwardNameXLocal, viewTop + forwardNameY);
@@ -22687,12 +22687,12 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
                     applyServiceShaderMatrix();
                     oldAlpha = getThemedPaint(Theme.key_paint_chatActionBackground).getAlpha();
                     getThemedPaint(Theme.key_paint_chatActionBackground).setAlpha((int) (oldAlpha * timeAlpha * replyForwardAlpha));
-                    canvas.drawRoundRect(rect, dp(4), dp(4), getThemedPaint(Theme.key_paint_chatActionBackground));
+                    canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), getThemedPaint(Theme.key_paint_chatActionBackground));
                     getThemedPaint(Theme.key_paint_chatActionBackground).setAlpha(oldAlpha);
                     if (hasGradientService()) {
                         oldAlpha = Theme.chat_actionBackgroundGradientDarkenPaint.getAlpha();
                         Theme.chat_actionBackgroundGradientDarkenPaint.setAlpha((int) (oldAlpha * timeAlpha * replyForwardAlpha));
-                        canvas.drawRoundRect(rect, dp(4), dp(4), Theme.chat_actionBackgroundGradientDarkenPaint);
+                        canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), Theme.chat_actionBackgroundGradientDarkenPaint);
                         Theme.chat_actionBackgroundGradientDarkenPaint.setAlpha(oldAlpha);
                     }
                     canvas.restore();
@@ -24076,15 +24076,15 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
                     Paint dimPaint = getThemedPaint(Theme.key_paint_chatTimeBackground);
                     int oldAlpha2 = dimPaint.getAlpha();
                     dimPaint.setAlpha((int) (oldAlpha2 * controlsAlpha * .4f));
-                    canvas.drawRoundRect(rect, r, r, dimPaint);
+                    canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), dimPaint);
                     dimPaint.setAlpha(oldAlpha2);
                 } else {
                     applyServiceShaderMatrix();
-                    canvas.drawRoundRect(rect, r, r, paint);
+                    canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), paint);
                     if (paint == getThemedPaint(Theme.key_paint_chatActionBackground) && hasGradientService()) {
                         int oldAlpha2 = Theme.chat_actionBackgroundGradientDarkenPaint.getAlpha();
                         Theme.chat_actionBackgroundGradientDarkenPaint.setAlpha((int) (oldAlpha2 * timeAlpha * alpha));
-                        canvas.drawRoundRect(rect, r, r, Theme.chat_actionBackgroundGradientDarkenPaint);
+                        canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), Theme.chat_actionBackgroundGradientDarkenPaint);
                         Theme.chat_actionBackgroundGradientDarkenPaint.setAlpha(oldAlpha2);
                     }
                 }
@@ -24329,7 +24329,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
             canvas.saveLayerAlpha(0, 0, getWidth(), getHeight(), (int)(unlockAlpha * 0xFF), Canvas.ALL_SAVE_FLAG);
             int wasAlpha = Theme.chat_timeBackgroundPaint.getAlpha();
             Theme.chat_timeBackgroundPaint.setAlpha((int) (wasAlpha * 0.7f));
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(32), dp(32), Theme.chat_timeBackgroundPaint);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(32)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(32)), Theme.chat_timeBackgroundPaint);
             Theme.chat_timeBackgroundPaint.setAlpha(wasAlpha);
             canvas.translate(unlockX + dp(4), unlockY);
             Theme.chat_msgUnlockDrawable.setBounds(0, 0, Theme.chat_msgUnlockDrawable.getIntrinsicWidth(), Theme.chat_msgUnlockDrawable.getIntrinsicHeight());
@@ -24350,7 +24350,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
                 int x = (int) (photoImage.getImageX() + dp(9));
                 int y = (int) (photoImage.getImageY() + dp(6));
                 rect.set(x - dp(4), y - dp(1.5f), x + durationWidth + dp(4) + dp(bigRadius ? 2 : 0), y + videoInfoLayout.getHeight() + dp(1.5f));
-                canvas.drawRoundRect(rect, rad, rad, getThemedPaint(Theme.key_paint_chatTimeBackground));
+                canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(rad), org.telegram.marble.MarbleTheme.m3CornerPxF(rad), getThemedPaint(Theme.key_paint_chatTimeBackground));
 
                 canvas.save();
                 canvas.translate(x + (bigRadius ? 2 : 0), y);
@@ -24462,7 +24462,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
                     canvas.save();
                     canvas.scale(scale, scale, rect.centerX(), rect.centerY());
                 }
-                canvas.drawRoundRect(rect, dp(1), dp(1), Theme.chat_msgErrorPaint);
+                canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(1)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(1)), Theme.chat_msgErrorPaint);
                 Theme.chat_msgErrorPaint.setAlpha(oldAlpha);
                 Drawable errorDrawable = getThemedDrawable(Theme.key_drawable_msgError);
                 setDrawableBounds(errorDrawable, x + dp(6), y + dp(2));
@@ -24896,7 +24896,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
             rect.set(x, y, x + dp(14), y + dp(14));
             int oldAlpha = Theme.chat_msgErrorPaint.getAlpha();
             Theme.chat_msgErrorPaint.setAlpha((int) (oldAlpha * alpha));
-            canvas.drawRoundRect(rect, dp(1), dp(1), Theme.chat_msgErrorPaint);
+            canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(1)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(1)), Theme.chat_msgErrorPaint);
             Theme.chat_msgErrorPaint.setAlpha(oldAlpha);
             setDrawableBounds(Theme.chat_msgErrorDrawable, x + dp(6), y + dp(2));
             Theme.chat_msgErrorDrawable.setAlpha((int) (255 * alpha));
@@ -25055,10 +25055,10 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
                                 photoImage.draw(canvas);
                                 photoImage.setAlpha(wasAlpha);
                                 canvas.restore();
-                                canvas.drawRoundRect(rect, r, r, getThemedPaint(Theme.key_paint_chatTimeBackground));
+                                canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), getThemedPaint(Theme.key_paint_chatTimeBackground));
                             } else if (drawDocTitleLayout || (drawLoadingProgress && loadingProgressLayout != null) || (!drawLoadingProgress && infoLayout != null)) {
                                 canvas.scale(loadingProgressAlpha, loadingProgressAlpha, x1, y1);
-                                canvas.drawRoundRect(rect, r, r, getThemedPaint(Theme.key_paint_chatTimeBackground));
+                                canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), getThemedPaint(Theme.key_paint_chatTimeBackground));
                             } else {
                                 canvas.scale(loadingProgressAlpha, loadingProgressAlpha, x1, y1);
                             }
@@ -25792,11 +25792,11 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
                         final float lineWidth = width - (pollWithMediaInAnswers ? dp(37.33f) : 0);
                         Theme.chat_docBackPaint.setColor(ColorUtils.setAlphaComponent(color1, 16 * lineAlpha / 255));
                         rect.set(Math.max(lineWidth * currentPercentProgress - dp(2), 0), bh + dp(6), lineWidth, bh + dp(11));
-                        canvas.drawRoundRect(rect, dp(2), dp(2), Theme.chat_docBackPaint);
+                        canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(2)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(2)), Theme.chat_docBackPaint);
                         Theme.chat_docBackPaint.setColor(lineColor);
 
                         rect.set(0, bh + dp(6), lineWidth * currentPercentProgress, bh + dp(11));
-                        canvas.drawRoundRect(rect, dp(2), dp(2), Theme.chat_docBackPaint);
+                        canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(2)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(2)), Theme.chat_docBackPaint);
                     }
 
                     if (drawChosenCheckbox) {
@@ -25820,7 +25820,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
                             srcOutPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_OUT));
                         }
                         srcOutPaint.setColor(Theme.chat_docBackPaint.getColor());
-                        canvas.drawRoundRect(cx - s, cy - s, cx + s, cy + s, r, r, srcOutPaint);
+                        canvas.drawRoundRect(cx - s, cy - s, cx + s, cy + s, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), srcOutPaint);
                         canvas.restore();
                     }
                 }
@@ -25885,7 +25885,8 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
                             final float r = dp(multipleChoice ? 8f : 8.5f);
                             if (multipleChoice) {
                                 canvas.drawRoundRect(cx - r, cy - r, cx + r, cy + r,
-                                    dp(4), dp(4), Theme.chat_instantViewRectPaint);
+                                    org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)),
+                                    org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), Theme.chat_instantViewRectPaint);
                             } else {
                                 canvas.drawCircle(cx, cy, r, Theme.chat_instantViewRectPaint);
                             }
@@ -26202,12 +26203,12 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
                 Paint bgPaint = getThemedPaint(Theme.key_paint_chatActionBackground);
                 int oldAlpha = bgPaint.getAlpha();
                 bgPaint.setAlpha((int) (oldAlpha * timeAlpha * 0.5f * (1f - getVideoTranscriptionProgress())));
-                canvas.drawRoundRect(rect, dp(6), dp(6), bgPaint);
+                canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(6)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(6)), bgPaint);
                 if (hasGradientService()) {
                     Paint darkenPaint = getThemedPaint(Theme.key_paint_chatActionBackgroundDarken);
                     int oldAlpha2 = darkenPaint.getAlpha();
                     darkenPaint.setAlpha((int) (oldAlpha2 * timeAlpha * (1f - getVideoTranscriptionProgress())));
-                    canvas.drawRoundRect(rect, dp(6), dp(6), darkenPaint);
+                    canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(6)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(6)), darkenPaint);
                     darkenPaint.setAlpha(oldAlpha2);
                 }
                 bgPaint.setAlpha(oldAlpha);
@@ -26324,7 +26325,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
 
             int oldAlpha = getThemedPaint(Theme.key_paint_chatTimeBackground).getAlpha();
             getThemedPaint(Theme.key_paint_chatTimeBackground).setAlpha((int) (oldAlpha * controlsAlpha * (1f - mediaSpoilerRevealProgress) * .35f));
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, r, r, getThemedPaint(Theme.key_paint_chatTimeBackground));
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), getThemedPaint(Theme.key_paint_chatTimeBackground));
             getThemedPaint(Theme.key_paint_chatTimeBackground).setAlpha(oldAlpha);
 
             canvas.save();
@@ -29395,7 +29396,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
 //            rect.set(left, bottom - h, left + w, bottom);
 //            int oldAlpha = timeBackgroundPaint.getAlpha();
 //            timeBackgroundPaint.setAlpha((int) (oldAlpha * controlsAlpha));
-//            canvas.drawRoundRect(rect, dp(9), dp(9), timeBackgroundPaint);
+//            canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(9)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(9)), timeBackgroundPaint);
 //            timeBackgroundPaint.setAlpha(oldAlpha);
 //            startsAtDrawable.setBounds((int) left + dp(6.33f), (int) bottom - h / 2 - startsAtDrawable.getIntrinsicHeight() / 2, (int) left + dp(6.33f) + startsAtDrawable.getIntrinsicWidth(), (int) bottom - h / 2 + startsAtDrawable.getIntrinsicHeight() / 2);
 //            startsAtDrawable.setAlpha((int) (0xFF * controlsAlpha));
@@ -29426,7 +29427,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
             canvas.drawRect(photoImage.getImageX(), photoImage.getImageY2() - dp(3), photoImage.getImageX2(), photoImage.getImageY2(), Theme.chat_videoProgressPaint);
             Theme.chat_videoProgressPaint.setColor(Theme.multAlpha(color, controlsAlpha));
             AndroidUtilities.rectTmp.set(photoImage.getImageX() - dp(2), photoImage.getImageY2() - dp(3), photoImage.getImageX() + photoImage.getImageWidth() * progress, photoImage.getImageY2());
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(2), dp(2), Theme.chat_videoProgressPaint);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(2)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(2)), Theme.chat_videoProgressPaint);
 
             canvas.restore();
         }

@@ -68,7 +68,7 @@ public class TooManyCommunitiesHintCell extends FrameLayout {
                 rect.set(0, 0, textPaint.measureText(s), textPaint.getTextSize());
                 rect.inset(-AndroidUtilities.dp(6), -AndroidUtilities.dp(3));
                 float r = (textPaint.getTextSize()) / 2f + AndroidUtilities.dp(3);
-                canvas.drawRoundRect(rect, r, r, paint);
+                canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), paint);
                 canvas.drawText(s, 0, textPaint.getTextSize() - AndroidUtilities.dpf2(2f), textPaint);
                 canvas.restore();
             }

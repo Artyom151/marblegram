@@ -216,7 +216,7 @@ public class ProfileGooeyView extends FrameLayout {
                         bitmapCanvas.drawPath(notchInfo.path, blackPaint);
                     } else {
                         float rad = Math.max(notchInfo.bounds.width(), notchInfo.bounds.height()) / 2f;
-                        bitmapCanvas.drawRoundRect(notchInfo.bounds, rad, rad, blackPaint);
+                        bitmapCanvas.drawRoundRect(notchInfo.bounds, org.telegram.marble.MarbleTheme.m3CornerPxF(rad), org.telegram.marble.MarbleTheme.m3CornerPxF(rad), blackPaint);
                     }
                     bitmapCanvas.restore();
                 } else {
@@ -410,7 +410,7 @@ public class ProfileGooeyView extends FrameLayout {
                 } else {
                     float rad = Math.max(notchInfo.bounds.width(), notchInfo.bounds.height()) / 2f;
                     temp.set(notchInfo.bounds);
-                    c.drawRoundRect(temp, rad, rad, blackPaint);
+                    c.drawRoundRect(temp, org.telegram.marble.MarbleTheme.m3CornerPxF(rad), org.telegram.marble.MarbleTheme.m3CornerPxF(rad), blackPaint);
 
                     path.rewind();
                     path.moveTo(temp.centerX() - h / 2f, temp.bottom);

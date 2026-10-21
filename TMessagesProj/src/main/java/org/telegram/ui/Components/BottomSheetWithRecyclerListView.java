@@ -796,7 +796,7 @@ public abstract class BottomSheetWithRecyclerListView extends BottomSheet {
                     int color = getThemedColor(Theme.key_sheet_scrollUp);
                     Theme.dialogs_onlineCirclePaint.setColor(color);
                     Theme.dialogs_onlineCirclePaint.setAlpha((int) (Theme.dialogs_onlineCirclePaint.getAlpha() * handleAlpha));
-                    canvas.drawRoundRect(handleRect, dp(2), dp(2), Theme.dialogs_onlineCirclePaint);
+                    canvas.drawRoundRect(handleRect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(2)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(2)), Theme.dialogs_onlineCirclePaint);
                 }
             }
 

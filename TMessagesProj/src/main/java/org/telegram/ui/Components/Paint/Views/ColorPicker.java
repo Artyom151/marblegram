@@ -284,7 +284,7 @@ public class ColorPicker extends FrameLayout {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        canvas.drawRoundRect(rectF, AndroidUtilities.dp(6), AndroidUtilities.dp(6), gradientPaint);
+        canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(6)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(6)), gradientPaint);
 
         int cx = (int) (rectF.left + rectF.width() * location);
         int cy = (int) (rectF.centerY() + draggingFactor * -AndroidUtilities.dp(70) - (changingWeight ? weight * AndroidUtilities.dp(190) : 0.0f));

@@ -267,7 +267,7 @@ public class RateCallLayout extends FrameLayout {
         protected void dispatchDraw(Canvas canvas) {
             bgRect.set(0, 0, getWidth(), getHeight());
             backgroundProvider.setDarkTranslation(getX() + ((View) getParent()).getX(), getY() + ((View) getParent()).getY());
-            canvas.drawRoundRect(bgRect, dp(28), dp(28), backgroundProvider.getDarkPaint());
+            canvas.drawRoundRect(bgRect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(28)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(28)), backgroundProvider.getDarkPaint());
             super.dispatchDraw(canvas);
         }
     }

@@ -162,7 +162,11 @@ public class ActionBarPopupWindow extends PopupWindow {
             this.resourcesProvider = resourcesProvider;
 
             if (resId != 0) {
-                backgroundDrawable = getResources().getDrawable(resId).mutate();
+                if ((resId == R.drawable.popup_fixed_alert2 || resId == R.drawable.popup_fixed_alert4) && org.telegram.marble.MarbleTheme.expressiveShapes()) {
+                    backgroundDrawable = org.telegram.marble.MarbleSurfaceDrawable.menu();
+                } else {
+                    backgroundDrawable = getResources().getDrawable(resId).mutate();
+                }
                 setPadding(dp(8), dp(8), dp(8), dp(8));
             }
             if (backgroundDrawable != null) {

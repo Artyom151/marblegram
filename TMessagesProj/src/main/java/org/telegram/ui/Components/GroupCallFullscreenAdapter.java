@@ -311,7 +311,7 @@ public class GroupCallFullscreenAdapter extends RecyclerListView.SelectionAdapte
             if (progress > 0) {
                 float p = getMeasuredWidth() / 2f * (1f - progress);
                 AndroidUtilities.rectTmp.set(p, p, getMeasuredWidth() - p, getMeasuredHeight() - p);
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, AndroidUtilities.dp(13), AndroidUtilities.dp(13), backgroundPaint);
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(13)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(13)), backgroundPaint);
                 drawSelection(canvas);
             }
 
@@ -354,7 +354,7 @@ public class GroupCallFullscreenAdapter extends RecyclerListView.SelectionAdapte
                 float p = getMeasuredWidth() / 2f * (1f - progress);
                 AndroidUtilities.rectTmp.set(p, p, getMeasuredWidth() - p, getMeasuredHeight() - p);
                 AndroidUtilities.rectTmp.inset(selectionPaint.getStrokeWidth() / 2, selectionPaint.getStrokeWidth() / 2);
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, AndroidUtilities.dp(12), AndroidUtilities.dp(12), selectionPaint);
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(12)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(12)), selectionPaint);
             }
         }
 

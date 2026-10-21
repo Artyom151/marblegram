@@ -290,6 +290,8 @@ public class ApplicationLoader extends Application {
 
         super.onCreate();
 
+        org.telegram.marble.MarbleTypography.installGlobal(); // Marblegram: Roboto Flex as the app-wide default face
+
         // AndroidUtilities must be initialized before FileLog
         final String helloWorld = AndroidUtilities.getHelloWorld();
 

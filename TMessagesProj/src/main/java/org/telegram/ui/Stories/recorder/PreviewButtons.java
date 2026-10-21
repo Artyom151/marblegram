@@ -300,7 +300,7 @@ public class PreviewButtons extends FrameLayout {
 
             canvas.saveLayerAlpha(0, 0, getWidth(), getHeight(), 0xFF, Canvas.ALL_SAVE_FLAG);
             AndroidUtilities.rectTmp.set(dp(10), dp(4), getWidth() - dp(10), getHeight() - dp(4));
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(20), dp(20), buttonPaint);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(20)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(20)), buttonPaint);
 
             canvas.save();
             canvas.translate((w - width) / 2f + dp(arrow ? 3 : 0) - left, (getHeight() - staticLayout.getHeight()) / 2f);

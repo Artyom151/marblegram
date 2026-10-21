@@ -192,10 +192,10 @@ public class GroupCallRecordAlert extends BottomSheet {
             protected void onDraw(Canvas canvas) {
                 AndroidUtilities.rectTmp.set(0, 0, getMeasuredWidth(), getMeasuredHeight());
                 gradientPaint[currentPage].setAlpha(255);
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, AndroidUtilities.dp(6), AndroidUtilities.dp(6), gradientPaint[currentPage]);
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(6)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(6)), gradientPaint[currentPage]);
                 if (pageOffset > 0 && currentPage + 1 < gradientPaint.length) {
                     gradientPaint[currentPage + 1].setAlpha((int) (255 * pageOffset));
-                    canvas.drawRoundRect(AndroidUtilities.rectTmp, AndroidUtilities.dp(6), AndroidUtilities.dp(6), gradientPaint[currentPage + 1]);
+                    canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(6)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(6)), gradientPaint[currentPage + 1]);
                 }
                 super.onDraw(canvas);
             }

@@ -555,7 +555,7 @@ public class ReplyMessageLine {
             rectF.set(rect.left, rect.top, lineRight, rect.bottom);
             canvas.save();
             canvas.clipRect(rectF.left, rectF.top, rectF.left + dp(3), rectF.bottom);
-            canvas.drawRoundRect(rectF, dp(rad), dp(rad), color1Paint);
+            canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(rad)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(rad)), color1Paint);
             color1Paint.setAlpha(wasAlpha);
 
             incrementLoadingT();
@@ -571,7 +571,7 @@ public class ReplyMessageLine {
                 rect.left + dp(6),
                 rect.top + rect.height() * AndroidUtilities.lerp(1f, 1f - CubicBezierInterpolator.EASE_OUT.getInterpolation(to), loadingAlpha)
             );
-            canvas.drawRoundRect(rectF, dp(4), dp(4), color1Paint);
+            canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), color1Paint);
             canvas.restore();
 
             if (parentView != null) {
@@ -582,7 +582,7 @@ public class ReplyMessageLine {
             rectF.set(rect.left, rect.top, lineRight, rect.bottom);
             canvas.save();
             canvas.clipRect(rectF.left, rectF.top, rectF.left + dp(3), rectF.bottom);
-            canvas.drawRoundRect(rectF, dp(rad), dp(rad), color1Paint);
+            canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(rad)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(rad)), color1Paint);
             canvas.restore();
         } else {
             // multi color: one tile holds every color -> one draw call
@@ -605,7 +605,7 @@ public class ReplyMessageLine {
             patternPaint.setAlpha(0xFF);
             rectF.set(0, 0, lineRight - rect.left, rect.bottom - rect.top);
             canvas.clipRect(rectF.left, rectF.top, rectF.left + dp(3), rectF.bottom);
-            canvas.drawRoundRect(rectF, dp(rad), dp(rad), patternPaint);
+            canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(rad)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(rad)), patternPaint);
 
             canvas.restore();
         }
@@ -655,7 +655,7 @@ public class ReplyMessageLine {
         if (!emojiOnly) {
             backgroundPaint.setColor(Theme.multAlpha(backgroundColorAnimated.set(backgroundColor), alpha));
             if (RadiiUtils.radiiAreSame(radii)) {
-                canvas.drawRoundRect(rect, radii[0], radii[0], backgroundPaint);
+                canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(radii[0]), org.telegram.marble.MarbleTheme.m3CornerPxF(radii[0]), backgroundPaint);
             } else {
                 backgroundPath.rewind();
                 backgroundPath.addRoundRect(rect, radii, Path.Direction.CW);

@@ -304,7 +304,7 @@ public class RichDocumentCell extends RichBlockCell implements Theme.Colorable,
         if (document() == null) return;
         if (hasPreview && !previewImage.draw(canvas)) {
             previewBackgroundPaint.setColor(Theme.getColor(Theme.key_chat_inFileBackground, resourcesProvider));
-            canvas.drawRoundRect(mediaX, dp(10), mediaX + dp(86), dp(96), dp(6), dp(6), previewBackgroundPaint);
+            canvas.drawRoundRect(mediaX, dp(10), mediaX + dp(86), dp(96), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(6)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(6)), previewBackgroundPaint);
         }
         radialProgress.draw(canvas);
         final int x = hasPreview ? mediaX + dp(86 + 11) : buttonX + dp(54);
@@ -314,7 +314,7 @@ public class RichDocumentCell extends RichBlockCell implements Theme.Colorable,
         sizePaint.setColor(Theme.getColor(Theme.key_chat_inTimeText, resourcesProvider));
         final int sizeY = titleY + (titleLayout == null ? 0 : titleLayout.getHeight()) + dp(2);
         if (sizeLayout != null) { canvas.save(); canvas.translate(x, sizeY); sizeLayout.draw(canvas); canvas.restore(); }
-        if (isCellSelected()) canvas.drawRoundRect((blockRtl ? 0 : blockInset()) + dp(8), dp(2), getWidth() - (blockRtl ? blockInset() : 0) - dp(8), dp(hasPreview ? 104 : 64), dp(8), dp(8), selectionPaint);
+        if (isCellSelected()) canvas.drawRoundRect((blockRtl ? 0 : blockInset()) + dp(8), dp(2), getWidth() - (blockRtl ? blockInset() : 0) - dp(8), dp(hasPreview ? 104 : 64), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(8)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(8)), selectionPaint);
     }
 
     private boolean isCellSelected() {

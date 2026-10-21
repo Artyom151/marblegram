@@ -929,7 +929,7 @@ public class LinkSpanDrawable<S extends CharacterStyle> {
             if (isClickable()) {
                 AndroidUtilities.rectTmp.set(0, 0, getPaddingLeft() + getTextWidth() + getPaddingRight(), getHeight());
                 linkBackgroundPaint.setColor(getLinkColor());
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(CORNER_RADIUS_DP), dp(CORNER_RADIUS_DP), linkBackgroundPaint);
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(CORNER_RADIUS_DP)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(CORNER_RADIUS_DP)), linkBackgroundPaint);
             }
 
             super.onDraw(canvas);

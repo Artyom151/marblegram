@@ -41,7 +41,7 @@ public class SearchField extends FrameLayout {
         FrameLayout.LayoutParams lp;
 
         searchBackground = new View(context);
-        searchBackground.setBackgroundDrawable(Theme.createRoundRectDrawable(AndroidUtilities.dp(18), getThemedColor(Theme.key_dialogSearchBackground)));
+        searchBackground.setBackgroundDrawable(Theme.createRoundRectDrawable(AndroidUtilities.dp(org.telegram.marble.MarbleTheme.isEnabled() ? 28 : 18), getThemedColor(Theme.key_dialogSearchBackground))); // Marblegram: M3 search bar = full pill
         if (supportRtl) {
             lp = LayoutHelper.createFrameRelatively(LayoutHelper.MATCH_PARENT, 36, Gravity.START | Gravity.TOP, horizontalMargin, 11, horizontalMargin, 0);
         } else {

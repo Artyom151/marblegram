@@ -63,7 +63,7 @@ public class CommunityBanGroupConfirmCell extends FrameLayout {
                     rectF.inset(dp(1.33f), dp(1.33f));
                     canvas.drawRoundRect(rectF, rectF.width() / 2f, rectF.height() / 2f, pRed);
                     rectF.inset(dpf2(4.67f), dpf2(9.066f));
-                    canvas.drawRoundRect(rectF, rectF.height() / 2f, rectF.height() / 2f, pWhite);
+                    canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(rectF.height() / 2f), org.telegram.marble.MarbleTheme.m3CornerPxF(rectF.height() / 2f), pWhite);
                 }
             };
             addView(minusBg, LayoutHelper.createFrame(22.66f, 22.66f, Gravity.LEFT | Gravity.BOTTOM, 50 - 1.34f, 0, 0, 5 - 1.34f));

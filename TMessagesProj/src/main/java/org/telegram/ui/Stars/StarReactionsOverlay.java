@@ -216,7 +216,7 @@ public class StarReactionsOverlay extends View {
 
             shadowPaint.setColor(0);
             shadowPaint.setShadowLayer(dp(12), 0, dp(3), Theme.multAlpha(0x55000000, focus));
-            canvas.drawRoundRect(reactionBounds, reactionBounds.height() / 2f, reactionBounds.height() / 2f, shadowPaint);
+            canvas.drawRoundRect(reactionBounds, org.telegram.marble.MarbleTheme.m3CornerPxF(reactionBounds.height() / 2f), org.telegram.marble.MarbleTheme.m3CornerPxF(reactionBounds.height() / 2f), shadowPaint);
 
             canvas.scale(s, s, btnX + btn.width * .1f, btnY + btn.height / 2f);
 

@@ -85,12 +85,12 @@ public class CellFlickerDrawable {
 
     public void draw(Canvas canvas, RectF rectF, float rad, View view) {
         update(view);
-        canvas.drawRoundRect(rectF, rad, rad, paint);
+        canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(rad), org.telegram.marble.MarbleTheme.m3CornerPxF(rad), paint);
         if (drawFrame) {
             if (frameInside) {
                 rectF.inset(paintOutline.getStrokeWidth() / 2f, paintOutline.getStrokeWidth() / 2f);
             }
-            canvas.drawRoundRect(rectF, rad, rad, paintOutline);
+            canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(rad), org.telegram.marble.MarbleTheme.m3CornerPxF(rad), paintOutline);
         }
     }
 
@@ -165,7 +165,7 @@ public class CellFlickerDrawable {
             if (frameInside) {
                 AndroidUtilities.rectTmp.inset(paintOutline.getStrokeWidth() / 2f, paintOutline.getStrokeWidth() / 2f);
             }
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, view.textureView.roundRadius, view.textureView.roundRadius, paintOutline);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(view.textureView.roundRadius), org.telegram.marble.MarbleTheme.m3CornerPxF(view.textureView.roundRadius), paintOutline);
         }
     }
 

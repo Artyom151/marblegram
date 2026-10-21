@@ -650,7 +650,7 @@ public class GroupCallMiniTextureView extends FrameLayout implements GroupCallSt
                 AndroidUtilities.rectTmp.set(textureView.getX() + textureView.currentClipHorizontal, textureView.getY() + textureView.currentClipVertical, textureView.getX() + textureView.getMeasuredWidth() - textureView.currentClipHorizontal, textureView.getY() + textureView.getMeasuredHeight() - textureView.currentClipVertical);
                 canvas.scale(scale, scale, AndroidUtilities.rectTmp.centerX(), AndroidUtilities.rectTmp.centerY());
                 canvas.translate(0, swipeToBackDy);
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, textureView.roundRadius, textureView.roundRadius, speakingPaint);
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(textureView.roundRadius), org.telegram.marble.MarbleTheme.m3CornerPxF(textureView.roundRadius), speakingPaint);
                 canvas.restore();
             }
         }
@@ -1674,7 +1674,7 @@ public class GroupCallMiniTextureView extends FrameLayout implements GroupCallSt
             backgroundImageReceiver.setRoundRadius((int) textureView.roundRadius);
             backgroundImageReceiver.draw(canvas);
 
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, textureView.roundRadius, textureView.roundRadius, backgroundPaint);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(textureView.roundRadius), org.telegram.marble.MarbleTheme.m3CornerPxF(textureView.roundRadius), backgroundPaint);
 
             if (animateToAmplitude != amplitude) {
                 amplitude += animateAmplitudeDiff * 16;

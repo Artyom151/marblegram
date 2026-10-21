@@ -261,7 +261,9 @@ public class AndroidUtilities {
 
     public static Typeface bold() {
         if (mediumTypeface == null) {
-            if (SharedConfig.useSystemBoldFont && Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            if (org.telegram.marble.MarbleTheme.expressiveTypography()) {
+                mediumTypeface = org.telegram.marble.MarbleTypography.emphasized();
+            } else if (SharedConfig.useSystemBoldFont && Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                 mediumTypeface = Typeface.create(null, 500, false);
             } else {
                 mediumTypeface = getTypeface(TYPEFACE_ROBOTO_MEDIUM);
@@ -2393,7 +2395,11 @@ public class AndroidUtilities {
         synchronized (typefaceCache) {
             if (!typefaceCache.containsKey(assetPath)) {
                 try {
-                    Typeface t;
+                    Typeface t = org.telegram.marble.MarbleTypography.mapTelegramFont(assetPath); // Marblegram: Roboto -> Roboto Flex
+                    if (t != null) {
+                        typefaceCache.put(assetPath, t);
+                        return t;
+                    }
                     if (Build.VERSION.SDK_INT >= 26) {
                         Typeface.Builder builder = new Typeface.Builder(ApplicationLoader.applicationContext.getAssets(), assetPath);
                         if (assetPath.contains("rextrabold")) {

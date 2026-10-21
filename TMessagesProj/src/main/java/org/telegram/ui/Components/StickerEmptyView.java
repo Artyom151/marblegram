@@ -121,6 +121,12 @@ public class StickerEmptyView extends FrameLayout implements NotificationCenter.
         button = new ButtonWithCounterView(context, resourcesProvider).setRound();
         button.setVisibility(View.GONE);
 
+        if (org.telegram.marble.MarbleTheme.expressiveShapes()) {
+            // Marblegram: M3E empty state — illustration on a slowly rotating tonal Cookie shape, headlineSmall title
+            stickerView.setBackground(new org.telegram.marble.MarbleShapeDrawable(org.telegram.marble.MaterialShapes.COOKIE_9,
+                androidx.core.graphics.ColorUtils.setAlphaComponent(getThemedColor(Theme.key_windowBackgroundWhiteBlueHeader), 0x22), 24000));
+            title.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 24);
+        }
         linearLayout.addView(stickerView, LayoutHelper.createLinear(117, 117, Gravity.CENTER_HORIZONTAL));
         linearLayout.addView(title, LayoutHelper.createLinear(LayoutHelper.WRAP_CONTENT, LayoutHelper.WRAP_CONTENT, Gravity.CENTER_HORIZONTAL, 0, 12, 0, 0));
         linearLayout.addView(subtitle, LayoutHelper.createLinear(LayoutHelper.WRAP_CONTENT, LayoutHelper.WRAP_CONTENT, Gravity.CENTER_HORIZONTAL, 0, 8, 0, 0));

@@ -187,7 +187,7 @@ public class PremiumFeatureBottomSheet extends BottomSheet implements Notificati
                 canvas.save();
                 canvas.clipRect(0, 0, getMeasuredWidth(), getMeasuredHeight());
                 gradientTools.paint.setAlpha(gradientAlpha);
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(24) - 1, dp(24) - 1, gradientTools.paint);
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(24) - 1), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(24) - 1), gradientTools.paint);
                 canvas.restore();
                 super.dispatchDraw(canvas);
             }

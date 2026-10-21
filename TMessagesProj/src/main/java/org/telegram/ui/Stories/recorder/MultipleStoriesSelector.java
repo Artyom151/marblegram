@@ -426,21 +426,21 @@ public class MultipleStoriesSelector extends FrameLayout {
         if (customBlur()) {
             drawBlur(backgroundBlur, canvas, bounds, r, false, 0, 0, true, 1.0f);
             darkenBackground.setAlpha(0x26);
-            canvas.drawRoundRect(bounds, r, r, darkenBackground);
+            canvas.drawRoundRect(bounds, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), darkenBackground);
         } else {
             Paint[] blurPaints = backgroundBlur.getPaints(1.0f, 0, 0);
             if (blurPaints == null || blurPaints[1] == null) {
                 darkenBackground.setAlpha(0x80);
-                canvas.drawRoundRect(bounds, r, r, darkenBackground);
+                canvas.drawRoundRect(bounds, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), darkenBackground);
             } else {
                 if (blurPaints[0] != null) {
-                    canvas.drawRoundRect(bounds, r, r, blurPaints[0]);
+                    canvas.drawRoundRect(bounds, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), blurPaints[0]);
                 }
                 if (blurPaints[1] != null) {
-                    canvas.drawRoundRect(bounds, r, r, blurPaints[1]);
+                    canvas.drawRoundRect(bounds, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), blurPaints[1]);
                 }
                 darkenBackground.setAlpha((int) (0x33 * alpha));
-                canvas.drawRoundRect(bounds, r, r, darkenBackground);
+                canvas.drawRoundRect(bounds, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), darkenBackground);
             }
         }
         if (alpha < 1.0f) {
@@ -630,7 +630,7 @@ public class MultipleStoriesSelector extends FrameLayout {
             if (selected > 0.0f) {
                 AndroidUtilities.rectTmp.set(dp(2), dp(4), dp(2 + 94), dp(4 + 112));
                 strokePaint.setAlpha((int) (0xFF * selected));
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(6), dp(6), strokePaint);
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(6)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(6)), strokePaint);
             }
 
             cx = getWidth() - dp(4.33f + 12.833f) - dp(3);// * selected;

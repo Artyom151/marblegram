@@ -3901,7 +3901,7 @@ public class WalletActivity extends UniversalFragment implements NotificationCen
                     AndroidUtilities.lerp(lowRect, highRect, selected - low, rect);
 
                     backgroundPaint.setColor(Theme.multAlpha(Theme.getColor(Theme.key_featuredStickers_addButton, resourcesProvider), .10f));
-                    canvas.drawRoundRect(rect, dp(14), dp(14), backgroundPaint);
+                    canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(14)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(14)), backgroundPaint);
 
                     super.dispatchDraw(canvas);
                 }
@@ -3939,7 +3939,7 @@ public class WalletActivity extends UniversalFragment implements NotificationCen
                 shadowPaint.setShadowLayer(dpf2(1.67f), 0, dpf2(0.67f), 0x1F000000);
                 shadowPaint.setColor(Theme.getColor(Theme.key_windowBackgroundWhite, resourcesProvider));
                 AndroidUtilities.rectTmp.set(layout.getX(), layout.getY(), layout.getX() + layout.getWidth(), layout.getY() + layout.getHeight());
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(18), dp(18), shadowPaint);
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(18)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(18)), shadowPaint);
             }
             return super.drawChild(canvas, child, drawingTime);
         }

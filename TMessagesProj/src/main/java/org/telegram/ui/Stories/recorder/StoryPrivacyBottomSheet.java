@@ -2441,7 +2441,7 @@ public class StoryPrivacyBottomSheet extends BottomSheet implements Notification
             top = Math.max(AndroidUtilities.statusBarHeight, top) - AndroidUtilities.statusBarHeight * actionBarT;
             AndroidUtilities.rectTmp.set(backgroundPaddingLeft, top, getWidth() - backgroundPaddingLeft, getHeight() + dp(8));
             final float r = AndroidUtilities.lerp(dp(14), 0, actionBarT);
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, r, r, backgroundPaint);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), backgroundPaint);
             canvas.save();
             path.rewind();
             path.addRoundRect(AndroidUtilities.rectTmp, r, r, Path.Direction.CW);
@@ -4648,7 +4648,7 @@ public class StoryPrivacyBottomSheet extends BottomSheet implements Notification
                     top = AndroidUtilities.lerp(top, 0, statusBarT.set(top < AndroidUtilities.statusBarHeight));
                     AndroidUtilities.rectTmp.set(backgroundPaddingLeft, top, getWidth() - backgroundPaddingLeft, getHeight() + dp(14));
                     final float r = dp(14) * (1f - statusBarT.get());
-                    canvas.drawRoundRect(AndroidUtilities.rectTmp, r, r, backgroundPaint);
+                    canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), backgroundPaint);
                     headerView.setTranslationY(Math.max(AndroidUtilities.statusBarHeight + dp(8), dp(14) + top));
 
                     canvas.save();

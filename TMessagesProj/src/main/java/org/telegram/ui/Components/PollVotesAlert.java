@@ -495,7 +495,7 @@ public class PollVotesAlert extends BottomSheet {
                     cx = getMeasuredWidth() - cx - w;
                 }
                 rect.set(cx, cy - dp(4), cx + w, cy + dp(4));
-                canvas.drawRoundRect(rect, dp(4), dp(4), placeholderPaint);
+                canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), placeholderPaint);
 
                 if (placeholderNum % 2 == 0) {
                     cx = dp(119);
@@ -508,7 +508,7 @@ public class PollVotesAlert extends BottomSheet {
                     cx = getMeasuredWidth() - cx - w;
                 }
                 rect.set(cx, cy - dp(4), cx + w, cy + dp(4));
-                canvas.drawRoundRect(rect, dp(4), dp(4), placeholderPaint);
+                canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), placeholderPaint);
             }
             if (needDivider) {
                 canvas.drawLine(LocaleController.isRTL ? 0 : dp(64), getMeasuredHeight() - 1, getMeasuredWidth() - (LocaleController.isRTL ? dp(64) : 0), getMeasuredHeight() - 1, Theme.dividerPaint);
@@ -773,7 +773,7 @@ public class PollVotesAlert extends BottomSheet {
                 if (rad != 1.0f) {
                     Theme.dialogs_onlineCirclePaint.setColor(Theme.getColor(Theme.key_dialogBackground));
                     rect.set(backgroundPaddingLeft, backgroundPaddingTop + top, getMeasuredWidth() - backgroundPaddingLeft, backgroundPaddingTop + top + dp(24));
-                    canvas.drawRoundRect(rect, dp(12) * rad, dp(12) * rad, Theme.dialogs_onlineCirclePaint);
+                    canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(12) * rad), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(12) * rad), Theme.dialogs_onlineCirclePaint);
                 }
 
                 if (rad != 0) {
@@ -784,7 +784,7 @@ public class PollVotesAlert extends BottomSheet {
                     int alpha = Color.alpha(color);
                     Theme.dialogs_onlineCirclePaint.setColor(color);
                     Theme.dialogs_onlineCirclePaint.setAlpha((int) (alpha * alphaProgress * rad));
-                    canvas.drawRoundRect(rect, dp(2), dp(2), Theme.dialogs_onlineCirclePaint);
+                    canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(2)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(2)), Theme.dialogs_onlineCirclePaint);
                 }
 
                 int color1 = Theme.getColor(Theme.key_dialogBackground);

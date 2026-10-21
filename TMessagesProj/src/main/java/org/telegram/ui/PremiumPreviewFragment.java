@@ -1560,7 +1560,7 @@ public class PremiumPreviewFragment extends BaseFragment implements Notification
                             matrix.postScale(1f, totalGradientHeight / 100f, 0, 0);
                             matrix.postTranslate(0, -data.yOffset);
                             shader.setLocalMatrix(matrix);
-                            canvas.drawRoundRect(AndroidUtilities.rectTmp, r, r, gradientPaint);
+                            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), gradientPaint);
 
                             final boolean border = resourceProvider != null ? resourceProvider.isDark() : Theme.isCurrentThemeDark();
                             if (border) {
@@ -1570,7 +1570,7 @@ public class PremiumPreviewFragment extends BaseFragment implements Notification
                                 canvas.translate(AndroidUtilities.rectTmp.left, AndroidUtilities.rectTmp.top);
                                 AndroidUtilities.rectTmp.offset(-AndroidUtilities.rectTmp.left, -AndroidUtilities.rectTmp.top);
                                 AndroidUtilities.rectTmp.inset(sw / 2.0f, sw / 2.0f);
-                                canvas.drawRoundRect(AndroidUtilities.rectTmp, r, r, strokePaint);
+                                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), strokePaint);
                                 canvas.restore();
                             }
 
@@ -1847,7 +1847,7 @@ public class PremiumPreviewFragment extends BaseFragment implements Notification
                             if (discountView.getVisibility() == VISIBLE) {
                                 AndroidUtilities.rectTmp.set(discountView.getLeft(), discountView.getTop(), discountView.getRight(), discountView.getBottom());
                                 tiersGradientTools.gradientMatrix(0, 0, getMeasuredWidth(), totalTiersGradientHeight, 0, -tier.yOffset);
-                                canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(6), dp(6), tiersGradientTools.paint);
+                                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(6)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(6)), tiersGradientTools.paint);
                             }
 
                             super.dispatchDraw(canvas);

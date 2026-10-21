@@ -103,10 +103,10 @@ public class DownloadProgressIcon extends View implements NotificationCenter.Not
         float startPadding = AndroidUtilities.dp(16);
         float width = getMeasuredWidth() - startPadding * 2;
         AndroidUtilities.rectTmp.set(startPadding, cy - r, getMeasuredWidth() - startPadding, cy + r);
-        canvas.drawRoundRect(AndroidUtilities.rectTmp, r, r, paint2);
+        canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), paint2);
 
         AndroidUtilities.rectTmp.set(startPadding, cy - r, startPadding + width * currentProgress, cy + r);
-        canvas.drawRoundRect(AndroidUtilities.rectTmp, r, r, paint);
+        canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), paint);
 
         canvas.save();
         canvas.clipRect(0, 0, getMeasuredWidth(), cy - r);

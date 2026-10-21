@@ -83,7 +83,7 @@ public class AttachBotIntroTopView extends View {
         super.onDraw(canvas);
 
         AndroidUtilities.rectTmp.set(0, 0, getWidth(), getHeight() + AndroidUtilities.dp(10));
-        canvas.drawRoundRect(AndroidUtilities.rectTmp, AndroidUtilities.dp(10), AndroidUtilities.dp(10), backgroundPaint);
+        canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(10)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(10)), backgroundPaint);
 
         imageReceiver.setImageCoords(getWidth() / 2f - AndroidUtilities.dp(ICONS_SIDE_PADDING + ICONS_SIZE_DP), getHeight() / 2f - AndroidUtilities.dp(ICONS_SIZE_DP) / 2f, AndroidUtilities.dp(ICONS_SIZE_DP), AndroidUtilities.dp(ICONS_SIZE_DP));
         imageReceiver.draw(canvas);

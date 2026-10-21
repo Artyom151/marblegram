@@ -644,7 +644,7 @@ public class VideoSeekPreviewImage extends View implements NotificationCenter.No
             float scale = getMeasuredWidth() / (float) bitmapToDraw.getWidth();
             matrix.preScale(scale, scale);
             bitmapRect.set(0, 0, getMeasuredWidth(), getMeasuredHeight());
-            canvas.drawRoundRect(bitmapRect, dp(6), dp(6), bitmapPaint);
+            canvas.drawRoundRect(bitmapRect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(6)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(6)), bitmapPaint);
             frameDrawable.setBounds(0, 0, getMeasuredWidth(), getMeasuredHeight());
             frameDrawable.draw(canvas);
 

@@ -418,7 +418,7 @@ public class RecordControl extends View implements FlashViews.Invertable {
             canvas.save();
             canvas.scale(scale, scale, cx, cy);
             mainPaint.setAlpha((int) (0xFF * (1.0f - check)));
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, rad, rad, mainPaint);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(rad), org.telegram.marble.MarbleTheme.m3CornerPxF(rad), mainPaint);
             canvas.restore();
             canvas.saveLayerAlpha(0, 0, getWidth(), getHeight(), 0xFF, Canvas.ALL_SAVE_FLAG);
         } else {
@@ -426,7 +426,7 @@ public class RecordControl extends View implements FlashViews.Invertable {
         }
         canvas.scale(scale, scale, cx, cy);
         mainPaint.setAlpha(0xFF);
-        canvas.drawRoundRect(AndroidUtilities.rectTmp, rad, rad, mainPaint);
+        canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(rad), org.telegram.marble.MarbleTheme.m3CornerPxF(rad), mainPaint);
         if (check > 0) {
             checkPaint.setStrokeWidth(dp(4));
             checkPath.rewind();
@@ -627,7 +627,7 @@ public class RecordControl extends View implements FlashViews.Invertable {
                     canvas.drawPath(metaballsPath, redPaint);
 
                     AndroidUtilities.rectTmp.set(acx - r, cy - r, acx + r, cy + r);
-                    canvas.drawRoundRect(AndroidUtilities.rectTmp, rad, rad, redPaint);
+                    canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(rad), org.telegram.marble.MarbleTheme.m3CornerPxF(rad), redPaint);
                 }
             }
         }

@@ -482,8 +482,8 @@ public class PollContentDrawable extends Drawable implements DownloadController.
                     bounds.top + dp(6),
                     bounds.left + videoDurationText.getCurrentWidth() + dp(18),
                     bounds.top + dp(6 + 17),
-                    dp(17 / 2f),
-                    dp(17 / 2f),
+                    org.telegram.marble.MarbleTheme.m3CornerPxF(dp(17 / 2f)),
+                    org.telegram.marble.MarbleTheme.m3CornerPxF(dp(17 / 2f)),
                     durationBackgroundPaint);
                 videoDurationText.draw(canvas, bounds.left + dp(12), bounds.top + dp(15));
             }

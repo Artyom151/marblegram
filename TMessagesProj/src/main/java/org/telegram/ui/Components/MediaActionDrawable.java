@@ -418,7 +418,7 @@ public class MediaActionDrawable extends Drawable {
                             if (nextIcon == ICON_CANCEL_FILL) {
                                 paint3.setAlpha(alpha);
                                 rect.set(cx - AndroidUtilities.dp(3.5f), cy - AndroidUtilities.dp(3.5f), cx + AndroidUtilities.dp(3.5f), cy + AndroidUtilities.dp(3.5f));
-                                canvas.drawRoundRect(rect, AndroidUtilities.dp(2), AndroidUtilities.dp(2), paint3);
+                                canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(2)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(2)), paint3);
 
                                 paint.setAlpha((int) (alpha * 0.15f));
                                 int diff = AndroidUtilities.dp(isMini ? 2 : 4);
@@ -539,7 +539,7 @@ public class MediaActionDrawable extends Drawable {
                 if (currentIcon == ICON_CANCEL_FILL || nextIcon == ICON_CANCEL_FILL) {
                     paint3.setAlpha((int) (alpha * overrideAlpha));
                     rect.set(cx - AndroidUtilities.dp(3.5f), cy - AndroidUtilities.dp(3.5f), cx + AndroidUtilities.dp(3.5f), cy + AndroidUtilities.dp(3.5f));
-                    canvas.drawRoundRect(rect, AndroidUtilities.dp(2), AndroidUtilities.dp(2), paint3);
+                    canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(2)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(2)), paint3);
                 } else {
                     canvas.drawLine(cx - d, cy - d, cx + d, cy + d, paint);
                     canvas.drawLine(cx + d, cy - d, cx - d, cy + d, paint);
@@ -565,7 +565,7 @@ public class MediaActionDrawable extends Drawable {
                     canvas.drawArc(rect, 0, 360, false, paint);
                     paint.setAlpha(alpha);
                 }
-                canvas.drawArc(rect, downloadRadOffset, rad, false, paint);
+                org.telegram.marble.WavyProgress.drawArc(canvas, rect, downloadRadOffset, rad, paint);
             }
             if (progressScale != 1.0f) {
                 canvas.restore();
@@ -586,7 +586,7 @@ public class MediaActionDrawable extends Drawable {
                 float rad = Math.max(4, 360 * animatedDownloadProgress);
                 int diff = AndroidUtilities.dp(isMini ? 2 : 4);
                 rect.set(bounds.left + diff, bounds.top + diff, bounds.right - diff, bounds.bottom - diff);
-                canvas.drawArc(rect, downloadRadOffset, rad, false, paint);
+                org.telegram.marble.WavyProgress.drawArc(canvas, rect, downloadRadOffset, rad, paint);
             }
         }
 

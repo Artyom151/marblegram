@@ -227,7 +227,7 @@ public class InviteLinkBottomSheet extends BottomSheet {
                 if (radProgress != 1.0f) {
                     Theme.dialogs_onlineCirclePaint.setColor(Theme.getColor(Theme.key_dialogBackground));
                     rect.set(backgroundPaddingLeft, backgroundPaddingTop + top, getMeasuredWidth() - backgroundPaddingLeft, backgroundPaddingTop + top + dp(24));
-                    canvas.drawRoundRect(rect, dp(12) * radProgress, dp(12) * radProgress, Theme.dialogs_onlineCirclePaint);
+                    canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(12) * radProgress), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(12) * radProgress), Theme.dialogs_onlineCirclePaint);
                 }
 
                 if (statusBarHeight > 0) {

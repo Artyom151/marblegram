@@ -190,7 +190,7 @@ public class BottomPagerTabs extends View {
                     sx + tabWidth / 2f,
                     dp(9 + 32)
             );
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(16), dp(16), selectPaint);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(16)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(16)), selectPaint);
         }
 
         for (int i = 0; i < tabs.length; ++i) {
@@ -211,7 +211,7 @@ public class BottomPagerTabs extends View {
             if (scrollingT < 1) {
                 selectPaint.setColor(ColorUtils.setAlphaComponent(Theme.getColor(Theme.key_windowBackgroundWhiteBlackText, resourcesProvider), (int) (0x12 * T * (1f - scrollingT))));
                 AndroidUtilities.rectTmp.set(AndroidUtilities.rectTmp2);
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(16), dp(16), selectPaint);
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(16)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(16)), selectPaint);
             }
 
             tab.ripple.setBounds(AndroidUtilities.rectTmp2);

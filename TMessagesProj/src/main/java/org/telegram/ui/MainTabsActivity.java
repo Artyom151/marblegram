@@ -581,7 +581,7 @@ public class MainTabsActivity extends ViewPagerActivity implements NotificationC
             ));
             textPaint.setColor(getThemedColor(Theme.key_actionBarDefault));
             AndroidUtilities.rectTmp.set(left, centerY - halfHeight, left + counterWidth, centerY + halfHeight);
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, halfHeight, halfHeight, backgroundPaint);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(halfHeight), org.telegram.marble.MarbleTheme.m3CornerPxF(halfHeight), backgroundPaint);
             final Paint.FontMetrics fontMetrics = textPaint.getFontMetrics();
             final float baseline = centerY - (fontMetrics.ascent + fontMetrics.descent) / 2f;
             canvas.drawText(count, left + (counterWidth - textPaint.measureText(count)) / 2f, baseline, textPaint);

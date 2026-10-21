@@ -1691,7 +1691,7 @@ public class UndoView extends FrameLayout {
 
            // canvas.drawText(timeLeftString, rect.centerX() - textWidth / 2, AndroidUtilities.dp(28.2f), textPaint);
            // canvas.drawText(timeLeftString, , textPaint);
-            canvas.drawArc(rect, -90, -360 * (timeLeft / 5000.0f), false, progressPaint);
+            org.telegram.marble.WavyProgress.drawArc(canvas, rect, -90, -360 * (timeLeft / 5000.0f), progressPaint);
         }
 
         long newTime = SystemClock.elapsedRealtime();

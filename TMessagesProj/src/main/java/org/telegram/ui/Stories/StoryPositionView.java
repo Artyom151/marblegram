@@ -56,7 +56,7 @@ public class StoryPositionView {
 
         AndroidUtilities.rectTmp.set(-horizontalPadding, -verticalPadding, textDrawable.getCurrentWidth() + horizontalPadding, textDrawable.getHeight() + verticalPadding);
        // float r = AndroidUtilities.rectTmp.height() / 2f;
-       // canvas.drawRoundRect(AndroidUtilities.rectTmp, r, r, backgroundPaint);
+       // canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), backgroundPaint);
 
        // canvas.clipRect(AndroidUtilities.rectTmp);
         //canvas.translate(0, textDrawable.getHeight() / 2f - AndroidUtilities.dpf2(0.5f));

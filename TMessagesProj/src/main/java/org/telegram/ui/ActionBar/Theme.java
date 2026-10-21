@@ -4675,6 +4675,7 @@ public class Theme {
     }
 
     public static ShapeDrawable createRoundRectDrawable(int rad, int defaultColor) {
+        rad = org.telegram.marble.MarbleTheme.m3CornerPx(rad); // Marblegram: M3E shape scale
         ShapeDrawable defaultDrawable = new ShapeDrawable(new RoundRectShape(new float[]{rad, rad, rad, rad, rad, rad, rad, rad}, null, null));
         defaultDrawable.getPaint().setColor(defaultColor);
         return defaultDrawable;
@@ -4697,12 +4698,15 @@ public class Theme {
     }
 
     public static ShapeDrawable createRoundRectDrawable(int topLeftRed, int topRightRad, int bottomRightRad, int bottomLeftRad, int defaultColor) {
+        topLeftRed = org.telegram.marble.MarbleTheme.m3CornerPx(topLeftRed); topRightRad = org.telegram.marble.MarbleTheme.m3CornerPx(topRightRad);
+        bottomRightRad = org.telegram.marble.MarbleTheme.m3CornerPx(bottomRightRad); bottomLeftRad = org.telegram.marble.MarbleTheme.m3CornerPx(bottomLeftRad);
         ShapeDrawable defaultDrawable = new ShapeDrawable(new RoundRectShape(new float[]{topLeftRed, topLeftRed, topRightRad, topRightRad, bottomRightRad, bottomRightRad, bottomLeftRad, bottomLeftRad}, null, null));
         defaultDrawable.getPaint().setColor(defaultColor);
         return defaultDrawable;
     }
 
     public static ShapeDrawable createRoundRectDrawable(int topRad, int bottomRad, int defaultColor) {
+        topRad = org.telegram.marble.MarbleTheme.m3CornerPx(topRad); bottomRad = org.telegram.marble.MarbleTheme.m3CornerPx(bottomRad);
         ShapeDrawable defaultDrawable = new ShapeDrawable(new RoundRectShape(new float[]{topRad, topRad, topRad, topRad, bottomRad, bottomRad, bottomRad, bottomRad}, null, null));
         defaultDrawable.getPaint().setColor(defaultColor);
         return defaultDrawable;
@@ -4730,9 +4734,9 @@ public class Theme {
                 Rect bounds = getBounds();
                 rect.set(bounds.left, bounds.top, bounds.right, bounds.bottom);
                 applyServiceShaderMatrixForView(view, containerView);
-                canvas.drawRoundRect(rect, rad, rad, backgroundPaint != null ? backgroundPaint : Theme.getThemePaint(Theme.key_paint_chatActionBackground, resourcesProvider));
+                canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(rad), org.telegram.marble.MarbleTheme.m3CornerPxF(rad), backgroundPaint != null ? backgroundPaint : Theme.getThemePaint(Theme.key_paint_chatActionBackground, resourcesProvider));
                 if (resourcesProvider != null ? resourcesProvider.hasGradientService() : hasGradientService()) {
-                    canvas.drawRoundRect(rect, rad, rad, Theme.getThemePaint(Theme.key_paint_chatActionBackgroundDarken, resourcesProvider));
+                    canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(rad), org.telegram.marble.MarbleTheme.m3CornerPxF(rad), Theme.getThemePaint(Theme.key_paint_chatActionBackgroundDarken, resourcesProvider));
                 }
             }
 
@@ -4774,6 +4778,7 @@ public class Theme {
         return createSimpleSelectorRoundRectDrawable(rad, defaultColor, pressedColor, maskColor, 0);
     }
     private static Drawable createSimpleSelectorRoundRectDrawable(float[] rad, int defaultColor, int pressedColor, int maskColor, int inset) {
+        rad = org.telegram.marble.MarbleTheme.m3CornersPx(rad); // Marblegram: M3E shape scale
         ShapeDrawable defaultDrawable = new ShapeDrawable(new RoundRectShape(rad, null, null));
         defaultDrawable.setPadding(inset, inset, inset, inset);
         defaultDrawable.getPaint().setColor(defaultColor);
@@ -4894,7 +4899,7 @@ public class Theme {
                         }
                         rect.set(bounds);
                         float rad = radius <= 0 ? dp(6) : radius;
-                        canvas.drawRoundRect(rect, rad, rad, maskPaint);
+                        canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(rad), org.telegram.marble.MarbleTheme.m3CornerPxF(rad), maskPaint);
                     } else {
                         int rad;
                         if (maskType == RIPPLE_MASK_CIRCLE_20DP || maskType == 6) {
@@ -4963,7 +4968,7 @@ public class Theme {
                 rectF.top += insetT;
                 rectF.right -= insetR;
                 rectF.bottom -= insetB;
-                canvas.drawRoundRect(rectF, radius, radius, maskPaint);
+                canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(radius), org.telegram.marble.MarbleTheme.m3CornerPxF(radius), maskPaint);
             }
 
             @Override
@@ -5299,10 +5304,13 @@ public class Theme {
         boolean invalidatePath = true;
 
         public RippleRadMaskDrawable(float top, float bottom) {
+            top = org.telegram.marble.MarbleTheme.m3CornerDp(top); bottom = org.telegram.marble.MarbleTheme.m3CornerDp(bottom);
             radii[0] = radii[1] = radii[2] = radii[3] = dp(top);
             radii[4] = radii[5] = radii[6] = radii[7] = dp(bottom);
         }
         public RippleRadMaskDrawable(float topLeft, float topRight, float bottomRight, float bottomLeft) {
+            topLeft = org.telegram.marble.MarbleTheme.m3CornerDp(topLeft); topRight = org.telegram.marble.MarbleTheme.m3CornerDp(topRight);
+            bottomRight = org.telegram.marble.MarbleTheme.m3CornerDp(bottomRight); bottomLeft = org.telegram.marble.MarbleTheme.m3CornerDp(bottomLeft);
             radii[0] = radii[1] = dp(topLeft);
             radii[2] = radii[3] = dp(topRight);
             radii[4] = radii[5] = dp(bottomRight);
@@ -5310,6 +5318,7 @@ public class Theme {
         }
 
         public void setRadius(float top, float bottom) {
+            top = org.telegram.marble.MarbleTheme.m3CornerDp(top); bottom = org.telegram.marble.MarbleTheme.m3CornerDp(bottom);
             radii[0] = radii[1] = radii[2] = radii[3] = dp(top);
             radii[4] = radii[5] = radii[6] = radii[7] = dp(bottom);
             invalidatePath = true;
@@ -6081,6 +6090,7 @@ public class Theme {
         }
         applyCalculatedTableColors(currentColorsNoAccent, currentColors, currentTheme.isDark());
         applyCalculatedArticleCodeColors(currentColorsNoAccent, currentColors, currentTheme.isDark());
+        org.telegram.marble.MarbleTheme.apply(currentColors, currentTheme.isDark());
         if (!messages) {
             boolean async = !(LaunchActivity.getLastFragment() instanceof ChatActivity);
             reloadWallpaper(async);

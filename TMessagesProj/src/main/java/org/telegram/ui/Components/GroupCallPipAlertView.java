@@ -229,7 +229,7 @@ public class GroupCallPipAlertView extends LinearLayout implements VoIPService.S
         }
         rectF.set(0, 0, getMeasuredWidth(), getMeasuredHeight());
         paint.setShader(linearGradient);
-        canvas.drawRoundRect(rectF, AndroidUtilities.dp(10), AndroidUtilities.dp(10), paint);
+        canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(10)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(10)), paint);
         float x, y;
         if (position == POSITION_LEFT) {
             y = cy - getTranslationY();
@@ -268,7 +268,7 @@ public class GroupCallPipAlertView extends LinearLayout implements VoIPService.S
 
         rectF.set(x - AndroidUtilities.dp(10), y - AndroidUtilities.dp(10), x + AndroidUtilities.dp(10), y + AndroidUtilities.dp(10));
 
-        canvas.drawRoundRect(rectF, AndroidUtilities.dp(4), AndroidUtilities.dp(4), paint);
+        canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(4)), paint);
         canvas.restore();
 
         super.onDraw(canvas);

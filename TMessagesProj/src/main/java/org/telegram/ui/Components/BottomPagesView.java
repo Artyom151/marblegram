@@ -66,7 +66,7 @@ public class BottomPagesView extends View {
             }
             x = a * AndroidUtilities.dp(11);
             rect.set(x, 0, x + AndroidUtilities.dp(5), AndroidUtilities.dp(5));
-            canvas.drawRoundRect(rect, AndroidUtilities.dp(2.5f), AndroidUtilities.dp(2.5f), paint);
+            canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(2.5f)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(2.5f)), paint);
         }
         if (selectedColorKey >= 0) {
             paint.setColor(Theme.getColor(selectedColorKey));
@@ -83,6 +83,6 @@ public class BottomPagesView extends View {
         } else {
             rect.set(x, 0, x + AndroidUtilities.dp(5), AndroidUtilities.dp(5));
         }
-        canvas.drawRoundRect(rect, AndroidUtilities.dp(2.5f), AndroidUtilities.dp(2.5f), paint);
+        canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(2.5f)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(2.5f)), paint);
     }
 }

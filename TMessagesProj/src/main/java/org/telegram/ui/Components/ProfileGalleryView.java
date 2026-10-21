@@ -1536,7 +1536,7 @@ public class ProfileGalleryView extends CircularViewPager implements Notificatio
                     canvas.drawRect(0, 0, getWidth(), getHeight(), placeholderPaint);
                 } else if (roundTopRadius == roundBottomRadius) {
                     rect.set(0, 0, getWidth(), getHeight());
-                    canvas.drawRoundRect(rect, roundTopRadius, roundTopRadius, placeholderPaint);
+                    canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(roundTopRadius), org.telegram.marble.MarbleTheme.m3CornerPxF(roundTopRadius), placeholderPaint);
                 } else {
                     path.reset();
                     rect.set(0, 0, getWidth(), getHeight());

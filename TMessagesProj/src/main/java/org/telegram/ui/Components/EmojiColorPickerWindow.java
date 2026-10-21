@@ -323,7 +323,7 @@ public class EmojiColorPickerWindow extends PopupWindow {
                         rect.set(x, y, x + emojiSize, y + emojiSize);
                         rect.inset(AndroidUtilities.dp(-2), AndroidUtilities.dp(-2 * mi));
                         rectPaint.setColor(Theme.multAlpha(Theme.getColor(Theme.key_listSelector, resourcesProvider), AndroidUtilities.lerp(1, 0.5f, mi)));
-                        canvas.drawRoundRect(rect, AndroidUtilities.dp(4), AndroidUtilities.dp(4), rectPaint);
+                        canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(4)), rectPaint);
 
                         for (int ix = 0; ix < 5; ++ix) {
                             int i = 1 + ix + iy * 5;
@@ -354,7 +354,7 @@ public class EmojiColorPickerWindow extends PopupWindow {
                     rect.set(x, y, x + emojiSize, y + emojiSize);
                     rect.inset(AndroidUtilities.dp(-2), AndroidUtilities.dp(-2));
                     rectPaint.setColor(Theme.getColor(Theme.key_listSelector, resourcesProvider));
-                    canvas.drawRoundRect(rect, AndroidUtilities.dp(4), AndroidUtilities.dp(4), rectPaint);
+                    canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(4)), rectPaint);
 
                     for (int a = 0; a < 6; a++) {
                         Drawable drawable = drawables[a];

@@ -100,7 +100,7 @@ public class QuoteCollapseButton {
             backgroundPaint.setColor(ColorUtils.setAlphaComponent(color, 0x1e));
             canvas.save();
             canvas.scale(s, s, right, bottom);
-            canvas.drawRoundRect(bounds, buttonHeight / 2f, buttonHeight / 2f, backgroundPaint);
+            canvas.drawRoundRect(bounds, org.telegram.marble.MarbleTheme.m3CornerPxF(buttonHeight / 2f), org.telegram.marble.MarbleTheme.m3CornerPxF(buttonHeight / 2f), backgroundPaint);
             text.setBounds((int) (bounds.left + dp(6)), (int) bounds.top, (int) (bounds.right - dp(17.66f)), (int) bounds.bottom);
             text.setTextColor(color);
             text.draw(canvas);

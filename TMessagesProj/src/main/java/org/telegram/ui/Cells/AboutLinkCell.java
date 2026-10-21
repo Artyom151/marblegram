@@ -159,7 +159,7 @@ public class AboutLinkCell extends FrameLayout {
             protected void onDraw(Canvas canvas) {
                 if (pressed) {
                     AndroidUtilities.rectTmp.set(0, 0, getWidth(), getHeight());
-                    canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(4), dp(4), Theme.chat_urlPaint);
+                    canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), Theme.chat_urlPaint);
                 }
                 super.onDraw(canvas);
             }

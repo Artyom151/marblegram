@@ -205,7 +205,7 @@ public class ReorderingHintDrawable extends Drawable {
         public void draw(@NonNull Canvas canvas) {
             tempRect.set(getBounds());
             final float radius = tempRect.height() * 0.2f;
-            canvas.drawRoundRect(tempRect, radius, radius, paint);
+            canvas.drawRoundRect(tempRect, org.telegram.marble.MarbleTheme.m3CornerPxF(radius), org.telegram.marble.MarbleTheme.m3CornerPxF(radius), paint);
         }
 
         public void setColor(int color) {

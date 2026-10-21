@@ -160,7 +160,7 @@ public class FiltersListBottomSheet extends BottomSheet implements NotificationC
                 if (radProgress != 1.0f) {
                     Theme.dialogs_onlineCirclePaint.setColor(Theme.getColor(Theme.key_dialogBackground));
                     rect.set(backgroundPaddingLeft, backgroundPaddingTop + top, getMeasuredWidth() - backgroundPaddingLeft, backgroundPaddingTop + top + AndroidUtilities.dp(24));
-                    canvas.drawRoundRect(rect, AndroidUtilities.dp(12) * radProgress, AndroidUtilities.dp(12) * radProgress, Theme.dialogs_onlineCirclePaint);
+                    canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(12) * radProgress), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(12) * radProgress), Theme.dialogs_onlineCirclePaint);
                 }
 
                 if (statusBarHeight > 0) {

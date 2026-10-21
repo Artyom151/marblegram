@@ -43,6 +43,8 @@ configurations.all {
 
 dependencies {
     implementation 'androidx.core:core:1.16.0'
+    implementation 'org.luaj:luaj-jse:3.0.1' // Marblegram Plugin SDK (Lua)
+    implementation 'com.anthropic:anthropic-java:2.73.0' // Marblegram AI replies (Claude API)
     implementation 'androidx.palette:palette:1.0.0'
     implementation 'androidx.exifinterface:exifinterface:1.3.6'
     implementation 'androidx.dynamicanimation:dynamicanimation:1.0.0'
@@ -136,6 +138,11 @@ android {
 
     defaultConfig {
         minSdkVersion 23
+
+        // Marblegram: Telegram API credentials are never committed. Source order:
+        // env MARBLE_APP_ID / MARBLE_APP_HASH (CI) → secrets.properties (local, gitignored) → upstream stub.
+        buildConfigField "int", "MARBLE_APP_ID", (marbleSecret("MARBLE_APP_ID") ?: "0")
+        buildConfigField "String", "MARBLE_APP_HASH", "\"" + (marbleSecret("MARBLE_APP_HASH") ?: "") + "\""
         targetSdkVersion 36
 
         vectorDrawables.generatedDensities = ['mdpi', 'hdpi', 'xhdpi', 'xxhdpi']
@@ -234,6 +241,19 @@ android {
     namespace 'org.telegram.messenger'
 }
 
+
+def marbleSecret(String name) {
+    def env = System.getenv(name)
+    if (env != null && !env.isEmpty()) return env
+    def f = rootProject.file('secrets.properties')
+    if (f.exists()) {
+        def props = new Properties()
+        f.withInputStream { props.load(it) }
+        def v = props[name]
+        if (v != null && !v.toString().isEmpty()) return v.toString()
+    }
+    return null
+}
 
 def getProps(String propName) {
     def propsFile = rootProject.file('local.properties')

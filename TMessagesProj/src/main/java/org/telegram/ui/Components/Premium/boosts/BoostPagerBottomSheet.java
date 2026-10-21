@@ -128,7 +128,7 @@ public class BoostPagerBottomSheet extends BottomSheet {
                     }
                     final float r = dp(14);
                     AndroidUtilities.rectTmp.set(0, currentTop, getWidth(), getHeight() + dp(8));
-                    canvas.drawRoundRect(AndroidUtilities.rectTmp, r, r, backgroundPaint);
+                    canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), backgroundPaint);
                     canvas.save();
                     path.rewind();
                     path.addRoundRect(AndroidUtilities.rectTmp, r, r, Path.Direction.CW);

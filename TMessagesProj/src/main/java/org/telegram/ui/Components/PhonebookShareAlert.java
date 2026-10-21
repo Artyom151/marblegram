@@ -429,7 +429,7 @@ public class PhonebookShareAlert extends BottomSheet {
                 if (rad != 1.0f) {
                     backgroundPaint.setColor(getThemedColor(Theme.key_dialogBackground));
                     rect.set(backgroundPaddingLeft, backgroundPaddingTop + top, getMeasuredWidth() - backgroundPaddingLeft, backgroundPaddingTop + top + AndroidUtilities.dp(24));
-                    canvas.drawRoundRect(rect, r * rad, r * rad, backgroundPaint);
+                    canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(r * rad), org.telegram.marble.MarbleTheme.m3CornerPxF(r * rad), backgroundPaint);
                 }
 
                 int color1 = getThemedColor(Theme.key_dialogBackground);

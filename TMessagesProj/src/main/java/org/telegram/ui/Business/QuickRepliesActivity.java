@@ -553,7 +553,7 @@ public class QuickRepliesActivity extends BaseFragment implements NotificationCe
             final float h = dpf2(14.66f), cy = (top + bottom) / 2f;
             AndroidUtilities.rectTmp.set(x, cy - h / 2f, x + getSize(), cy + h / 2f);
             backgroundPaint.setColor(Theme.multAlpha(Theme.getColor(Theme.key_windowBackgroundWhiteGrayText2), .15f));
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(4), dp(4), backgroundPaint);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), backgroundPaint);
             this.text.draw(canvas, x + dp(5), (top + bottom) / 2f, Theme.getColor(Theme.key_windowBackgroundWhiteGrayText2), Utilities.clamp(2 * paint.getAlpha() / 255f, 1, 0));
         }
     }

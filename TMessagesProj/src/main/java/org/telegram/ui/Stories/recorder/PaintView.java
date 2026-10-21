@@ -773,7 +773,7 @@ public class PaintView extends SizeNotifierFrameLayoutPhoto implements IPhotoPai
                         lerp(barView.getBottom(), colorsListView.getBottom(), toolsTransformProgress)
                 );
                 final float radius = lerp(dp(32), dp(24), toolsTransformProgress);
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, radius, radius, toolsPaint);
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(radius), org.telegram.marble.MarbleTheme.m3CornerPxF(radius), toolsPaint);
 
                 if (barView != null && barView.getChildCount() >= 1 && toolsTransformProgress != 1f) {
                     canvas.save();
@@ -891,10 +891,10 @@ public class PaintView extends SizeNotifierFrameLayoutPhoto implements IPhotoPai
 
                 int alpha = typefaceMenuBackgroundPaint.getAlpha();
                 typefaceMenuBackgroundPaint.setAlpha((int) (alpha * typefaceMenuTransformProgress));
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, rad, rad, typefaceMenuBackgroundPaint);
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(rad), org.telegram.marble.MarbleTheme.m3CornerPxF(rad), typefaceMenuBackgroundPaint);
                 typefaceMenuBackgroundPaint.setAlpha(alpha);
 
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, rad, rad, typefaceMenuOutlinePaint);
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(rad), org.telegram.marble.MarbleTheme.m3CornerPxF(rad), typefaceMenuOutlinePaint);
             }
         };
         addView(overlayLayout, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.MATCH_PARENT));
@@ -1618,8 +1618,8 @@ public class PaintView extends SizeNotifierFrameLayoutPhoto implements IPhotoPai
                         }
                         paint.setAlpha(alpha);
                         backgroundPaint.setAlpha((int) (0.4f * alpha));
-                        canvas.drawRoundRect(rect, radius, radius, paint);
-                        canvas.drawRoundRect(rect, radius, radius, backgroundPaint);
+                        canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(radius), org.telegram.marble.MarbleTheme.m3CornerPxF(radius), paint);
+                        canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(radius), org.telegram.marble.MarbleTheme.m3CornerPxF(radius), backgroundPaint);
                         //ReactionsContainerLayout.ReactionsContainerDelegate.super.drawRoundRect(canvas, rect, radius, offsetX, offsetY);
                     }
                 }

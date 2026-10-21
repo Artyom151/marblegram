@@ -110,7 +110,7 @@ public class VideoTimeView extends View {
                 (getWidth() + w) / 2 + dp(6),
                 dp(2 + 21)
         );
-        canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(5), dp(5), backgroundPaint);
+        canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(5)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(5)), backgroundPaint);
 
         textDrawable.setBounds((int) (AndroidUtilities.rectTmp.left), (int) AndroidUtilities.rectTmp.top - dp(1), (int) AndroidUtilities.rectTmp.right, (int) AndroidUtilities.rectTmp.bottom);
         textDrawable.draw(canvas);

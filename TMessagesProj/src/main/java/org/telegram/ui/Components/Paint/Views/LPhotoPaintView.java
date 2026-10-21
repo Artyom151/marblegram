@@ -684,10 +684,10 @@ public class LPhotoPaintView extends SizeNotifierFrameLayoutPhoto implements IPh
 
                 int alpha = typefaceMenuBackgroundPaint.getAlpha();
                 typefaceMenuBackgroundPaint.setAlpha((int) (alpha * typefaceMenuTransformProgress));
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, rad, rad, typefaceMenuBackgroundPaint);
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(rad), org.telegram.marble.MarbleTheme.m3CornerPxF(rad), typefaceMenuBackgroundPaint);
                 typefaceMenuBackgroundPaint.setAlpha(alpha);
 
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, rad, rad, typefaceMenuOutlinePaint);
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(rad), org.telegram.marble.MarbleTheme.m3CornerPxF(rad), typefaceMenuOutlinePaint);
             }
         };
         addView(overlayLayout, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.MATCH_PARENT));
@@ -3757,7 +3757,7 @@ public class LPhotoPaintView extends SizeNotifierFrameLayoutPhoto implements IPh
                 blurredBackgroundDrawableForTools.setBounds(AndroidUtilities.rectTmp2);
                 blurredBackgroundDrawableForTools.draw(canvas);
             } else {
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, radius, radius, toolsPaint);
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(radius), org.telegram.marble.MarbleTheme.m3CornerPxF(radius), toolsPaint);
             }
 
             if (barView != null && barView.getChildCount() >= 1 && toolsTransformProgress != 1f) {

@@ -1015,7 +1015,7 @@ public final class AnimatedFileDrawable extends BitmapDrawable implements Animat
             }
             if (USE_BITMAP_SHADER) {
                 if (isRoundRadiusSame()) {
-                    canvas.drawRoundRect(drawInBackground ? rect : actualDrawRect, roundRadius[0], roundRadius[0], paint);
+                    canvas.drawRoundRect(drawInBackground ? rect : actualDrawRect, org.telegram.marble.MarbleTheme.m3CornerPxF(roundRadius[0]), org.telegram.marble.MarbleTheme.m3CornerPxF(roundRadius[0]), paint);
                 } else {
                     canvas.drawPath(path, paint);
                 }

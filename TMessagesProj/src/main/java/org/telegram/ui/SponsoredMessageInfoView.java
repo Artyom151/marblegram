@@ -77,7 +77,7 @@ public class SponsoredMessageInfoView extends FrameLayout {
             protected void onDraw(Canvas canvas) {
                 super.onDraw(canvas);
                 AndroidUtilities.rectTmp.set(AndroidUtilities.dp(1), AndroidUtilities.dp(1), getMeasuredWidth() - AndroidUtilities.dp(1), getMeasuredHeight() - AndroidUtilities.dp(1));
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, AndroidUtilities.dp(4), AndroidUtilities.dp(4), buttonPaint);
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(4)), buttonPaint);
             }
         };
         button.setOnClickListener(new OnClickListener() {

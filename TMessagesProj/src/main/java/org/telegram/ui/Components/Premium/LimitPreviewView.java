@@ -201,9 +201,9 @@ public class LimitPreviewView extends LinearLayout {
 
                 if (hasDarkGradientProvider()) {
                     Paint p = darkGradientProvider.setDarkGradientLocation((((ViewGroup) getParent()).getX() + getX()), (((ViewGroup) getParent()).getY() + getY()));
-                    canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(6), dp(6), p);
+                    canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(6)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(6)), p);
                 } else {
-                    canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(6), dp(6), grayPaint);
+                    canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(6)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(6)), grayPaint);
                 }
 
                 canvas.save();
@@ -242,7 +242,7 @@ public class LimitPreviewView extends LinearLayout {
                         AndroidUtilities.rectTmp.set(0, 0, width1, getMeasuredHeight());
                     }
                 }
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(6), dp(6), paint);
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(6)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(6)), paint);
                 paint.setAlpha(wasAlpha);
                 canvas.restore();
                 if (staticGradient == null && invalidationEnabled) {
@@ -1068,7 +1068,7 @@ public class LimitPreviewView extends LinearLayout {
                 h = getMeasuredHeight();
                 PremiumGradient.getInstance().updateMainGradientMatrix(0, 0, LimitPreviewView.this.getMeasuredWidth(), LimitPreviewView.this.getMeasuredHeight(), getGlobalXOffset() - getX(), -getTop());
                 AndroidUtilities.rectTmp.set(0, dp(3), getMeasuredWidth(), h - dp(3));
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, h / 2f, h / 2f, PremiumGradient.getInstance().getPremiumLocakedPaint());
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(h / 2f), org.telegram.marble.MarbleTheme.m3CornerPxF(h / 2f), PremiumGradient.getInstance().getPremiumLocakedPaint());
             } else {
                 if (invalidatePath) {
                     invalidatePath = false;
@@ -1076,7 +1076,7 @@ public class LimitPreviewView extends LinearLayout {
                 }
                 PremiumGradient.getInstance().updateMainGradientMatrix(0, 0, LimitPreviewView.this.getMeasuredWidth(), LimitPreviewView.this.getMeasuredHeight(), getGlobalXOffset() - getX(), -getTop());
                 AndroidUtilities.rectTmp.set(0, 0, getMeasuredWidth(), h);
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, h / 2f, h / 2f, isRatingStyle ? ratingPaint : hasDarkGradientProvider() ? textPaint : PremiumGradient.getInstance().getMainGradientPaint());
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(h / 2f), org.telegram.marble.MarbleTheme.m3CornerPxF(h / 2f), isRatingStyle ? ratingPaint : hasDarkGradientProvider() ? textPaint : PremiumGradient.getInstance().getMainGradientPaint());
                 PremiumGradient.getInstance().getMainGradientPaint().setPathEffect(pathEffect);
                 if (hasDarkGradientProvider()) {
                     textPaint.setPathEffect(pathEffect);

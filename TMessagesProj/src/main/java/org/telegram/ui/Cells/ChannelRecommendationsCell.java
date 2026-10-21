@@ -686,15 +686,15 @@ public class ChannelRecommendationsCell {
                     subscribersBackgroundPaintMatrix.postScale(avatarSize() / (float) subscribersBackgroundPaintBitmapWidth, avatarSize() / (float) subscribersBackgroundPaintBitmapHeight);
                     subscribersBackgroundPaintMatrix.postTranslate(width / 2f - avatarSize() / 2f, AndroidUtilities.rectTmp.bottom - avatarSize());
                     subscribersBackgroundPaintShader.setLocalMatrix(subscribersBackgroundPaintMatrix);
-                    canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(8), dp(8), subscribersBackgroundPaint);
-                    canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(8), dp(8), subscribersBackgroundDimPaint);
+                    canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(8)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(8)), subscribersBackgroundPaint);
+                    canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(8)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(8)), subscribersBackgroundDimPaint);
                 } else {
-                    canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(8), dp(8), subscribersBackgroundPaint);
+                    canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(8)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(8)), subscribersBackgroundPaint);
                 }
 
                 AndroidUtilities.rectTmp.inset(-dp(1) / 2f, -dp(1) / 2f);
                 subscribersStrokePaint.setStrokeWidth(dp(1));
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(8), dp(8), subscribersStrokePaint);
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(8)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(8)), subscribersStrokePaint);
             }
 
             canvas.restore();

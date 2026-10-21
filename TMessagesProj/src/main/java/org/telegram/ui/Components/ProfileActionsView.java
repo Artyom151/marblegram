@@ -314,13 +314,25 @@ public class ProfileActionsView extends View {
                         paint.setShadowLayer(0, 0, 0, 0);
                     }
 
-                    canvas.drawRoundRect(AndroidUtilities.rectTmp, r, r, paint);
+                    if (org.telegram.marble.MarbleTheme.expressiveShapes()) {
+                        // Marblegram: M3E connected ButtonGroup — full outer corners, small inner corners;
+                        // the pressed button morphs towards a rounder pill
+                        final float full = AndroidUtilities.rectTmp.height() / 2f, inner = dp(hit == action ? 18 : 8);
+                        final boolean first = action == firstAction, last = action == lastAction;
+                        final float l = first ? full : inner, rr = last ? full : inner;
+                        m3Radii[0] = m3Radii[1] = m3Radii[6] = m3Radii[7] = l;
+                        m3Radii[2] = m3Radii[3] = m3Radii[4] = m3Radii[5] = rr;
+                        m3Path.rewind();
+                        m3Path.addRoundRect(AndroidUtilities.rectTmp, m3Radii, Path.Direction.CW);
+                        canvas.drawPath(m3Path, paint);
+                    } else
+                    canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), paint);
                     if (radialGradient != null) {
                         int wasAlpha2 = shaderPaint.getAlpha();
                         shaderPaint.setAlpha((int) (action.getAlpha() * alphaFraction1 * wasAlpha2));
                         matrix.setTranslate(AndroidUtilities.rectTmp.left, AndroidUtilities.rectTmp.top);
                         radialGradient.setLocalMatrix(matrix);
-                        canvas.drawRoundRect(AndroidUtilities.rectTmp, r, r, shaderPaint);
+                        canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(r), org.telegram.marble.MarbleTheme.m3CornerPxF(r), shaderPaint);
                         shaderPaint.setAlpha(wasAlpha2);
                     }
                     paint.setAlpha(wasAlpha);
@@ -508,6 +520,9 @@ public class ProfileActionsView extends View {
             action.loadingDrawable.draw(canvas);
         }
     }
+
+    private final float[] m3Radii = new float[8];
+    private final Path m3Path = new Path();
 
     public float getRoundRadius() {
         return dp(16);

@@ -500,7 +500,7 @@ public class StickerCategoriesListView extends RecyclerListView {
 //            float hw = rect3.width() / 2 * (1f + isMiddle * .05f);
 //            float hh = rect3.height() / 2 * (1f - isMiddle * .1f);
 //            rect3.set(rect3.centerX() - hw, rect3.centerY() - hh, rect3.centerX() + hw, rect3.centerY() + hh);
-            canvas.drawRoundRect(rect3, AndroidUtilities.dp(15), AndroidUtilities.dp(15), selectedPaint);
+            canvas.drawRoundRect(rect3, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(15)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(15)), selectedPaint);
         }
         selectedPaint.setAlpha(wasAlpha);
     }

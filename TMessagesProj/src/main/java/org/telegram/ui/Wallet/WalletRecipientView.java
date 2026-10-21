@@ -361,7 +361,7 @@ public class WalletRecipientView extends FrameLayout {
                     final float centerY = y + (metrics.ascent + metrics.descent) / 2;
                     canvas.drawRoundRect(x, centerY - dp(2),
                             x + Math.min(4, count - first) * characterWidth, centerY + dp(2),
-                            dp(2), dp(2), paint);
+                            org.telegram.marble.MarbleTheme.m3CornerPxF(dp(2)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(2)), paint);
                 }
                 if (value == null) {
                     continue;

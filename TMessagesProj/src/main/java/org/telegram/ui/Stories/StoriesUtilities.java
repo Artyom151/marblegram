@@ -427,10 +427,10 @@ public class StoriesUtilities {
         final float liveScale = lerp(0.7f, 1.0f, alpha);
         canvas.scale(liveScale, liveScale, liveRect.centerX(), liveRect.centerY());
         AndroidUtilities.scaleRect(liveRect, alpha);
-        canvas.drawRoundRect(liveRect, liveRect.height() / 2f, liveRect.height() / 2f, liveCutPaint);
+        canvas.drawRoundRect(liveRect, org.telegram.marble.MarbleTheme.m3CornerPxF(liveRect.height() / 2f), org.telegram.marble.MarbleTheme.m3CornerPxF(liveRect.height() / 2f), liveCutPaint);
         if (drawText) {
             liveRect.set(rect.centerX() - w / 2f, rect.bottom - h * 0.8f, rect.centerX() + w / 2f, rect.bottom + h * 0.2f);
-            canvas.drawRoundRect(liveRect, liveRect.height() / 2f, liveRect.height() / 2f, livePaint);
+            canvas.drawRoundRect(liveRect, org.telegram.marble.MarbleTheme.m3CornerPxF(liveRect.height() / 2f), org.telegram.marble.MarbleTheme.m3CornerPxF(liveRect.height() / 2f), livePaint);
             liveText.draw(canvas, liveRect.left + P, liveRect.centerY(), 0xFFFFFFFF, alpha);
         }
 
@@ -660,15 +660,21 @@ public class StoriesUtilities {
     }
 
     private static final RectF forumRect = new RectF();
+    private static final Path m3StoryPath = new Path();
 
     private static void drawCircleInternal(Canvas canvas, View view, AvatarStoryParams params, Paint paint, boolean isForum) {
         if (isForum) {
             forumRect.set(rectTmp);
             forumRect.inset(dp(0.5f), dp(0.5f));
-            canvas.drawRoundRect(forumRect, dp(18), dp(18), paint);
+            canvas.drawRoundRect(forumRect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(18)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(18)), paint);
             return;
         }
-        if (params.progressToArc == 0) {
+        final float[] m3Shape = org.telegram.marble.MarbleTheme.avatarShapeRadii();
+        if (params.progressToArc == 0 && m3Shape != null) {
+            // Marblegram: story ring follows the chosen avatar shape
+            org.telegram.marble.MaterialShapes.morph(m3StoryPath, m3Shape, m3Shape, 0, rectTmp.centerX(), rectTmp.centerY(), rectTmp.width() / 2f, -90);
+            canvas.drawPath(m3StoryPath, paint);
+        } else if (params.progressToArc == 0) {
             canvas.drawCircle(rectTmp.centerX(), rectTmp.centerY(), rectTmp.width() / 2f, paint);
         } else {
             canvas.drawArc(rectTmp, 360 + params.progressToArc / 2f, 360 - params.progressToArc, false, paint);

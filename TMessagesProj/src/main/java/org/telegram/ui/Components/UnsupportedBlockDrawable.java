@@ -196,7 +196,7 @@ public class UnsupportedBlockDrawable extends Drawable {
         canvas.save();
         canvas.scale(s, s, buttonRect.centerX(), buttonRect.centerY());
         final int bgColor = Theme.multAlpha(0xFFFFFFFF, 0.18f);
-        canvas.drawRoundRect(buttonRect, buttonRadius, buttonRadius, buttonBackgroundPaint);
+        canvas.drawRoundRect(buttonRect, org.telegram.marble.MarbleTheme.m3CornerPxF(buttonRadius), org.telegram.marble.MarbleTheme.m3CornerPxF(buttonRadius), buttonBackgroundPaint);
         canvas.save();
         canvas.translate(
                 buttonLeft + buttonPaddingH,

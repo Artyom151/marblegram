@@ -41,7 +41,7 @@ public class ButtonWithCounterView extends FrameLayout implements Loadable {
 
     private Theme.ResourcesProvider resourcesProvider;
 
-    private int radiusDp = 8;
+    private int radiusDp = org.telegram.marble.MarbleTheme.expressiveShapes() ? 24 : 8; // Marblegram: M3E pill buttons
 
     private final Paint paint;
     public final AnimatedTextView.AnimatedTextDrawable text;
@@ -75,6 +75,20 @@ public class ButtonWithCounterView extends FrameLayout implements Loadable {
         setColor(Theme.getColor(Theme.key_buttonNeutral, resourcesProvider));
         updateColors();
         return this;
+    }
+
+    @Override
+    public void setPressed(boolean pressed) {
+        final boolean was = isPressed();
+        super.setPressed(pressed);
+        // Marblegram: M3E press "squish" with a springy release
+        if (was != pressed && org.telegram.marble.MarbleTheme.expressiveShapes() && isEnabled()) {
+            animate().cancel();
+            animate().scaleX(pressed ? 0.96f : 1f).scaleY(pressed ? 0.94f : 1f)
+                .setDuration(pressed ? 120 : 380)
+                .setInterpolator(pressed ? CubicBezierInterpolator.EASE_OUT : new android.view.animation.OvershootInterpolator(2.5f))
+                .start();
+        }
     }
 
     public void setRoundRadius(int radiusDp) {
@@ -112,7 +126,7 @@ public class ButtonWithCounterView extends FrameLayout implements Loadable {
         addView(rippleView, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.MATCH_PARENT));
 
         if (filled) {
-            setBackground(Theme.createRoundRectDrawable(dp(8), backgroundColor = Theme.getColor(Theme.key_featuredStickers_addButton, resourcesProvider)));
+            setBackground(Theme.createRoundRectDrawable(dp(radiusDp), backgroundColor = Theme.getColor(Theme.key_featuredStickers_addButton, resourcesProvider)));
         }
 
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -571,7 +585,7 @@ public class ButtonWithCounterView extends FrameLayout implements Loadable {
                 if (countFilled) {
                     paint.setAlpha((int) (globalAlpha * (1f - loadingT) * countAlpha * countAlpha * AndroidUtilities.lerp(.5f, 1f, enabledT)));
                     int radius = withCounterIcon ? dp(4) : dp(10);
-                    canvas.drawRoundRect(AndroidUtilities.rectTmp, radius, radius, paint);
+                    canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(radius), org.telegram.marble.MarbleTheme.m3CornerPxF(radius), paint);
                 }
 
                 int countLength = countText.getText() != null ? countText.getText().length() : 0;

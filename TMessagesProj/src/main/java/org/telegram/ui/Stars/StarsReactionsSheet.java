@@ -395,7 +395,7 @@ public class StarsReactionsSheet extends BottomSheet implements NotificationCent
                         canvas.drawRect((getWidth() + textWidth) / 2f + dp(8), getHeight() / 2f - 1, getWidth() - dp(24), getHeight() / 2f, separatorPaint);
 
                         AndroidUtilities.rectTmp.set((getWidth() - textWidth) / 2f, 0, (getWidth() + textWidth) / 2f, getHeight());
-                        canvas.drawRoundRect(AndroidUtilities.rectTmp, getHeight() / 2f, getHeight() / 2f, backgroundPaint);
+                        canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(getHeight() / 2f), org.telegram.marble.MarbleTheme.m3CornerPxF(getHeight() / 2f), backgroundPaint);
                         text.draw(canvas, (getWidth() - text.getCurrentWidth()) / 2f, getHeight() / 2f, 0xFFFFFFFF, 1f);
                     }
                 };
@@ -1296,7 +1296,7 @@ public class StarsReactionsSheet extends BottomSheet implements NotificationCent
                     sliderRect.right - dp(16 - 12),
                     (sliderRect.centerY() + dp(16) / 2f)
             );
-            canvas.drawRoundRect(sliderCircleRect, dp(12), dp(12), sliderCirclePaint);
+            canvas.drawRoundRect(sliderCircleRect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(12)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(12)), sliderCirclePaint);
 
             final float slide = dp(9) / sliderInnerRect.width();
             final float pointerX = lerp(
@@ -2175,14 +2175,14 @@ public class StarsReactionsSheet extends BottomSheet implements NotificationCent
                 }
 
                 rectTmp.set(cx - starsText.getCurrentWidth() / 2f - dp(5.66f), cy + dp(23) - dp(16) / 2f, cx + starsText.getCurrentWidth() / 2f + dp(5.66f), cy + dp(23) + dp(16) / 2f);
-                canvas.drawRoundRect(rectTmp, rectTmp.height() / 2f, rectTmp.height() / 2f, backgroundPaint);
+                canvas.drawRoundRect(rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(rectTmp.height() / 2f), org.telegram.marble.MarbleTheme.m3CornerPxF(rectTmp.height() / 2f), backgroundPaint);
                 paint.setAlpha((int) (0xFF * alpha));
                 if (gradient != null) {
                     gradientMatrix.reset();
                     gradientMatrix.postTranslate(0, rectTmp.top);
                     gradient.setLocalMatrix(gradientMatrix);
                 }
-                canvas.drawRoundRect(rectTmp, rectTmp.height() / 2f, rectTmp.height() / 2f, paint);
+                canvas.drawRoundRect(rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(rectTmp.height() / 2f), org.telegram.marble.MarbleTheme.m3CornerPxF(rectTmp.height() / 2f), paint);
                 starsText.draw(canvas, cx - starsText.getCurrentWidth() / 2f, cy + dp(23), 0xFFFFFFFF, alpha);
 
                 text.ellipsize(w - dp(4)).draw(canvas, cx - text.getWidth() / 2f, cy + dp(42), Theme.getColor(Theme.key_windowBackgroundWhiteBlackText, resourcesProvider), alpha);

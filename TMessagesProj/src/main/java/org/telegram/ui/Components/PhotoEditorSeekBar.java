@@ -113,6 +113,10 @@ public class PhotoEditorSeekBar extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
+        if (org.telegram.marble.MarbleTheme.expressiveShapes()) {
+            drawM3(canvas);
+            return;
+        }
         int y = (getMeasuredHeight() - thumbSize) / 2;
         int thumbX = (int)((getMeasuredWidth() - thumbSize) * progress);
         canvas.drawRect(thumbSize / 2, getMeasuredHeight() / 2 - AndroidUtilities.dp(1), getMeasuredWidth() - thumbSize / 2, getMeasuredHeight() / 2 + AndroidUtilities.dp(1), innerPaint);
@@ -128,5 +132,33 @@ public class PhotoEditorSeekBar extends View {
             }
         }
         canvas.drawCircle(thumbX + thumbSize / 2, y + thumbSize / 2, thumbSize / 2, outerPaint);
+    }
+
+    /** Marblegram: M3E slider — 12dp rounded track, 6dp gaps around a 4dp vertical pill handle; bipolar from center. */
+    private void drawM3(Canvas canvas) {
+        innerPaint.setAntiAlias(true);
+        final float w = getMeasuredWidth(), cy = getMeasuredHeight() / 2f;
+        final float left = thumbSize / 2f, right = w - thumbSize / 2f;
+        final float hx = left + (right - left) * progress;
+        final float th = AndroidUtilities.dp(12), r = th / 2f, gap = AndroidUtilities.dp(6);
+        final float origin = minValue == 0 ? left : (left + right) / 2f;
+        final float aL = Math.min(origin, hx), aR = Math.max(origin, hx);
+        // inactive track (both sides of the handle)
+        segment(canvas, left, Math.min(aL, hx - gap), cy, th, r, innerPaint);
+        segment(canvas, Math.max(aR, hx + gap), right, cy, th, r, innerPaint);
+        // active track
+        if (hx >= origin) segment(canvas, aL, hx - gap, cy, th, r, outerPaint);
+        else segment(canvas, hx + gap, aR, cy, th, r, outerPaint);
+        // handle
+        final float hw = AndroidUtilities.dpf2(2), hh = AndroidUtilities.dp(16);
+        AndroidUtilities.rectTmp.set(hx - hw, cy - hh, hx + hw, cy + hh);
+        canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(hw), org.telegram.marble.MarbleTheme.m3CornerPxF(hw), outerPaint);
+    }
+
+    private static void segment(Canvas canvas, float l, float r, float cy, float th, float rad, android.graphics.Paint p) {
+        if (r - l < 1) return;
+        AndroidUtilities.rectTmp.set(l, cy - th / 2f, r, cy + th / 2f);
+        final float rr = Math.min(rad, (r - l) / 2f);
+        canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(rr), org.telegram.marble.MarbleTheme.m3CornerPxF(rr), p);
     }
 }

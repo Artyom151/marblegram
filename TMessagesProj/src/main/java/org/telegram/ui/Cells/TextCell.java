@@ -104,7 +104,7 @@ public class TextCell extends FrameLayout {
 
         subtitleView = new SimpleTextView(context);
         subtitleView.setTextColor(Theme.getColor(dialog ? Theme.key_dialogTextGray : Theme.key_windowBackgroundWhiteGrayText, resourcesProvider));
-        subtitleView.setTextSize(13);
+        subtitleView.setTextSize(org.telegram.marble.MarbleTheme.expressiveTypography() ? 14 : 13);
         subtitleView.setGravity(LocaleController.isRTL ? Gravity.RIGHT : Gravity.LEFT);
         subtitleView.setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO);
         addView(subtitleView, LayoutHelper.createFrame(LayoutHelper.WRAP_CONTENT, LayoutHelper.MATCH_PARENT));
@@ -967,7 +967,7 @@ public class TextCell extends FrameLayout {
                 AndroidUtilities.rectTmp.left = getMeasuredWidth() - AndroidUtilities.rectTmp.left;
                 AndroidUtilities.rectTmp.right = getMeasuredWidth() - AndroidUtilities.rectTmp.right;
             }
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(3), dp(3), paint);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(3)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(3)), paint);
             invalidate();
         }
         valueTextView.setAlpha((1f - drawLoadingProgress) * (emojiDrawable == null ? 1f : 1f - emojiDrawable.isNotEmpty()) * (isEnabled() ? 1.0f : 0.5f));

@@ -1,0 +1,193 @@
+name: Build Marblegram
+
+on:
+  push:
+    branches: [marblegram, main, master]
+    tags: ['v*']
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: 'Тег релиза (например v13.0.2-marblegram.1); пусто — только debug APK'
+        required: false
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  # Release runs get their own group so a newer push on the same branch cannot cancel them
+  group: ${{ (startsWith(github.ref, 'refs/tags/v') || inputs.release_tag != '') && format('release-{0}', github.run_id) || format('build-{0}-{1}', github.workflow, github.ref) }}
+  cancel-in-progress: ${{ !startsWith(github.ref, 'refs/tags/v') && inputs.release_tag == '' }}
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    env:
+      MARBLE_APP_ID: ${{ secrets.MARBLE_APP_ID }}
+      MARBLE_APP_HASH: ${{ secrets.MARBLE_APP_HASH }}
+      IS_RELEASE: ${{ startsWith(github.ref, 'refs/tags/v') || (github.event_name == 'workflow_dispatch' && inputs.release_tag != '') }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          persist-credentials: false
+
+      - name: Validate manual release tag
+        if: github.event_name == 'workflow_dispatch' && inputs.release_tag != ''
+        env:
+          RELEASE_TAG: ${{ inputs.release_tag }}
+        run: |
+          if [[ "$RELEASE_TAG" != v* ]] || ! git check-ref-format "refs/tags/$RELEASE_TAG"; then
+            echo "::error::Release tag must be a valid Git tag starting with v"
+            exit 1
+          fi
+
+      - name: Validate release configuration
+        if: env.IS_RELEASE == 'true'
+        env:
+          KEYSTORE: ${{ secrets.RELEASE_KEYSTORE_BASE64 }}
+          STORE_PASSWORD: ${{ secrets.RELEASE_STORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.RELEASE_KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.RELEASE_KEY_PASSWORD }}
+        run: |
+          for key in MARBLE_APP_ID MARBLE_APP_HASH KEYSTORE STORE_PASSWORD KEY_ALIAS KEY_PASSWORD; do
+            if [ -z "${!key}" ]; then
+              echo "::error::Missing release configuration: $key. See .github/RELEASING.md"
+              exit 1
+            fi
+          done
+          [[ "$MARBLE_APP_ID" =~ ^[1-9][0-9]*$ ]]
+          [[ "$MARBLE_APP_HASH" =~ ^[a-fA-F0-9]{32}$ ]]
+
+      - name: Free disk space
+        run: |
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android/sdk/emulator /opt/ghc /usr/local/.ghcup
+          df -h /
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      # Chaquopy (Python plugin runtime) needs a host Python of the same minor version
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      # The runner image already ships the Android SDK; use its sdkmanager directly
+      # (android-actions/setup-android@v3 tries to install the removed "tools" package and fails).
+      - name: Install NDK and CMake
+        run: |
+          SDKM="$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager"
+          yes | "$SDKM" --licenses > /dev/null || true
+          "$SDKM" --install "ndk;27.2.12479018" "cmake;3.22.1" "platforms;android-36" "build-tools;36.0.0" > /dev/null
+          echo "ANDROID_NDK_HOME=$ANDROID_HOME/ndk/27.2.12479018" >> "$GITHUB_ENV"
+
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          cache-read-only: ${{ github.ref != 'refs/heads/marblegram' }}
+
+      - name: Check that no Telegram API credentials are committed
+        run: |
+          grep -q 'BuildConfig.MARBLE_APP_ID' TMessagesProj/src/main/java/org/telegram/messenger/BuildVars.java
+          ! git ls-files --error-unmatch secrets.properties 2>/dev/null
+
+      - name: Release keystore
+        if: env.IS_RELEASE == 'true'
+        env:
+          KEYSTORE: ${{ secrets.RELEASE_KEYSTORE_BASE64 }}
+          STORE_PASSWORD: ${{ secrets.RELEASE_STORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.RELEASE_KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.RELEASE_KEY_PASSWORD }}
+        run: |
+          printf '%s' "$KEYSTORE" | base64 --decode > TMessagesProj/config/release.keystore
+          # Pass signing values as quoted Gradle arguments in the build step.
+          {
+            echo "ORG_GRADLE_PROJECT_RELEASE_STORE_PASSWORD=$STORE_PASSWORD"
+            echo "ORG_GRADLE_PROJECT_RELEASE_KEY_ALIAS=$KEY_ALIAS"
+            echo "ORG_GRADLE_PROJECT_RELEASE_KEY_PASSWORD=$KEY_PASSWORD"
+          } >> "$GITHUB_ENV"
+
+      - name: Build
+        run: |
+          TASK=assembleAfatDebug
+          [ "$IS_RELEASE" = true ] && TASK=assembleAfatRelease
+          SIGNING_ARGS=()
+          if [ "$IS_RELEASE" = true ]; then
+            SIGNING_ARGS+=("-PRELEASE_STORE_PASSWORD=$ORG_GRADLE_PROJECT_RELEASE_STORE_PASSWORD")
+            SIGNING_ARGS+=("-PRELEASE_KEY_ALIAS=$ORG_GRADLE_PROJECT_RELEASE_KEY_ALIAS")
+            SIGNING_ARGS+=("-PRELEASE_KEY_PASSWORD=$ORG_GRADLE_PROJECT_RELEASE_KEY_PASSWORD")
+          fi
+          ./gradlew ":TMessagesProj_App:$TASK" "${SIGNING_ARGS[@]}" \
+            "-Dorg.gradle.jvmargs=-Xmx6g -XX:MaxMetaspaceSize=1g" \
+            --no-daemon --max-workers=4 --stacktrace
+
+      - name: Verify and collect APK
+        run: |
+          VARIANT=debug
+          [ "$IS_RELEASE" = true ] && VARIANT=release
+          APK="TMessagesProj_App/build/outputs/apk/afat/$VARIANT/app.apk"
+          test -s "$APK"
+          mkdir -p out
+          NAME="Marblegram-${GITHUB_SHA:0:12}-$VARIANT.apk"
+          cp "$APK" "out/$NAME"
+          "$ANDROID_HOME/build-tools/36.0.0/apksigner" verify --verbose --print-certs "out/$NAME" > out/signature.txt
+          {
+            echo "Repository: $GITHUB_REPOSITORY"
+            echo "Commit: $GITHUB_SHA"
+            echo "Ref: $GITHUB_REF"
+            echo "Variant: $VARIANT (universal APK)"
+            echo "Build: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          } > out/build-info.txt
+          (cd out && sha256sum ./*.apk > SHA256SUMS.txt)
+          cat out/build-info.txt >> "$GITHUB_STEP_SUMMARY"
+          cat out/SHA256SUMS.txt >> "$GITHUB_STEP_SUMMARY"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: marblegram-${{ github.run_id }}
+          path: out/
+          if-no-files-found: error
+          retention-days: 14
+
+  release:
+    if: startsWith(github.ref, 'refs/tags/v') || (github.event_name == 'workflow_dispatch' && inputs.release_tag != '')
+    needs: build
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: marblegram-${{ github.run_id }}
+          path: out
+
+      - name: Prepare release description
+        env:
+          REPOSITORY: ${{ github.repository }}
+          COMMIT: ${{ github.sha }}
+        run: |
+          (cd out && sha256sum --check SHA256SUMS.txt)
+          cat > release-notes.md <<EOF
+          Неофициальный клиент Marblegram. Универсальный APK для Android 7.0+.
+
+          APK собран GitHub Actions из исходного кода коммита [$COMMIT]($GITHUB_SERVER_URL/$REPOSITORY/commit/$COMMIT).
+          [Журнал сборки]($GITHUB_SERVER_URL/$REPOSITORY/actions/runs/$GITHUB_RUN_ID).
+
+          Скачайте файл .apk ниже. Контрольные суммы — в SHA256SUMS.txt,
+          сведения о сборке — в build-info.txt, отпечаток сертификата подписи — в signature.txt.
+          Проверка загрузки: \`sha256sum --check SHA256SUMS.txt\`.
+          EOF
+
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ inputs.release_tag || github.ref_name }}
+          target_commitish: ${{ github.sha }}
+          files: out/*
+          body_path: release-notes.md
+          generate_release_notes: true
+          fail_on_unmatched_files: true

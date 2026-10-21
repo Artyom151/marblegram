@@ -2674,10 +2674,10 @@ public class TimelineView extends View {
         AndroidUtilities.rectTmp.set(left - dp(10), top, right + dp(10), bottom);
         canvas.saveLayerAlpha(0, 0, w, h, 0xFF, Canvas.ALL_SAVE_FLAG);
         regionPaint.setAlpha((int) (0xFF * alpha));
-        canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(6), dp(6), regionPaint);
+        canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(6)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(6)), regionPaint);
         AndroidUtilities.rectTmp.inset(dp(isCover ? 2.5f : 10), dp(2));
         if (isCover) {
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(3), dp(3), regionCutPaint);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(3)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(3)), regionCutPaint);
         } else {
             canvas.drawRect(AndroidUtilities.rectTmp, regionCutPaint);
         }
@@ -2693,10 +2693,10 @@ public class TimelineView extends View {
                 (top + bottom + hh) / 2f
         );
         if (!isCover) {
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(1), dp(1), handlePaint);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(1)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(1)), handlePaint);
             if (blurPaint != null && !isCover) {
                 regionHandlePaint.setAlpha((int) (0x30 * alpha));
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(1), dp(1), regionHandlePaint);
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(1)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(1)), regionHandlePaint);
             }
         }
         AndroidUtilities.rectTmp.set(
@@ -2706,10 +2706,10 @@ public class TimelineView extends View {
                 (top + bottom + hh) / 2f
         );
         if (!isCover) {
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(1), dp(1), handlePaint);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(1)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(1)), handlePaint);
             if (blurPaint != null) {
                 regionHandlePaint.setAlpha((int) (0x30 * alpha));
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(1), dp(1), regionHandlePaint);
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(1)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(1)), regionHandlePaint);
             }
         }
 
@@ -2732,9 +2732,9 @@ public class TimelineView extends View {
 
         AndroidUtilities.rectTmp.set(progressX - dpf2(1.5f), y1, progressX + dpf2(1.5f), y2);
         AndroidUtilities.rectTmp.inset(-dpf2(0.66f), -dpf2(0.66f));
-        canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(6), dp(6), progressShadowPaint);
+        canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(6)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(6)), progressShadowPaint);
         AndroidUtilities.rectTmp.set(progressX - dpf2(1.5f), y1, progressX + dpf2(1.5f), y2);
-        canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(6), dp(6), progressWhitePaint);
+        canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(6)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(6)), progressWhitePaint);
     }
 
     private int sw;

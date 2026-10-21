@@ -50,6 +50,7 @@ public class RadialProgressView extends View {
     private float toCircleProgress;
 
     private boolean noProgress = true;
+    private org.telegram.marble.LoadingIndicator m3Indicator;
     private final Theme.ResourcesProvider resourcesProvider;
 
     public RadialProgressView(Context context) {
@@ -227,12 +228,48 @@ public class RadialProgressView extends View {
     protected void onDraw(Canvas canvas) {
         int x = (getMeasuredWidth() - size) / 2;
         int y = (getMeasuredHeight() - size) / 2;
+        if (drawM3(canvas, getMeasuredWidth() / 2f, getMeasuredHeight() / 2f)) {
+            return;
+        }
+        if (drawM3Wavy(canvas, getMeasuredWidth() / 2f, getMeasuredHeight() / 2f)) {
+            return;
+        }
         cicleRect.set(x, y, x + size, y + size);
         canvas.drawArc(cicleRect, radOffset, drawingCircleLenght = currentCircleLength, false, progressPaint);
         updateAnimation();
     }
 
+    /** Marblegram: determinate progress uses the M3E circular wavy indicator. */
+    private boolean drawM3Wavy(Canvas canvas, float cx, float cy) {
+        if (noProgress || toCircle || !org.telegram.marble.MarbleTheme.wavyProgress() || size < AndroidUtilities.dp(24)) {
+            return false;
+        }
+        updateAnimation();
+        org.telegram.marble.WavyProgress.drawCircular(canvas, progressPaint, cx, cy, size, animatedProgress);
+        return true;
+    }
+
+    /** Marblegram: indeterminate progress is drawn as an M3 Expressive shape-morphing LoadingIndicator. */
+    private boolean drawM3(Canvas canvas, float cx, float cy) {
+        if (!noProgress || toCircle || !org.telegram.marble.MarbleTheme.isEnabled()) {
+            return false;
+        }
+        if (m3Indicator == null) {
+            m3Indicator = new org.telegram.marble.LoadingIndicator();
+        }
+        m3Indicator.setColor(progressPaint.getColor());
+        m3Indicator.setAlpha(progressPaint.getAlpha());
+        m3Indicator.draw(canvas, cx, cy, size * 1.15f, this);
+        return true;
+    }
+
     public void draw(Canvas canvas, float cx, float cy) {
+        if (drawM3(canvas, cx, cy)) {
+            return;
+        }
+        if (drawM3Wavy(canvas, cx, cy)) {
+            return;
+        }
         cicleRect.set(cx - size / 2f, cy - size / 2f, cx + size / 2f, cy +  size / 2f);
         canvas.drawArc(cicleRect, radOffset, drawingCircleLenght = currentCircleLength, false, progressPaint);
         updateAnimation();

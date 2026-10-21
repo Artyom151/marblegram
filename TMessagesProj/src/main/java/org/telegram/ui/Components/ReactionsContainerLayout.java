@@ -740,7 +740,7 @@ public class ReactionsContainerLayout extends FrameLayout implements Notificatio
                     blurredBackgroundDrawable.setAlpha(bgPaint.getAlpha());
                     blurredBackgroundDrawable.draw(canvas);
                 } else {
-                    canvas.drawRoundRect(rect, radius, radius, bgPaint);
+                    canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(radius), org.telegram.marble.MarbleTheme.m3CornerPxF(radius), bgPaint);
                 }
             }
 
@@ -753,7 +753,7 @@ public class ReactionsContainerLayout extends FrameLayout implements Notificatio
                     }
                 }
                 if (!isStarSelected) {
-                    canvas.drawRoundRect(rect, radius, radius, getStarGradientPaint(rect, Utilities.clamp01(1f - getPullingLeftProgress())));
+                    canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(radius), org.telegram.marble.MarbleTheme.m3CornerPxF(radius), getStarGradientPaint(rect, Utilities.clamp01(1f - getPullingLeftProgress())));
                 }
             }
 
@@ -2516,7 +2516,7 @@ public class ReactionsContainerLayout extends FrameLayout implements Notificatio
             AndroidUtilities.rectTmp.set(cx - sizeHalf, cy - sizeHalf - expandSize, cx + sizeHalf, cy + sizeHalf + expandSize);
             canvas.save();
             canvas.scale(child.getScaleX(), child.getScaleY(), cx, cy);
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, sizeHalf, sizeHalf, backgroundPaint);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(sizeHalf), org.telegram.marble.MarbleTheme.m3CornerPxF(sizeHalf), backgroundPaint);
             canvas.restore();
 
             canvas.save();

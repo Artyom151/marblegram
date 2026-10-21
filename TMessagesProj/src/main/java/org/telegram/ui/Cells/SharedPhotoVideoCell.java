@@ -104,7 +104,7 @@ public class SharedPhotoVideoCell extends FrameLayout {
                 @Override
                 protected void onDraw(Canvas canvas) {
                     rect.set(0, 0, getMeasuredWidth(), getMeasuredHeight());
-                    canvas.drawRoundRect(rect, AndroidUtilities.dp(4), AndroidUtilities.dp(4), Theme.chat_timeBackgroundPaint);
+                    canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(4)), Theme.chat_timeBackgroundPaint);
                 }
             };
             videoInfoContainer.setWillNotDraw(false);

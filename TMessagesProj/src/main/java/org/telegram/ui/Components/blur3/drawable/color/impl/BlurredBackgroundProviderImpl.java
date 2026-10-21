@@ -19,6 +19,17 @@ import org.telegram.ui.Components.blur3.drawable.color.BlurredBackgroundProvider
 
 public class BlurredBackgroundProviderImpl {
     public static BlurredBackgroundProvider mainTabs(Theme.ResourcesProvider resourcesProvider) {
+        if (org.telegram.marble.MarbleTheme.isEnabled()) {
+            // Marblegram: M3E floating toolbar — opaque tonal container, soft level-2 shadow, no glass stroke
+            return new BlurredBackgroundProviderBuilder(resourcesProvider)
+                .setBackgroundColor((r, isDark) -> org.telegram.marble.MarbleTheme.roles(isDark).surfaceContainerHigh)
+                .setStrokeColorTop(0, 0)
+                .setStrokeColorBottom(0, 0)
+                .setShadowColor(0x26000000, 0x40000000)
+                .setShadowLayer(dpf2(6), 0, dpf2(2))
+                .setStrokeWidth(0, 0)
+                .build();
+        }
         return new BlurredBackgroundProviderBuilder(resourcesProvider)
             .setBackgroundColor((r, isDark) -> {
                 final float alpha = LiteMode.isEnabled(LiteMode.FLAG_LIQUID_GLASS) ? 0.85f : 0.76f;
@@ -35,6 +46,17 @@ public class BlurredBackgroundProviderImpl {
     }
 
     public static BlurredBackgroundProvider topPanel(Theme.ResourcesProvider resourcesProvider) {
+        if (org.telegram.marble.MarbleTheme.isEnabled()) {
+            // Marblegram: M3E floating toolbar — opaque tonal container, soft level-2 shadow, no glass stroke
+            return new BlurredBackgroundProviderBuilder(resourcesProvider)
+                .setBackgroundColor((r, isDark) -> org.telegram.marble.MarbleTheme.roles(isDark).surfaceContainer)
+                .setStrokeColorTop(0, 0)
+                .setStrokeColorBottom(0, 0)
+                .setShadowColor(0x26000000, 0x40000000)
+                .setShadowLayer(dpf2(6), 0, dpf2(2))
+                .setStrokeWidth(0, 0)
+                .build();
+        }
         return new BlurredBackgroundProviderBuilder(resourcesProvider)
             .setBackgroundColor((r, isDark) -> {
                 final float alpha = LiteMode.isEnabled(LiteMode.FLAG_LIQUID_GLASS) ? 0.85f : 0.76f;
@@ -61,6 +83,7 @@ public class BlurredBackgroundProviderImpl {
     }
 
     public static BlurredBackgroundProvider emojiViewButton(Theme.ResourcesProvider resourcesProvider) {
+        if (org.telegram.marble.MarbleTheme.isEnabled()) return m3(resourcesProvider, isDark -> org.telegram.marble.MarbleTheme.roles(isDark).surfaceContainerHigh, true);
         return new BlurredBackgroundProviderBuilder(resourcesProvider)
                 .setBackgroundColor((r, isDark) -> {
                     final float alpha = LiteMode.isEnabled(LiteMode.FLAG_LIQUID_GLASS) ? 0.85f : 0.76f;
@@ -76,6 +99,7 @@ public class BlurredBackgroundProviderImpl {
     }
 
     public static BlurredBackgroundProvider counterMini(Theme.ResourcesProvider resourcesProvider) {
+        if (org.telegram.marble.MarbleTheme.isEnabled()) return m3(resourcesProvider, isDark -> org.telegram.marble.MarbleTheme.roles(isDark).surfaceContainerHighest, false);
         return new BlurredBackgroundProviderBuilder(resourcesProvider)
                 .setBackgroundColor((r, isDark) -> {
                     final float alpha = 0.075f;
@@ -95,6 +119,7 @@ public class BlurredBackgroundProviderImpl {
     }
 
     public static BlurredBackgroundProvider messageMenuBackground(Theme.ResourcesProvider resourcesProvider) {
+        if (org.telegram.marble.MarbleTheme.isEnabled()) return m3(resourcesProvider, isDark -> org.telegram.marble.MarbleTheme.roles(isDark).surfaceContainer, true);
         return new BlurredBackgroundProviderBuilder(resourcesProvider)
                 .setBackgroundColor((r, isDark) -> {
                     if (!LiteMode.isEnabled(LiteMode.FLAG_CHAT_BLUR)) {
@@ -111,6 +136,7 @@ public class BlurredBackgroundProviderImpl {
     }
 
     public static BlurredBackgroundProvider scrimMenuBackground(Theme.ResourcesProvider resourcesProvider) {
+        if (org.telegram.marble.MarbleTheme.isEnabled()) return m3(resourcesProvider, isDark -> org.telegram.marble.MarbleTheme.roles(isDark).surfaceContainer, true);
         return new BlurredBackgroundProviderBuilder(resourcesProvider)
             .setBackgroundColor((r, isDark) ->
                 Theme.multAlpha(Theme.getColor(Theme.key_actionBarDefaultSubmenuBackground), isDark ? 0.85f : 0.825f))
@@ -123,6 +149,7 @@ public class BlurredBackgroundProviderImpl {
     }
 
     public static BlurredBackgroundProvider attachMenuSearch(Theme.ResourcesProvider resourcesProvider) {
+        if (org.telegram.marble.MarbleTheme.isEnabled()) return m3(resourcesProvider, isDark -> org.telegram.marble.MarbleTheme.roles(isDark).surfaceContainerHighest, false);
         return new BlurredBackgroundProviderBuilder(resourcesProvider)
                 .setBackgroundColor((r, isDark) -> {
                     final float alpha = LiteMode.isEnabled(LiteMode.FLAG_LIQUID_GLASS) ? 0.85f : 0.76f;
@@ -138,6 +165,7 @@ public class BlurredBackgroundProviderImpl {
     }
 
     public static BlurredBackgroundProvider searchFloatingDate(Theme.ResourcesProvider resourcesProvider) {
+        if (org.telegram.marble.MarbleTheme.isEnabled()) return m3(resourcesProvider, isDark -> org.telegram.marble.MarbleTheme.roles(isDark).surfaceContainerHigh, true);
         return new BlurredBackgroundProviderBuilder(resourcesProvider)
                 .setBackgroundColor((r, isDark) -> 0x33000000)
                 .setStrokeColorTop(0x17000000, 0x17FFFFFF)
@@ -148,6 +176,7 @@ public class BlurredBackgroundProviderImpl {
     }
 
     public static BlurredBackgroundProvider bottomPanelChatActivity(Theme.ResourcesProvider resourcesProvider) {
+        if (org.telegram.marble.MarbleTheme.isEnabled()) return m3(resourcesProvider, isDark -> org.telegram.marble.MarbleTheme.roles(isDark).surfaceContainerHigh, true);
         return new BlurredBackgroundProviderBuilder(resourcesProvider)
                 .setBackgroundColor((r, isDark) -> {
                     if (!checkBlurEnabled(resourcesProvider)) {
@@ -167,6 +196,7 @@ public class BlurredBackgroundProviderImpl {
     }
 
     public static BlurredBackgroundProvider topPanelChatActivity(Theme.ResourcesProvider resourcesProvider) {
+        if (org.telegram.marble.MarbleTheme.isEnabled()) return m3(resourcesProvider, isDark -> org.telegram.marble.MarbleTheme.roles(isDark).surfaceContainer, false);
         return new BlurredBackgroundProviderBuilder(resourcesProvider)
                 .setBackgroundColor((r, isDark) -> {
                     if (!checkBlurEnabled(resourcesProvider)) {
@@ -187,6 +217,7 @@ public class BlurredBackgroundProviderImpl {
     }
 
     public static BlurredBackgroundProvider topPanelChatActivityTags(Theme.ResourcesProvider resourcesProvider) {
+        if (org.telegram.marble.MarbleTheme.isEnabled()) return m3(resourcesProvider, isDark -> org.telegram.marble.MarbleTheme.roles(isDark).surfaceContainer, false);
         return new BlurredBackgroundProviderBuilder(resourcesProvider)
             .setBackgroundColor((r, isDark) -> {
                 if (!checkBlurEnabled(resourcesProvider)) {
@@ -222,6 +253,7 @@ public class BlurredBackgroundProviderImpl {
     }
 
     public static BlurredBackgroundProvider bulletin(Theme.ResourcesProvider resourcesProvider) {
+        if (org.telegram.marble.MarbleTheme.isEnabled()) return m3(resourcesProvider, isDark -> org.telegram.marble.MarbleTheme.roles(isDark).inverseSurface, true);
         return new BlurredBackgroundProviderBuilder(resourcesProvider)
             .setBackgroundColor((r, isDark) -> {
                 final float alpha = LiteMode.isEnabled(LiteMode.FLAG_LIQUID_GLASS) ? 0.85f : 0.76f;
@@ -237,10 +269,12 @@ public class BlurredBackgroundProviderImpl {
     }
 
     public static BlurredBackgroundProvider inputFieldDialogActivity(Theme.ResourcesProvider resourcesProvider) {
+        if (org.telegram.marble.MarbleTheme.isEnabled()) return m3(resourcesProvider, isDark -> org.telegram.marble.MarbleTheme.roles(isDark).surfaceContainerHigh, false);
         return topPanel(resourcesProvider);
     }
 
     public static BlurredBackgroundProvider inputFieldShareAlert(Theme.ResourcesProvider resourcesProvider) {
+        if (org.telegram.marble.MarbleTheme.isEnabled()) return m3(resourcesProvider, isDark -> org.telegram.marble.MarbleTheme.roles(isDark).surfaceContainerHighest, false);
         return new BlurredBackgroundProviderBuilder(resourcesProvider)
                 .setBackgroundColor((r, isDark) -> {
                     final float alpha = LiteMode.isEnabled(LiteMode.FLAG_LIQUID_GLASS) ? 0.85f : 0.76f;
@@ -350,5 +384,31 @@ public class BlurredBackgroundProviderImpl {
             }
         }
         return blurEnabled;
+    }
+
+    /** Marblegram: M3E tonal icon button container (secondaryContainer) for floating app-bar buttons. */
+    public static BlurredBackgroundProvider m3TonalButton(Theme.ResourcesProvider resourcesProvider) {
+        return m3(resourcesProvider, isDark -> org.telegram.marble.MarbleTheme.roles(isDark).secondaryContainer, true);
+    }
+
+    /** Marblegram: M3E floating app-bar title container. */
+    public static BlurredBackgroundProvider m3TitleContainer(Theme.ResourcesProvider resourcesProvider) {
+        return m3(resourcesProvider, isDark -> org.telegram.marble.MarbleTheme.roles(isDark).surfaceContainerHigh, true);
+    }
+
+    private interface M3Role {
+        int color(boolean isDark);
+    }
+
+    /** Marblegram: opaque M3 tonal surface instead of translucent glass. */
+    private static BlurredBackgroundProvider m3(Theme.ResourcesProvider resourcesProvider, M3Role role, boolean shadow) {
+        return new BlurredBackgroundProviderBuilder(resourcesProvider)
+            .setBackgroundColor((r, isDark) -> role.color(isDark))
+            .setStrokeColorTop(0, 0)
+            .setStrokeColorBottom(0, 0)
+            .setShadowColor(shadow ? 0x22000000 : 0, shadow ? 0x40000000 : 0)
+            .setShadowLayer(shadow ? dpf2(5) : 0, 0, shadow ? dpf2(1.5f) : 0)
+            .setStrokeWidth(0, 0)
+            .build();
     }
 }

@@ -70,7 +70,7 @@ public class BotCommandsMenuContainer extends FrameLayout implements NestedScrol
                     getMeasuredWidth() / 2f + dp(12),
                     y
                 );
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(4), dp(4), topBackground);
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(4)), topBackground);
                 super.dispatchDraw(canvas);
             }
         };

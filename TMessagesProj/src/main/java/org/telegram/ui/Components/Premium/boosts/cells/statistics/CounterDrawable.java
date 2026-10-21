@@ -47,7 +47,7 @@ public class CounterDrawable extends Drawable {
     public void draw(@NonNull Canvas canvas) {
         Rect bounds = getBounds();
         bgRoundRect.set(bounds.left, bounds.top, bounds.right, bounds.bottom);
-        canvas.drawRoundRect(bgRoundRect, dp(12), dp(12), bgPaint);
+        canvas.drawRoundRect(bgRoundRect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(12)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(12)), bgPaint);
         icon.setBounds(bounds.left + dp(2), bounds.top + dp(1), bounds.left + dp(2) + icon.getIntrinsicWidth(), getBounds().top + dp(1) + icon.getIntrinsicHeight());
         icon.draw(canvas);
         if (text != null) {

@@ -280,7 +280,7 @@ public class SecretMediaViewer implements NotificationCenter.NotificationCenterD
                 drawable.setBounds((int) (cx - r), (int) (cy - r), (int) (cx + r), (int) (cy + r));
                 drawable.draw(canvas);
                 float radProgress = -360 * progress;
-                canvas.drawArc(deleteProgressRect, -90, radProgress, false, afterDeleteProgressPaint);
+                org.telegram.marble.WavyProgress.drawArc(canvas, deleteProgressRect, -90, radProgress, afterDeleteProgressPaint);
                 timerParticles.draw(canvas, particlePaint, deleteProgressRect, radProgress, 1.0f);
             }
             invalidate();

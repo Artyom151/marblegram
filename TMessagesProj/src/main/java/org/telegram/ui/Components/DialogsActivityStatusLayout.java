@@ -57,7 +57,7 @@ public class DialogsActivityStatusLayout extends View {
 
         final float radius = lerp(dp(15), 0, factor);
 
-        canvas.drawRoundRect(animatingRectF, radius, radius, fillingPaint);
+        canvas.drawRoundRect(animatingRectF, org.telegram.marble.MarbleTheme.m3CornerPxF(radius), org.telegram.marble.MarbleTheme.m3CornerPxF(radius), fillingPaint);
     }
 
 

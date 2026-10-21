@@ -81,14 +81,14 @@ public class ChatMessageUnsupportedCell extends View implements Theme.Colorable 
         canvas.drawRoundRect(dp(18), dp(6),
             dp(18) + unsupportedBlockWidth,
             dp(6) + unsupportedBlockHeight,
-            dp(18), dp(18),
+            org.telegram.marble.MarbleTheme.m3CornerPxF(dp(18)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(18)),
             getThemedPaint(Theme.key_paint_chatActionBackground));
 
         if (hasGradientService()) {
             canvas.drawRoundRect(dp(18), dp(6),
                 dp(18) + unsupportedBlockWidth,
                 dp(6) + unsupportedBlockHeight,
-                dp(18), dp(18),
+                org.telegram.marble.MarbleTheme.m3CornerPxF(dp(18)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(18)),
                 Theme.chat_actionBackgroundGradientDarkenPaint);
         }
     }

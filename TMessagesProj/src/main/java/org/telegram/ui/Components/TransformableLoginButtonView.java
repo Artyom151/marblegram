@@ -99,7 +99,7 @@ public class TransformableLoginButtonView extends View {
             boolean animateCornerRadius = transformType == TRANSFORM_OPEN_ARROW;
             float rad = AndroidUtilities.dp(BUTTON_RADIUS_DP + (CIRCLE_RADIUS_DP - BUTTON_RADIUS_DP) * (animateCornerRadius ? progress : 1f));
             rect.set(0, 0, getWidth(), getHeight());
-            canvas.drawRoundRect(rect, rad, rad, backgroundPaint);
+            canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(rad), org.telegram.marble.MarbleTheme.m3CornerPxF(rad), backgroundPaint);
         }
 
         switch (transformType) {

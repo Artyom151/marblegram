@@ -1928,10 +1928,10 @@ public class CacheControlActivity extends BaseFragment implements NotificationCe
                 super.onDraw(canvas);
 
                 AndroidUtilities.rectTmp.set(0, 0, getMeasuredWidth(), getMeasuredHeight());
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, AndroidUtilities.dp(3), AndroidUtilities.dp(3), out);
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(3)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(3)), out);
 
                 AndroidUtilities.rectTmp.set(0, 0, getMeasuredWidth() * progressT.set(this.progress), getMeasuredHeight());
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, AndroidUtilities.dp(3), AndroidUtilities.dp(3), in);
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(3)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(3)), in);
             }
         }
     }

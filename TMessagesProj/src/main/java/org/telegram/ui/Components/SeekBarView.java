@@ -444,6 +444,10 @@ public class SeekBarView extends FrameLayout {
             float step = (getMeasuredWidth() - selectorWidth) / ((float) delegate.getStepsCount() - 1f);
             thumbX = (int) (Math.round((thumbX) / step) * step);
         }
+        if (!twoSided && minProgress < 0 && timestamps == null && org.telegram.marble.MarbleTheme.expressiveShapes()) {
+            drawM3Slider(canvas, thumbX);
+            return;
+        }
         int y = (getMeasuredHeight() - thumbSize) / 2;
         innerPaint1.setColor(getThemedColor(Theme.key_player_progressBackground));
 
@@ -657,7 +661,7 @@ public class SeekBarView extends FrameLayout {
     private void drawProgressBar(Canvas canvas, RectF rect, Paint paint) {
         float radius = AndroidUtilities.dp(2);
         if (timestamps == null || timestamps.isEmpty()) {
-            canvas.drawRoundRect(rect, radius, radius, paint);
+            canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(radius), org.telegram.marble.MarbleTheme.m3CornerPxF(radius), paint);
         } else {
             float lineWidth = rect.bottom - rect.top;
             float left = selectorWidth / 2f;
@@ -896,5 +900,55 @@ public class SeekBarView extends FrameLayout {
 
     private int getThemedColor(int key) {
         return Theme.getColor(key, resourcesProvider);
+    }
+
+    private final RectF m3Rect = new RectF();
+
+    /** Marblegram: M3 Expressive slider — thick rounded tracks, 4dp handle with gaps, stop indicator. */
+    private void drawM3Slider(Canvas canvas, int thumbX) {
+        final int active = outerPaint1.getColor();
+        final int inactive = androidx.core.graphics.ColorUtils.setAlphaComponent(active, 0x3d);
+        final float h = getMeasuredHeight(), cy = h / 2f;
+        final float track = Math.min(AndroidUtilities.dp(12), h * 0.4f);
+        final float handleH = Math.min(h - AndroidUtilities.dp(2), track + AndroidUtilities.dp(pressed ? 22 : 18));
+        final float handleW = AndroidUtilities.dp(pressed ? 3 : 4);
+        final float gap = AndroidUtilities.dp(5);
+        final float left = selectorWidth / 2f, right = getMeasuredWidth() - selectorWidth / 2f;
+        final float hx = left + thumbX;
+        final float r = track / 2f, inner = AndroidUtilities.dp(2);
+        final int oldColor = outerPaint1.getColor();
+
+        // active track (outer corners round, inner corner near handle small)
+        if (hx - gap - left > inner) {
+            outerPaint1.setColor(active);
+            m3Rect.set(left, cy - r, hx - gap, cy + r);
+            drawM3Track(canvas, m3Rect, r, inner, outerPaint1);
+        }
+        // inactive track
+        if (right - (hx + gap) > inner) {
+            outerPaint1.setColor(inactive);
+            m3Rect.set(hx + gap, cy - r, right, cy + r);
+            drawM3Track(canvas, m3Rect, inner, r, outerPaint1);
+            outerPaint1.setColor(active);
+            canvas.drawCircle(right - r, cy, AndroidUtilities.dp(2), outerPaint1);
+        }
+        // handle
+        outerPaint1.setColor(active);
+        m3Rect.set(hx - handleW / 2f, cy - handleH / 2f, hx + handleW / 2f, cy + handleH / 2f);
+        canvas.drawRoundRect(m3Rect, org.telegram.marble.MarbleTheme.m3CornerPxF(handleW / 2f), org.telegram.marble.MarbleTheme.m3CornerPxF(handleW / 2f), outerPaint1);
+        outerPaint1.setColor(oldColor);
+    }
+
+    private final android.graphics.Path m3Path = new android.graphics.Path();
+    private final float[] m3Radii = new float[8];
+
+    private void drawM3Track(Canvas canvas, RectF rect, float leftRadius, float rightRadius, Paint paint) {
+        leftRadius = Math.min(leftRadius, rect.width() / 2f);
+        rightRadius = Math.min(rightRadius, rect.width() / 2f);
+        m3Radii[0] = m3Radii[1] = m3Radii[6] = m3Radii[7] = leftRadius;
+        m3Radii[2] = m3Radii[3] = m3Radii[4] = m3Radii[5] = rightRadius;
+        m3Path.rewind();
+        m3Path.addRoundRect(rect, m3Radii, android.graphics.Path.Direction.CW);
+        canvas.drawPath(m3Path, paint);
     }
 }

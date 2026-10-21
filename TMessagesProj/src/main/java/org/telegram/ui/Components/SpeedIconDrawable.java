@@ -91,7 +91,7 @@ public class SpeedIconDrawable extends Drawable {
                 (getIntrinsicWidth() + textDrawable.getCurrentWidth()) / 2f + AndroidUtilities.dpf2(3f),
                 (getIntrinsicHeight() + textDrawable.getHeight()) / 2f
             );
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, AndroidUtilities.dpf2(3f), AndroidUtilities.dpf2(3f), outlinePaint);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dpf2(3f)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dpf2(3f)), outlinePaint);
         }
 
         textDrawable.getPaint().setStrokeWidth(AndroidUtilities.dpf2(.3f));

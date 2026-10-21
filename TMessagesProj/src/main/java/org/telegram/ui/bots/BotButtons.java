@@ -189,7 +189,7 @@ public class BotButtons extends FrameLayout {
             canvas.scale(s, s, cx, t + cy);
 
             button.backgroundPaint.setColor(Theme.multAlpha(button.backgroundColor.set(state.color), alpha));
-            canvas.drawRoundRect(button.bounds, dp(9), dp(9), button.backgroundPaint);
+            canvas.drawRoundRect(button.bounds, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(9)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(9)), button.backgroundPaint);
 
             if (progress < 1) {
                 canvas.save();

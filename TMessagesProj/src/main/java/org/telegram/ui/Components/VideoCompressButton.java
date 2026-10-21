@@ -120,7 +120,7 @@ public class VideoCompressButton extends View {
             (getWidth() + w) / 2f,
             (getHeight() + h) / 2f
         );
-        canvas.drawRoundRect(AndroidUtilities.rectTmp, dpf2(4), dpf2(4), strokePaint);
+        canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dpf2(4)), org.telegram.marble.MarbleTheme.m3CornerPxF(dpf2(4)), strokePaint);
 
         AndroidUtilities.rectTmp2.set(0, (int) ((getHeight() - h) / 2f), getWidth(), (int) ((getHeight() + h) / 2f));
         textDrawable.setBounds(AndroidUtilities.rectTmp2);
@@ -138,12 +138,12 @@ public class VideoCompressButton extends View {
         );
         AndroidUtilities.rectTmp.set(AndroidUtilities.rectTmp2);
         AndroidUtilities.rectTmp.inset(-dpf2(1.33f), -dpf2(1.33f));
-        canvas.drawRoundRect(AndroidUtilities.rectTmp, dpf2(1.66f), dpf2(1.66f), clearPaint);
+        canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dpf2(1.66f)), org.telegram.marble.MarbleTheme.m3CornerPxF(dpf2(1.66f)), clearPaint);
 
         canvas.saveLayerAlpha(0, 0, getWidth(), getHeight(), 0xFF, Canvas.ALL_SAVE_FLAG);
         AndroidUtilities.rectTmp.set(AndroidUtilities.rectTmp2);
         fillPaint.setAlpha((int) (0xFF * (1f - .35f * disabled) * sizeTextDrawable.isNotEmpty()));
-        canvas.drawRoundRect(AndroidUtilities.rectTmp, dpf2(1.66f), dpf2(1.66f), fillPaint);
+        canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dpf2(1.66f)), org.telegram.marble.MarbleTheme.m3CornerPxF(dpf2(1.66f)), fillPaint);
         AndroidUtilities.rectTmp2.offset((int) (-dpf2(1.33f)), 0);
         canvas.save();
         sizeTextDrawable.setBounds(AndroidUtilities.rectTmp2);

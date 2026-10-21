@@ -234,7 +234,7 @@ public class SwipeGestureSettingsView extends FrameLayout {
         color = ColorUtils.blendARGB(fromColor, ColorUtils.blendARGB(Theme.getColor(Theme.key_windowBackgroundWhite), Theme.getColor(currentColorKey), 0.9f), colorProgress);
 
         filledPaint.setColor(color);
-        canvas.drawRoundRect(rect, AndroidUtilities.dp(6), AndroidUtilities.dp(6), filledPaint);
+        canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(6)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(6)), filledPaint);
 
         filledPaint.setColor(Theme.getColor(Theme.key_windowBackgroundWhite));
         filledPaint.setAlpha(255);
@@ -253,9 +253,9 @@ public class SwipeGestureSettingsView extends FrameLayout {
         rect.set(left, verticalPadding, right - AndroidUtilities.dp(58), getMeasuredHeight() - verticalPadding);
 
         rect.inset(-AndroidUtilities.dp(1), -AndroidUtilities.dp(1));
-        canvas.drawRoundRect(rect, AndroidUtilities.dp(6), AndroidUtilities.dp(6), filledPaint);
+        canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(6)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(6)), filledPaint);
         outlinePaint.setAlpha(31);
-        canvas.drawRoundRect(rect, AndroidUtilities.dp(6), AndroidUtilities.dp(6), outlinePaint);
+        canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(6)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(6)), outlinePaint);
 //
         canvas.save();
         canvas.clipRect(rect);

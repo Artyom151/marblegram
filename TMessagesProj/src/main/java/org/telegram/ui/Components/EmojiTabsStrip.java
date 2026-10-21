@@ -475,7 +475,7 @@ public class EmojiTabsStrip extends ScrollableHorizontalScrollView {
         @Override
         public void draw(@NonNull Canvas canvas) {
             rectF.set(0, 0, AndroidUtilities.dp(30), AndroidUtilities.dp(30));
-            canvas.drawRoundRect(rectF, AndroidUtilities.dpf2(8), AndroidUtilities.dpf2(8), paint);
+            canvas.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dpf2(8)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dpf2(8)), paint);
         }
 
         @Override

@@ -615,8 +615,8 @@ public class PhotoFilterView extends FrameLayout implements FilterShaders.Filter
             } else if (a == 3) {
                 String str = LocaleController.getString(R.string.CurvesBlue);
                 curveTextView.setText(str.substring(0, 1).toUpperCase() + str.substring(1).toLowerCase());
-                curveTextView.setTextColor(0xff3dadee);
-                curveRadioButton[a].setColor(0xff3dadee, 0xff3dadee);
+                curveTextView.setTextColor(org.telegram.marble.MarbleTheme.editorAccent(0xff3dadee));
+                curveRadioButton[a].setColor(org.telegram.marble.MarbleTheme.editorAccent(0xff3dadee), org.telegram.marble.MarbleTheme.editorAccent(0xff3dadee));
             }
             frameLayout1.addView(curveTextView, LayoutHelper.createFrame(LayoutHelper.WRAP_CONTENT, LayoutHelper.WRAP_CONTENT, Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, 38, 0, 0));
 

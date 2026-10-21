@@ -147,6 +147,9 @@ public class SeekBar {
     }
 
     public void setProgress(float progress) {
+        if (progress != thumbProgress) {
+            m3LastProgressChange = android.os.SystemClock.elapsedRealtime();
+        }
         thumbProgress = progress;
         thumbX = (int) Math.ceil((width - thumbWidth) * thumbProgress);
         if (thumbX < 0) {
@@ -207,6 +210,13 @@ public class SeekBar {
             paint.setColor(selected ? backgroundSelectedColor : cacheColor);
             rect.set(thumbWidth / 2, height / 2 - lineHeight / 2, thumbWidth / 2 + bufferedProgress * (width - thumbWidth), height / 2 + lineHeight / 2);
             drawProgressBar(canvas, rect, paint);
+        }
+        if (org.telegram.marble.MarbleTheme.wavyProgress() && height >= AndroidUtilities.dp(12)) {
+            drawM3Wavy(canvas);
+            if (alpha < 1) {
+                canvas.restore();
+            }
+            return;
         }
         rect.set(thumbWidth / 2, height / 2 - lineHeight / 2, thumbWidth / 2 + (pressed ? draggingThumbX : thumbX), height / 2 + lineHeight / 2);
         paint.setColor(progressColor);
@@ -364,7 +374,7 @@ public class SeekBar {
     private void drawProgressBar(Canvas canvas, RectF rect, Paint paint) {
         float radius = thumbWidth / 2f;
         if (timestamps == null || timestamps.isEmpty()) {
-            canvas.drawRoundRect(rect, radius, radius, paint);
+            canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(radius), org.telegram.marble.MarbleTheme.m3CornerPxF(radius), paint);
         } else {
             float lineWidth = rect.bottom - rect.top;
             float left = thumbWidth / 2f;
@@ -493,5 +503,64 @@ public class SeekBar {
             }
             lastTimestampsAppearingUpdate = SystemClock.elapsedRealtime();
         }
+    }
+
+    private final android.graphics.Path m3WavePath = new android.graphics.Path();
+    private long m3LastProgressChange, m3LastFrame;
+    private float m3Phase;
+
+    /**
+     * Marblegram: M3 Expressive media seek bar — the played part is a wave (like Android 16 media controls),
+     * handle is a 4dp vertical bar. Wave phase follows the position so no extra redraws are needed.
+     */
+    private void drawM3Wavy(Canvas canvas) {
+        final float x = thumbWidth / 2f + (pressed ? draggingThumbX : thumbX);
+        final float left = thumbWidth / 2f, cy = height / 2f;
+        final float stroke = Math.max(lineHeight, AndroidUtilities.dp(3));
+        final float amplitude = Math.min(AndroidUtilities.dpf2(2.5f), height / 2f - stroke);
+        final float wavelength = AndroidUtilities.dp(16);
+        final float gap = AndroidUtilities.dp(4);
+        final Paint.Style oldStyle = paint.getStyle();
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeCap(Paint.Cap.ROUND);
+        paint.setStrokeWidth(stroke);
+        // remaining (flat) track
+        if (width - thumbWidth / 2f - stroke / 2f > x + gap) {
+            paint.setColor(selected ? backgroundSelectedColor : backgroundColor);
+            canvas.drawLine(x + gap + stroke / 2f, cy, width - thumbWidth / 2f - stroke / 2f, cy, paint);
+        }
+        // played (wavy) part
+        final float x1 = x - gap - stroke / 2f;
+        if (x1 > left + stroke / 2f) {
+            paint.setColor(progressColor);
+            m3WavePath.rewind();
+            // wave flows while playback is advancing (progress changed recently), freezes on pause
+            final long now = android.os.SystemClock.elapsedRealtime();
+            final boolean playing = now - m3LastProgressChange < 1200 && !pressed;
+            if (playing) {
+                m3Phase += (now - m3LastFrame) / 1000f * AndroidUtilities.dp(24);
+            }
+            m3LastFrame = now;
+            final float phase = -m3Phase;
+            for (float xx = left + stroke / 2f; ; xx += AndroidUtilities.dpf2(1.5f)) {
+                float px = Math.min(xx, x1);
+                float ramp = Math.min(1f, Math.min(px - left, x1 - px) / AndroidUtilities.dp(6));
+                float y = cy + Math.max(0, amplitude) * ramp * (float) Math.sin(2 * Math.PI * (px + phase) / wavelength);
+                if (xx == left + stroke / 2f) m3WavePath.moveTo(px, y); else m3WavePath.lineTo(px, y);
+                if (px >= x1) break;
+            }
+            canvas.drawPath(m3WavePath, paint);
+            if (playing && parentView != null) {
+                parentView.invalidate();
+            }
+        }
+        // handle
+        paint.setStyle(Paint.Style.FILL);
+        paint.setColor(circleColor);
+        final float hw = AndroidUtilities.dp(pressed ? 5 : 4) / 2f;
+        final float hh = Math.min(height / 2f, AndroidUtilities.dp(pressed ? 10 : 8));
+        rect.set(x - hw, cy - hh, x + hw, cy + hh);
+        canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(hw), org.telegram.marble.MarbleTheme.m3CornerPxF(hw), paint);
+        paint.setStyle(oldStyle);
     }
 }

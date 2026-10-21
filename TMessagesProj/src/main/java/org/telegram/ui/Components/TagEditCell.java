@@ -265,7 +265,7 @@ public class TagEditCell extends LinearLayout {
             final float h = dp(6.66f);
 
             AndroidUtilities.rectTmp.set(x, cy - h / 2f, x + width, cy + h / 2f);
-            canvas.drawRoundRect(AndroidUtilities.rectTmp, h / 2f, h / 2f, this.paint);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(h / 2f), org.telegram.marble.MarbleTheme.m3CornerPxF(h / 2f), this.paint);
         }
     }
 
@@ -407,7 +407,7 @@ public class TagEditCell extends LinearLayout {
                 public void draw(@NonNull Canvas canvas, CharSequence text, int start, int end, float x, int top, int y, int bottom, @NonNull Paint paint) {
                     final float cy = (top + bottom) / 2f, h = dp(19);
                     paint.setColor(textColor);
-                    canvas.drawRoundRect(x, cy - h / 2f, x + textWidth + dp(11.33f), cy + h / 2f, h / 2f, h / 2f, bgPaint);
+                    canvas.drawRoundRect(x, cy - h / 2f, x + textWidth + dp(11.33f), cy + h / 2f, org.telegram.marble.MarbleTheme.m3CornerPxF(h / 2f), org.telegram.marble.MarbleTheme.m3CornerPxF(h / 2f), bgPaint);
                     canvas.drawText(rankStr, x + dpf2(5.66f), bottom - dp(6), paint);
                 }
             }, 0, tag.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);

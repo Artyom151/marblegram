@@ -376,6 +376,10 @@ public class Switch extends View {
         if (getVisibility() != VISIBLE) {
             return;
         }
+        if (iconDrawable == null && overrideColorProgress == 0 && org.telegram.marble.MarbleTheme.expressiveShapes()) {
+            drawM3(canvas);
+            return;
+        }
 
         int width = AndroidUtilities.dp(31);
         int thumb = AndroidUtilities.dp(20);
@@ -446,7 +450,7 @@ public class Switch extends View {
             paint2.setColor(color);
 
             rectF.set(x, y, x + width, y + AndroidUtilities.dpf2(14));
-            canvasToDraw.drawRoundRect(rectF, AndroidUtilities.dpf2(7), AndroidUtilities.dpf2(7), paint);
+            canvasToDraw.drawRoundRect(rectF, org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dpf2(7)), org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dpf2(7)), paint);
             canvasToDraw.drawCircle(tx, ty, AndroidUtilities.dpf2(10), paint);
 
             if (a == 0 && rippleDrawable != null) {
@@ -560,5 +564,59 @@ public class Switch extends View {
         info.setCheckable(true);
         info.setChecked(isChecked);
         //info.setContentDescription(isChecked ? LocaleController.getString(R.string.NotificationsOn) : LocaleController.getString(R.string.NotificationsOff));
+    }
+
+    private android.graphics.Paint m3Paint;
+    private android.graphics.Path m3Check;
+
+    /** Marblegram: M3 Expressive switch (track 52x32 scaled to 40x24, thumb grows 16→24 with a check icon). */
+    private void drawM3(Canvas canvas) {
+        if (m3Paint == null) {
+            m3Paint = new android.graphics.Paint(android.graphics.Paint.ANTI_ALIAS_FLAG);
+            m3Check = new android.graphics.Path();
+        }
+        final org.telegram.marble.MarbleTheme.Roles r = org.telegram.marble.MarbleTheme.roles(resourcesProvider != null ? resourcesProvider.isDark() : Theme.isCurrentThemeDark());
+        final float p = progress;
+        // fit into the view (Telegram uses 37dp-wide switches in some cells): keep the 5:3 M3 proportions
+        final float maxW = Math.max(AndroidUtilities.dp(20), getMeasuredWidth() - AndroidUtilities.dp(2));
+        final float maxH = Math.max(AndroidUtilities.dp(12), getMeasuredHeight() - AndroidUtilities.dp(2));
+        final float h = Math.min(AndroidUtilities.dp(24), Math.min(maxH, maxW * 0.6f));
+        final float w = h / 0.6f;
+        final float k = h / AndroidUtilities.dp(24);
+        final float x = (getMeasuredWidth() - w) / 2f, y = (getMeasuredHeight() - h) / 2f;
+        final float sw = AndroidUtilities.dpf2(1.5f);
+
+        AndroidUtilities.rectTmp.set(x, y, x + w, y + h);
+        m3Paint.setStyle(android.graphics.Paint.Style.FILL);
+        m3Paint.setColor(androidx.core.graphics.ColorUtils.blendARGB(r.surfaceContainerHighest, r.primary, p));
+        canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(h / 2f), org.telegram.marble.MarbleTheme.m3CornerPxF(h / 2f), m3Paint);
+        if (p < 1f) {
+            m3Paint.setStyle(android.graphics.Paint.Style.STROKE);
+            m3Paint.setStrokeWidth(sw);
+            m3Paint.setColor(androidx.core.graphics.ColorUtils.setAlphaComponent(r.outline, (int) (255 * (1f - p))));
+            AndroidUtilities.rectTmp.inset(sw / 2f, sw / 2f);
+            canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(h / 2f), org.telegram.marble.MarbleTheme.m3CornerPxF(h / 2f), m3Paint);
+        }
+
+        final float pressed = isPressed() ? AndroidUtilities.dp(1.5f) * k : 0;
+        final float thumbR = Math.min(h / 2f - AndroidUtilities.dp(1), (AndroidUtilities.dpf2(6) + AndroidUtilities.dpf2(3) * p) * k + pressed);
+        final float cx = x + h / 2f + (w - h) * p, cy = y + h / 2f;
+        m3Paint.setStyle(android.graphics.Paint.Style.FILL);
+        m3Paint.setColor(androidx.core.graphics.ColorUtils.blendARGB(r.outline, r.onPrimary, p));
+        canvas.drawCircle(cx, cy, thumbR, m3Paint);
+
+        if (p > 0.5f) {
+            float a = (p - 0.5f) * 2f, s = AndroidUtilities.dpf2(4.5f) * k;
+            m3Check.rewind();
+            m3Check.moveTo(cx - s, cy);
+            m3Check.lineTo(cx - s * 0.3f, cy + s * 0.7f);
+            m3Check.lineTo(cx + s, cy - s * 0.7f);
+            m3Paint.setStyle(android.graphics.Paint.Style.STROKE);
+            m3Paint.setStrokeCap(android.graphics.Paint.Cap.ROUND);
+            m3Paint.setStrokeJoin(android.graphics.Paint.Join.ROUND);
+            m3Paint.setStrokeWidth(AndroidUtilities.dpf2(1.8f));
+            m3Paint.setColor(androidx.core.graphics.ColorUtils.setAlphaComponent(r.onPrimaryContainer, (int) (255 * a)));
+            canvas.drawPath(m3Check, m3Paint);
+        }
     }
 }

@@ -276,7 +276,7 @@ public class FlashViews {
                 canvas.drawRect(0, 0, lastWidth, lastHeight, paint);
             } else {
                 AndroidUtilities.rectTmp.set(0, 0, foregroundView.getMeasuredWidth(), foregroundView.getMeasuredHeight());
-                canvas.drawRoundRect(AndroidUtilities.rectTmp, dp(12) - 2, dp(12) - 2, paint);
+                canvas.drawRoundRect(AndroidUtilities.rectTmp, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(12) - 2), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(12) - 2), paint);
             }
         }
     }

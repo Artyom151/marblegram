@@ -1267,11 +1267,11 @@ public class ManageLinksActivity extends BaseFragment implements NotificationCen
                     float a = (animateHideExpiring ? (1f - animateToStateProgress) : animateToStateProgress);
                     float s = (float) (0.7 + 0.3f * a);
                     canvas.scale(s, s, rectF.centerX(), rectF.centerY());
-                    canvas.drawArc(rectF, -90, -timeProgress * 360, false, paint2);
+                    org.telegram.marble.WavyProgress.drawArc(canvas, rectF, -90, -timeProgress * 360, paint2);
                     timerParticles.draw(canvas, paint2, rectF, -timeProgress * 360, a);
                     canvas.restore();
                 } else {
-                    canvas.drawArc(rectF, -90, -timeProgress * 360, false, paint2);
+                    org.telegram.marble.WavyProgress.drawArc(canvas, rectF, -90, -timeProgress * 360, paint2);
                     timerParticles.draw(canvas, paint2, rectF, -timeProgress * 360, 1f);
                 }
                 if (!isPaused) {

@@ -807,7 +807,7 @@ public class WebActionBar extends FrameLayout {
             rect.set(dp(6), cx - h / 2f, lerp(right, getWidth() - dp(6), addressingProgress), cx + h / 2f);
             wasAlpha = addressRoundPaint.getAlpha();
             addressRoundPaint.setAlpha((int) (wasAlpha * addressingProgress));
-            canvas.drawRoundRect(rect, dp(50), dp(50), addressRoundPaint);
+            canvas.drawRoundRect(rect, org.telegram.marble.MarbleTheme.m3CornerPxF(dp(50)), org.telegram.marble.MarbleTheme.m3CornerPxF(dp(50)), addressRoundPaint);
             addressRoundPaint.setAlpha(wasAlpha);
         }
 
