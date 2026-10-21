@@ -225,6 +225,7 @@ public class MessageObject {
     public int dateKeyInt;
     public String monthKey;
     public boolean deleted;
+    public boolean marbleDeleted; // Marblegram: deleted by the other party, kept in the chat (dimmed + trash marker)
     public boolean deletedByThanos;
     public float audioProgress;
     public float forceSeekTo = -1;

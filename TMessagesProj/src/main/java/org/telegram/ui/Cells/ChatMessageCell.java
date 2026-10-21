@@ -20156,11 +20156,13 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
         if (sponosoredAlpha == 0) {
             return;
         }
+        // Marblegram: messages deleted by the other party are drawn at 60% opacity
+        final int layerAlpha = currentMessageObject.marbleDeleted ? sponosoredAlpha * 153 / 255 : sponosoredAlpha;
 
         final int restore = canvas.getSaveCount();
         int restoreToSponosoredAlpha = -1;
-        if (sponosoredAlpha != 255) {
-            restoreToSponosoredAlpha = canvas.saveLayerAlpha(0, 0, getMeasuredWidth(), getMeasuredHeight(), sponosoredAlpha);
+        if (layerAlpha != 255) {
+            restoreToSponosoredAlpha = canvas.saveLayerAlpha(0, 0, getMeasuredWidth(), getMeasuredHeight(), layerAlpha);
         }
 
         setupTextColors();
@@ -20362,11 +20364,33 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
         }
         updateSelectionTextPosition();
 
+        if (currentMessageObject.marbleDeleted) {
+            drawMarbleDeletedMarker(canvas);
+        }
+
         if (restoreToSponosoredAlpha != -1) {
             canvas.restoreToCount(restoreToSponosoredAlpha);
         }
 
         canvas.restoreToCount(restore);
+    }
+
+    private Drawable marbleDeletedIcon;
+
+    /** Marblegram: small trash icon in the top-right corner of the bubble, meaning "deleted by the other party". */
+    private void drawMarbleDeletedMarker(Canvas canvas) {
+        if (currentBackgroundDrawable == null) {
+            return;
+        }
+        if (marbleDeletedIcon == null) {
+            marbleDeletedIcon = getContext().getResources().getDrawable(R.drawable.msg_delete).mutate();
+        }
+        final int size = dp(14);
+        final int x = currentBackgroundDrawable.getBounds().right - size - dp(6);
+        final int y = currentBackgroundDrawable.getBounds().top + dp(6);
+        marbleDeletedIcon.setBounds(x, y, x + size, y + size);
+        marbleDeletedIcon.setColorFilter(new PorterDuffColorFilter(Theme.getColor(currentMessageObject.isOutOwner() ? Theme.key_chat_outTimeText : Theme.key_chat_inTimeText), PorterDuff.Mode.SRC_IN));
+        marbleDeletedIcon.draw(canvas);
     }
 
     public void drawBackgroundInternal(Canvas canvas, boolean fromParent) {

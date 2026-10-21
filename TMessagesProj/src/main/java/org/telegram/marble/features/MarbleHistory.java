@@ -198,9 +198,24 @@ public final class MarbleHistory implements NotificationCenter.NotificationCente
                         db.update("messages", v, "account = ? AND dialog_id = ? AND msg_id = ? AND deleted = 0",
                             new String[]{String.valueOf(account), String.valueOf(-channelId), String.valueOf(id)});
                     } else {
-                        // private chats and basic groups share one id space per account; channels are excluded
-                        db.update("messages", v, "account = ? AND msg_id = ? AND deleted = 0 AND channel = 0",
-                            new String[]{String.valueOf(account), String.valueOf(id)});
+                        // Marblegram: updateDeleteMessages carries no peer, so the dialog is unknown. Only mark the
+                        // row when this msg_id belongs to exactly one private/basic-group dialog in the local db.
+                        // Ambiguous ids (several dialogs) and ids we never stored are left alone.
+                        long onlyDialogId = 0;
+                        int dialogCount = 0;
+                        try (Cursor c = db.rawQuery("SELECT DISTINCT dialog_id FROM messages WHERE account = ? AND msg_id = ? AND channel = 0 LIMIT 2",
+                            new String[]{String.valueOf(account), String.valueOf(id)})) {
+                            while (c.moveToNext()) {
+                                onlyDialogId = c.getLong(0);
+                                dialogCount++;
+                            }
+                        }
+                        if (dialogCount != 1) {
+                            android.util.Log.i("MarbleHistory", "skip deleted " + id + ", dialogs matched " + dialogCount);
+                            continue;
+                        }
+                        db.update("messages", v, "account = ? AND dialog_id = ? AND msg_id = ? AND deleted = 0 AND channel = 0",
+                            new String[]{String.valueOf(account), String.valueOf(onlyDialogId), String.valueOf(id)});
                     }
                 }
                 db.setTransactionSuccessful();
