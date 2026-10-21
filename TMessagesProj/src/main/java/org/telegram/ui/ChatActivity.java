@@ -11430,6 +11430,23 @@ public class ChatActivity extends BaseFragment implements
         contentView.addView(topUndoView, 17, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT, Gravity.TOP | Gravity.LEFT, 8, 8, 8, 0));
     }
 
+    /** Marblegram: pinned bar is a floating M3 pill (tonal surface) inset from the edges; legacy keeps a flat row. */
+    private void updatePinnedMessageBackground() {
+        if (pinnedMessageView == null) {
+            return;
+        }
+        final Drawable selector = Theme.getSelectorDrawable(false);
+        if (!org.telegram.marble.MarbleTheme.isEnabled()) {
+            pinnedMessageView.setBackground(selector);
+            return;
+        }
+        final int surface = org.telegram.marble.MarbleTheme.roles(themeDelegate != null ? themeDelegate.isDark() : Theme.isCurrentThemeDark()).surfaceContainerHigh;
+        final android.graphics.drawable.GradientDrawable pill = new android.graphics.drawable.GradientDrawable();
+        pill.setColor(surface);
+        pill.setCornerRadius(org.telegram.marble.MarbleTheme.m3CornerPxF(AndroidUtilities.dp(24)));
+        pinnedMessageView.setBackground(new android.graphics.drawable.LayerDrawable(new Drawable[]{pill, selector}));
+    }
+
     private void createPinnedMessageView() {
         if (currentEncryptedChat != null || pinnedMessageView != null || getContext() == null) {
             return;
@@ -11502,7 +11519,8 @@ public class ChatActivity extends BaseFragment implements
             }
         };
         pinnedMessageView.setTag(1);
-        topPanelLayout.addView(pinnedMessageView, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, 48));
+        // Marblegram: inset the pill from the screen edges
+        topPanelLayout.addView(pinnedMessageView, org.telegram.marble.MarbleTheme.isEnabled() ? LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, 48, Gravity.TOP | Gravity.LEFT, 8, 0, 8, 0) : LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, 48));
         topPanelLayout.setPriority(pinnedMessageView, 1);
         topPanelLayout.setDebugName(pinnedMessageView, "pinned message view");
         pinnedMessageView.setOnClickListener(v -> {
@@ -11531,7 +11549,7 @@ public class ChatActivity extends BaseFragment implements
             }
         });
         pinnedMessageView.setEnabled(!isInPreviewMode());
-        pinnedMessageView.setBackground(Theme.getSelectorDrawable(false));
+        updatePinnedMessageBackground();
 
         pinnedLineView = new PinnedLineView(getContext(), themeDelegate);
         pinnedMessageView.addView(pinnedLineView, LayoutHelper.createFrame(3, 48, Gravity.LEFT | Gravity.TOP, 13, 0, 0, 0));
@@ -11548,7 +11566,8 @@ public class ChatActivity extends BaseFragment implements
             pinnedNameTextView[a] = new TrackingWidthSimpleTextView(getContext());
             pinnedNameTextView[a].setTextSize(14);
             pinnedNameTextView[a].setTextColor(getThemedColor(Theme.key_chat_topPanelTitle));
-            pinnedNameTextView[a].setTypeface(AndroidUtilities.bold());
+            // Marblegram: M3 emphasized label weight
+            pinnedNameTextView[a].setTypeface(org.telegram.marble.MarbleTheme.isEnabled() ? org.telegram.marble.MarbleTypography.emphasized() : AndroidUtilities.bold());
             pinnedMessageView.addView(pinnedNameTextView[a], LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, 18, Gravity.TOP | Gravity.LEFT, 23, 7.3f, 44 + possibleLeftMarginDp, 0));
 
             pinnedMessageTextView[a] = new SimpleTextView(getContext()) {
@@ -34812,7 +34831,7 @@ public class ChatActivity extends BaseFragment implements
         } else if (actionBar != null && actionBar.isActionModeShowed()) {
             if (invoked) clearSelectionMode();
             return false;
-        } else if (chatActivityEnterView != null && chatActivityEnterView.isPopupShowing()) {
+        } else if (chatActivityEnterView != null && chatActivityEnterView.canHidePopupByBackButton()) {
             if (invoked) chatActivityEnterView.hidePopup(true);
             return false;
 //        } else if (chatActivityEnterView != null && chatActivityEnterView.hasBotWebView() && chatActivityEnterView.botCommandsMenuIsShowing() && chatActivityEnterView.onBotWebViewBackPressed()) {
@@ -42724,6 +42743,7 @@ public class ChatActivity extends BaseFragment implements
             if (pinnedLineView != null) {
                 pinnedLineView.updateColors();
             }
+            updatePinnedMessageBackground(); // Marblegram: refresh the pill's tonal surface
             if (chatActivityEnterTopView != null && chatActivityEnterTopView.getEditView() != null) {
                 chatActivityEnterTopView.getEditView().updateColors();
             }
