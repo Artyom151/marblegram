@@ -175,6 +175,10 @@ public class FilterTabsView extends FrameLayout {
 
     private static final float TAB_PADDING_WIDTH = 24;
     private static final float TAB_INTERNAL_PADDING = 12.5f;
+    // Marblegram: M3E chips are taller (36dp) and narrower than the legacy 28dp tabs
+    private static float tabPadding() { return org.telegram.marble.MarbleTheme.folderChips() ? 16 : TAB_PADDING_WIDTH; }
+    private static float tabInternalPadding() { return org.telegram.marble.MarbleTheme.folderChips() ? 8 : TAB_INTERNAL_PADDING; }
+    private static float chipHalfHeight() { return org.telegram.marble.MarbleTheme.folderChips() ? 18 : 14; }
     private static final float TAB_COUNTER_HEIGHT = 17.333f;
 
     private static Paint m3ChipPaint;
@@ -339,7 +343,7 @@ public class FilterTabsView extends FrameLayout {
 
         @Override
         protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-            int w = currentTab.getWidth(false) + dp(TAB_PADDING_WIDTH) + additionalTabWidth;
+            int w = currentTab.getWidth(false) + dp(tabPadding()) + additionalTabWidth;
             setMeasuredDimension(w, MeasureSpec.getSize(heightMeasureSpec));
         }
 
@@ -462,7 +466,7 @@ public class FilterTabsView extends FrameLayout {
                 m3ChipPaint.setStyle(Paint.Style.FILL);
                 final org.telegram.marble.MarbleTheme.Roles m3r = org.telegram.marble.MarbleTheme.roles(Theme.isCurrentThemeDark());
                 m3ChipPaint.setColor(androidx.core.graphics.ColorUtils.blendARGB(m3r.surfaceContainerHigh, m3r.primary, m3Select));
-                final float half = dp(14), inner = dp(6), gap = dp(1);
+                final float half = dp(chipHalfHeight()), inner = dp(6), gap = dp(1);
                 final boolean leading = currentPosition == 0, trailing = currentPosition == tabs.size() - 1;
                 float left = gap, right = getMeasuredWidth() - gap;
                 // ButtonGroup animateWidth: pressed button grows by ExpandedRatio, neighbours give up the space
@@ -1196,7 +1200,7 @@ public class FilterTabsView extends FrameLayout {
         });
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new TouchHelperCallback());
         itemTouchHelper.attachToRecyclerView(listView);
-        listViewPaddingH = Math.max(0, dp(23.5f - TAB_PADDING_WIDTH / 2f));
+        listViewPaddingH = Math.max(0, dp(23.5f - tabPadding() / 2f));
         listView.setPadding(listViewPaddingH, 0, listViewPaddingH, 0);
         listView.setClipToPadding(false);
         listView.setDrawSelectorBehind(true);
@@ -1372,7 +1376,7 @@ public class FilterTabsView extends FrameLayout {
         Tab tab = new Tab(id, text(text, entities), noanimate);
         tab.isDefault = isDefault;
         tab.isLocked = isLocked;
-        allTabsWidth += tab.getWidth(true) + dp(TAB_PADDING_WIDTH);
+        allTabsWidth += tab.getWidth(true) + dp(tabPadding());
         tabs.add(tab);
     }
 
@@ -1391,7 +1395,7 @@ public class FilterTabsView extends FrameLayout {
         Tab tab = new Tab(id, text, noanimate);
         tab.isDefault = isDefault;
         tab.isLocked = isLocked;
-        allTabsWidth += tab.getWidth(true) + dp(TAB_PADDING_WIDTH);
+        allTabsWidth += tab.getWidth(true) + dp(tabPadding());
         tabs.add(tab);
     }
 
@@ -1480,7 +1484,7 @@ public class FilterTabsView extends FrameLayout {
             positionToWidth.put(a, tabWidth);
             positionToCount.put(a, tabs.get(a).counter);
             positionToX.put(a, xOffset + additionalTabWidth / 2);
-            xOffset += tabWidth + dp(TAB_PADDING_WIDTH) + additionalTabWidth;
+            xOffset += tabWidth + dp(tabPadding()) + additionalTabWidth;
         }
     }
 
@@ -1575,10 +1579,10 @@ public class FilterTabsView extends FrameLayout {
                     float prevH = positionToCount.get(idx1) != 0 ? 1 : 0;
                     float newH = positionToCount.get(idx2) != 0 ? 1 : 0;
                     if (additionalTabWidth != 0) {
-                        indicatorX = lerp(prevX, newX, animatingIndicatorProgress) + dp(TAB_PADDING_WIDTH / 2f);
+                        indicatorX = lerp(prevX, newX, animatingIndicatorProgress) + dp(tabPadding() / 2f);
                     } else {
                         int x = positionToX.get(position);
-                        indicatorX = lerp(prevX, newX, animatingIndicatorProgress) - (x - holder.itemView.getLeft()) + dp(TAB_PADDING_WIDTH / 2f);
+                        indicatorX = lerp(prevX, newX, animatingIndicatorProgress) - (x - holder.itemView.getLeft()) + dp(tabPadding() / 2f);
                     }
                     indicatorWidth = lerp(prevW, newW, animatingIndicatorProgress);
                     counterVisible = lerp(prevH, newH, animatingIndicatorProgress);
@@ -1609,12 +1613,12 @@ public class FilterTabsView extends FrameLayout {
 
             final float add = additionalTabWidth / 2f;
 
-            final int y = height / 2 - dp(14);
+            final int y = height / 2 - dp(chipHalfHeight());
             float m3e = 0;
             if (m3PressedPosition >= 0 && m3PressedPosition < tabs.size() && tabs.get(m3PressedPosition).id == selectedTabId) {
                 m3e = m3PressValue * m3PressedWidth * M3_EXPANDED_RATIO / 2f;
             }
-            selectorDrawable.setBounds((int) (indicatorX - dp(TAB_INTERNAL_PADDING) - add - m3e), y, (int) (indicatorX + indicatorWidth + dp(TAB_INTERNAL_PADDING) + add + m3e), y + dp(28));
+            selectorDrawable.setBounds((int) (indicatorX - dp(tabInternalPadding()) - add - m3e), y, (int) (indicatorX + indicatorWidth + dp(tabInternalPadding()) + add + m3e), y + dp(2 * chipHalfHeight()));
             // Marblegram: M3E connected toggle — selected folder is a filled secondaryContainer pill
             selectorDrawable.setAlpha(org.telegram.marble.MarbleTheme.folderChips() ? 0 : org.telegram.marble.MarbleTheme.isEnabled() ? 255 : 31);
             selectorDrawable.draw(canvas);
@@ -1829,7 +1833,7 @@ public class FilterTabsView extends FrameLayout {
                     defaultTab.setTitle(LocaleController.getString(R.string.FilterAllChats), null, false);
                 }
                 for (int b = 0; b < N; b++) {
-                    allTabsWidth += tabs.get(b).getWidth(true) + dp(TAB_PADDING_WIDTH);
+                    allTabsWidth += tabs.get(b).getWidth(true) + dp(tabPadding());
                 }
                 break;
             }
@@ -1865,7 +1869,7 @@ public class FilterTabsView extends FrameLayout {
                 defaultTab.setTitle(LocaleController.getString(R.string.FilterAllChats), null, false);
             }
             for (int b = 0, N = tabs.size(); b < N; b++) {
-                allTabsWidth += tabs.get(b).getWidth(true) + dp(TAB_PADDING_WIDTH);
+                allTabsWidth += tabs.get(b).getWidth(true) + dp(tabPadding());
             }
         }
     }

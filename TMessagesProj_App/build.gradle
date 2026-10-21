@@ -123,7 +123,7 @@ android {
     productFlavors {
         bundleAfat {
             ndk {
-                abiFilters "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
+                abiFilters(*(project.hasProperty("marbleAbi") ? project.property("marbleAbi").split(",") : ["armeabi-v7a", "arm64-v8a", "x86", "x86_64"])) // Marblegram: -PmarbleAbi=arm64-v8a for fast device installs
             }
             ext {
                 abiVersionCode = 1
@@ -132,7 +132,7 @@ android {
         }
         afat {
             ndk {
-                abiFilters "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
+                abiFilters(*(project.hasProperty("marbleAbi") ? project.property("marbleAbi").split(",") : ["armeabi-v7a", "arm64-v8a", "x86", "x86_64"])) // Marblegram: -PmarbleAbi=arm64-v8a for fast device installs
             }
             sourceSets.debug {
                 manifest.srcFile '../TMessagesProj/config/debug/AndroidManifest_SDK23.xml'

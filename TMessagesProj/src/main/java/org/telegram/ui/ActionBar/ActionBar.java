@@ -94,6 +94,8 @@ public class ActionBar extends FrameLayout implements FactorAnimator.Target, The
     private BlurredBackgroundDrawable glassDrawable;
     private BlurredBackgroundDrawable glassDrawableBack;
     private BlurredBackgroundDrawable glassDrawableMenu;
+    // Marblegram: M3E expressive buttons — back is a 4-leaf clover, a single overflow item is a sunny shape
+    private org.telegram.marble.MarbleShapeDrawable m3BackShape, m3MenuShape;
     private INavigationLayout.BackButtonState backButtonState = INavigationLayout.BackButtonState.BACK;
     public ImageView backButtonImageView;
     private BackupImageView avatarSearchImageView;
@@ -244,6 +246,12 @@ public class ActionBar extends FrameLayout implements FactorAnimator.Target, The
             .setRadius(dp(23))
             .setPadding(dp(6));
 
+        if (m3) {
+            m3BackShape = new org.telegram.marble.MarbleShapeDrawable(org.telegram.marble.MaterialShapes.COOKIE_4, 0, 0);
+            m3MenuShape = new org.telegram.marble.MarbleShapeDrawable(org.telegram.marble.MaterialShapes.SUNNY, 0, 0);
+            updateM3ShapeColors();
+        }
+
         if (menu != null) {
             menu.setTranslationX(-dp(10));
             menu.setGlassMode(true);
@@ -255,6 +263,15 @@ public class ActionBar extends FrameLayout implements FactorAnimator.Target, The
         if (backButtonImageView != null) {
             backButtonImageView.setTranslationX(dp(2));
         }
+    }
+
+    private void updateM3ShapeColors() {
+        if (m3BackShape == null) {
+            return;
+        }
+        final org.telegram.marble.MarbleTheme.Roles r = org.telegram.marble.MarbleTheme.roles(resourcesProvider != null ? resourcesProvider.isDark() : Theme.isCurrentThemeDark());
+        m3BackShape.setColor(r.secondaryContainer);
+        m3MenuShape.setColor(r.secondaryContainer);
     }
 
     public INavigationLayout.BackButtonState getBackButtonState() {
@@ -2272,11 +2289,20 @@ public class ActionBar extends FrameLayout implements FactorAnimator.Target, The
             glassDrawable.setBounds(left, t, right, b);
             glassDrawable.draw(canvas);
         }
-        if (glassDrawableBack != null && hasBackButton) {
+        if (m3BackShape != null) {
+            if (hasBackButton) {
+                m3BackShape.setBounds(0, t, s + p * 2, b);
+                m3BackShape.draw(canvas);
+            }
+        } else if (glassDrawableBack != null && hasBackButton) {
             glassDrawableBack.setBounds(0, t, s + p * 2, b);
             glassDrawableBack.draw(canvas);
         }
-        if (glassDrawableMenu != null && menuWidth > 0 && !glassOnlyBack && !doNotDrawGlassMenu) {
+        if (m3MenuShape != null && menuWidth > 0 && menuWidth <= s && !glassOnlyBack && !doNotDrawGlassMenu) {
+            m3MenuShape.setBounds(getWidth() - (b - t), t, getWidth(), b);
+            m3MenuShape.setAlpha(hasForcedMenuWidth ? 255 : (int) (255 * animatorHasMenuItems.getFloatValue()));
+            m3MenuShape.draw(canvas);
+        } else if (glassDrawableMenu != null && menuWidth > 0 && !glassOnlyBack && !doNotDrawGlassMenu) {
             glassDrawableMenu.setBounds(getWidth() - Math.max(s, menuWidth) - p * 2, t, getWidth(), b);
             glassDrawableMenu.setAlpha(hasForcedMenuWidth ? 255 : (int) (255 * animatorHasMenuItems.getFloatValue()));
             glassDrawableMenu.draw(canvas);
@@ -2336,6 +2362,7 @@ public class ActionBar extends FrameLayout implements FactorAnimator.Target, The
     @Override
     public void updateColors() {
         adaptive_updateColor();
+        updateM3ShapeColors();
         if (glassDrawable != null) {
             glassDrawable.updateColors();
         }
