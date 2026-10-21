@@ -144,6 +144,9 @@ public class PluginsActivity extends BaseFragment {
             items.add(UItem.asShadow(null));
         }
         items.add(UItem.asCheck(ID_ENABLED, getString(R.string.MarblePluginEnabled)).setChecked(p.enabled));
+        // Marblegram: list the permissions the plugin declared in plugin.json.
+        items.add(UItem.asShadow(getString(R.string.MarblePluginPermissions) + ": " + (p.manifest.permissions.isEmpty()
+            ? getString(R.string.MarblePluginNoPermissions) : TextUtils.join(", ", p.manifest.permissions))));
         if (p.error != null) {
             items.add(UItem.asShadow(getString(R.string.MarblePluginError) + ": " + p.error));
         } else {

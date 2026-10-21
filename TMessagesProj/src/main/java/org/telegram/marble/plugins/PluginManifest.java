@@ -4,12 +4,24 @@
 
 package org.telegram.marble.plugins;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class PluginManifest {
 
     public static final String LANG_LUA = "lua";
     public static final String LANG_PYTHON = "python";
+
+    /** Marblegram: reads the current chat (PluginApi.current_chat). */
+    public static final String PERM_CHAT_READ = "chat.read";
+    /** Marblegram: sends a text message after the user confirms it in a dialog (PluginApi.send_text). */
+    public static final String PERM_MESSAGES_SEND = "messages.send";
+    /** Marblegram: reads the local deleted/edited message history (PluginApi.history_deleted, history_versions). */
+    public static final String PERM_HISTORY_READ = "history.read";
 
     /** Unique id: [a-z0-9_.-], also the install folder name. */
     public String id;
@@ -27,6 +39,8 @@ public class PluginManifest {
     public String main;
     /** Minimal SDK level the plugin needs. */
     public int minSdk = 1;
+    /** Marblegram: permissions the plugin asks for in plugin.json ("permissions": [...]), shown to the user. */
+    public List<String> permissions = Collections.emptyList();
 
     public static PluginManifest parse(String json) throws Exception {
         JSONObject o = new JSONObject(json);
@@ -44,6 +58,19 @@ public class PluginManifest {
         m.language = o.optString("language", LANG_LUA).toLowerCase();
         m.main = o.optString("main", LANG_PYTHON.equals(m.language) ? "main.py" : "main.lua");
         m.minSdk = o.optInt("min_sdk", 1);
+        JSONArray perms = o.optJSONArray("permissions");
+        if (perms != null) {
+            ArrayList<String> list = new ArrayList<>();
+            for (int i = 0; i < perms.length(); i++) {
+                list.add(perms.getString(i));
+            }
+            m.permissions = Collections.unmodifiableList(list);
+        }
         return m;
+    }
+
+    /** Marblegram: true if plugin.json declared this permission. */
+    public boolean hasPermission(String permission) {
+        return permissions.contains(permission);
     }
 }

@@ -202,3 +202,29 @@ end
 ```
 
 (`luajava_list` — 3 строки: перебор `java.util.List` через `:size()`/`:get(i)`, см. LUA.md.)
+
+---
+
+# SDK 3 — разрешения, текущий чат, история
+
+`tg.sdk_version()` возвращает `3`. Новые методы требуют разрешения, объявленного в `plugin.json`:
+
+```json
+"permissions": ["chat.read", "messages.send", "history.read"]
+```
+
+Страница плагина в Настройках → Marblegram → Плагины показывает список разрешений.
+
+| Разрешение | Метод | Описание |
+|---|---|---|
+| `chat.read` | `current_chat()` | Чат на верхнем экране: map `dialog_id`, `title`; `nil`, если это не чат |
+| `messages.send` | `send_text(dialog_id, text)` | Показывает диалог подтверждения (чат и текст); отправка только по «Отправить». Фильтр ghost mode действует как обычно |
+| `history.read` | `history_deleted(dialog_id, limit)` | Удалённые сообщения из **локальной** истории (`0` — все чаты). Элементы: `dialog_id`, `message_id`, `from_id`, `date`, `text`, `deleted_at` |
+| `history.read` | `history_versions(dialog_id, message_id)` | Все сохранённые версии сообщения, от старой к новой; дополнительно `version`, `edit_date` |
+
+`history_*` читают только базу на устройстве и ничего никуда не отправляют. Вызывайте их из `run_in_background`.
+Ограничение: проверка разрешений касается только методов SDK 3. Методы SDK 2 (`tg.cls`, `tg.call`, `tg.send_request` и т.д.) разрешений не требуют,
+поэтому плагин с полным доступом по-прежнему может сделать всё через них (см. предупреждение выше).
+
+Уже существующие, без разрешения: хуки `on_chat_open(dialog_id)` (открыт чат) и `on_message(dialog_id, text, out)` (новое сообщение),
+а также `toast(text)`, `alert(title, text)` и `add_action(title, fn)` (строка-действие на странице плагина в Настройках).

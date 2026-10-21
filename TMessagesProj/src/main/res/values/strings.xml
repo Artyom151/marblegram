@@ -11613,6 +11613,8 @@
     <string name="MarblePluginsInfo">Plugins are Lua or Python scripts with full access to the app. Install only plugins you trust. SDK docs: docs/plugins in the Marblegram repo.</string>
     <string name="MarblePluginEnabled">Enabled</string>
     <string name="MarblePluginError">Error</string>
+    <string name="MarblePluginPermissions">Permissions</string>
+    <string name="MarblePluginNoPermissions">none</string>
     <string name="MarblePluginActions">Actions</string>
     <string name="MarblePluginReload">Reload</string>
     <string name="MarblePluginDelete">Delete plugin</string>
