@@ -15,17 +15,20 @@ import org.telegram.messenger.ApplicationLoader;
 import org.telegram.messenger.MessagesController;
 import org.telegram.messenger.SendMessagesHelper;
 import org.telegram.messenger.UserConfig;
+import org.telegram.marble.features.MarbleHistory;
 import org.telegram.tgnet.TLRPC;
 import org.telegram.ui.ActionBar.BaseFragment;
+import org.telegram.ui.ChatActivity;
 import org.telegram.ui.Components.BulletinFactory;
 import org.telegram.ui.LaunchActivity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class PluginApi {
 
-    /** SDK level; bump when the API grows. */
-    public static final int SDK_VERSION = 2;
+    /** SDK level; bump when the API grows. Marblegram: 3 added permissions, current_chat, send_text, history_*. */
+    public static final int SDK_VERSION = 3;
 
     public static class Action {
         public final String title;
@@ -42,6 +45,13 @@ public class PluginApi {
 
     PluginApi(Plugin plugin) {
         this.plugin = plugin;
+    }
+
+    /** Marblegram: throws unless plugin.json declared the permission. Used by the SDK 3 methods below. */
+    private void requirePermission(String permission) {
+        if (!plugin.manifest.hasPermission(permission)) {
+            throw new SecurityException("plugin '" + plugin.manifest.id + "' needs permission \"" + permission + "\" in plugin.json");
+        }
     }
 
     // --- info ----------------------------------------------------------------------------------
@@ -94,6 +104,87 @@ public class PluginApi {
                 PluginManager.getInstance().suppressHooks = false;
             }
         });
+    }
+
+    // --- Marblegram SDK 3: chat, confirmed sending, local history ---------------------------------
+    // Permissions are declared in plugin.json: "permissions": ["chat.read", "messages.send", "history.read"].
+
+    /**
+     * Marblegram (permission chat.read): the chat on top of the screen stack, or null if it is not a chat.
+     * Returns a map with "dialog_id" (Long) and "title" (String).
+     */
+    public HashMap<String, Object> current_chat() {
+        requirePermission(PluginManifest.PERM_CHAT_READ);
+        BaseFragment f = fragment();
+        if (!(f instanceof ChatActivity)) {
+            return null;
+        }
+        long dialogId = ((ChatActivity) f).getDialogId();
+        HashMap<String, Object> out = new HashMap<>();
+        out.put("dialog_id", dialogId);
+        out.put("title", chat_title(dialogId));
+        return out;
+    }
+
+    /**
+     * Marblegram (permission messages.send): shows a confirmation dialog with the chat and text;
+     * the message is sent only if the user taps Send. Ghost mode filters still apply to the request.
+     */
+    public void send_text(long dialogId, String text) {
+        requirePermission(PluginManifest.PERM_MESSAGES_SEND);
+        AndroidUtilities.runOnUIThread(() -> {
+            BaseFragment f = fragment();
+            if (f == null || f.getParentActivity() == null) return;
+            String title = chat_title(dialogId);
+            f.showDialog(new org.telegram.ui.ActionBar.AlertDialog.Builder(f.getParentActivity())
+                .setTitle(plugin.manifest.name)
+                .setMessage((title == null ? String.valueOf(dialogId) : title) + "\n\n" + text)
+                .setPositiveButton(org.telegram.messenger.LocaleController.getString(org.telegram.messenger.R.string.Send),
+                    (d, w) -> send_message(dialogId, text))
+                .setNegativeButton(org.telegram.messenger.LocaleController.getString(org.telegram.messenger.R.string.Cancel), null)
+                .create());
+        });
+    }
+
+    /**
+     * Marblegram (permission history.read): latest version of deleted messages from the local history
+     * (dialog_id 0 = all chats). Each item is a map: dialog_id, message_id, from_id, date, text, deleted_at.
+     * Reads the device database only. Call from run_in_background.
+     */
+    public java.util.List<HashMap<String, Object>> history_deleted(long dialogId, int limit) {
+        requirePermission(PluginManifest.PERM_HISTORY_READ);
+        ArrayList<HashMap<String, Object>> out = new ArrayList<>();
+        for (MarbleHistory.Entry e : MarbleHistory.getInstance().deleted(account(), dialogId, Math.max(1, Math.min(limit, 500)))) {
+            out.add(entry_map(e));
+        }
+        return out;
+    }
+
+    /**
+     * Marblegram (permission history.read): every stored version of one message, oldest first, from the
+     * local history. Maps as in history_deleted, plus "version" and "edit_date". Call from run_in_background.
+     */
+    public java.util.List<HashMap<String, Object>> history_versions(long dialogId, int messageId) {
+        requirePermission(PluginManifest.PERM_HISTORY_READ);
+        ArrayList<HashMap<String, Object>> out = new ArrayList<>();
+        for (MarbleHistory.Entry e : MarbleHistory.getInstance().versions(account(), dialogId, messageId)) {
+            HashMap<String, Object> m = entry_map(e);
+            m.put("version", e.version);
+            m.put("edit_date", e.editDate);
+            out.add(m);
+        }
+        return out;
+    }
+
+    private static HashMap<String, Object> entry_map(MarbleHistory.Entry e) {
+        HashMap<String, Object> m = new HashMap<>();
+        m.put("dialog_id", e.dialogId);
+        m.put("message_id", e.messageId);
+        m.put("from_id", e.fromId);
+        m.put("date", e.date);
+        m.put("text", e.text);
+        m.put("deleted_at", e.deletedAt);
+        return m;
     }
 
     // --- UI ------------------------------------------------------------------------------------
